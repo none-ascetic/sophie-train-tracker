@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sophie's Train Tracker · Yatton ↔ Paddington</title>
+<meta name="description" content="Daily prescriptive recommendations for Sophie's weekly Yatton → London Paddington Tuesday commute." />
+<style>
+  :root {
+    --bg: #fafaf7;
+    --ink: #1a1a1a;
+    --muted: #6b6b6b;
+    --rule: #e6e3db;
+    --card: #ffffff;
+    --urgent: #b42318;
+    --urgent-bg: #fef3f2;
+    --today: #b54708;
+    --today-bg: #fef9e7;
+    --soon: #175cd3;
+    --soon-bg: #eff6ff;
+    --stable: #3f7d3f;
+    --stable-bg: #f0faf0;
+    --pending: #707070;
+    --pending-bg: #f2f0eb;
+    --save: #067647;
+    --save-bg: #ecfdf3;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "SF Pro Text", Roboto, sans-serif; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 80px; }
+  header { margin-bottom: 8px; }
+  h1 { font-size: 24px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .subtitle { font-size: 14px; color: var(--muted); margin: 0; }
+  .hero {
+    margin: 22px 0 26px;
+    padding: 18px 20px;
+    background: var(--urgent-bg);
+    border: 1px solid #fcd6d1;
+    border-left: 4px solid var(--urgent);
+    border-radius: 10px;
+    color: var(--urgent);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .hero strong { color: var(--urgent); }
+  .section-title {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 30px 0 12px;
+    font-weight: 600;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .date {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .weeks-out { font-size: 12px; color: var(--muted); margin-left: 8px; font-weight: 400; }
+  .status {
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: 999px;
+  }
+  .status.urgent { background: var(--urgent-bg); color: var(--urgent); }
+  .status.today { background: var(--today-bg); color: var(--today); }
+  .status.soon { background: var(--soon-bg); color: var(--soon); }
+  .status.stable { background: var(--stable-bg); color: var(--stable); }
+  .legs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .leg {
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: #fdfcf9;
+  }
+  .leg-label {
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .leg-time {
+    font-size: 19px;
+    font-weight: 600;
+    margin-top: 3px;
+  }
+  .leg-fare {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .totals {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: #f7f5ee;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .totals .over { color: var(--urgent); font-weight: 600; }
+  .totals .base { color: var(--stable); font-weight: 600; }
+  .alts {
+    background: var(--save-bg);
+    border: 1px solid #b7e4c7;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: #064e2f;
+    margin-bottom: 10px;
+  }
+  .alts-head {
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--save);
+    margin-bottom: 4px;
+  }
+  .alts ul { margin: 0; padding-left: 18px; }
+  .alts li { margin: 2px 0; }
+  .save-badge {
+    display: inline-block;
+    background: var(--save);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
+  }
+  .note {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #3a3a3a;
+    margin: 8px 0 12px;
+  }
+  .actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: #fff;
+  }
+  .btn-secondary {
+    background: #f0ede5;
+    color: var(--ink);
+    border: 1px solid var(--rule);
+  }
+  /* Pending cards (pre-release Tuesdays) */
+  .pending-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .pending-card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .pending-date {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .pending-release {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .pending-release strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .pending-btn {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 8px 10px;
+    font-size: 12.5px;
+    font-weight: 600;
+    text-align: center;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+  .pending-btn:active { opacity: 0.8; }
+  footer {
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Sophie's Train Tracker</h1>
+  <p class="subtitle">Yatton → London Paddington · every Tuesday · adult, no railcard</p>
+  <p class="subtitle" style="margin-top:4px;">Out no later than <strong>07:36</strong> · return no earlier than <strong>18:30</strong></p>
+</header>
+
+<div class="hero">
+<strong>Baseline for Sophie's window is £127/week</strong> (07:36 out + 18:30 back, direct). The cheap Advance tier has already gone on <strong>28 Apr</strong> and <strong>5 May</strong> — book those today before peak fares climb further. 12 May still has a £131.50 tier open — close in the next few days.
+</div>
+
+<!-- URGENT -->
+<div class="section-title">Urgent · cheap tier gone</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><span class="date">Tue 28 Apr</span><span class="weeks-out">1 week out</span></div>
+    <div class="status urgent">Book today</div>
+  </div>
+  <div class="legs">
+    <div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£142.00 · direct · GWR</div></div>
+    <div class="leg"><div class="leg-label">Back</div><div class="leg-time">19:30</div><div class="leg-fare">£48.50 · direct · GWR</div></div>
+  </div>
+  <div class="totals"><span>Total <strong>£190.50</strong></span><span class="over">£63.50 over baseline</span></div>
+  <div class="alts">
+    <div class="alts-head">Savings if you flex</div>
+    <ul>
+      <li>Earlier out — <strong>06:38</strong> same price (£142) · no saving</li>
+      <li>Take <strong>19:30</strong> instead of 18:30 back <span class="save-badge">saves £62</span> (18:30 is peaked at £110.50)</li>
+      <li>Or <strong>20:30</strong> back — same £48.50 · no extra saving vs 19:30</li>
+    </ul>
+  </div>
+  <div class="note">All outbound peak trains locked at £142. Return leg: the 18:30 is peaked (£110.50) — taking the 19:30 saves £62 so it's already built into the total above. Book today to lock in.</div>
+  <div class="actions">
+    <a class="btn btn-primary" href="https://www.thetrainline.com/book/results?origin=YAT&amp;destination=PAD&amp;outboundDate=2026-04-28&amp;outboundTime=07:36&amp;returnDate=2026-04-28&amp;returnTime=19:30&amp;passengers%5B%5D=adult" target="_blank" rel="noopener">Book on Trainline →</a>
+    <a class="btn btn-secondary" href="https://ojp.nationalrail.co.uk/service/timesandfares/YAT/PAD/280426/0530/dep" target="_blank" rel="noopener">National Rail</a>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><span class="date">Tue 5 May</span><span class="weeks-out">2 weeks out</span></div>
+    <div class="status urgent">Book today</div>
+  </div>
+  <div class="legs">
+    <div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£142.00 · direct · GWR</div></div>
+    <div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27.00 · direct · GWR</div></div>
+  </div>
+  <div class="totals"><span>Total <strong>£169.00</strong></span><span class="over">£42 over baseline</span></div>
+  <div class="alts">
+    <div class="alts-head">Savings if you flex</div>
+    <ul>
+      <li>Earlier out — <strong>06:38</strong> same price (£142) · no saving</li>
+      <li>Later back — <strong>20:30</strong> same £27 · no saving (18:30 already cheapest)</li>
+    </ul>
+  </div>
+  <div class="note">Cheap outbound Advance gone — all peak trains £142. Return leg still cheap at £27. Book today before peak fares climb further.</div>
+  <div class="actions">
+    <a class="btn btn-primary" href="https://www.thetrainline.com/book/results?origin=YAT&amp;destination=PAD&amp;outboundDate=2026-05-05&amp;outboundTime=07:36&amp;returnDate=2026-05-05&amp;returnTime=18:30&amp;passengers%5B%5D=adult" target="_blank" rel="noopener">Book on Trainline →</a>
+    <a class="btn btn-secondary" href="https://ojp.nationalrail.co.uk/service/timesandfares/YAT/PAD/050526/0530/dep" target="_blank" rel="noopener">National Rail</a>
+  </div>
+</div>
+
+<!-- BOOK TODAY -->
+<div class="section-title">Book this week · last cheap tier</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><span class="date">Tue 12 May</span><span class="weeks-out">3 weeks out</span></div>
+    <div class="status today">Book this week</div>
+  </div>
+  <div class="legs">
+    <div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£131.50 · direct · GWR</div></div>
+    <div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27.00 · direct · GWR</div></div>
+  </div>
+  <div class="totals"><span>Total <strong>£158.50</strong></span><span class="over">£31.50 over baseline</span></div>
+  <div class="alts">
+    <div class="alts-head">Savings if you flex</div>
+    <ul>
+      <li>Earlier out — <strong>06:38</strong> same £131.50 · no saving</li>
+      <li>07:06 bumps to £142 — avoid</li>
+      <li>Later back — <strong>20:30</strong> same £27 · no saving</li>
+    </ul>
+  </div>
+  <div class="note">£131.50 tier still open on 06:38 and 07:36. One below the £142 peak — book this week before it flips up.</div>
+  <div class="actions">
+    <a class="btn btn-primary" href="https://www.thetrainline.com/book/results?origin=YAT&amp;destination=PAD&amp;outboundDate=2026-05-12&amp;outboundTime=07:36&amp;returnDate=2026-05-12&amp;returnTime=18:30&amp;passengers%5B%5D=adult" target="_blank" rel="noopener">Book on Trainline →</a>
+    <a class="btn btn-secondary" href="https://ojp.nationalrail.co.uk/service/timesandfares/YAT/PAD/120526/0530/dep" target="_blank" rel="noopener">National Rail</a>
+  </div>
+</div>
+
+<!-- BOOK SOON -->
+<div class="section-title">Book soon · within 1–2 weeks</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><span class="date">Tue 19 May</span><span class="weeks-out">4 weeks out</span></div>
+    <div class="status soon">Book soon</div>
+  </div>
+  <div class="legs">
+    <div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£110.50 · direct · GWR</div></div>
+    <div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27.00 · direct · GWR</div></div>
+  </div>
+  <div class="totals"><span>Total <strong>£137.50</strong></span><span class="over">£10.50 over baseline</span></div>
+  <div class="alts">
+    <div class="alts-head">Savings if you flex</div>
+    <ul>
+      <li>Earlier out — <strong>06:38</strong> same £110.50 · no saving</li>
+      <li>07:05 bumps to £142 — avoid</li>
+      <li>Later back — <strong>20:30</strong> same £27 · no saving</li>
+    </ul>
+  </div>
+  <div class="note">£110.50 tier still open — book in the next week or two before it climbs to £131.50 or £142.</div>
+  <div class="actions">
+    <a class="btn btn-primary" href="https://www.thetrainline.com/book/results?origin=YAT&amp;destination=PAD&amp;outboundDate=2026-05-19&amp;outboundTime=07:36&amp;returnDate=2026-05-19&amp;returnTime=18:30&amp;passengers%5B%5D=adult" target="_blank" rel="noopener">Book on Trainline →</a>
+    <a class="btn btn-secondary" href="https://ojp.nationalrail.co.uk/service/timesandfares/YAT/PAD/190526/0530/dep" target="_blank" rel="noopener">National Rail</a>
+  </div>
+</div>
+
+<!-- STABLE -->
+<div class="section-title">Baseline · sit tight, book in the next fortnight</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><span class="date">Tue 26 May</span><span class="weeks-out">5 weeks out</span></div>
+    <div class="status stable">Book in 2 weeks</div>
+  </div>
+  <div class="legs">
+    <div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£100.00 · direct · GWR</div></div>
+    <div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27.00 · direct · GWR</div></div>
+  </div>
+  <div class="totals"><span>Total <strong>£127.00</strong></span><span class="base">at baseline</span></div>
+  <div class="alts">
+    <div class="alts-head">Savings if you flex</div>
+    <ul>
+      <li>Earlier out — <strong>06:38</strong> same £100 · no saving</li>
+      <li>Later back — <strong>20:30</strong> same £27 · no saving</li>
+    </ul>
+  </div>
+  <div class="note">Baseline achievable: £100 out + £27 back = £127. Book this fortnight.</div>
+  <div class="actions">
+    <a class="btn btn-primary" href="https://www.thetrainline.com/book/results?origin=YAT&amp;destination=PAD&amp;outboundDate=2026-05-26&amp;outboundTime=07:36&amp;returnDate=2026-05-26&amp;returnTime=18:30&amp;passengers%5B%5D=adult" target="_blank" rel="noopener">Book on Trainline →</a>
+    <a class="btn btn-secondary" href="https://ojp.nationalrail.co.uk/service/timesandfares/YAT/PAD/260526/0530/dep" target="_blank" rel="noopener">National Rail</a>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><span class="date">Tue 2 Jun</span><span class="weeks-out">6 weeks out</span></div>
+    <div class="status stable">Watch</div>
+  </div>
+  <div class="legs">
+    <div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£100.00 · direct · GWR</div></div>
+    <div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27.00 · direct · GWR</div></div>
+  </div>
+  <div class="totals"><span>Total <strong>£127.00</strong></span><span class="base">at baseline</span></div>
+  <div class="alts">
+    <div class="alts-head">Savings if you flex</div>
+    <ul>
+      <li>Leave earlier — <strong>05:59</strong> with 1 change £67 <span class="save-badge">saves £33</span> (total £94)</li>
+      <li>06:38 direct same £100 · no saving</li>
+      <li>Later back — <strong>20:30</strong> same £27 · no saving</li>
+    </ul>
+  </div>
+  <div class="note">Baseline £127. If Sophie's willing to leave Yatton at 05:59 with one change, total drops to £94 — £33 saved.</div>
+  <div class="actions">
+    <a class="btn btn-primary" href="https://www.thetrainline.com/book/results?origin=YAT&amp;destination=PAD&amp;outboundDate=2026-06-02&amp;outboundTime=07:36&amp;returnDate=2026-06-02&amp;returnTime=18:30&amp;passengers%5B%5D=adult" target="_blank" rel="noopener">Book on Trainline →</a>
+    <a class="btn btn-secondary" href="https://ojp.nationalrail.co.uk/service/timesandfares/YAT/PAD/020626/0530/dep" target="_blank" rel="noopener">National Rail</a>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><span class="date">Tue 9 Jun</span><span class="weeks-out">7 weeks out</span></div>
+    <div class="status stable">Watch</div>
+  </div>
+  <div class="legs">
+    <div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£100.00 · direct · GWR</div></div>
+    <div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27.00 · direct · GWR</div></div>
+  </div>
+  <div class="totals"><span>Total <strong>£127.00</strong></span><span class="base">at baseline</span></div>
+  <div class="note">Baseline £127 — direct both ways. 06:38 out and 20:30 back both match price.</div>
+  <div class="actions">
+    <a class="btn btn-primary" href="https://www.thetrainline.com/book/results?origin=YAT&amp;destination=PAD&amp;outboundDate=2026-06-09&amp;outboundTime=07:36&amp;returnDate=2026-06-09&amp;returnTime=18:30&amp;passengers%5B%5D=adult" target="_blank" rel="noopener">Book on Trainline →</a>
+    <a class="btn btn-secondary" href="https://ojp.nationalrail.co.uk/service/timesandfares/YAT/PAD/090626/0530/dep" target="_blank" rel="noopener">National Rail</a>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><span class="date">Tue 16 Jun</span><span class="weeks-out">8 weeks out</span></div>
+    <div class="status stable">Watch</div>
+  </div>
+  <div class="legs">
+    <div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£100.00 · direct · GWR</div></div>
+    <div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27.00 · direct · GWR</div></div>
+  </div>
+  <div class="totals"><span>Total <strong>£127.00</strong></span><span class="base">at baseline</span></div>
+  <div class="note">Baseline £127 — 06:38 out and 20:30 back both match price.</div>
+  <div class="actions">
+    <a class="btn btn-primary" href="https://www.thetrainline.com/book/results?origin=YAT&amp;destination=PAD&amp;outboundDate=2026-06-16&amp;outboundTime=07:36&amp;returnDate=2026-06-16&amp;returnTime=18:30&amp;passengers%5B%5D=adult" target="_blank" rel="noopener">Book on Trainline →</a>
+    <a class="btn btn-secondary" href="https://ojp.nationalrail.co.uk/service/timesandfares/YAT/PAD/160626/0530/dep" target="_blank" rel="noopener">National Rail</a>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><span class="date">Tue 23 Jun</span><span class="weeks-out">9 weeks out</span></div>
+    <div class="status stable">Watch</div>
+  </div>
+  <div class="legs">
+    <div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£100.00 · direct · GWR</div></div>
+    <div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27.00 · direct · GWR</div></div>
+  </div>
+  <div class="totals"><span>Total <strong>£127.00</strong></span><span class="base">at baseline</span></div>
+  <div class="note">Baseline £127 — direct both ways.</div>
+  <div class="actions">
+    <a class="btn btn-primary" href="https://www.thetrainline.com/book/results?origin=YAT&amp;destination=PAD&amp;outboundDate=2026-06-23&amp;outboundTime=07:36&amp;returnDate=2026-06-23&amp;returnTime=18:30&amp;passengers%5B%5D=adult" target="_blank" rel="noopener">Book on Trainline →</a>
+    <a class="btn btn-secondary" href="https://ojp.nationalrail.co.uk/service/timesandfares/YAT/PAD/230626/0530/dep" target="_blank" rel="noopener">National Rail</a>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><span class="date">Tue 30 Jun</span><span class="weeks-out">10 weeks out</span></div>
+    <div class="status stable">Watch</div>
+  </div>
+  <div class="legs">
+    <div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£100.00 · direct · GWR</div></div>
+    <div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27.00 · direct · GWR</div></div>
+  </div>
+  <div class="totals"><span>Total <strong>£127.00</strong></span><span class="base">at baseline</span></div>
+  <div class="note">Baseline £127 — direct both ways.</div>
+  <div class="actions">
+    <a class="btn btn-primary" href="https://www.thetrainline.com/book/results?origin=YAT&amp;destination=PAD&amp;outboundDate=2026-06-30&amp;outboundTime=07:36&amp;returnDate=2026-06-30&amp;returnTime=18:30&amp;passengers%5B%5D=adult" target="_blank" rel="noopener">Book on Trainline →</a>
+    <a class="btn btn-secondary" href="https://ojp.nationalrail.co.uk/service/timesandfares/YAT/PAD/300626/0530/dep" target="_blank" rel="noopener">National Rail</a>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><span class="date">Tue 7 Jul</span><span class="weeks-out">11 weeks out · edge of window</span></div>
+    <div class="status stable">Watch</div>
+  </div>
+  <div class="legs">
+    <div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£100.00 · direct · GWR</div></div>
+    <div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27.00 · direct · GWR</div></div>
+  </div>
+  <div class="totals"><span>Total <strong>£127.00</strong></span><span class="base">at baseline</span></div>
+  <div class="note">Baseline £127. Near edge of 12-week booking window.</div>
+  <div class="actions">
+    <a class="btn btn-primary" href="https://www.thetrainline.com/book/results?origin=YAT&amp;destination=PAD&amp;outboundDate=2026-07-07&amp;outboundTime=07:36&amp;returnDate=2026-07-07&amp;returnTime=18:30&amp;passengers%5B%5D=adult" target="_blank" rel="noopener">Book on Trainline →</a>
+    <a class="btn btn-secondary" href="https://ojp.nationalrail.co.uk/service/timesandfares/YAT/PAD/070726/0530/dep" target="_blank" rel="noopener">National Rail</a>
+  </div>
+</div>
+
+<div class="section-title">Not bookable yet · tap to add to Reminders</div>
+<div class="card">
+  <div class="note" style="margin-top:0">These Tuesdays unlock one at a time as the 12-week window rolls forward. Tickets release at <strong>02:00 UK</strong> on the day below — tap <strong>Add to Reminders</strong> and your iPhone's Reminders app will drop in a to-do with a timed alert, 15-minute warning, and a direct Trainline link in the notes so you can book the second they go live.</div>
+  <div class="pending-grid">
+{{PENDING_CARDS}}
+  </div>
+</div>
+
+<footer>
+  <p>Last refreshed <strong>Tue 21 Apr 2026, 22:39 BST</strong> · refreshed daily at 07:00 UK · new-release watcher runs at 02:00 UK.</p>
+  <p>Source: <a href="https://ojp.nationalrail.co.uk/" target="_blank" rel="noopener">ojp.nationalrail.co.uk</a> · data reflects cheapest Advance fares available at time of check; fares move up as cheap tiers sell out.</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sophie Train Tracker//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Europe/London
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0000
+TZOFFSETTO:+0100
+TZNAME:BST
+DTSTART:19700329T010000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0000
+TZNAME:GMT
+DTSTART:19701025T020000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VTODO
+UID:sophie-2026-09-29@train-tracker
+DTSTAMP:20260421T220326Z
+DTSTART;TZID=Europe/London:20260707T020000
+DUE;TZID=Europe/London:20260707T020000
+SUMMARY:Book Sophie's train · Tue 29 Sep
+DESCRIPTION:Tickets for Tuesday 29 September 2026 (Yatton → London Paddington) release around this time.\n\nTarget times: out 07:36 (peak)\, back 18:30.\nBaseline cost: £127 (£100 out + £27 back).\nNo price history yet — tickets haven't released.\n\nBOOK NOW:\nTrainline: https://www.thetrainline.com/book/results?origin=YAT&destination=PAD&outboundDate=2026-09-29&outboundTime=07:36&returnDate=2026-09-29&returnTime=18:30&passengers%5B%5D=adult\nNational Rail: https://ojp.nationalrail.co.uk/service/timesandfares/YAT/PAD/290926/0530/dep\n\nFull tracker: https://sophie-train-tracker.vercel.app
+URL:https://www.thetrainline.com/book/results?origin=YAT&destination=PAD&outboundDate=2026-09-29&outboundTime=07:36&returnDate=2026-09-29&returnTime=18:30&passengers%5B%5D=adult
+PRIORITY:1
+STATUS:NEEDS-ACTION
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tickets now on sale for Tuesday 29 September 2026 — book Sophie's train
+TRIGGER:PT0M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tickets about to release for Tuesday 29 September 2026
+TRIGGER:-PT15M
+END:VALARM
+END:VTODO
+END:VCALENDAR

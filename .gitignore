@@ -1,0 +1,14 @@
+# Drape plugin config (not part of this site)
+.drape/
+
+# Large self-contained HTML (regenerated from _template.html + prices.json)
+# Kept locally for Cowork artifact preview; Vercel serves index.html + reminders/
+index.artifact.html
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Local Python scratch
+__pycache__/
+*.pyc
