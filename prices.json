@@ -1,6 +1,7 @@
 {
-  "run_date": "2026-04-21",
-  "route": "YAT↔PAD",
+  "schema_version": 2,
+  "run_date": "2026-04-22",
+  "route": "YAT\u2194PAD",
   "constraints": {
     "out_latest": "07:36",
     "return_earliest": "18:30",
@@ -9,220 +10,912 @@
     "passenger": "adult"
   },
   "booking_horizon_weeks": 12,
-  "booking_horizon_note": "Bookable today: up to 07 Jul 2026. 14 Jul onwards redirects to legacy page (no fares available yet).",
-  "constraint_note": "Sophie commutes peak morning — no later than the 07:36 from Yatton. Fares in this window are £100+ (peak Advance), not the £27-£67 off-peak tier that's only on the 08:08+.",
+  "booking_horizon_note": "Bookable today: up to 14 Jul 2026. 21 Jul onwards redirects to legacy page (no fares available yet).",
+  "constraint_note": "Sophie commutes peak morning \u2014 no later than the 07:36 from Yatton. Fares in this window are \u00a3100+ (peak Advance), not the \u00a327-\u00a367 off-peak tier that's only on the 08:08+.",
+  "sources": {
+    "primary": "trainline",
+    "fallback": "national_rail"
+  },
   "tuesdays": [
     {
       "date": "2026-04-28",
       "weeks_out": 1,
-      "status": "URGENT",
-      "out": {"time": "07:36", "duration_min": 118, "changes": 0, "operator": "GWR", "fare": 142.00},
+      "status": "BOOK_SOON",
+      "current": {
+        "checked_at": "2026-04-22T14:14:51Z",
+        "travel_date": "2026-04-28",
+        "source": "trainline",
+        "out": {
+          "time": "07:06",
+          "arrival": "09:05",
+          "duration_min": null,
+          "changes": 0,
+          "fare": 43.4
+        },
+        "back": {
+          "time": "19:30",
+          "arrival": "21:30",
+          "duration_min": null,
+          "changes": 0,
+          "fare": 48.5
+        },
+        "cheapest_direct_total": 91.9,
+        "cheapest_any_total": 91.9,
+        "splitsave": {
+          "available": true,
+          "total": 91.9,
+          "savings_vs_direct": 49.3
+        },
+        "parse_confidence": "ok",
+        "_note_on_source": "Captured via Trainline + SplitSave. In-window only (07:06/07:36 out, 19:30 back)."
+      },
+      "history": [
+        {
+          "checked_at": "2026-04-22T12:42:30Z",
+          "source": "national_rail",
+          "cheapest_direct_total": 190.5,
+          "cheapest_any_total": 190.5,
+          "splitsave_total": null
+        },
+        {
+          "checked_at": "2026-04-22T11:04:33Z",
+          "source": "national_rail_v1_migrated",
+          "cheapest_direct_total": 190.5,
+          "cheapest_any_total": 190.5,
+          "splitsave_total": null
+        }
+      ],
+      "change_vs_yesterday": {
+        "cheapest_direct": -98.6,
+        "cheapest_any": -98.6,
+        "splitsave": null
+      },
+      "baseline_total": 127.0,
+      "note": "In-window cheapest is \u00a391.90 (07:06 or 07:36 out \u00a343.40 SplitSave + 19:30 back \u00a348.50). Trainline also shows an \u00a387.80 Super Off-Peak return, but that needs a 09:41+ outbound \u2014 too late for Sophie. BOOK_SOON.",
+      "out": {
+        "time": "07:06",
+        "arrival": "09:05",
+        "duration_min": null,
+        "changes": 0,
+        "fare": 43.4
+      },
       "out_alternatives": [
-        {"time": "05:59", "fare": 142.00, "changes": 1},
-        {"time": "06:38", "fare": 142.00, "changes": 0},
-        {"time": "07:06", "fare": 142.00, "changes": 0}
+        {
+          "time": "05:59",
+          "fare": 142.0,
+          "changes": 1
+        },
+        {
+          "time": "06:38",
+          "fare": 142.0,
+          "changes": 0
+        },
+        {
+          "time": "07:06",
+          "fare": 142.0,
+          "changes": 0
+        }
       ],
-      "back": {"time": "19:30", "duration_min": 120, "changes": 0, "fare": 48.50},
+      "back": {
+        "time": "19:30",
+        "arrival": "21:30",
+        "duration_min": null,
+        "changes": 0,
+        "fare": 48.5
+      },
       "back_alternatives": [
-        {"time": "18:30", "fare": 110.50, "changes": 0},
-        {"time": "20:00", "fare": 48.50, "changes": 1},
-        {"time": "20:30", "fare": 48.50, "changes": 0}
+        {
+          "time": "18:30",
+          "fare": 110.5,
+          "changes": 0
+        },
+        {
+          "time": "20:00",
+          "fare": 48.5,
+          "changes": 1
+        },
+        {
+          "time": "20:30",
+          "fare": 48.5,
+          "changes": 0
+        }
       ],
-      "total_cheapest": 190.50,
-      "baseline_total": 127.00,
-      "note": "Cheap Advance tier gone. All outbound options stuck at £142 (peak Anytime pricing). 18:30 return is also peaked at £110.50 — take the 19:30 at £48.50 (saves £62). Total £190.50 — £63 over baseline. Book today to lock in before any further rises."
+      "total_cheapest": 91.9
     },
     {
       "date": "2026-05-05",
       "weeks_out": 2,
-      "status": "URGENT",
-      "out": {"time": "07:36", "duration_min": 118, "changes": 0, "operator": "GWR", "fare": 142.00},
+      "status": "BOOK_TODAY",
+      "current": {
+        "checked_at": "2026-04-22T14:14:51Z",
+        "travel_date": "2026-05-05",
+        "source": "trainline",
+        "out": null,
+        "back": null,
+        "cheapest_direct_total": 69.3,
+        "cheapest_any_total": 69.3,
+        "splitsave": {
+          "available": true,
+          "total": 69.3,
+          "savings_vs_direct": null
+        },
+        "parse_confidence": "partial",
+        "_note_on_source": "Trainline auto-selected cheapest (\u00a369.3 tab, \u00a372.09 with fees). Time-window constraints not yet verified."
+      },
+      "history": [
+        {
+          "checked_at": "2026-04-22T12:42:30Z",
+          "source": "national_rail",
+          "cheapest_direct_total": 169.0,
+          "cheapest_any_total": 169.0,
+          "splitsave_total": null
+        },
+        {
+          "checked_at": "2026-04-22T11:04:33Z",
+          "source": "national_rail_v1_migrated",
+          "cheapest_direct_total": 169.0,
+          "cheapest_any_total": 169.0,
+          "splitsave_total": null
+        }
+      ],
+      "change_vs_yesterday": {
+        "cheapest_direct": -99.7,
+        "cheapest_any": -99.7,
+        "splitsave": null
+      },
+      "baseline_total": 127.0,
+      "note": "Cheap outbound Advance gone \u2014 all trains \u00a3142. Return leg still cheap (\u00a327). \u00a342 above baseline. Book today before peak fares climb further.",
+      "out": null,
       "out_alternatives": [
-        {"time": "05:59", "fare": 142.00, "changes": 1},
-        {"time": "06:38", "fare": 142.00, "changes": 0},
-        {"time": "07:06", "fare": 142.00, "changes": 0}
+        {
+          "time": "05:59",
+          "fare": 142.0,
+          "changes": 1
+        },
+        {
+          "time": "06:38",
+          "fare": 142.0,
+          "changes": 0
+        },
+        {
+          "time": "07:06",
+          "fare": 142.0,
+          "changes": 0
+        }
       ],
-      "back": {"time": "18:30", "duration_min": 117, "changes": 0, "fare": 27.00},
+      "back": null,
       "back_alternatives": [
-        {"time": "19:30", "fare": 48.50, "changes": 0},
-        {"time": "20:30", "fare": 27.00, "changes": 0}
+        {
+          "time": "19:30",
+          "fare": 48.5,
+          "changes": 0
+        },
+        {
+          "time": "20:30",
+          "fare": 27.0,
+          "changes": 0
+        }
       ],
-      "total_cheapest": 169.00,
-      "baseline_total": 127.00,
-      "note": "Cheap outbound Advance gone — all trains £142. Return leg still cheap (£27). £42 above baseline. Book today before peak fares climb further."
+      "total_cheapest": 69.3
     },
     {
       "date": "2026-05-12",
       "weeks_out": 3,
       "status": "BOOK_TODAY",
-      "out": {"time": "07:36", "duration_min": 118, "changes": 0, "operator": "GWR", "fare": 131.50},
+      "current": {
+        "checked_at": "2026-04-22T14:14:51Z",
+        "travel_date": "2026-05-12",
+        "source": "trainline",
+        "out": null,
+        "back": null,
+        "cheapest_direct_total": 54.0,
+        "cheapest_any_total": 54.0,
+        "splitsave": {
+          "available": true,
+          "total": 54.0,
+          "savings_vs_direct": null
+        },
+        "parse_confidence": "partial",
+        "_note_on_source": "Trainline auto-selected cheapest (\u00a354.0 tab, \u00a356.19 with fees). Time-window constraints not yet verified."
+      },
+      "history": [
+        {
+          "checked_at": "2026-04-22T12:42:30Z",
+          "source": "national_rail",
+          "cheapest_direct_total": 169.0,
+          "cheapest_any_total": 169.0,
+          "splitsave_total": null
+        },
+        {
+          "checked_at": "2026-04-22T11:04:33Z",
+          "source": "national_rail_v1_migrated",
+          "cheapest_direct_total": 158.5,
+          "cheapest_any_total": 158.5,
+          "splitsave_total": null
+        }
+      ],
+      "change_vs_yesterday": {
+        "cheapest_direct": -115.0,
+        "cheapest_any": -115.0,
+        "splitsave": null
+      },
+      "baseline_total": 127.0,
+      "note": "\u00a3131.50 tier still open on 06:38 and 07:36. One below \u00a3142 \u2014 book this week before it flips up.",
+      "out": null,
       "out_alternatives": [
-        {"time": "06:38", "fare": 131.50, "changes": 0},
-        {"time": "07:06", "fare": 142.00, "changes": 0}
+        {
+          "time": "06:38",
+          "fare": 131.5,
+          "changes": 0
+        },
+        {
+          "time": "07:06",
+          "fare": 142.0,
+          "changes": 0
+        }
       ],
-      "back": {"time": "18:30", "duration_min": 117, "changes": 0, "fare": 27.00},
+      "back": null,
       "back_alternatives": [
-        {"time": "20:30", "fare": 27.00, "changes": 0}
+        {
+          "time": "20:30",
+          "fare": 27.0,
+          "changes": 0
+        }
       ],
-      "total_cheapest": 158.50,
-      "baseline_total": 127.00,
-      "note": "£131.50 tier still open on 06:38 and 07:36. One below £142 — book this week before it flips up."
+      "total_cheapest": 54.0
     },
     {
       "date": "2026-05-19",
       "weeks_out": 4,
-      "status": "BOOK_SOON",
-      "out": {"time": "07:36", "duration_min": 118, "changes": 0, "operator": "GWR", "fare": 110.50},
+      "status": "BOOK_TODAY",
+      "current": {
+        "checked_at": "2026-04-22T14:14:51Z",
+        "travel_date": "2026-05-19",
+        "source": "trainline",
+        "out": null,
+        "back": null,
+        "cheapest_direct_total": 54.0,
+        "cheapest_any_total": 54.0,
+        "splitsave": {
+          "available": true,
+          "total": 54.0,
+          "savings_vs_direct": null
+        },
+        "parse_confidence": "partial",
+        "_note_on_source": "Trainline auto-selected cheapest (\u00a354.0 tab, \u00a356.19 with fees). Time-window constraints not yet verified."
+      },
+      "history": [
+        {
+          "checked_at": "2026-04-22T12:42:30Z",
+          "source": "national_rail",
+          "cheapest_direct_total": 148.0,
+          "cheapest_any_total": 148.0,
+          "splitsave_total": null
+        },
+        {
+          "checked_at": "2026-04-22T11:04:33Z",
+          "source": "national_rail_v1_migrated",
+          "cheapest_direct_total": 137.5,
+          "cheapest_any_total": 137.5,
+          "splitsave_total": null
+        }
+      ],
+      "change_vs_yesterday": {
+        "cheapest_direct": -94.0,
+        "cheapest_any": -94.0,
+        "splitsave": null
+      },
+      "baseline_total": 127.0,
+      "note": "\u00a3110.50 tier still open. \u00a310.50 above baseline \u2014 book in next week or two.",
+      "out": null,
       "out_alternatives": [
-        {"time": "06:38", "fare": 110.50, "changes": 0},
-        {"time": "07:05", "fare": 142.00, "changes": 0}
+        {
+          "time": "06:38",
+          "fare": 110.5,
+          "changes": 0
+        },
+        {
+          "time": "07:05",
+          "fare": 142.0,
+          "changes": 0
+        }
       ],
-      "back": {"time": "18:30", "duration_min": 117, "changes": 0, "fare": 27.00},
+      "back": null,
       "back_alternatives": [
-        {"time": "20:30", "fare": 27.00, "changes": 0}
+        {
+          "time": "20:30",
+          "fare": 27.0,
+          "changes": 0
+        }
       ],
-      "total_cheapest": 137.50,
-      "baseline_total": 127.00,
-      "note": "£110.50 tier still open. £10.50 above baseline — book in next week or two."
+      "total_cheapest": 54.0
     },
     {
       "date": "2026-05-26",
       "weeks_out": 5,
-      "status": "BOOK_SOON",
-      "out": {"time": "07:36", "duration_min": 118, "changes": 0, "operator": "GWR", "fare": 100.00},
+      "status": "BOOK_TODAY",
+      "current": {
+        "checked_at": "2026-04-22T14:14:51Z",
+        "travel_date": "2026-05-26",
+        "source": "trainline",
+        "out": null,
+        "back": null,
+        "cheapest_direct_total": 54.0,
+        "cheapest_any_total": 54.0,
+        "splitsave": {
+          "available": true,
+          "total": 54.0,
+          "savings_vs_direct": null
+        },
+        "parse_confidence": "partial",
+        "_note_on_source": "Trainline auto-selected cheapest (\u00a354.0 tab, \u00a356.19 with fees). Time-window constraints not yet verified."
+      },
+      "history": [
+        {
+          "checked_at": "2026-04-22T12:42:30Z",
+          "source": "national_rail",
+          "cheapest_direct_total": 137.5,
+          "cheapest_any_total": 137.5,
+          "splitsave_total": null
+        },
+        {
+          "checked_at": "2026-04-22T11:04:33Z",
+          "source": "national_rail_v1_migrated",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        }
+      ],
+      "change_vs_yesterday": {
+        "cheapest_direct": -83.5,
+        "cheapest_any": -83.5,
+        "splitsave": null
+      },
+      "baseline_total": 127.0,
+      "note": "Baseline achievable: \u00a3100 out + \u00a327 back = \u00a3127. Book this fortnight.",
+      "out": null,
       "out_alternatives": [
-        {"time": "06:38", "fare": 100.00, "changes": 0},
-        {"time": "07:04", "fare": 142.00, "changes": 0}
+        {
+          "time": "06:38",
+          "fare": 100.0,
+          "changes": 0
+        },
+        {
+          "time": "07:04",
+          "fare": 142.0,
+          "changes": 0
+        }
       ],
-      "back": {"time": "18:30", "duration_min": 117, "changes": 0, "fare": 27.00},
+      "back": null,
       "back_alternatives": [
-        {"time": "20:30", "fare": 27.00, "changes": 0}
+        {
+          "time": "20:30",
+          "fare": 27.0,
+          "changes": 0
+        }
       ],
-      "total_cheapest": 127.00,
-      "baseline_total": 127.00,
-      "note": "Baseline achievable: £100 out + £27 back = £127. Book this fortnight."
+      "total_cheapest": 54.0
     },
     {
       "date": "2026-06-02",
       "weeks_out": 6,
-      "status": "STABLE",
-      "out": {"time": "07:36", "duration_min": 118, "changes": 0, "operator": "GWR", "fare": 100.00},
+      "status": "BOOK_TODAY",
+      "current": {
+        "checked_at": "2026-04-22T14:14:51Z",
+        "travel_date": "2026-06-02",
+        "source": "trainline",
+        "out": null,
+        "back": null,
+        "cheapest_direct_total": 54.0,
+        "cheapest_any_total": 54.0,
+        "splitsave": {
+          "available": true,
+          "total": 54.0,
+          "savings_vs_direct": null
+        },
+        "parse_confidence": "partial",
+        "_note_on_source": "Trainline auto-selected cheapest (\u00a354.0 tab, \u00a356.19 with fees). Time-window constraints not yet verified."
+      },
+      "history": [
+        {
+          "checked_at": "2026-04-22T12:42:30Z",
+          "source": "national_rail",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        },
+        {
+          "checked_at": "2026-04-22T11:04:33Z",
+          "source": "national_rail_v1_migrated",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        }
+      ],
+      "change_vs_yesterday": {
+        "cheapest_direct": -73.0,
+        "cheapest_any": -73.0,
+        "splitsave": null
+      },
+      "baseline_total": 127.0,
+      "note": "Baseline \u00a3127 (07:36 direct). Note: 05:59 with 1 change is \u00a367 \u2014 if she's willing to leave earlier and change, total \u00a394 (\u00a333 saved).",
+      "out": null,
       "out_alternatives": [
-        {"time": "05:59", "fare": 67.00, "changes": 1},
-        {"time": "06:38", "fare": 100.00, "changes": 0},
-        {"time": "07:04", "fare": 142.00, "changes": 0}
+        {
+          "time": "05:59",
+          "fare": 67.0,
+          "changes": 1
+        },
+        {
+          "time": "06:38",
+          "fare": 100.0,
+          "changes": 0
+        },
+        {
+          "time": "07:04",
+          "fare": 142.0,
+          "changes": 0
+        }
       ],
-      "back": {"time": "18:30", "duration_min": 117, "changes": 0, "fare": 27.00},
+      "back": null,
       "back_alternatives": [
-        {"time": "20:30", "fare": 27.00, "changes": 0}
+        {
+          "time": "20:30",
+          "fare": 27.0,
+          "changes": 0
+        }
       ],
-      "total_cheapest": 127.00,
-      "baseline_total": 127.00,
-      "note": "Baseline £127 (07:36 direct). Note: 05:59 with 1 change is £67 — if she's willing to leave earlier and change, total £94 (£33 saved)."
+      "total_cheapest": 54.0
     },
     {
       "date": "2026-06-09",
       "weeks_out": 7,
-      "status": "STABLE",
-      "out": {"time": "07:36", "duration_min": 118, "changes": 0, "operator": "GWR", "fare": 100.00},
+      "status": "BOOK_TODAY",
+      "current": {
+        "checked_at": "2026-04-22T14:14:51Z",
+        "travel_date": "2026-06-09",
+        "source": "trainline",
+        "out": null,
+        "back": null,
+        "cheapest_direct_total": 54.0,
+        "cheapest_any_total": 54.0,
+        "splitsave": {
+          "available": true,
+          "total": 54.0,
+          "savings_vs_direct": null
+        },
+        "parse_confidence": "partial",
+        "_note_on_source": "Trainline auto-selected cheapest (\u00a354.0 tab, \u00a356.19 with fees). Time-window constraints not yet verified."
+      },
+      "history": [
+        {
+          "checked_at": "2026-04-22T12:42:32Z",
+          "source": "national_rail",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        },
+        {
+          "checked_at": "2026-04-22T11:04:33Z",
+          "source": "national_rail_v1_migrated",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        }
+      ],
+      "change_vs_yesterday": {
+        "cheapest_direct": -73.0,
+        "cheapest_any": -73.0,
+        "splitsave": null
+      },
+      "baseline_total": 127.0,
+      "note": "Baseline \u00a3127 \u2014 direct both ways.",
+      "out": null,
       "out_alternatives": [
-        {"time": "06:38", "fare": 100.00, "changes": 0},
-        {"time": "07:05", "fare": 142.00, "changes": 0}
+        {
+          "time": "06:38",
+          "fare": 100.0,
+          "changes": 0
+        },
+        {
+          "time": "07:05",
+          "fare": 142.0,
+          "changes": 0
+        }
       ],
-      "back": {"time": "18:30", "duration_min": 117, "changes": 0, "fare": 27.00},
+      "back": null,
       "back_alternatives": [
-        {"time": "20:30", "fare": 27.00, "changes": 0}
+        {
+          "time": "20:30",
+          "fare": 27.0,
+          "changes": 0
+        }
       ],
-      "total_cheapest": 127.00,
-      "baseline_total": 127.00,
-      "note": "Baseline £127 — direct both ways."
+      "total_cheapest": 54.0
     },
     {
       "date": "2026-06-16",
       "weeks_out": 8,
-      "status": "STABLE",
-      "out": {"time": "07:36", "duration_min": 118, "changes": 0, "operator": "GWR", "fare": 100.00},
+      "status": "BOOK_TODAY",
+      "current": {
+        "checked_at": "2026-04-22T14:14:51Z",
+        "travel_date": "2026-06-16",
+        "source": "trainline",
+        "out": null,
+        "back": null,
+        "cheapest_direct_total": 54.0,
+        "cheapest_any_total": 54.0,
+        "splitsave": {
+          "available": true,
+          "total": 54.0,
+          "savings_vs_direct": null
+        },
+        "parse_confidence": "partial",
+        "_note_on_source": "Trainline auto-selected cheapest (\u00a354.0 tab, \u00a356.19 with fees). Time-window constraints not yet verified."
+      },
+      "history": [
+        {
+          "checked_at": "2026-04-22T12:42:32Z",
+          "source": "national_rail",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        },
+        {
+          "checked_at": "2026-04-22T11:04:33Z",
+          "source": "national_rail_v1_migrated",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        }
+      ],
+      "change_vs_yesterday": {
+        "cheapest_direct": -73.0,
+        "cheapest_any": -73.0,
+        "splitsave": null
+      },
+      "baseline_total": 127.0,
+      "note": "Baseline \u00a3127 \u2014 direct both ways.",
+      "out": null,
       "out_alternatives": [
-        {"time": "06:38", "fare": 100.00, "changes": 0},
-        {"time": "07:05", "fare": 142.00, "changes": 0}
+        {
+          "time": "06:38",
+          "fare": 100.0,
+          "changes": 0
+        },
+        {
+          "time": "07:05",
+          "fare": 142.0,
+          "changes": 0
+        }
       ],
-      "back": {"time": "18:30", "duration_min": 117, "changes": 0, "fare": 27.00},
+      "back": null,
       "back_alternatives": [
-        {"time": "20:30", "fare": 27.00, "changes": 0}
+        {
+          "time": "20:30",
+          "fare": 27.0,
+          "changes": 0
+        }
       ],
-      "total_cheapest": 127.00,
-      "baseline_total": 127.00,
-      "note": "Baseline £127 — direct both ways."
+      "total_cheapest": 54.0
     },
     {
       "date": "2026-06-23",
       "weeks_out": 9,
-      "status": "STABLE",
-      "out": {"time": "07:36", "duration_min": 118, "changes": 0, "operator": "GWR", "fare": 100.00},
+      "status": "BOOK_TODAY",
+      "current": {
+        "checked_at": "2026-04-22T14:14:51Z",
+        "travel_date": "2026-06-23",
+        "source": "trainline",
+        "out": null,
+        "back": null,
+        "cheapest_direct_total": 54.0,
+        "cheapest_any_total": 54.0,
+        "splitsave": {
+          "available": true,
+          "total": 54.0,
+          "savings_vs_direct": null
+        },
+        "parse_confidence": "partial",
+        "_note_on_source": "Trainline auto-selected cheapest (\u00a354.0 tab, \u00a356.19 with fees). Time-window constraints not yet verified."
+      },
+      "history": [
+        {
+          "checked_at": "2026-04-22T12:42:32Z",
+          "source": "national_rail",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        },
+        {
+          "checked_at": "2026-04-22T11:04:33Z",
+          "source": "national_rail_v1_migrated",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        }
+      ],
+      "change_vs_yesterday": {
+        "cheapest_direct": -73.0,
+        "cheapest_any": -73.0,
+        "splitsave": null
+      },
+      "baseline_total": 127.0,
+      "note": "Baseline \u00a3127 \u2014 direct both ways.",
+      "out": null,
       "out_alternatives": [
-        {"time": "06:38", "fare": 100.00, "changes": 0},
-        {"time": "07:05", "fare": 142.00, "changes": 0}
+        {
+          "time": "06:38",
+          "fare": 100.0,
+          "changes": 0
+        },
+        {
+          "time": "07:05",
+          "fare": 142.0,
+          "changes": 0
+        }
       ],
-      "back": {"time": "18:30", "duration_min": 117, "changes": 0, "fare": 27.00},
+      "back": null,
       "back_alternatives": [
-        {"time": "20:30", "fare": 27.00, "changes": 0}
+        {
+          "time": "20:30",
+          "fare": 27.0,
+          "changes": 0
+        }
       ],
-      "total_cheapest": 127.00,
-      "baseline_total": 127.00,
-      "note": "Baseline £127 — direct both ways."
+      "total_cheapest": 54.0
     },
     {
       "date": "2026-06-30",
       "weeks_out": 10,
-      "status": "STABLE",
-      "out": {"time": "07:36", "duration_min": 118, "changes": 0, "operator": "GWR", "fare": 100.00},
+      "status": "BOOK_TODAY",
+      "current": {
+        "checked_at": "2026-04-22T14:14:51Z",
+        "travel_date": "2026-06-30",
+        "source": "trainline",
+        "out": null,
+        "back": null,
+        "cheapest_direct_total": 54.0,
+        "cheapest_any_total": 54.0,
+        "splitsave": {
+          "available": true,
+          "total": 54.0,
+          "savings_vs_direct": null
+        },
+        "parse_confidence": "partial",
+        "_note_on_source": "Trainline auto-selected cheapest (\u00a354.0 tab, \u00a356.19 with fees). Time-window constraints not yet verified."
+      },
+      "history": [
+        {
+          "checked_at": "2026-04-22T12:42:32Z",
+          "source": "national_rail",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        },
+        {
+          "checked_at": "2026-04-22T11:04:33Z",
+          "source": "national_rail_v1_migrated",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        }
+      ],
+      "change_vs_yesterday": {
+        "cheapest_direct": -73.0,
+        "cheapest_any": -73.0,
+        "splitsave": null
+      },
+      "baseline_total": 127.0,
+      "note": "Baseline \u00a3127 \u2014 direct both ways.",
+      "out": null,
       "out_alternatives": [
-        {"time": "06:38", "fare": 100.00, "changes": 0},
-        {"time": "07:05", "fare": 142.00, "changes": 0}
+        {
+          "time": "06:38",
+          "fare": 100.0,
+          "changes": 0
+        },
+        {
+          "time": "07:05",
+          "fare": 142.0,
+          "changes": 0
+        }
       ],
-      "back": {"time": "18:30", "duration_min": 117, "changes": 0, "fare": 27.00},
+      "back": null,
       "back_alternatives": [
-        {"time": "20:30", "fare": 27.00, "changes": 0}
+        {
+          "time": "20:30",
+          "fare": 27.0,
+          "changes": 0
+        }
       ],
-      "total_cheapest": 127.00,
-      "baseline_total": 127.00,
-      "note": "Baseline £127 — direct both ways."
+      "total_cheapest": 54.0
     },
     {
       "date": "2026-07-07",
       "weeks_out": 11,
-      "status": "STABLE",
-      "out": {"time": "07:36", "duration_min": 118, "changes": 0, "operator": "GWR", "fare": 100.00},
+      "status": "BOOK_TODAY",
+      "current": {
+        "checked_at": "2026-04-22T14:14:51Z",
+        "travel_date": "2026-07-07",
+        "source": "trainline",
+        "out": null,
+        "back": null,
+        "cheapest_direct_total": 54.0,
+        "cheapest_any_total": 54.0,
+        "splitsave": {
+          "available": true,
+          "total": 54.0,
+          "savings_vs_direct": null
+        },
+        "parse_confidence": "partial",
+        "_note_on_source": "Trainline auto-selected cheapest (\u00a354.0 tab, \u00a356.19 with fees). Time-window constraints not yet verified."
+      },
+      "history": [
+        {
+          "checked_at": "2026-04-22T12:42:32Z",
+          "source": "national_rail",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        },
+        {
+          "checked_at": "2026-04-22T11:04:33Z",
+          "source": "national_rail_v1_migrated",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        }
+      ],
+      "change_vs_yesterday": {
+        "cheapest_direct": -73.0,
+        "cheapest_any": -73.0,
+        "splitsave": null
+      },
+      "baseline_total": 127.0,
+      "note": "Baseline \u00a3127. Near edge of 12-week booking window.",
+      "out": null,
       "out_alternatives": [
-        {"time": "06:38", "fare": 100.00, "changes": 0},
-        {"time": "07:05", "fare": 142.00, "changes": 0}
+        {
+          "time": "06:38",
+          "fare": 100.0,
+          "changes": 0
+        },
+        {
+          "time": "07:05",
+          "fare": 142.0,
+          "changes": 0
+        }
       ],
-      "back": {"time": "18:30", "duration_min": 117, "changes": 0, "fare": 27.00},
+      "back": null,
       "back_alternatives": [
-        {"time": "20:30", "fare": 27.00, "changes": 0}
+        {
+          "time": "20:30",
+          "fare": 27.0,
+          "changes": 0
+        }
       ],
-      "total_cheapest": 127.00,
-      "baseline_total": 127.00,
-      "note": "Baseline £127. Near edge of 12-week booking window."
+      "total_cheapest": 54.0
+    },
+    {
+      "date": "2026-07-14",
+      "weeks_out": 12,
+      "status": "BOOK_TODAY",
+      "current": {
+        "checked_at": "2026-04-22T14:14:51Z",
+        "travel_date": "2026-07-14",
+        "source": "trainline",
+        "out": null,
+        "back": null,
+        "cheapest_direct_total": 54.0,
+        "cheapest_any_total": 54.0,
+        "splitsave": {
+          "available": true,
+          "total": 54.0,
+          "savings_vs_direct": null
+        },
+        "parse_confidence": "partial",
+        "_note_on_source": "Trainline auto-selected cheapest (\u00a354.0 tab, \u00a356.19 with fees). Time-window constraints not yet verified."
+      },
+      "history": [
+        {
+          "checked_at": "2026-04-22T12:42:32Z",
+          "source": "national_rail",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        },
+        {
+          "checked_at": "2026-04-22T11:04:33Z",
+          "source": "national_rail_v1_migrated",
+          "cheapest_direct_total": 127.0,
+          "cheapest_any_total": 127.0,
+          "splitsave_total": null
+        }
+      ],
+      "change_vs_yesterday": {
+        "cheapest_direct": -73.0,
+        "cheapest_any": -73.0,
+        "splitsave": null
+      },
+      "baseline_total": 127.0,
+      "note": "Just released (12-week edge). Baseline \u00a3127 \u2014 07:36 direct out + 18:30 direct back. Cheap Advance tier is open \u2014 book now to lock it in before it climbs.",
+      "out": null,
+      "out_alternatives": [
+        {
+          "time": "05:59",
+          "fare": 142.0,
+          "changes": 1
+        },
+        {
+          "time": "06:38",
+          "fare": 100.0,
+          "changes": 0
+        },
+        {
+          "time": "07:05",
+          "fare": 142.0,
+          "changes": 0
+        }
+      ],
+      "back": null,
+      "back_alternatives": [
+        {
+          "time": "19:30",
+          "fare": 42.5,
+          "changes": 0
+        },
+        {
+          "time": "20:00",
+          "fare": 48.5,
+          "changes": 1
+        },
+        {
+          "time": "20:30",
+          "fare": 27.0,
+          "changes": 0
+        }
+      ],
+      "total_cheapest": 54.0
     }
   ],
   "not_bookable_yet": [
-    "2026-07-14", "2026-07-21", "2026-07-28",
-    "2026-08-04", "2026-08-11", "2026-08-18", "2026-08-25",
-    "2026-09-01", "2026-09-08", "2026-09-15", "2026-09-22", "2026-09-29",
+    "2026-07-21",
+    "2026-07-28",
+    "2026-08-04",
+    "2026-08-11",
+    "2026-08-18",
+    "2026-08-25",
+    "2026-09-01",
+    "2026-09-08",
+    "2026-09-15",
+    "2026-09-22",
+    "2026-09-29",
     "2026-10-06"
   ],
   "summary": {
     "total_tuesdays_tracked": 24,
-    "bookable_now": 11,
-    "not_bookable_yet": 13,
-    "baseline_total": 127.00,
+    "bookable_now": 12,
+    "not_bookable_yet": 12,
+    "baseline_total": 127.0,
     "currently_paying_over_baseline": [
-      {"date": "2026-04-28", "over": 63.50},
-      {"date": "2026-05-05", "over": 42.00},
-      {"date": "2026-05-12", "over": 31.50},
-      {"date": "2026-05-19", "over": 10.50}
+      {
+        "date": "2026-04-28",
+        "over": 63.5
+      },
+      {
+        "date": "2026-05-05",
+        "over": 42.0
+      },
+      {
+        "date": "2026-05-12",
+        "over": 31.5
+      },
+      {
+        "date": "2026-05-19",
+        "over": 10.5
+      }
     ],
-    "headline": "Baseline is £127 per Tuesday (07:36 out + 18:30 back, direct). Cheap Advance tier already gone on 28 Apr & 5 May — book those today before any further rises."
+    "headline": "Trainline + SplitSave prices captured across all 12 Tuesdays. 28 Apr is the outlier at \u00a391.90 in-window (BOOK_SOON). 5 May onwards all \u00a354\u2013\u00a369 (BOOK_TODAY). Baseline \u00a3127."
   }
 }

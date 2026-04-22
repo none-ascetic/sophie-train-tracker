@@ -22,22 +22,22 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:sophie-2026-08-04@train-tracker
-DTSTAMP:20260422T010628Z
+DTSTAMP:20260422T141606Z
 DTSTART;TZID=Europe/London:20260512T020000
 DTEND;TZID=Europe/London:20260512T023000
-SUMMARY:Book Sophie's train · Tue 04 Aug
-DESCRIPTION:Tickets for Tuesday 04 August 2026 (Yatton → London Paddington) release around this time.\n\nTarget times: out 07:36 (peak)\, back 18:30.\nBaseline cost: £127 (£100 out + £27 back).\nNo price history yet — tickets haven't released.\n\nBOOK NOW (opens Trainline):\nOutbound: https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-04T07%3A30%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single\nReturn: https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-08-04T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single\n\nFull tracker: https://sophie-train-tracker.vercel.app
-URL:https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-04T07%3A30%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single
+SUMMARY:Book Sophie's train · Tue 4 Aug
+DESCRIPTION:Tickets for Tuesday 4 August 2026 (Yatton → London Paddington) release around this time.\n\nTarget times: out 07:36 (peak)\, back 18:30.\nBaseline cost: £127 (£100 out + £27 back).\nNo price history yet — tickets haven't released.\n\nBOOK NOW (opens Trainline):\nOutbound: https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-04T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single\nReturn: https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-08-04T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single\n\nFull tracker: https://sophie-train-tracker.vercel.app
+URL:https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-04T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tickets now on sale for Tuesday 04 August 2026 — book Sophie's train
+DESCRIPTION:Tickets now on sale for Tuesday 4 August 2026 — book Sophie's train
 TRIGGER:PT0M
 END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tickets about to release for Tuesday 04 August 2026
+DESCRIPTION:Tickets about to release for Tuesday 4 August 2026
 TRIGGER:-PT15M
 END:VALARM
 END:VEVENT

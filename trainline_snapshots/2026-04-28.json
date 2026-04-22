@@ -1,0 +1,26 @@
+{
+  "date": "2026-04-28",
+  "source": "trainline",
+  "scraped_at": "2026-04-22",
+  "train_tab_price": 87.80,
+  "total_selected": 90.59,
+  "cheapest_single_price": 43.40,
+  "outbound_in_window": [
+    {"dep": "07:06", "arr": "09:05", "standard_single": 92.70, "splitsave_save": 49.30, "splitsave_single": 43.40, "changes": 0},
+    {"dep": "07:36", "arr": "09:34", "standard_single": 92.70, "splitsave_save": 49.30, "splitsave_single": 43.40, "changes": 0}
+  ],
+  "return_in_window": [
+    {"dep": "18:30", "arr": "20:27", "standard_single": 93.30, "splitsave_save": 17.20, "splitsave_single": 76.10, "changes": 0},
+    {"dep": "19:00", "arr": "21:16", "standard_single": 67.50, "splitsave_save": 0.60, "splitsave_single": 66.90, "changes": 1},
+    {"dep": "19:30", "arr": "21:30", "standard_single": 48.50, "splitsave_save": 0, "splitsave_single": 48.50, "changes": 0},
+    {"dep": "20:00", "arr": "22:19", "standard_single": 48.50, "splitsave_save": 0, "splitsave_single": 48.50, "changes": 1},
+    {"dep": "20:30", "arr": null, "standard_single": null, "splitsave_save": null, "splitsave_single": null, "changes": null}
+  ],
+  "ticket_types": {
+    "Anytime_Return": 286.40,
+    "Off_Peak_Return": 117.00,
+    "Super_Off_Peak_Return": 87.80,
+    "Super_Off_Peak_Day_Travelcard": 96.70
+  },
+  "notes": "Super Off-Peak requires 09:41+ outbound — doesn't fit Sophie's ≤07:36. Cheapest in-window return: ~£91.90 (07:06/07:36 SplitSave single £43.40 + 19:30 return £48.50). Trainline auto-selected £90.59 for 09:41+19:30."
+}
