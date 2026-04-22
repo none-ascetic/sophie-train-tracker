@@ -30,6 +30,7 @@ STATUS_LABELS = {
     "BOOK_SOON": ("Book soon", "soon"),
     "STABLE": ("Watch · at baseline", "stable"),
     "UNKNOWN": ("Awaiting data", "stable"),
+    "BOOKED": ("Already booked", "booked"),
 }
 
 SECTION_ORDER = [
@@ -38,6 +39,7 @@ SECTION_ORDER = [
     ("BOOK_SOON", "Book soon · within 1–2 weeks"),
     ("STABLE", "Baseline · sit tight, book in the next fortnight"),
     ("UNKNOWN", "Awaiting data"),
+    ("BOOKED", "Already booked · paid tickets"),
 ]
 
 
@@ -181,23 +183,57 @@ def _render_bookable_card(t: dict) -> str:
         if "National Rail" not in note and "SplitSave" not in note:
             full_note = (note + " " if note else "") + source_note
     change_badge = _arrow_badge(t.get("change_vs_yesterday"))
+    is_booked = bool(t.get("booked"))
+
+    # When leg-level data is missing (headline-only scrape), avoid showing
+    # two "No data" blocks. Fall back to a single summary row highlighting
+    # the cheapest total — honest about the limit, quieter visually.
+    if out_leg is None and back_leg is None:
+        total = cur.get("cheapest_any_total")
+        if total is not None:
+            legs_block = (
+                '<div class="legs-summary">'
+                f'Cheapest return: <strong>{_fmt_gbp(total)}</strong> · per-leg times refresh when you tap through'
+                '</div>'
+            )
+        else:
+            legs_block = (
+                '<div class="legs-summary">Price not captured this run — re-checking tomorrow</div>'
+            )
+    else:
+        legs_block = (
+            '<div class="legs">'
+            f'{_leg_html(out_leg, "Out")}'
+            f'{_leg_html(back_leg, "Back")}'
+            '</div>'
+        )
+
+    if is_booked:
+        actions_block = (
+            '<div class="note" style="color:#8a8a8a; font-style:italic;">'
+            'Tickets already paid for — no action needed.'
+            '</div>'
+        )
+    else:
+        actions_block = (
+            '<div class="actions">'
+            f'<a class="btn btn-primary" href="{_trainline_url(t["date"], "out", out_time)}" target="_blank" rel="noopener">Book outbound ({html.escape(out_time)}) →</a>'
+            f'<a class="btn btn-secondary" href="{_trainline_url(t["date"], "back", back_time)}" target="_blank" rel="noopener">Book return ({html.escape(back_time)})</a>'
+            '</div>'
+        )
+
+    card_class = "card booked" if is_booked else "card"
     return f"""
-<div class="card">
+<div class="{card_class}">
   <div class="card-head">
     <div><span class="date">{_fmt_date_short(t['date'])}</span><span class="weeks-out">{wk} week{'s' if wk != 1 else ''} out</span>{change_badge}</div>
     <div class="status {status_class}">{html.escape(status_label)}</div>
   </div>
-  <div class="legs">
-    {_leg_html(out_leg, 'Out')}
-    {_leg_html(back_leg, 'Back')}
-  </div>
+  {legs_block}
   {_totals_row(cur, t.get('baseline_total') or 127.0)}
   {_alts_block(cur)}
   <div class="note">{html.escape(full_note)}</div>
-  <div class="actions">
-    <a class="btn btn-primary" href="{_trainline_url(t['date'], 'out', out_time)}" target="_blank" rel="noopener">Book outbound ({html.escape(out_time)}) →</a>
-    <a class="btn btn-secondary" href="{_trainline_url(t['date'], 'back', back_time)}" target="_blank" rel="noopener">Book return ({html.escape(back_time)})</a>
-  </div>
+  {actions_block}
 </div>
 """.strip()
 
@@ -275,6 +311,11 @@ CSS = """
   .status.today { background: var(--today-bg); color: var(--today); }
   .status.soon { background: var(--soon-bg); color: var(--soon); }
   .status.stable { background: var(--stable-bg); color: var(--stable); }
+  .status.booked { background: #eeece6; color: #8a8a8a; }
+  .card.booked { opacity: 0.55; background: #f6f4ee; }
+  .card.booked .date { color: #6b6b6b; }
+  .legs-summary { padding: 12px; background: #fdfcf9; border: 1px solid var(--rule); border-radius: 8px; font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 10px; }
+  .legs-summary strong { color: var(--ink); font-size: 18px; font-weight: 600; }
   .legs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
   .leg { border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; background: #fdfcf9; }
   .leg-label { font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }

@@ -20,7 +20,7 @@
     {
       "date": "2026-04-28",
       "weeks_out": 1,
-      "status": "BOOK_SOON",
+      "status": "BOOKED",
       "current": {
         "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-04-28",
@@ -78,7 +78,7 @@
         "splitsave": 0.0
       },
       "baseline_total": 127.0,
-      "note": "In-window cheapest is \u00a391.90 (07:06 or 07:36 out \u00a343.40 SplitSave + 19:30 back \u00a348.50). Trainline also shows an \u00a387.80 Super Off-Peak return, but that needs a 09:41+ outbound \u2014 too late for Sophie. BOOK_SOON.",
+      "note": "Tickets already booked & paid \u2014 locked in. In-window cheapest is \u00a391.90 (07:06 or 07:36 out \u00a343.40 SplitSave + 19:30 back \u00a348.50). Trainline also shows an \u00a387.80 Super Off-Peak return, but that needs a 09:41+ outbound \u2014 too late for Sophie. BOOK_SOON.",
       "out": {
         "time": "07:06",
         "arrival": "09:05",
@@ -127,12 +127,13 @@
           "changes": 0
         }
       ],
-      "total_cheapest": 91.9
+      "total_cheapest": 91.9,
+      "booked": true
     },
     {
       "date": "2026-05-05",
       "weeks_out": 2,
-      "status": "BOOK_TODAY",
+      "status": "BOOKED",
       "current": {
         "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-05-05",
@@ -178,7 +179,7 @@
         "splitsave": 0.0
       },
       "baseline_total": 127.0,
-      "note": "Cheap outbound Advance gone \u2014 all trains \u00a3142. Return leg still cheap (\u00a327). \u00a342 above baseline. Book today before peak fares climb further.",
+      "note": "Tickets already booked & paid \u2014 locked in. Cheap outbound Advance gone \u2014 all trains \u00a3142. Return leg still cheap (\u00a327). \u00a342 above baseline. Book today before peak fares climb further.",
       "out": null,
       "out_alternatives": [
         {
@@ -210,12 +211,13 @@
           "changes": 0
         }
       ],
-      "total_cheapest": 69.3
+      "total_cheapest": 69.3,
+      "booked": true
     },
     {
       "date": "2026-05-12",
       "weeks_out": 3,
-      "status": "BOOK_TODAY",
+      "status": "BOOKED",
       "current": {
         "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-05-12",
@@ -261,7 +263,7 @@
         "splitsave": 0.0
       },
       "baseline_total": 127.0,
-      "note": "\u00a3131.50 tier still open on 06:38 and 07:36. One below \u00a3142 \u2014 book this week before it flips up.",
+      "note": "Tickets already booked & paid \u2014 locked in. \u00a3131.50 tier still open on 06:38 and 07:36. One below \u00a3142 \u2014 book this week before it flips up.",
       "out": null,
       "out_alternatives": [
         {
@@ -283,12 +285,13 @@
           "changes": 0
         }
       ],
-      "total_cheapest": 54.0
+      "total_cheapest": 54.0,
+      "booked": true
     },
     {
       "date": "2026-05-19",
       "weeks_out": 4,
-      "status": "BOOK_TODAY",
+      "status": "BOOKED",
       "current": {
         "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-05-19",
@@ -334,7 +337,7 @@
         "splitsave": 0.0
       },
       "baseline_total": 127.0,
-      "note": "\u00a3110.50 tier still open. \u00a310.50 above baseline \u2014 book in next week or two.",
+      "note": "Tickets already booked & paid \u2014 locked in. \u00a3110.50 tier still open. \u00a310.50 above baseline \u2014 book in next week or two.",
       "out": null,
       "out_alternatives": [
         {
@@ -356,12 +359,13 @@
           "changes": 0
         }
       ],
-      "total_cheapest": 54.0
+      "total_cheapest": 54.0,
+      "booked": true
     },
     {
       "date": "2026-05-26",
       "weeks_out": 5,
-      "status": "BOOK_TODAY",
+      "status": "BOOKED",
       "current": {
         "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-05-26",
@@ -407,7 +411,7 @@
         "splitsave": 0.0
       },
       "baseline_total": 127.0,
-      "note": "Baseline achievable: \u00a3100 out + \u00a327 back = \u00a3127. Book this fortnight.",
+      "note": "Tickets already booked & paid \u2014 locked in. Baseline achievable: \u00a3100 out + \u00a327 back = \u00a3127. Book this fortnight.",
       "out": null,
       "out_alternatives": [
         {
@@ -429,12 +433,13 @@
           "changes": 0
         }
       ],
-      "total_cheapest": 54.0
+      "total_cheapest": 54.0,
+      "booked": true
     },
     {
       "date": "2026-06-02",
       "weeks_out": 6,
-      "status": "BOOK_TODAY",
+      "status": "BOOKED",
       "current": {
         "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-06-02",
@@ -480,7 +485,7 @@
         "splitsave": 0.0
       },
       "baseline_total": 127.0,
-      "note": "Baseline \u00a3127 (07:36 direct). Note: 05:59 with 1 change is \u00a367 \u2014 if she's willing to leave earlier and change, total \u00a394 (\u00a333 saved).",
+      "note": "Tickets already booked & paid \u2014 locked in. Baseline \u00a3127 (07:36 direct). Note: 05:59 with 1 change is \u00a367 \u2014 if she's willing to leave earlier and change, total \u00a394 (\u00a333 saved).",
       "out": null,
       "out_alternatives": [
         {
@@ -507,7 +512,8 @@
           "changes": 0
         }
       ],
-      "total_cheapest": 54.0
+      "total_cheapest": 54.0,
+      "booked": true
     },
     {
       "date": "2026-06-09",
@@ -979,27 +985,11 @@
   ],
   "summary": {
     "total_tuesdays_tracked": 24,
-    "bookable_now": 12,
+    "bookable_now": 6,
     "not_bookable_yet": 12,
     "baseline_total": 127.0,
-    "currently_paying_over_baseline": [
-      {
-        "date": "2026-04-28",
-        "over": 63.5
-      },
-      {
-        "date": "2026-05-05",
-        "over": 42.0
-      },
-      {
-        "date": "2026-05-12",
-        "over": 31.5
-      },
-      {
-        "date": "2026-05-19",
-        "over": 10.5
-      }
-    ],
-    "headline": "Trainline + SplitSave prices captured across all 12 Tuesdays. 28 Apr is the outlier at \u00a391.90 in-window (BOOK_SOON). 5 May onwards all \u00a354\u2013\u00a369 (BOOK_TODAY). Baseline \u00a3127."
+    "currently_paying_over_baseline": [],
+    "headline": "6 Tuesdays already booked (through 2 Jun). 6 still to book: 9 Jun\u201314 Jul, all showing \u00a354 cheapest return. Baseline \u00a3127 \u2014 all well below.",
+    "booked": 6
   }
 }

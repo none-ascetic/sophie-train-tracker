@@ -82,11 +82,18 @@ def compute_change(new: dict, prev_compact: Optional[dict]) -> Optional[dict]:
 
 def merge_snapshot(date_str: str, new_snapshot: dict) -> dict:
     """Merge one new Trainline snapshot into prices.json for the given date.
-    Returns the updated tuesday dict so the caller can compose messaging."""
+    Returns the updated tuesday dict so the caller can compose messaging.
+
+    If the tuesday is marked `booked: true` (Sophie has already paid), skip the
+    merge entirely — we freeze state at the time of booking and don't want a
+    stale daily scrape to mutate status back to BOOK_TODAY etc."""
     data = json.loads(PRICES.read_text())
     for t in data["tuesdays"]:
         if t["date"] != date_str:
             continue
+        if t.get("booked"):
+            # No-op: tickets already paid for, state is frozen.
+            return t
         # Push the previous current onto history, then replace
         prev = t.get("current")
         if prev:

@@ -122,10 +122,14 @@ def _source_caveat(tuesdays: list) -> str:
 
 def compose_message(data: dict) -> str:
     today = date.today().strftime("%a %-d %b")
-    tuesdays = [t for t in data.get("tuesdays", []) if t.get("current")]
+    # Exclude already-booked Tuesdays — Sophie doesn't want nagging on dates she's paid for.
+    tuesdays = [
+        t for t in data.get("tuesdays", [])
+        if t.get("current") and not t.get("booked")
+    ]
     if not tuesdays:
-        return (f"Morning Soph — couldn't reach Trainline last night, so no update today. "
-                f"Will try again tomorrow. Full tracker: {TRACKER_URL}")
+        return (f"Morning Soph — nothing to action today. All tracked Tuesdays are either "
+                f"booked or awaiting data. Full tracker: {TRACKER_URL}")
     ranked = rank_tuesdays(tuesdays)
     headline = compose_headline(tuesdays)
     body = compose_body(ranked, max_lines=3)
