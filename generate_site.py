@@ -19,6 +19,11 @@ ARTIFACT = ROOT / "index.artifact.html"
 REMINDERS_DIR = ROOT / "reminders"
 TRACKER_URL = "https://sophie-train-tracker.vercel.app"
 
+# Trainline opens booking ~179 days ahead and the window rolls forward one day at a time.
+# See RUNBOOK.md "Booking horizon" and horizon_log.jsonl for the live probe. Do NOT change
+# this to 12 weeks / 84 days — that was a miscount that showed release dates 3 months late.
+HORIZON_DAYS = 179
+
 # Trainline deep-link station hashes (copied from existing template)
 YAT = "1551a38ad87e8710d21b25403ae0a3e6"
 PAD = "1f06fc66ccd7ea92ae4b0a550e4ddfd1"
@@ -239,9 +244,9 @@ def _render_bookable_card(t: dict) -> str:
 
 
 def _render_pending_card(iso_date: str) -> str:
-    # Ticket release is ~12 weeks before travel date. Show the release date.
+    # Ticket release is ~179 days before travel date (Trainline booking horizon).
     travel = datetime.strptime(iso_date, "%Y-%m-%d").date()
-    release = travel - timedelta(weeks=12)
+    release = travel - timedelta(days=HORIZON_DAYS)
     release_txt = release.strftime("%-d %b")
     return f"""
     <div class="pending-card">
@@ -370,7 +375,7 @@ def render_html(data: dict) -> str:
         pending_section = f"""
 <div class="section-title">Not bookable yet · tap to add to Reminders</div>
 <div class="card">
-  <div class="note" style="margin-top:0">These Tuesdays unlock one at a time as the 12-week window rolls forward. Tap <strong>Add to Reminders</strong> and your iPhone's Reminders app will drop in a to-do with a timed alert, a 15-minute warning, and a direct Trainline link in the notes so you can book the second they go live.</div>
+  <div class="note" style="margin-top:0">These Tuesdays unlock one at a time as Trainline's ~6-month booking window rolls forward (179 days ahead). Tap <strong>Add to Reminders</strong> and your iPhone's Reminders app will drop in a to-do with a timed alert, a 15-minute warning, and a direct Trainline link in the notes so you can book the second they go live.</div>
   <div class="pending-grid">
 {pending_html}
   </div>
@@ -428,7 +433,7 @@ def render_html(data: dict) -> str:
 
 def _ics_for_pending(iso_date: str) -> str:
     travel = datetime.strptime(iso_date, "%Y-%m-%d").date()
-    release = travel - timedelta(weeks=12)
+    release = travel - timedelta(days=HORIZON_DAYS)
     out_url = _trainline_url(iso_date, "out", "07:36")
     back_url = _trainline_url(iso_date, "back", "18:30")
     dtstamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
