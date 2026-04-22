@@ -3,3 +3,4 @@
 {"probed_on": "2026-04-22", "probe_date": "2026-10-17", "bookable": true, "coach_redirect": false, "out_count": 8, "inw_count": 8, "checked_at": "2026-04-22T17:11:00Z", "note": "Saturday — bookable"}
 {"probed_on": "2026-04-22", "probe_date": "2026-10-20", "bookable": false, "coach_redirect": true, "out_count": 0, "inw_count": 0, "checked_at": "2026-04-22T16:30:00Z", "note": "Tuesday 20 Oct — first unbooked Tuesday beyond horizon. Target to unlock 24 Apr."}
 {"probed_on": "2026-04-22", "probe_date": "2026-10-20", "bookable": false, "coach_redirect": true, "out_count": 0, "inw_count": 0, "checked_at": "2026-04-22T17:28:52Z", "note": "Redirected to coach-only; still beyond horizon"}
+{"probed_on": "2026-04-22", "probe_date": "2026-10-20", "bookable": false, "coach_redirect": true, "out_count": 0, "inw_count": 0, "checked_at": "2026-04-22T18:47:55Z", "note": "Tuesday 20 Oct \u2014 still beyond horizon (coach redirect)"}
