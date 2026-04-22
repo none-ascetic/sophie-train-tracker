@@ -12,3 +12,4 @@ Thumbs.db
 # Local Python scratch
 __pycache__/
 *.pyc
+.vercel

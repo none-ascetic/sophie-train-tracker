@@ -22,7 +22,7 @@
       "weeks_out": 1,
       "status": "BOOK_SOON",
       "current": {
-        "checked_at": "2026-04-22T14:14:51Z",
+        "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-04-28",
         "source": "trainline",
         "out": {
@@ -51,6 +51,13 @@
       },
       "history": [
         {
+          "checked_at": "2026-04-22T14:14:51Z",
+          "source": "trainline",
+          "cheapest_direct_total": 91.9,
+          "cheapest_any_total": 91.9,
+          "splitsave_total": 91.9
+        },
+        {
           "checked_at": "2026-04-22T12:42:30Z",
           "source": "national_rail",
           "cheapest_direct_total": 190.5,
@@ -66,9 +73,9 @@
         }
       ],
       "change_vs_yesterday": {
-        "cheapest_direct": -98.6,
-        "cheapest_any": -98.6,
-        "splitsave": null
+        "cheapest_direct": 0.0,
+        "cheapest_any": 0.0,
+        "splitsave": 0.0
       },
       "baseline_total": 127.0,
       "note": "In-window cheapest is \u00a391.90 (07:06 or 07:36 out \u00a343.40 SplitSave + 19:30 back \u00a348.50). Trainline also shows an \u00a387.80 Super Off-Peak return, but that needs a 09:41+ outbound \u2014 too late for Sophie. BOOK_SOON.",
@@ -127,7 +134,7 @@
       "weeks_out": 2,
       "status": "BOOK_TODAY",
       "current": {
-        "checked_at": "2026-04-22T14:14:51Z",
+        "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-05-05",
         "source": "trainline",
         "out": null,
@@ -144,6 +151,13 @@
       },
       "history": [
         {
+          "checked_at": "2026-04-22T14:14:51Z",
+          "source": "trainline",
+          "cheapest_direct_total": 69.3,
+          "cheapest_any_total": 69.3,
+          "splitsave_total": 69.3
+        },
+        {
           "checked_at": "2026-04-22T12:42:30Z",
           "source": "national_rail",
           "cheapest_direct_total": 169.0,
@@ -159,9 +173,9 @@
         }
       ],
       "change_vs_yesterday": {
-        "cheapest_direct": -99.7,
-        "cheapest_any": -99.7,
-        "splitsave": null
+        "cheapest_direct": 0.0,
+        "cheapest_any": 0.0,
+        "splitsave": 0.0
       },
       "baseline_total": 127.0,
       "note": "Cheap outbound Advance gone \u2014 all trains \u00a3142. Return leg still cheap (\u00a327). \u00a342 above baseline. Book today before peak fares climb further.",
@@ -203,7 +217,7 @@
       "weeks_out": 3,
       "status": "BOOK_TODAY",
       "current": {
-        "checked_at": "2026-04-22T14:14:51Z",
+        "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-05-12",
         "source": "trainline",
         "out": null,
@@ -220,6 +234,13 @@
       },
       "history": [
         {
+          "checked_at": "2026-04-22T14:14:51Z",
+          "source": "trainline",
+          "cheapest_direct_total": 54.0,
+          "cheapest_any_total": 54.0,
+          "splitsave_total": 54.0
+        },
+        {
           "checked_at": "2026-04-22T12:42:30Z",
           "source": "national_rail",
           "cheapest_direct_total": 169.0,
@@ -235,9 +256,9 @@
         }
       ],
       "change_vs_yesterday": {
-        "cheapest_direct": -115.0,
-        "cheapest_any": -115.0,
-        "splitsave": null
+        "cheapest_direct": 0.0,
+        "cheapest_any": 0.0,
+        "splitsave": 0.0
       },
       "baseline_total": 127.0,
       "note": "\u00a3131.50 tier still open on 06:38 and 07:36. One below \u00a3142 \u2014 book this week before it flips up.",
@@ -269,7 +290,7 @@
       "weeks_out": 4,
       "status": "BOOK_TODAY",
       "current": {
-        "checked_at": "2026-04-22T14:14:51Z",
+        "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-05-19",
         "source": "trainline",
         "out": null,
@@ -286,6 +307,13 @@
       },
       "history": [
         {
+          "checked_at": "2026-04-22T14:14:51Z",
+          "source": "trainline",
+          "cheapest_direct_total": 54.0,
+          "cheapest_any_total": 54.0,
+          "splitsave_total": 54.0
+        },
+        {
           "checked_at": "2026-04-22T12:42:30Z",
           "source": "national_rail",
           "cheapest_direct_total": 148.0,
@@ -301,9 +329,9 @@
         }
       ],
       "change_vs_yesterday": {
-        "cheapest_direct": -94.0,
-        "cheapest_any": -94.0,
-        "splitsave": null
+        "cheapest_direct": 0.0,
+        "cheapest_any": 0.0,
+        "splitsave": 0.0
       },
       "baseline_total": 127.0,
       "note": "\u00a3110.50 tier still open. \u00a310.50 above baseline \u2014 book in next week or two.",
@@ -335,7 +363,7 @@
       "weeks_out": 5,
       "status": "BOOK_TODAY",
       "current": {
-        "checked_at": "2026-04-22T14:14:51Z",
+        "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-05-26",
         "source": "trainline",
         "out": null,
@@ -352,6 +380,13 @@
       },
       "history": [
         {
+          "checked_at": "2026-04-22T14:14:51Z",
+          "source": "trainline",
+          "cheapest_direct_total": 54.0,
+          "cheapest_any_total": 54.0,
+          "splitsave_total": 54.0
+        },
+        {
           "checked_at": "2026-04-22T12:42:30Z",
           "source": "national_rail",
           "cheapest_direct_total": 137.5,
@@ -367,9 +402,9 @@
         }
       ],
       "change_vs_yesterday": {
-        "cheapest_direct": -83.5,
-        "cheapest_any": -83.5,
-        "splitsave": null
+        "cheapest_direct": 0.0,
+        "cheapest_any": 0.0,
+        "splitsave": 0.0
       },
       "baseline_total": 127.0,
       "note": "Baseline achievable: \u00a3100 out + \u00a327 back = \u00a3127. Book this fortnight.",
@@ -401,7 +436,7 @@
       "weeks_out": 6,
       "status": "BOOK_TODAY",
       "current": {
-        "checked_at": "2026-04-22T14:14:51Z",
+        "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-06-02",
         "source": "trainline",
         "out": null,
@@ -418,6 +453,13 @@
       },
       "history": [
         {
+          "checked_at": "2026-04-22T14:14:51Z",
+          "source": "trainline",
+          "cheapest_direct_total": 54.0,
+          "cheapest_any_total": 54.0,
+          "splitsave_total": 54.0
+        },
+        {
           "checked_at": "2026-04-22T12:42:30Z",
           "source": "national_rail",
           "cheapest_direct_total": 127.0,
@@ -433,9 +475,9 @@
         }
       ],
       "change_vs_yesterday": {
-        "cheapest_direct": -73.0,
-        "cheapest_any": -73.0,
-        "splitsave": null
+        "cheapest_direct": 0.0,
+        "cheapest_any": 0.0,
+        "splitsave": 0.0
       },
       "baseline_total": 127.0,
       "note": "Baseline \u00a3127 (07:36 direct). Note: 05:59 with 1 change is \u00a367 \u2014 if she's willing to leave earlier and change, total \u00a394 (\u00a333 saved).",
@@ -472,7 +514,7 @@
       "weeks_out": 7,
       "status": "BOOK_TODAY",
       "current": {
-        "checked_at": "2026-04-22T14:14:51Z",
+        "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-06-09",
         "source": "trainline",
         "out": null,
@@ -489,6 +531,13 @@
       },
       "history": [
         {
+          "checked_at": "2026-04-22T14:14:51Z",
+          "source": "trainline",
+          "cheapest_direct_total": 54.0,
+          "cheapest_any_total": 54.0,
+          "splitsave_total": 54.0
+        },
+        {
           "checked_at": "2026-04-22T12:42:32Z",
           "source": "national_rail",
           "cheapest_direct_total": 127.0,
@@ -504,9 +553,9 @@
         }
       ],
       "change_vs_yesterday": {
-        "cheapest_direct": -73.0,
-        "cheapest_any": -73.0,
-        "splitsave": null
+        "cheapest_direct": 0.0,
+        "cheapest_any": 0.0,
+        "splitsave": 0.0
       },
       "baseline_total": 127.0,
       "note": "Baseline \u00a3127 \u2014 direct both ways.",
@@ -538,7 +587,7 @@
       "weeks_out": 8,
       "status": "BOOK_TODAY",
       "current": {
-        "checked_at": "2026-04-22T14:14:51Z",
+        "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-06-16",
         "source": "trainline",
         "out": null,
@@ -555,6 +604,13 @@
       },
       "history": [
         {
+          "checked_at": "2026-04-22T14:14:51Z",
+          "source": "trainline",
+          "cheapest_direct_total": 54.0,
+          "cheapest_any_total": 54.0,
+          "splitsave_total": 54.0
+        },
+        {
           "checked_at": "2026-04-22T12:42:32Z",
           "source": "national_rail",
           "cheapest_direct_total": 127.0,
@@ -570,9 +626,9 @@
         }
       ],
       "change_vs_yesterday": {
-        "cheapest_direct": -73.0,
-        "cheapest_any": -73.0,
-        "splitsave": null
+        "cheapest_direct": 0.0,
+        "cheapest_any": 0.0,
+        "splitsave": 0.0
       },
       "baseline_total": 127.0,
       "note": "Baseline \u00a3127 \u2014 direct both ways.",
@@ -604,7 +660,7 @@
       "weeks_out": 9,
       "status": "BOOK_TODAY",
       "current": {
-        "checked_at": "2026-04-22T14:14:51Z",
+        "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-06-23",
         "source": "trainline",
         "out": null,
@@ -621,6 +677,13 @@
       },
       "history": [
         {
+          "checked_at": "2026-04-22T14:14:51Z",
+          "source": "trainline",
+          "cheapest_direct_total": 54.0,
+          "cheapest_any_total": 54.0,
+          "splitsave_total": 54.0
+        },
+        {
           "checked_at": "2026-04-22T12:42:32Z",
           "source": "national_rail",
           "cheapest_direct_total": 127.0,
@@ -636,9 +699,9 @@
         }
       ],
       "change_vs_yesterday": {
-        "cheapest_direct": -73.0,
-        "cheapest_any": -73.0,
-        "splitsave": null
+        "cheapest_direct": 0.0,
+        "cheapest_any": 0.0,
+        "splitsave": 0.0
       },
       "baseline_total": 127.0,
       "note": "Baseline \u00a3127 \u2014 direct both ways.",
@@ -670,7 +733,7 @@
       "weeks_out": 10,
       "status": "BOOK_TODAY",
       "current": {
-        "checked_at": "2026-04-22T14:14:51Z",
+        "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-06-30",
         "source": "trainline",
         "out": null,
@@ -687,6 +750,13 @@
       },
       "history": [
         {
+          "checked_at": "2026-04-22T14:14:51Z",
+          "source": "trainline",
+          "cheapest_direct_total": 54.0,
+          "cheapest_any_total": 54.0,
+          "splitsave_total": 54.0
+        },
+        {
           "checked_at": "2026-04-22T12:42:32Z",
           "source": "national_rail",
           "cheapest_direct_total": 127.0,
@@ -702,9 +772,9 @@
         }
       ],
       "change_vs_yesterday": {
-        "cheapest_direct": -73.0,
-        "cheapest_any": -73.0,
-        "splitsave": null
+        "cheapest_direct": 0.0,
+        "cheapest_any": 0.0,
+        "splitsave": 0.0
       },
       "baseline_total": 127.0,
       "note": "Baseline \u00a3127 \u2014 direct both ways.",
@@ -736,7 +806,7 @@
       "weeks_out": 11,
       "status": "BOOK_TODAY",
       "current": {
-        "checked_at": "2026-04-22T14:14:51Z",
+        "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-07-07",
         "source": "trainline",
         "out": null,
@@ -753,6 +823,13 @@
       },
       "history": [
         {
+          "checked_at": "2026-04-22T14:14:51Z",
+          "source": "trainline",
+          "cheapest_direct_total": 54.0,
+          "cheapest_any_total": 54.0,
+          "splitsave_total": 54.0
+        },
+        {
           "checked_at": "2026-04-22T12:42:32Z",
           "source": "national_rail",
           "cheapest_direct_total": 127.0,
@@ -768,9 +845,9 @@
         }
       ],
       "change_vs_yesterday": {
-        "cheapest_direct": -73.0,
-        "cheapest_any": -73.0,
-        "splitsave": null
+        "cheapest_direct": 0.0,
+        "cheapest_any": 0.0,
+        "splitsave": 0.0
       },
       "baseline_total": 127.0,
       "note": "Baseline \u00a3127. Near edge of 12-week booking window.",
@@ -802,7 +879,7 @@
       "weeks_out": 12,
       "status": "BOOK_TODAY",
       "current": {
-        "checked_at": "2026-04-22T14:14:51Z",
+        "checked_at": "2026-04-22T15:05:56Z",
         "travel_date": "2026-07-14",
         "source": "trainline",
         "out": null,
@@ -819,6 +896,13 @@
       },
       "history": [
         {
+          "checked_at": "2026-04-22T14:14:51Z",
+          "source": "trainline",
+          "cheapest_direct_total": 54.0,
+          "cheapest_any_total": 54.0,
+          "splitsave_total": 54.0
+        },
+        {
           "checked_at": "2026-04-22T12:42:32Z",
           "source": "national_rail",
           "cheapest_direct_total": 127.0,
@@ -834,9 +918,9 @@
         }
       ],
       "change_vs_yesterday": {
-        "cheapest_direct": -73.0,
-        "cheapest_any": -73.0,
-        "splitsave": null
+        "cheapest_direct": 0.0,
+        "cheapest_any": 0.0,
+        "splitsave": 0.0
       },
       "baseline_total": 127.0,
       "note": "Just released (12-week edge). Baseline \u00a3127 \u2014 07:36 direct out + 18:30 direct back. Cheap Advance tier is open \u2014 book now to lock it in before it climbs.",

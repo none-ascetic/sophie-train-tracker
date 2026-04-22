@@ -1,8 +1,1 @@
-{
-  "date": "2026-05-12",
-  "source": "trainline",
-  "scraped_at": "2026-04-22",
-  "train_tab_price": 54.00,
-  "total_selected": 56.19,
-  "notes": "Trainline auto-selected cheapest. 07:06/07:36 out show Save £49.30 SplitSave on £92.70 single = £43.40."
-}
+{"date":"2026-05-12","source":"trainline","scraped_at":"2026-04-22T02:00:00Z","train_tab_price":54.00,"total_selected":56.19,"notes":"Trainline auto-selected cheapest."}

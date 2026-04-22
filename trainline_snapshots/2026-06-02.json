@@ -1,8 +1,1 @@
-{
-  "date": "2026-06-02",
-  "source": "trainline",
-  "scraped_at": "2026-04-22",
-  "train_tab_price": 54.00,
-  "total_selected": 56.19,
-  "notes": "Trainline auto-selected cheapest."
-}
+{"date":"2026-06-02","source":"trainline","scraped_at":"2026-04-22T02:00:00Z","train_tab_price":54.00,"total_selected":56.19,"notes":"Trainline auto-selected cheapest."}
