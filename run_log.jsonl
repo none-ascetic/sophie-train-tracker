@@ -1,1 +1,2 @@
 {"ts": "2026-04-22T15:07:20Z", "duration_sec": 180, "tuesdays_total": 12, "scraped_trainline": 12, "fell_back_to_nr": 0, "scrape_failures": 0, "big_movers": [], "status_transitions": [], "source_flips": [], "pending_message_chars": 229, "tool_calls_estimate": 80}
+{"ts": "2026-04-22T17:48:50Z", "status": "ok", "duration_sec": 0.04, "tuesdays_total": 19, "scraped_trainline": 19, "fell_back_to_nr": 0, "scrape_failures": 0, "big_movers": [], "status_transitions": [], "source_flips": [], "pending_message_chars": 237}
