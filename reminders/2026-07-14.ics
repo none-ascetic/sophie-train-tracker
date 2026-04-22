@@ -20,16 +20,16 @@ DTSTART:19701025T020000
 RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
 END:STANDARD
 END:VTIMEZONE
-BEGIN:VTODO
+BEGIN:VEVENT
 UID:sophie-2026-07-14@train-tracker
-DTSTAMP:20260421T234505Z
+DTSTAMP:20260422T010628Z
 DTSTART;TZID=Europe/London:20260423T020000
-DUE;TZID=Europe/London:20260423T020000
+DTEND;TZID=Europe/London:20260423T023000
 SUMMARY:Book Sophie's train · Tue 14 Jul
 DESCRIPTION:Tickets for Tuesday 14 July 2026 (Yatton → London Paddington) release around this time.\n\nTarget times: out 07:36 (peak)\, back 18:30.\nBaseline cost: £127 (£100 out + £27 back).\nNo price history yet — tickets haven't released.\n\nBOOK NOW (opens Trainline):\nOutbound: https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-07-14T07%3A30%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single\nReturn: https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-07-14T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single\n\nFull tracker: https://sophie-train-tracker.vercel.app
 URL:https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-07-14T07%3A30%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single
-PRIORITY:1
-STATUS:NEEDS-ACTION
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Tickets now on sale for Tuesday 14 July 2026 — book Sophie's train
@@ -40,5 +40,5 @@ ACTION:DISPLAY
 DESCRIPTION:Tickets about to release for Tuesday 14 July 2026
 TRIGGER:-PT15M
 END:VALARM
-END:VTODO
+END:VEVENT
 END:VCALENDAR
