@@ -6,6 +6,16 @@ and 18:30 Paddington→Yatton fares for every unbooked Tuesday in
 `prices.json`, plus a fresh horizon probe. No skips, no assumptions, no lazy
 scrapes (per Paddy, 22 Apr 2026).
 
+> **Read the `trainline-lookup` skill first** (at
+> `/Users/paddydavies/.claude/skills/trainline-lookup/SKILL.md`, or
+> `/sessions/gallant-peaceful-babbage/mnt/.claude/skills/trainline-lookup/SKILL.md`
+> from the sandbox). It encodes the working Trainline URL format (URN
+> location codes — NOT hash IDs; `selectedTab=train`, `splitSave=true`,
+> `transportModes[]=mixed`), the current DOM selectors, and a
+> date-guarded `extractor.js`. Every bullet in this runbook assumes you
+> already loaded the skill — don't re-derive the URL or selectors from
+> scratch.
+
 ## Sequence
 
 1. **Read `prices.json`** — list every unbooked Tuesday (skip `booked: true`).
