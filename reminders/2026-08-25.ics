@@ -22,12 +22,12 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VTODO
 UID:sophie-2026-08-25@train-tracker
-DTSTAMP:20260421T220326Z
+DTSTAMP:20260421T234505Z
 DTSTART;TZID=Europe/London:20260602T020000
 DUE;TZID=Europe/London:20260602T020000
 SUMMARY:Book Sophie's train · Tue 25 Aug
-DESCRIPTION:Tickets for Tuesday 25 August 2026 (Yatton → London Paddington) release around this time.\n\nTarget times: out 07:36 (peak)\, back 18:30.\nBaseline cost: £127 (£100 out + £27 back).\nNo price history yet — tickets haven't released.\n\nBOOK NOW:\nTrainline: https://www.thetrainline.com/book/results?origin=YAT&destination=PAD&outboundDate=2026-08-25&outboundTime=07:36&returnDate=2026-08-25&returnTime=18:30&passengers%5B%5D=adult\nNational Rail: https://ojp.nationalrail.co.uk/service/timesandfares/YAT/PAD/250826/0530/dep\n\nFull tracker: https://sophie-train-tracker.vercel.app
-URL:https://www.thetrainline.com/book/results?origin=YAT&destination=PAD&outboundDate=2026-08-25&outboundTime=07:36&returnDate=2026-08-25&returnTime=18:30&passengers%5B%5D=adult
+DESCRIPTION:Tickets for Tuesday 25 August 2026 (Yatton → London Paddington) release around this time.\n\nTarget times: out 07:36 (peak)\, back 18:30.\nBaseline cost: £127 (£100 out + £27 back).\nNo price history yet — tickets haven't released.\n\nBOOK NOW (opens Trainline):\nOutbound: https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-25T07%3A30%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single\nReturn: https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-08-25T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single\n\nFull tracker: https://sophie-train-tracker.vercel.app
+URL:https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-25T07%3A30%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single
 PRIORITY:1
 STATUS:NEEDS-ACTION
 BEGIN:VALARM
