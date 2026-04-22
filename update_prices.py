@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
-"""Merge a fresh Trainline snapshot into prices.json.
+"""Manual single-Tuesday merge utility. **NOT** the scheduled-task path.
 
-Called by the 02:00 scheduled task, once per pending Tuesday:
+The 02:00 pipeline is `daily_run.py` (strict-validated all-at-once merge
+gated on 07:36 OUT + 18:30 RETURN). This script is kept around for manual
+one-off fixes where only one date needs refreshing — e.g. re-running a
+single scrape after a transient Trainline outage. Do not call it from the
+scheduled task.
 
     python3 update_prices.py --date 2026-06-16 --snapshot snapshot.json
 
-Where snapshot.json is the output of fetch_trainline_fares.py.
+Where snapshot.json has the compact-snapshot shape used in history[]
+entries (cheapest_any_total, splitsave.total, out, back). The companion
+`fetch_trainline_fares.py` that used to produce these has been moved to
+`archive/` — supply the JSON by hand or via Chrome MCP if re-running.
 
 Responsibilities:
   - Find the Tuesday entry in prices.json (by date)
