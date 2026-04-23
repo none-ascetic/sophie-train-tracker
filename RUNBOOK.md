@@ -6,15 +6,22 @@ and 18:30 Paddington→Yatton fares for every unbooked Tuesday in
 `prices.json`, plus a fresh horizon probe. No skips, no assumptions, no lazy
 scrapes (per Paddy, 22 Apr 2026).
 
-> **Read the `trainline-lookup` skill first** (at
-> `/Users/paddydavies/.claude/skills/trainline-lookup/SKILL.md`, or
-> `/sessions/gallant-peaceful-babbage/mnt/.claude/skills/trainline-lookup/SKILL.md`
-> from the sandbox). It encodes the working Trainline URL format (URN
-> location codes — NOT hash IDs; `selectedTab=train`, `splitSave=true`,
-> `transportModes[]=mixed`), the current DOM selectors, and a
-> date-guarded `extractor.js`. Every bullet in this runbook assumes you
-> already loaded the skill — don't re-derive the URL or selectors from
-> scratch.
+> **Load the `trainline-lookup` skill first.** It's installed in Cowork
+> and available in every session. Invoke it with the Skill tool:
+> `Skill({skill: "trainline-lookup"})`. It encodes the working URL
+> format (URN location codes — NOT hash IDs; `selectedTab=train`,
+> `splitSave=true`, `transportModes[]=mixed`), the DOM selectors
+> (`train-results-container-OUTWARD`/`INWARD`, `alternative-price`),
+> the date-guarded `extractor.js`, and a station URN cache
+> (`stations.md`). Every scrape step in this runbook assumes the skill
+> is loaded — don't re-derive any of it from scratch.
+>
+> **Session-agnostic paths.** The Train Tickets folder is mounted at
+> `/sessions/<session>/mnt/Train Tickets/` and the session name rotates
+> every Cowork run. Discover the folder via `pwd` (if CWD is inside it)
+> or glob `/sessions/*/mnt/Train\ Tickets/RUNBOOK.md`. Never hardcode
+> a session name. The `trainline-lookup` skill is reached via the Skill
+> tool, not by path.
 
 ## Sequence
 
@@ -65,6 +72,30 @@ scrapes (per Paddy, 22 Apr 2026).
    - `ok` → send the iMessage at 06:00 (separate task reads `pending_message.txt`).
    - `failed` → DO NOT send Sophie's iMessage. Alert Paddy using
      `paddy_alert.txt`. Yesterday's prices and message are preserved as-is.
+7. **Commit AND push from the sandbox** — auth lives in `$WORK/.env`
+   as `GITHUB_TOKEN` (fine-grained PAT for `sophie-train-tracker`). The
+   sandbox has no global git identity, so pass the committer inline
+   with `-c` flags. The tracker at https://sophie-train-tracker.vercel.app
+   auto-deploys from `origin/main`; without the push Sophie's morning
+   page is yesterday's data — so this step is load-bearing.
+   ```sh
+   set -a; . "$WORK/.env"; set +a
+
+   cd "$WORK"
+   git add prices.json raw_snapshot.json run_status.json horizon_log.jsonl pending_message.txt paddy_alert.txt 2>/dev/null
+
+   if git diff --cached --quiet; then
+     echo "no changes to commit"
+   else
+     git -c user.name="Paddy Davies" -c user.email="paddy@dines.co.uk" \
+         commit -m "Daily rail scrape $(date +%Y-%m-%d)"
+     git push "https://x-access-token:${GITHUB_TOKEN}@github.com/none-ascetic/sophie-train-tracker.git" main
+   fi
+   ```
+   If the push fails (network/auth/conflict), overwrite `paddy_alert.txt`
+   with the git error so the 06:00 task pages Paddy instead of sending
+   Sophie a stale message. Skip commit+push only if the run was `failed`
+   AND no files changed. `.env` is gitignored — never stage or commit it.
 
 ## Key invariants
 

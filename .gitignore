@@ -1,3 +1,6 @@
+# Secrets — never commit
+.env
+
 # Drape plugin config (not part of this site)
 .drape/
 
