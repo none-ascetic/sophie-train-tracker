@@ -72,30 +72,35 @@ scrapes (per Paddy, 22 Apr 2026).
    - `ok` → send the iMessage at 06:00 (separate task reads `pending_message.txt`).
    - `failed` → DO NOT send Sophie's iMessage. Alert Paddy using
      `paddy_alert.txt`. Yesterday's prices and message are preserved as-is.
-7. **Commit AND push from the sandbox** — auth lives in `$WORK/.env`
-   as `GITHUB_TOKEN` (fine-grained PAT for `sophie-train-tracker`). The
-   sandbox has no global git identity, so pass the committer inline
-   with `-c` flags. The tracker at https://sophie-train-tracker.vercel.app
-   auto-deploys from `origin/main`; without the push Sophie's morning
-   page is yesterday's data — so this step is load-bearing.
+7. **Commit AND push via the Mac** (the Cowork sandbox mount is
+   additive-only — it can create files inside `.git/` but cannot
+   unlink them, so a sandbox-native `git commit` leaves stale
+   `.git/index.lock`, `HEAD.lock`, and `tmp_obj_*` files that block
+   the next run. Use the Mac, where `rm` works normally). The real
+   repo lives at `/Users/paddydavies/Documents/Claude/Projects/Train Tickets`
+   and the tracker at https://sophie-train-tracker.vercel.app auto-deploys
+   from the GitHub remote on push. The push is load-bearing: without it,
+   Sophie's morning page is yesterday's data. Via
+   `mcp__Control_your_Mac__osascript`:
    ```sh
-   set -a; . "$WORK/.env"; set +a
-
-   cd "$WORK"
-   git add prices.json raw_snapshot.json run_status.json horizon_log.jsonl pending_message.txt paddy_alert.txt 2>/dev/null
-
-   if git diff --cached --quiet; then
-     echo "no changes to commit"
-   else
-     git -c user.name="Paddy Davies" -c user.email="paddy@dines.co.uk" \
-         commit -m "Daily rail scrape $(date +%Y-%m-%d)"
-     git push "https://x-access-token:${GITHUB_TOKEN}@github.com/none-ascetic/sophie-train-tracker.git" main
-   fi
+   cd "/Users/paddydavies/Documents/Claude/Projects/Train Tickets" \
+     && git add prices.json raw_snapshot.json run_status.json horizon_log.jsonl pending_message.txt paddy_alert.txt 2>/dev/null; \
+     if ! git diff --cached --quiet; then \
+       git commit -m "Daily rail scrape $(date +%Y-%m-%d)" && git push origin main; \
+     else \
+       echo "no changes to commit"; \
+     fi
    ```
    If the push fails (network/auth/conflict), overwrite `paddy_alert.txt`
    with the git error so the 06:00 task pages Paddy instead of sending
    Sophie a stale message. Skip commit+push only if the run was `failed`
-   AND no files changed. `.env` is gitignored — never stage or commit it.
+   AND no files changed.
+
+   > **Note on `GITHUB_TOKEN`**: a fine-grained PAT lives in `$WORK/.env`
+   > as `GITHUB_TOKEN`. It is NOT used for the nightly push (see above).
+   > It's kept around for GitHub API calls from the sandbox where
+   > unlinking isn't involved — issues, workflow dispatches, content API,
+   > etc. `.env` is gitignored; never stage or commit it.
 
 ## Key invariants
 
