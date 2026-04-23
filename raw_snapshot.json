@@ -1,13 +1,13 @@
 {
-  "probed_at": "2026-04-22T18:47:55Z",
+  "probed_at": "2026-04-23T01:16:59Z",
   "horizon_probe": {
     "probe_date": "2026-10-20",
     "bookable": false,
     "coach_redirect": true,
     "out_count": 0,
     "inw_count": 0,
-    "checked_at": "2026-04-22T18:47:55Z",
-    "note": "Tuesday 20 Oct \u2014 still beyond horizon (coach redirect)"
+    "checked_at": "2026-04-23T01:16:59Z",
+    "note": "Tuesday 20 Oct \u2014 still beyond horizon (redirect to selectedTab=coach)"
   },
   "tuesdays": [
     {
@@ -21,7 +21,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 86.7
+          "price": 93.7
         },
         {
           "arr": "10:06",
@@ -41,7 +41,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 64.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -95,12 +95,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-06-16",
@@ -113,7 +108,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 86.7
+          "price": 93.7
         },
         {
           "arr": "10:06",
@@ -133,7 +128,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 53.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -187,12 +182,7 @@
           "dep": "21:48",
           "price": 49.3
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-06-23",
@@ -205,7 +195,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 86.7
+          "price": 93.7
         },
         {
           "arr": "10:06",
@@ -225,7 +215,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 64.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -279,12 +269,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-06-30",
@@ -297,7 +282,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 86.7
+          "price": 93.7
         },
         {
           "arr": "10:06",
@@ -317,7 +302,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 53.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -371,12 +356,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-07-07",
@@ -389,7 +369,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 86.7
+          "price": 93.7
         },
         {
           "arr": "10:14",
@@ -463,12 +443,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-07-14",
@@ -481,7 +456,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 86.7
+          "price": 93.7
         },
         {
           "arr": "10:14",
@@ -555,12 +530,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-07-21",
@@ -573,7 +543,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 86.7
+          "price": 93.7
         },
         {
           "arr": "10:14",
@@ -647,12 +617,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-07-28",
@@ -665,7 +630,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 86.7
+          "price": 93.7
         },
         {
           "arr": "10:14",
@@ -739,12 +704,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-08-04",
@@ -757,7 +717,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 86.7
+          "price": 93.7
         },
         {
           "arr": "10:06",
@@ -777,7 +737,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 64.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -831,12 +791,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-08-11",
@@ -849,7 +804,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 86.7
+          "price": 93.7
         },
         {
           "arr": "10:06",
@@ -869,7 +824,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 64.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -923,12 +878,7 @@
           "dep": "21:48",
           "price": 38.4
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-08-18",
@@ -941,7 +891,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 86.7
+          "price": 93.7
         },
         {
           "arr": "10:06",
@@ -961,7 +911,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 64.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -1015,12 +965,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-08-25",
@@ -1033,7 +978,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 77.1
+          "price": 84.1
         },
         {
           "arr": "10:06",
@@ -1053,7 +998,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 64.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -1107,12 +1052,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 104.1,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-09-01",
@@ -1125,7 +1065,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 86.7
+          "price": 93.7
         },
         {
           "arr": "10:06",
@@ -1145,7 +1085,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 64.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -1199,12 +1139,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-09-08",
@@ -1217,7 +1152,7 @@
         {
           "arr": "09:34",
           "dep": "07:36",
-          "price": 86.7
+          "price": 93.7
         },
         {
           "arr": "10:06",
@@ -1237,7 +1172,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 64.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -1291,12 +1226,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-09-15",
@@ -1329,7 +1259,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 64.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -1383,12 +1313,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 70.8,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-09-22",
@@ -1421,7 +1346,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 64.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -1475,12 +1400,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 70.8,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-09-29",
@@ -1513,7 +1433,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 64.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -1567,12 +1487,7 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 70.8,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-10-06",
@@ -1605,7 +1520,7 @@
         {
           "arr": "11:20",
           "dep": "09:02",
-          "price": 64.5
+          "price": 68.1
         },
         {
           "arr": "11:34",
@@ -1659,104 +1574,94 @@
           "dep": "22:03",
           "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 70.8,
-        "savings_vs_direct": 0
-      }
+      ]
     },
     {
       "date": "2026-10-13",
       "outward": [
         {
-          "dep": "07:05",
           "arr": "09:05",
+          "dep": "07:05",
           "price": 66.3
         },
         {
-          "dep": "07:36",
           "arr": "09:34",
+          "dep": "07:36",
           "price": 43.8
         },
         {
-          "dep": "08:08",
           "arr": "10:06",
+          "dep": "08:08",
           "price": 66.3
         },
         {
-          "dep": "08:23",
           "arr": "10:36",
-          "price": 67.0
-        },
-        {
           "dep": "08:23",
+          "price": 67
+        },
+        {
           "arr": "10:45",
-          "price": 27.0
+          "dep": "08:23",
+          "price": 27
         },
         {
-          "dep": "09:02",
           "arr": "11:20",
-          "price": 64.5
+          "dep": "09:02",
+          "price": 68.1
         },
         {
-          "dep": "09:41",
           "arr": "11:34",
+          "dep": "09:41",
           "price": 48.5
         },
         {
-          "dep": "10:01",
           "arr": "12:09",
+          "dep": "10:01",
           "price": 36.5
         }
       ],
       "inward": [
         {
-          "dep": "18:01",
           "arr": "20:11",
+          "dep": "18:01",
           "price": 48.5
         },
         {
-          "dep": "18:30",
           "arr": "20:27",
-          "price": 27.0
+          "dep": "18:30",
+          "price": 27
         },
         {
-          "dep": "19:00",
           "arr": "21:16",
-          "price": 67.0
+          "dep": "19:00",
+          "price": 67
         },
         {
-          "dep": "19:30",
           "arr": "21:30",
+          "dep": "19:30",
           "price": 48.5
         },
         {
-          "dep": "20:00",
           "arr": "22:19",
+          "dep": "20:00",
           "price": 33.5
         },
         {
-          "dep": "20:30",
           "arr": "22:36",
-          "price": 27.0
+          "dep": "20:30",
+          "price": 27
         },
         {
-          "dep": "21:02",
           "arr": "23:24",
+          "dep": "21:02",
           "price": 32.5
         },
         {
-          "dep": "22:03",
           "arr": "00:03",
-          "price": 27.0
+          "dep": "22:03",
+          "price": 27
         }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 70.8,
-        "savings_vs_direct": 0
-      }
+      ]
     }
   ]
 }
