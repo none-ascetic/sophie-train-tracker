@@ -103,6 +103,35 @@ scrapes (per Paddy, 22 Apr 2026).
    > unlinking isn't involved — issues, workflow dispatches, content API,
    > etc. `.env` is gitignored; never stage or commit it.
 
+## Pricing semantics (validated 2026-04-24)
+
+Paddy and Claude clicked through to Trainline's basket for two dates to
+confirm what the scrape actually represents. Findings — keep these in
+mind when touching any code that interprets the scraped `price`:
+
+- The **07:36 outward** `alternative-price` is a **SplitSave** fare
+  (two tickets that together cover Yatton → Paddington, same train no
+  change, refundable until 23:59 day before). It is NOT a simple
+  Advance Single. The "2x Advance Single" alternative costs £1.70 more
+  (15 Sep) to £13.30 more (9 Jun) and has no refunds.
+- The **18:30 return** is an **Advance Single** at £27.00 — quota-
+  controlled in principle but has not moved across any observation.
+- Trainline adds a **flat ~£2.79 booking fee** at `/book/ticket-options`
+  on top of the ticket price. Sophie's true out-the-door cost = scraped
+  total + £2.79.
+- The results page pre-selects the *cheapest* standard-class row by
+  default — NOT necessarily Sophie's 07:36. Any automation that
+  clicks through from results to basket MUST explicitly select the
+  target radios first. The tracker's `dpi` deep-links for Sophie go
+  straight to the correct train, so this only matters for manual
+  validation runs.
+
+`generate_site.py` labels these honestly in the tracker UI (SplitSave
+label on the outward hero, all-in total with fee, 18:30 return
+footnoted as Advance Single). If you're re-running after a code change
+and these labels disappear, something broke — check `generate_site.py`
+constants `BOOKING_FEE_GBP`, `SPLITSAVE_LABEL`, `RETURN_LABEL`.
+
 ## Key invariants
 
 - **Sophie's constraints are non-negotiable**: 07:36 out, 18:30 back. Any
