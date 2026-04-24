@@ -52,7 +52,7 @@ STATUS_LABELS = {
     "URGENT": ("Cheap tier gone", "urgent"),
     "BOOK_TODAY": ("Book today", "today"),
     "BOOK_SOON": ("Book soon", "soon"),
-    "STABLE": ("Watch · at baseline", "stable"),
+    "STABLE": ("Watch · at median", "stable"),
     "UNKNOWN": ("Awaiting data", "stable"),
     "BOOKED": ("Already booked", "booked"),
 }
@@ -61,7 +61,7 @@ SECTION_ORDER = [
     ("URGENT", "Urgent · cheap tier gone"),
     ("BOOK_TODAY", "Book this week · last cheap tier"),
     ("BOOK_SOON", "Book soon · within 1–2 weeks"),
-    ("STABLE", "Baseline · sit tight, book in the next fortnight"),
+    ("STABLE", "At median · sit tight, book in the next fortnight"),
     ("UNKNOWN", "Awaiting data"),
     ("BOOKED", "Already booked · paid tickets"),
 ]
@@ -123,9 +123,37 @@ def _trainline_url(iso_date: str, direction: str, hhmm: str) -> str:
     )
 
 
+def _trainline_return_url(iso_date: str) -> str:
+    """Return-journey deep link for Sophie's fixed 07:36 out + 18:30 back.
+    Lands her on the /book/results page for that Tuesday with the journey
+    type = return and both dates pre-filled. She still picks the 07:36 /
+    18:30 rows manually — Trainline's selected-outward URL params are
+    ephemeral so we can't pre-click them from a static link. This matches
+    what the scraper opens, which is what was validated end-to-end on
+    2026-04-24. Single booking flow — gets her one SplitSave+Advance
+    booking at the right total, not two separate one-way tickets."""
+    return (
+        "https://www.thetrainline.com/book/results"
+        "?journeySearchType=return"
+        "&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb"
+        "&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb"
+        f"&outwardDate={iso_date}T07%3A00%3A00"
+        "&outwardDateType=departAfter"
+        f"&inwardDate={iso_date}T18%3A00%3A00"
+        "&inwardDateType=departAfter"
+        "&selectedTab=train&splitSave=true&lang=en"
+        "&transportModes%5B%5D=mixed"
+    )
+
+
 # ---------- card rendering ----------
 
-def _arrow_badge(change: dict, movement_context: dict | None = None) -> str:
+def _arrow_badge(
+    change: dict,
+    movement_context: dict | None = None,
+    *,
+    suppress: bool = False,
+) -> str:
     """Pill showing day-over-day move. When we know WHICH leg moved
     (via movement_context), we say so — much more useful to Sophie than
     a bare "vs yesterday" that hides whether the outward or return
@@ -136,7 +164,16 @@ def _arrow_badge(change: dict, movement_context: dict | None = None) -> str:
       1. movement_context.d_total — sourced from fare_history, immune to
          same-day re-runs overwriting the in-memory `change_vs_yesterday`.
       2. change.cheapest_any — the legacy field, left as a fallback for
-         historical data read before movements existed."""
+         historical data read before movements existed.
+
+    `suppress=True` returns an empty string. Used when a Tuesday's move
+    is already carried by the Today's-Moves banner (bulk event membership);
+    the per-card pill would be 13 identical repeats of the banner's
+    headline, so we drop it to reduce visual noise — unless this specific
+    card *also* has a new-low or outlier story, in which case the caller
+    should pass suppress=False."""
+    if suppress:
+        return ""
     delta = None
     if movement_context and isinstance(movement_context.get("d_total"), (int, float)):
         delta = movement_context["d_total"]
@@ -283,6 +320,7 @@ def _render_bookable_card(
     movement_ctx: dict | None = None,
     new_lows_by_date: dict | None = None,
     route_median: float | None = None,
+    suppress_pill_dates: set | None = None,
 ) -> str:
     """Rebuilt 2026-04-24 after basket validation. Outward-primary layout —
     the 07:36 is the only leg that moves on this route, so it gets the
@@ -300,7 +338,19 @@ def _render_bookable_card(
     out_time = (out_leg or {}).get("time") or "07:36"
     back_time = (back_leg or {}).get("time") or "18:30"
     note = t.get("note") or ""
-    change_badge = _arrow_badge(t.get("change_vs_yesterday"), movement_ctx)
+    # Suppress the card-level pill when this Tuesday is part of a bulk
+    # event (same move applied to many dates at once) UNLESS it also has
+    # a new-low story of its own — a new-low is date-specific news the
+    # banner doesn't cover.
+    has_new_low = t["date"] in (new_lows_by_date or {})
+    suppress = (
+        suppress_pill_dates is not None
+        and t["date"] in suppress_pill_dates
+        and not has_new_low
+    )
+    change_badge = _arrow_badge(
+        t.get("change_vs_yesterday"), movement_ctx, suppress=suppress
+    )
     new_low_badge = _new_low_badge(new_lows_by_date or {}, t["date"])
     is_booked = bool(t.get("booked"))
 
@@ -328,10 +378,16 @@ def _render_bookable_card(
             '</div>'
         )
     else:
+        # Single primary button — matches SplitSave's one-booking reality
+        # (Paddy's call, 2026-04-24). All-in price (ticket + £2.79 fee) is
+        # what Sophie will actually pay; putting that number on the button
+        # makes the tap decision explicit.
+        all_in_total = _all_in(cur.get("cheapest_any_total"))
+        price_suffix = f" — {_fmt_gbp2(all_in_total)}" if all_in_total is not None else ""
         actions_block = (
             '<div class="actions">'
-            f'<a class="btn btn-primary" href="{_trainline_url(t["date"], "out", out_time)}" target="_blank" rel="noopener">Book 07:36 outbound →</a>'
-            f'<a class="btn btn-secondary" href="{_trainline_url(t["date"], "back", back_time)}" target="_blank" rel="noopener">Book 18:30 return</a>'
+            f'<a class="btn btn-primary" href="{_trainline_return_url(t["date"])}" target="_blank" rel="noopener">'
+            f'Book tickets{price_suffix} →</a>'
             '</div>'
         )
 
@@ -815,16 +871,16 @@ CSS = """
   .patterns-explainer strong { color: var(--ink); }
   .hero-sub { display: block; font-size: 12.5px; font-weight: 400; margin-top: 6px; opacity: 0.85; }
   .note { font-size: 13px; line-height: 1.5; color: #3a3a3a; margin: 8px 0 12px; }
-  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
-  .btn { display: inline-block; padding: 8px 14px; font-size: 13px; font-weight: 600; border-radius: 6px; text-decoration: none; }
-  .btn-primary { background: var(--ink); color: #fff; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 18px; font-size: 14px; font-weight: 600; border-radius: 8px; text-decoration: none; line-height: 1.2; }
+  .btn-primary { background: var(--ink); color: #fff; flex: 1 1 auto; }
   .btn-secondary { background: #f0ede5; color: var(--ink); border: 1px solid var(--rule); }
   .pending-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 12px; }
   .pending-card { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
   .pending-date { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
   .pending-release { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
   .pending-release strong { color: var(--ink); font-weight: 600; }
-  .pending-btn { display: inline-block; margin-top: 4px; padding: 8px 10px; font-size: 12.5px; font-weight: 600; text-align: center; background: var(--ink); color: #fff; border-radius: 6px; text-decoration: none; }
+  .pending-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 6px; padding: 12px 14px; font-size: 13px; font-weight: 600; text-align: center; background: var(--ink); color: #fff; border-radius: 8px; text-decoration: none; }
   footer { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); line-height: 1.6; }
   footer a { color: var(--muted); }
 """
@@ -840,6 +896,15 @@ def render_html(data: dict) -> str:
     }
     patterns = data.get("patterns") or {}
     route_median = patterns.get("route_median")
+
+    # Dates that participate in a bulk event today — the moves banner
+    # already explains them as a single pricing event, so we suppress the
+    # identical per-card pill to stop painting the same delta 13 times.
+    # Outliers stay loud (they're date-specific news), new-lows stay loud.
+    suppress_pill_dates: set[str] = set()
+    for ev in (movements.get("bulk_events") or []):
+        for d in (ev.get("dates") or []):
+            suppress_pill_dates.add(d)
 
     # Group by status in explicit order
     by_status = {}
@@ -858,6 +923,7 @@ def render_html(data: dict) -> str:
                 movement_ctx=per_tuesday_moves.get(t["date"]),
                 new_lows_by_date=new_lows_by_date,
                 route_median=route_median,
+                suppress_pill_dates=suppress_pill_dates,
             )
             for t in group
         )
@@ -911,9 +977,9 @@ def render_html(data: dict) -> str:
   <p class="subtitle" style="margin-top:4px;">Out no later than <strong>07:36</strong> · return no earlier than <strong>18:30</strong></p>
 </header>
 
-{moves_banner}
-
 {hero}
+
+{moves_banner}
 
 {chr(10).join(sections_html)}
 
