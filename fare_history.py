@@ -22,21 +22,35 @@ Files:
   Never edit in place. If schema needs to change, add a version field and
   handle old rows in the reader.
 
-Schema (v1):
+Schema (v2):
   {
-    "schema": 1,
+    "schema": 2,                                # bumped from 1 when we added
+                                                #   twox_advance_premium
     "observed_at":  ISO8601 UTC timestamp,     # when the scrape happened
     "observed_on":  YYYY-MM-DD,                # UK date (for grouping)
     "travel_date":  YYYY-MM-DD,                # the Tuesday the fare is for
     "days_out":     int,                       # travel_date − observed_on
     "weeks_out":    int,                       # weeks until travel
-    "out_07_36":    float,                     # 07:36 outward fare
-    "back_18_30":   float,                     # 18:30 return fare
+    "out_07_36":    float,                     # 07:36 outward fare (SplitSave)
+    "back_18_30":   float,                     # 18:30 return fare (Advance Single)
     "total":        float,                     # sum of the two Sophie-valid rows
+    "twox_advance_premium":  float | None,     # v2: the extra £ Sophie pays to
+                                                #   swap SplitSave for 2x Advance
+                                                #   Singles on the outward. Scraped
+                                                #   from /book/ticket-options on the
+                                                #   nightly run. null for v1 rows
+                                                #   captured before this field existed.
     "cheapest_out": {"dep": "HH:MM", "fare": float},   # cheapest outward any time
     "cheapest_in":  {"dep": "HH:MM", "fare": float},   # cheapest return any time
     "run_id":       ISO timestamp              # == observed_at, for joining
   }
+
+Schema evolution notes:
+  - Readers MUST accept v1 rows with `twox_advance_premium` absent — treat
+    as None. Analysis code should gracefully ignore null premiums.
+  - Back-fill for historical v1 rows is NOT feasible (Trainline prices
+    move, so re-scraping today gives today's data not the original day's).
+    The field just stays null for pre-Phase-4 rows.
 """
 from __future__ import annotations
 
@@ -109,8 +123,14 @@ def observations_from_snapshot(raw_snapshot: dict) -> list[dict]:
             # Skip rows where Sophie's constraints weren't met — those aren't
             # legitimate data points for trend analysis anyway.
             continue
+        # twox_advance_premium may or may not be present depending on whether
+        # the scheduled task captured the ticket-options page. Pass through
+        # as-is; readers accept null.
+        premium = t.get("twox_advance_premium")
+        if not isinstance(premium, (int, float)):
+            premium = None
         rows.append({
-            "schema": 1,
+            "schema": 2,
             "observed_at": observed_at,
             "observed_on": observed_on.strftime("%Y-%m-%d"),
             "travel_date": dstr,
@@ -119,6 +139,7 @@ def observations_from_snapshot(raw_snapshot: dict) -> list[dict]:
             "out_07_36": round(float(out_fare), 2),
             "back_18_30": round(float(back_fare), 2),
             "total": round(float(out_fare) + float(back_fare), 2),
+            "twox_advance_premium": (round(premium, 2) if premium is not None else None),
             "cheapest_out": _cheapest(t.get("outward") or []),
             "cheapest_in": _cheapest(t.get("inward") or []),
             "run_id": observed_at,

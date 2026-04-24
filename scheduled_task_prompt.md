@@ -91,6 +91,41 @@ If validation fails, retry up to 3 times with a 30s gap. On the 3rd
 failure, mark the date as failed in the snapshot and move on — don't
 skip silently.
 
+### 6b. Capture 2x-Advance Single premium (Phase 4, added 2026-04-24)
+
+After a Tuesday passes validation, also capture `twox_advance_premium`
+— how much extra Sophie would pay to swap the default SplitSave outward
+for a 2x Advance Single ticket. This tells us whether the £7 seesaw on
+the SplitSave outward is SplitSave-specific or tracks the Advance tier
+as well. Optional: if a capture fails, leave the field null — don't
+block the run. The primary SplitSave scrape is what guards Sophie's
+booking message.
+
+Steps per date (~5–7s per Tuesday, ~100s total across 20 dates):
+
+1. On the results page (same URL as step 6), find the standard-class
+   radio buttons for 07:36 outward and 18:30 return: select
+   `[data-test="train-results-container-OUTWARD"]`, walk its
+   `train-results-departure-time` elements, regex-match `07:36`, walk
+   up to the row's `standard-class-price-radio-btn`. Same for
+   `-INWARD` + `18:30`.
+2. If either radio is not `.checked`, click it. Trainline auto-selects
+   the *cheapest* train by default — which is NOT the 07:36 at 6-month
+   range (it's the 08:23 arriving 10:45, too late).
+3. Click `[data-test="cjs-button-continue"]`.
+4. Wait for URL to contain `/book/ticket-options` (up to 15s). If the
+   wait times out, record null premium and move on.
+5. Parse `document.body.innerText` — find the `Ticket type` section,
+   scan for lines matching `^\+£([\d.]+)$` with the preceding line as
+   the ticket-type name. Expect: `SplitSave` `+£0.00`, `2x Single
+   Tickets` `+£X.XX`, `Anytime Return` `+£X.XX`.
+6. Record the `2x Single Tickets` delta as the date's
+   `twox_advance_premium` (float). If not found, record null.
+7. Return to results: `window.history.back()`, or simply navigate to
+   the next date's URL for the following iteration.
+
+Validated working 2026-04-24 for 15 Sep (£1.70) and 9 Jun (£13.30).
+
 ### 7. Write `$WORK/raw_snapshot.json`
 
 ```json
@@ -107,7 +142,8 @@ skip silently.
       "date": "YYYY-MM-DD",
       "outward": [{"dep": "07:36", "arr": "09:34", "price": 86.70}, ...],
       "inward":  [{"dep": "18:30", "arr": "20:27", "price": 27.00}, ...],
-      "splitsave": {"available": true, "total": 113.70, "savings_vs_direct": 0}
+      "splitsave": {"available": true, "total": 113.70, "savings_vs_direct": 0},
+      "twox_advance_premium": 13.30  // null if capture failed (non-blocking)
     }
   ]
 }

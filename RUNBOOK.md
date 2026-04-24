@@ -37,6 +37,13 @@ scrapes (per Paddy, 22 Apr 2026).
    - Validate: the outward list must contain a row with `dep == "07:36"` AND
      the inward list must contain a row with `dep == "18:30"`, both with
      numeric prices.
+   - **Then capture the 2x-Advance premium** (Phase 4, added 2026-04-24):
+     click the 07:36 outward + 18:30 inward radios, click Continue, wait
+     for `/book/ticket-options`, parse the Ticket type block, read the
+     `2x Single Tickets` `+£X.XX` delta, record as
+     `twox_advance_premium` on this Tuesday. If capture fails for any
+     reason, record null — non-blocking. This tells us whether the
+     SplitSave seesaw tracks the Advance tier.
    - **If validation fails**: wait 30 seconds, reload the tab, re-extract.
      Retry up to 3 times. If the third attempt still fails, record the
      failure — do not move on silently.
