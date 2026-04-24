@@ -275,41 +275,78 @@ def _all_in_row(cur: dict, route_median: float | None) -> str:
     return f'<div class="totals">{core}{flag}</div>'
 
 
-def _outward_hero(cur: dict) -> str:
-    """Big primary block for the 07:36 — the ONLY leg that moves day-to-day
-    on this route, so it earns the visual weight. Labels the price as
-    SplitSave because that's what Trainline delivers at checkout."""
+def _price_hero(cur: dict, route_median: float | None = None) -> str:
+    """Primary block: all-in total is the 30px headline (what Sophie pays);
+    outward-leg fare + SplitSave meta is supporting text. Rewrite per
+    Paddy's 2026-04-24 critique — 'the biggest number should be what she
+    actually spends, not one leg of it'. Median-comparison chip renders
+    next to the total so the decision ('is this a deal?') is visible
+    without reading body copy."""
     out = cur.get("out") or {}
-    fare = out.get("fare")
-    dep = out.get("time") or "07:36"
-    arr = out.get("arrival")
-    arr_bit = f" · arrives <strong>{html.escape(arr)}</strong>" if arr else ""
-    fare_str = _fmt_gbp(fare) if fare is not None else "—"
+    back = cur.get("back") or {}
+    total = cur.get("cheapest_any_total")
+    all_in = _all_in(total)
+    out_fare = out.get("fare")
+    out_dep = out.get("time") or "07:36"
+    out_arr = out.get("arrival")
+    back_fare = back.get("fare")
+    back_dep = back.get("time") or "18:30"
+    out_str = _fmt_gbp(out_fare) if out_fare is not None else "—"
+    back_str = _fmt_gbp(back_fare) if back_fare is not None else "—"
+    all_in_str = _fmt_gbp2(all_in) if all_in is not None else "—"
+    # Median-comparison chip — calm language, short.
+    median_chip = ""
+    if isinstance(route_median, (int, float)) and isinstance(total, (int, float)):
+        median_all_in = route_median + BOOKING_FEE_GBP
+        diff = all_in - median_all_in
+        if abs(diff) < 0.5:
+            median_chip = '<span class="median-chip at">at median</span>'
+        elif diff < 0:
+            median_chip = f'<span class="median-chip under">{_fmt_gbp(abs(diff))} under median</span>'
+        else:
+            median_chip = f'<span class="median-chip over">{_fmt_gbp(diff)} over median</span>'
+    # Supporting line: decomposition so Sophie can audit the £73.59 herself.
+    supporting = (
+        f'{out_str} <span class="leg-time">{html.escape(out_dep)}'
+        f'{" → " + html.escape(out_arr) if out_arr else ""}</span>'
+        f' · {back_str} <span class="leg-time">{html.escape(back_dep)}</span>'
+        f' · {_fmt_gbp2(BOOKING_FEE_GBP)} fee'
+    )
     return (
-        '<div class="outward-hero">'
-        f'<div class="outward-label">OUT · <strong>{html.escape(dep)}</strong>{arr_bit}</div>'
-        f'<div class="outward-fare">{fare_str}</div>'
-        f'<div class="outward-meta">{html.escape(SPLITSAVE_LABEL)}</div>'
+        '<div class="price-hero">'
+        '<div class="price-hero-top">'
+        f'<div class="price-hero-total">{all_in_str}</div>'
+        f'{median_chip}'
+        '</div>'
+        f'<div class="price-hero-label">all-in · Sophie pays this</div>'
+        f'<div class="price-hero-breakdown">{supporting}</div>'
+        f'<div class="price-hero-meta">{html.escape(SPLITSAVE_LABEL)} · '
+        f'return {html.escape(RETURN_LABEL.lower())}</div>'
         '</div>'
     )
 
 
-def _return_footnote(cur: dict) -> str:
-    """Compact one-line footnote for the 18:30. It's an Advance Single at
-    £27 every observation we've made; no point giving it equal card real
-    estate when Sophie's decision is always 'yep, £27, book it'. If it
-    ever does move, the moves banner will flag it and the card-level pill
-    will light up."""
+def _render_booked_line(t: dict) -> str:
+    """Compact one-line summary for a Tuesday that's already paid for.
+    No action, no breakdown — just the date, what she paid, the train
+    times. Replaces the previous full-card layout for booked entries,
+    which was identical to bookable cards but greyed out (wasteful on
+    mobile where those 6 cards ate ~2,300px of scroll for zero info)."""
+    cur = t.get("current") or {}
+    out = cur.get("out") or {}
     back = cur.get("back") or {}
-    fare = back.get("fare")
-    dep = back.get("time") or "18:30"
-    arr = back.get("arrival")
-    arr_bit = f" → {html.escape(arr)}" if arr else ""
-    fare_str = _fmt_gbp(fare) if fare is not None else "—"
+    total = cur.get("cheapest_any_total")
+    total_str = _fmt_gbp2(_all_in(total)) if total is not None else "—"
+    wk = _weeks_out(t["date"])
+    wk_str = f"{wk} week{'s' if wk != 1 else ''} out" if wk > 0 else "this week"
+    out_dep = out.get("time") or "—"
+    back_dep = back.get("time") or "—"
     return (
-        '<div class="return-foot">'
-        f'+ <strong>{html.escape(dep)}</strong>{arr_bit} return '
-        f'<strong>{fare_str}</strong> · {html.escape(RETURN_LABEL)}'
+        '<div class="booked-line">'
+        f'<span class="booked-date">{_fmt_date_short(t["date"])}</span>'
+        f'<span class="booked-meta">{wk_str} · paid {total_str} · '
+        f'{html.escape(out_dep)} / {html.escape(back_dep)}</span>'
+        '<span class="booked-flag">Booked</span>'
         '</div>'
     )
 
@@ -355,7 +392,7 @@ def _render_bookable_card(
     is_booked = bool(t.get("booked"))
 
     # When the scrape didn't capture leg-level data, render one honest line
-    # rather than two empty slots — Sophie shouldn't have to decode empty UI.
+    # rather than empty slots — Sophie shouldn't have to decode empty UI.
     if out_leg is None and back_leg is None:
         total = cur.get("cheapest_any_total")
         if total is not None:
@@ -369,7 +406,7 @@ def _render_bookable_card(
                 '<div class="legs-summary">Price not captured this run — re-checking tomorrow</div>'
             )
     else:
-        body = _outward_hero(cur) + _return_footnote(cur)
+        body = _price_hero(cur, route_median=route_median)
 
     if is_booked:
         actions_block = (
@@ -391,7 +428,8 @@ def _render_bookable_card(
             '</div>'
         )
 
-    card_class = "card booked" if is_booked else "card"
+    # Status-based card tint — see _card_class_for_status for rationale.
+    card_class = _card_class_for_status(t, is_booked)
     note_block = f'<div class="note">{html.escape(note)}</div>' if note else ""
     return f"""
 <div class="{card_class}">
@@ -400,11 +438,24 @@ def _render_bookable_card(
     <div class="status {status_class}">{html.escape(status_label)}</div>
   </div>
   {body}
-  {_all_in_row(cur, route_median)}
   {note_block}
   {actions_block}
 </div>
 """.strip()
+
+
+def _card_class_for_status(t: dict, is_booked: bool) -> str:
+    """Tint cards by status so Sophie can scan the list and spot the
+    actionable ones without reading copy. Faint backgrounds — enough to
+    differentiate, not enough to fight the card content for attention."""
+    if is_booked:
+        return "card booked"
+    status = t.get("status", "UNKNOWN")
+    if status == "BOOK_TODAY":
+        return "card tint-today"
+    if status == "URGENT":
+        return "card tint-urgent"
+    return "card"
 
 
 def _render_pending_card(iso_date: str) -> str:
@@ -833,13 +884,28 @@ CSS = """
   .card.booked .date { color: #6b6b6b; }
   .legs-summary { padding: 12px; background: #fdfcf9; border: 1px solid var(--rule); border-radius: 8px; font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 10px; }
   .legs-summary strong { color: var(--ink); font-size: 18px; font-weight: 600; }
-  .outward-hero { padding: 14px 16px; background: var(--soon-bg); border: 1px solid #cfe0f4; border-radius: 8px; margin-bottom: 6px; }
-  .outward-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
-  .outward-label strong { color: var(--ink); font-weight: 700; }
-  .outward-fare { font-size: 30px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; margin-top: 4px; line-height: 1; }
-  .outward-meta { font-size: 12px; color: var(--muted); margin-top: 6px; }
-  .return-foot { padding: 8px 14px; font-size: 13px; color: var(--muted); background: #fdfcf9; border: 1px solid var(--rule); border-radius: 8px; margin: 6px 0 10px; }
-  .return-foot strong { color: var(--ink); font-weight: 600; }
+  .price-hero { padding: 16px 16px 14px; background: #fdfcf9; border: 1px solid var(--rule); border-radius: 8px; margin-bottom: 10px; }
+  .price-hero-top { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .price-hero-total { font-size: 34px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; line-height: 1; }
+  .price-hero-label { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: 0.02em; }
+  .price-hero-breakdown { font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.45; }
+  .price-hero-breakdown .leg-time { color: var(--ink); font-weight: 500; }
+  .price-hero-meta { font-size: 11.5px; color: var(--muted); margin-top: 6px; font-style: italic; line-height: 1.45; }
+  .median-chip { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+  .median-chip.under { background: var(--save-bg); color: var(--save); border: 1px solid #b7e4c7; }
+  .median-chip.over  { background: var(--urgent-bg); color: var(--urgent); border: 1px solid #fcd6d1; }
+  .median-chip.at    { background: #f0ede5; color: var(--muted); border: 1px solid var(--rule); }
+  /* Status tints — faint background tint on the whole card so Sophie can scan */
+  .card.tint-today  { background: #f0faf0; border-color: #c6e5c6; }
+  .card.tint-urgent { background: var(--urgent-bg); border-color: #fcd6d1; }
+  /* Compact booked list */
+  .booked-list { border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
+  .booked-line { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #f6f4ee; border-bottom: 1px solid var(--rule); font-size: 13.5px; color: var(--muted); flex-wrap: wrap; }
+  .booked-line:last-child { border-bottom: 0; }
+  .booked-date { font-weight: 600; color: #3a3a3a; font-size: 14px; min-width: 88px; }
+  .booked-meta { color: var(--muted); flex: 1 1 auto; }
+  .booked-flag { font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8a8a; font-weight: 700; background: #eeece6; padding: 3px 8px; border-radius: 999px; }
+  /* Legacy classes — kept in case historical data or edge paths still reference them */
   .totals { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f7f5ee; border-radius: 8px; font-size: 13.5px; margin-bottom: 10px; gap: 12px; flex-wrap: wrap; }
   .totals .over { color: var(--urgent); font-weight: 600; }
   .totals .base { color: var(--stable); font-weight: 600; }
@@ -917,6 +983,15 @@ def render_html(data: dict) -> str:
         if not group:
             continue
         group.sort(key=lambda t: t["date"])
+        # Booked Tuesdays render as a compact one-line list rather than
+        # full cards — zero action means zero page real estate warranted.
+        if status == "BOOKED":
+            lines = "\n".join(_render_booked_line(t) for t in group)
+            sections_html.append(
+                f'<div class="section-title">{html.escape(title)}</div>\n'
+                f'<div class="booked-list">{lines}</div>'
+            )
+            continue
         cards = "\n".join(
             _render_bookable_card(
                 t,
