@@ -48,12 +48,14 @@
   .card.booked .date { color: #6b6b6b; }
   .legs-summary { padding: 12px; background: #fdfcf9; border: 1px solid var(--rule); border-radius: 8px; font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 10px; }
   .legs-summary strong { color: var(--ink); font-size: 18px; font-weight: 600; }
-  .legs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-  .leg { border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; background: #fdfcf9; }
-  .leg-label { font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-  .leg-time { font-size: 19px; font-weight: 600; margin-top: 3px; }
-  .leg-fare { font-size: 13px; color: var(--muted); margin-top: 2px; }
-  .totals { display: flex; justify-content: space-between; padding: 10px 12px; background: #f7f5ee; border-radius: 8px; font-size: 14px; margin-bottom: 10px; }
+  .outward-hero { padding: 14px 16px; background: var(--soon-bg); border: 1px solid #cfe0f4; border-radius: 8px; margin-bottom: 6px; }
+  .outward-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  .outward-label strong { color: var(--ink); font-weight: 700; }
+  .outward-fare { font-size: 30px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; margin-top: 4px; line-height: 1; }
+  .outward-meta { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .return-foot { padding: 8px 14px; font-size: 13px; color: var(--muted); background: #fdfcf9; border: 1px solid var(--rule); border-radius: 8px; margin: 6px 0 10px; }
+  .return-foot strong { color: var(--ink); font-weight: 600; }
+  .totals { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f7f5ee; border-radius: 8px; font-size: 13.5px; margin-bottom: 10px; gap: 12px; flex-wrap: wrap; }
   .totals .over { color: var(--urgent); font-weight: 600; }
   .totals .base { color: var(--stable); font-weight: 600; }
   .alts { background: var(--save-bg); border: 1px solid #b7e4c7; border-radius: 8px; padding: 10px 12px; font-size: 13px; color: #064e2f; margin-bottom: 10px; }
@@ -80,6 +82,9 @@
   .patterns-list { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
   .patterns-list > li { margin: 5px 0; }
   .patterns-list .patterns-meta { list-style: none; margin-left: -18px; padding-left: 0; color: var(--muted); font-size: 12px; margin-top: 8px; }
+  .patterns-explainer { font-size: 13px; line-height: 1.55; color: var(--ink); padding: 10px 12px; background: #fdfcf9; border: 1px solid var(--rule); border-radius: 8px; margin-bottom: 12px; }
+  .patterns-explainer strong { color: var(--ink); }
+  .hero-sub { display: block; font-size: 12.5px; font-weight: 400; margin-top: 6px; opacity: 0.85; }
   .note { font-size: 13px; line-height: 1.5; color: #3a3a3a; margin: 8px 0 12px; }
   .actions { display: flex; gap: 8px; flex-wrap: wrap; }
   .btn { display: inline-block; padding: 8px 14px; font-size: 13px; font-weight: 600; border-radius: 6px; text-decoration: none; }
@@ -104,9 +109,9 @@
   <p class="subtitle" style="margin-top:4px;">Out no later than <strong>07:36</strong> · return no earlier than <strong>18:30</strong></p>
 </header>
 
-<div class="moves"><div class="moves-head">Today's moves</div><ul class="moves-list"><li class="move-bulk"><strong>↓ £7</strong> on the <strong>07:36 outward</strong> — £93.70 → £86.70 <span class="move-count">(13 dates)</span>. <span class="move-dates">Tue 9 Jun, Tue 16 Jun, Tue 23 Jun, Tue 30 Jun, Tue 7 Jul, Tue 14 Jul +7 more.</span> <span class="move-context">Single Advance-tier release — these all moved in lockstep, so it's one pricing event, not 13 independent signals.</span></li><li class="move-outlier">⚠️ <strong>Tue 25 Aug</strong> moved differently from the pack — 07:36 out £84.10 → £77.10. <span class="move-context">Worth a quick look.</span></li></ul><div class="moves-quiet-inline">No change on 6 other Tuesdays.</div></div>
+<div class="moves"><div class="moves-head">Today's moves</div><ul class="moves-list"><li class="move-bulk"><strong>↓ £7</strong> on the <strong>07:36 SplitSave outward</strong> — £93.70 → £86.70 <span class="move-count">(13 dates)</span>. <span class="move-dates">Tue 9 Jun, Tue 16 Jun, Tue 23 Jun, Tue 30 Jun, Tue 7 Jul, Tue 14 Jul +7 more.</span> <span class="move-context">Single Advance-tier release — these all moved in lockstep, so it's one pricing event, not 13 independent signals.</span></li><li class="move-outlier">⚠️ <strong>Tue 25 Aug</strong> moved differently from the pack — 07:36 out £84.10 → £77.10. <span class="move-context">Worth a quick look.</span></li></ul><div class="moves-quiet-inline">No change on 6 other Tuesdays.</div></div>
 
-<div class="hero" style="background:#ecfdf3; border-left-color:#067647; color:#064e2f;">💰 <strong>6 Tuesdays at the all-time low (£70.80)</strong>: Tue 15 Sep, Tue 22 Sep, Tue 29 Sep, Tue 6 Oct +2 more. Book these today — we've never seen cheaper on this route.</div>
+<div class="hero" style="background:#ecfdf3; border-left-color:#067647; color:#064e2f;">💰 <strong>6 Tuesdays at the all-time low (£73.59 all-in)</strong>: Tue 15 Sep, Tue 22 Sep, Tue 29 Sep, Tue 6 Oct +2 more. Book these today — we've never seen cheaper on this route. <span class="hero-sub">SplitSave tickets (2 tickets, same train, day-before refund) + ~£2.79 Trainline fee.</span></div>
 
 <div class="section-title">Book this week · last cheap tier</div>
 <div class="card">
@@ -114,66 +119,60 @@
     <div><span class="date">Tue 15 Sep</span><span class="weeks-out">21 weeks out</span></div>
     <div class="status today">Book today</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£43.80</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£70.80</strong></span><span class="base">£56.20 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£43.80</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£70.80</strong> + ~£2.79 fee = <strong>£73.59 all-in</strong></span><span class="base">£42.90 under route median</span></div>
   
-  <div class="note">CHEAP: OUT 07:36 Advance Single £43.80 + RETURN 18:30 Advance Single £27.00. £56.20 below £127 baseline — book today to lock in. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-09-15T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-09-15T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-09-15T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-09-15T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 22 Sep</span><span class="weeks-out">22 weeks out</span></div>
     <div class="status today">Book today</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£43.80</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£70.80</strong></span><span class="base">£56.20 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£43.80</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£70.80</strong> + ~£2.79 fee = <strong>£73.59 all-in</strong></span><span class="base">£42.90 under route median</span></div>
   
-  <div class="note">CHEAP: OUT 07:36 Advance Single £43.80 + RETURN 18:30 Advance Single £27.00. £56.20 below £127 baseline — book today to lock in. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-09-22T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-09-22T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-09-22T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-09-22T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 29 Sep</span><span class="weeks-out">23 weeks out</span></div>
     <div class="status today">Book today</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£43.80</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£70.80</strong></span><span class="base">£56.20 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£43.80</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£70.80</strong> + ~£2.79 fee = <strong>£73.59 all-in</strong></span><span class="base">£42.90 under route median</span></div>
   
-  <div class="note">CHEAP: OUT 07:36 Advance Single £43.80 + RETURN 18:30 Advance Single £27.00. £56.20 below £127 baseline — book today to lock in. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-09-29T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-09-29T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-09-29T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-09-29T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 6 Oct</span><span class="weeks-out">24 weeks out</span></div>
     <div class="status today">Book today</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£43.80</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£70.80</strong></span><span class="base">£56.20 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£43.80</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£70.80</strong> + ~£2.79 fee = <strong>£73.59 all-in</strong></span><span class="base">£42.90 under route median</span></div>
   
-  <div class="note">CHEAP: OUT 07:36 Advance Single £43.80 + RETURN 18:30 Advance Single £27.00. £56.20 below £127 baseline — book today to lock in. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-10-06T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-10-06T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-10-06T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-10-06T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 13 Oct</span><span class="weeks-out">25 weeks out</span></div>
     <div class="status today">Book today</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£43.80</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£70.80</strong></span><span class="base">£56.20 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£43.80</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£70.80</strong> + ~£2.79 fee = <strong>£73.59 all-in</strong></span><span class="base">£42.90 under route median</span></div>
   
-  <div class="note">CHEAP: OUT 07:36 Advance Single £43.80 + RETURN 18:30 Advance Single £27.00. £56.20 below £127 baseline — book today to lock in. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-10-13T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-10-13T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-10-13T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-10-13T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 20 Oct</span><span class="weeks-out">26 weeks out</span></div>
     <div class="status today">Book today</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£43.80</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£70.80</strong></span><span class="base">£56.20 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£43.80</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£70.80</strong> + ~£2.79 fee = <strong>£73.59 all-in</strong></span><span class="base">£42.90 under route median</span></div>
   
-  <div class="note">Newly unlocked — first scrape pending this run. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-10-20T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-10-20T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-10-20T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-10-20T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="section-title">Book soon · within 1–2 weeks</div>
 <div class="card">
@@ -181,11 +180,10 @@
     <div><span class="date">Tue 25 Aug</span><span class="weeks-out">18 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status soon">Book soon</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£77.10</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£104.10</strong></span><span class="base">£22.90 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£77.10</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£104.10</strong> + ~£2.79 fee = <strong>£106.89 all-in</strong></span><span class="base">£9.60 under route median</span></div>
   
-  <div class="note">OUT 07:36 Advance Single £77.10 + RETURN 18:30 Advance Single £27.00. £22.90 below baseline — fair price, book within a week. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-25T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-08-25T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-25T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-08-25T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="section-title">Baseline · sit tight, book in the next fortnight</div>
 <div class="card">
@@ -193,143 +191,130 @@
     <div><span class="date">Tue 9 Jun</span><span class="weeks-out">7 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£113.70</strong></span><span class="base">£13.30 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£86.70</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£113.70</strong> + ~£2.79 fee = <strong>£116.49 all-in</strong></span><span class="base">at route median</span></div>
   
-  <div class="note">Baseline £127 — direct both ways. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-06-09T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-06-09T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-06-09T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-06-09T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 16 Jun</span><span class="weeks-out">8 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£113.70</strong></span><span class="base">£13.30 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£86.70</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£113.70</strong> + ~£2.79 fee = <strong>£116.49 all-in</strong></span><span class="base">at route median</span></div>
   
-  <div class="note">Baseline £127 — direct both ways. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-06-16T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-06-16T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-06-16T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-06-16T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 23 Jun</span><span class="weeks-out">9 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£113.70</strong></span><span class="base">£13.30 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£86.70</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£113.70</strong> + ~£2.79 fee = <strong>£116.49 all-in</strong></span><span class="base">at route median</span></div>
   
-  <div class="note">Baseline £127 — direct both ways. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-06-23T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-06-23T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-06-23T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-06-23T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 30 Jun</span><span class="weeks-out">10 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£113.70</strong></span><span class="base">£13.30 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£86.70</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£113.70</strong> + ~£2.79 fee = <strong>£116.49 all-in</strong></span><span class="base">at route median</span></div>
   
-  <div class="note">Baseline £127 — direct both ways. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-06-30T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-06-30T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-06-30T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-06-30T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 7 Jul</span><span class="weeks-out">11 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£113.70</strong></span><span class="base">£13.30 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£86.70</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£113.70</strong> + ~£2.79 fee = <strong>£116.49 all-in</strong></span><span class="base">at route median</span></div>
   
-  <div class="note">Baseline £127. Near edge of 12-week booking window. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-07-07T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-07-07T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-07-07T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-07-07T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 14 Jul</span><span class="weeks-out">12 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£113.70</strong></span><span class="base">£13.30 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£86.70</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£113.70</strong> + ~£2.79 fee = <strong>£116.49 all-in</strong></span><span class="base">at route median</span></div>
   
-  <div class="note">Just released (12-week edge). Baseline £127 — 07:36 direct out + 18:30 direct back. Cheap Advance tier is open — book now to lock it in before it climbs. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-07-14T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-07-14T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-07-14T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-07-14T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 21 Jul</span><span class="weeks-out">13 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£113.70</strong></span><span class="base">£13.30 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£86.70</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£113.70</strong> + ~£2.79 fee = <strong>£116.49 all-in</strong></span><span class="base">at route median</span></div>
   
-  <div class="note">Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-07-21T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-07-21T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-07-21T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-07-21T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 28 Jul</span><span class="weeks-out">14 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£113.70</strong></span><span class="base">£13.30 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£86.70</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£113.70</strong> + ~£2.79 fee = <strong>£116.49 all-in</strong></span><span class="base">at route median</span></div>
   
-  <div class="note">OUT 07:36 Advance Single £86.70 + RETURN 18:30 Advance Single £27.00. £13.30 below £127 baseline — stable summer pricing. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-07-28T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-07-28T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-07-28T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-07-28T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 4 Aug</span><span class="weeks-out">15 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£113.70</strong></span><span class="base">£13.30 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£86.70</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£113.70</strong> + ~£2.79 fee = <strong>£116.49 all-in</strong></span><span class="base">at route median</span></div>
   
-  <div class="note">OUT 07:36 Advance Single £86.70 + RETURN 18:30 Advance Single £27.00. £13.30 below £127 baseline — stable summer pricing. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-04T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-08-04T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-04T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-08-04T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 11 Aug</span><span class="weeks-out">16 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£113.70</strong></span><span class="base">£13.30 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£86.70</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£113.70</strong> + ~£2.79 fee = <strong>£116.49 all-in</strong></span><span class="base">at route median</span></div>
   
-  <div class="note">OUT 07:36 Advance Single £86.70 + RETURN 18:30 Advance Single £27.00. £13.30 below £127 baseline — stable summer pricing. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-11T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-08-11T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-11T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-08-11T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 18 Aug</span><span class="weeks-out">17 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£113.70</strong></span><span class="base">£13.30 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£86.70</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£113.70</strong> + ~£2.79 fee = <strong>£116.49 all-in</strong></span><span class="base">at route median</span></div>
   
-  <div class="note">OUT 07:36 Advance Single £86.70 + RETURN 18:30 Advance Single £27.00. £13.30 below £127 baseline — stable summer pricing. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-18T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-08-18T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-08-18T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-08-18T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 1 Sep</span><span class="weeks-out">19 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£113.70</strong></span><span class="base">£13.30 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£86.70</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£113.70</strong> + ~£2.79 fee = <strong>£116.49 all-in</strong></span><span class="base">at route median</span></div>
   
-  <div class="note">OUT 07:36 Advance Single £86.70 + RETURN 18:30 Advance Single £27.00. £13.30 below £127 baseline — stable summer pricing. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-09-01T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-09-01T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-09-01T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-09-01T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="card">
   <div class="card-head">
     <div><span class="date">Tue 8 Sep</span><span class="weeks-out">20 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
-  <div class="totals"><span>Total <strong>£113.70</strong></span><span class="base">£13.30 under baseline</span></div>
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:36</strong> · arrives <strong>09:34</strong></div><div class="outward-fare">£86.70</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>18:30</strong> → 20:27 return <strong>£27</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£113.70</strong> + ~£2.79 fee = <strong>£116.49 all-in</strong></span><span class="base">at route median</span></div>
   
-  <div class="note">OUT 07:36 Advance Single £86.70 + RETURN 18:30 Advance Single £27.00. £13.30 below £127 baseline — stable summer pricing. Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.</div>
-  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-09-08T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book outbound (07:36) →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-09-08T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book return (18:30)</a></div>
+  <div class="actions"><a class="btn btn-primary" href="https://www.thetrainline.com/dpi?locale=en&origin=1551a38ad87e8710d21b25403ae0a3e6&destination=1f06fc66ccd7ea92ae4b0a550e4ddfd1&outboundType=departAfter&outboundTime=2026-09-08T07%3A06%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 07:36 outbound →</a><a class="btn btn-secondary" href="https://www.thetrainline.com/dpi?locale=en&origin=1f06fc66ccd7ea92ae4b0a550e4ddfd1&destination=1551a38ad87e8710d21b25403ae0a3e6&outboundType=departAfter&outboundTime=2026-09-08T18%3A24%3A00&affiliateCode=tlseo&currency=GBP&passengers%5B0%5D%5Bdob%5D=1995-01-01&journeyType=single" target="_blank" rel="noopener">Book 18:30 return</a></div>
 </div>
 <div class="section-title">Already booked · paid tickets</div>
 <div class="card booked">
@@ -337,9 +322,8 @@
     <div><span class="date">Tue 28 Apr</span><span class="weeks-out">1 week out</span></div>
     <div class="status booked">Already booked</div>
   </div>
-  <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:06</div><div class="leg-fare">£43.40 · direct</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">19:30</div><div class="leg-fare">£48.50 · direct</div></div></div>
-  <div class="totals"><span>Total <strong>£91.90</strong></span><span class="base">£35.10 under baseline</span></div>
-  
+  <div class="outward-hero"><div class="outward-label">OUT · <strong>07:06</strong> · arrives <strong>09:05</strong></div><div class="outward-fare">£43.40</div><div class="outward-meta">SplitSave · same train, 2 tickets · refundable day-before</div></div><div class="return-foot">+ <strong>19:30</strong> → 21:30 return <strong>£48.50</strong> · Advance Single · specified train only</div>
+  <div class="totals"><span>Tickets <strong>£91.90</strong> + ~£2.79 fee = <strong>£94.69 all-in</strong></span><span class="base">£21.80 under route median</span></div>
   <div class="note">Tickets already booked &amp; paid — locked in. In-window cheapest is £91.90 (07:06 or 07:36 out £43.40 SplitSave + 19:30 back £48.50). Trainline also shows an £87.80 Super Off-Peak return, but that needs a 09:41+ outbound — too late for Sophie. BOOK_SOON.</div>
   <div class="note" style="color:#8a8a8a; font-style:italic;">Tickets already paid for — no action needed.</div>
 </div>
@@ -348,10 +332,9 @@
     <div><span class="date">Tue 5 May</span><span class="weeks-out">2 weeks out</span></div>
     <div class="status booked">Already booked</div>
   </div>
-  <div class="legs-summary">Cheapest return: <strong>£69.30</strong> · per-leg times refresh when you tap through</div>
-  <div class="totals"><span>Total <strong>£69.30</strong></span><span class="base">£57.70 under baseline</span></div>
-  
-  <div class="note">Tickets already booked &amp; paid — locked in. Cheap outbound Advance gone — all trains £142. Return leg still cheap (£27). £42 above baseline. Book today before peak fares climb further. Trainline auto-selected cheapest (£69.3 tab, £72.09 with fees). Time-window constraints not yet verified.</div>
+  <div class="legs-summary">Cheapest return: <strong>£69.30</strong> · leg times refresh next run</div>
+  <div class="totals"><span>Tickets <strong>£69.30</strong> + ~£2.79 fee = <strong>£72.09 all-in</strong></span><span class="base">£44.40 under route median</span></div>
+  <div class="note">Tickets already booked &amp; paid — locked in. Cheap outbound Advance gone — all trains £142. Return leg still cheap (£27). £42 above baseline. Book today before peak fares climb further.</div>
   <div class="note" style="color:#8a8a8a; font-style:italic;">Tickets already paid for — no action needed.</div>
 </div>
 <div class="card booked">
@@ -359,10 +342,9 @@
     <div><span class="date">Tue 12 May</span><span class="weeks-out">3 weeks out</span></div>
     <div class="status booked">Already booked</div>
   </div>
-  <div class="legs-summary">Cheapest return: <strong>£54</strong> · per-leg times refresh when you tap through</div>
-  <div class="totals"><span>Total <strong>£54</strong></span><span class="base">£73 under baseline</span></div>
-  
-  <div class="note">Tickets already booked &amp; paid — locked in. £131.50 tier still open on 06:38 and 07:36. One below £142 — book this week before it flips up. Trainline auto-selected cheapest (£54.0 tab, £56.19 with fees). Time-window constraints not yet verified.</div>
+  <div class="legs-summary">Cheapest return: <strong>£54</strong> · leg times refresh next run</div>
+  <div class="totals"><span>Tickets <strong>£54</strong> + ~£2.79 fee = <strong>£56.79 all-in</strong></span><span class="base">£59.70 under route median</span></div>
+  <div class="note">Tickets already booked &amp; paid — locked in. £131.50 tier still open on 06:38 and 07:36. One below £142 — book this week before it flips up.</div>
   <div class="note" style="color:#8a8a8a; font-style:italic;">Tickets already paid for — no action needed.</div>
 </div>
 <div class="card booked">
@@ -370,10 +352,9 @@
     <div><span class="date">Tue 19 May</span><span class="weeks-out">4 weeks out</span></div>
     <div class="status booked">Already booked</div>
   </div>
-  <div class="legs-summary">Cheapest return: <strong>£54</strong> · per-leg times refresh when you tap through</div>
-  <div class="totals"><span>Total <strong>£54</strong></span><span class="base">£73 under baseline</span></div>
-  
-  <div class="note">Tickets already booked &amp; paid — locked in. £110.50 tier still open. £10.50 above baseline — book in next week or two. Trainline auto-selected cheapest (£54.0 tab, £56.19 with fees). Time-window constraints not yet verified.</div>
+  <div class="legs-summary">Cheapest return: <strong>£54</strong> · leg times refresh next run</div>
+  <div class="totals"><span>Tickets <strong>£54</strong> + ~£2.79 fee = <strong>£56.79 all-in</strong></span><span class="base">£59.70 under route median</span></div>
+  <div class="note">Tickets already booked &amp; paid — locked in. £110.50 tier still open. £10.50 above baseline — book in next week or two.</div>
   <div class="note" style="color:#8a8a8a; font-style:italic;">Tickets already paid for — no action needed.</div>
 </div>
 <div class="card booked">
@@ -381,10 +362,9 @@
     <div><span class="date">Tue 26 May</span><span class="weeks-out">5 weeks out</span></div>
     <div class="status booked">Already booked</div>
   </div>
-  <div class="legs-summary">Cheapest return: <strong>£54</strong> · per-leg times refresh when you tap through</div>
-  <div class="totals"><span>Total <strong>£54</strong></span><span class="base">£73 under baseline</span></div>
-  
-  <div class="note">Tickets already booked &amp; paid — locked in. Baseline achievable: £100 out + £27 back = £127. Book this fortnight. Trainline auto-selected cheapest (£54.0 tab, £56.19 with fees). Time-window constraints not yet verified.</div>
+  <div class="legs-summary">Cheapest return: <strong>£54</strong> · leg times refresh next run</div>
+  <div class="totals"><span>Tickets <strong>£54</strong> + ~£2.79 fee = <strong>£56.79 all-in</strong></span><span class="base">£59.70 under route median</span></div>
+  <div class="note">Tickets already booked &amp; paid — locked in. Baseline achievable: £100 out + £27 back = £127. Book this fortnight.</div>
   <div class="note" style="color:#8a8a8a; font-style:italic;">Tickets already paid for — no action needed.</div>
 </div>
 <div class="card booked">
@@ -392,10 +372,9 @@
     <div><span class="date">Tue 2 Jun</span><span class="weeks-out">6 weeks out</span></div>
     <div class="status booked">Already booked</div>
   </div>
-  <div class="legs-summary">Cheapest return: <strong>£54</strong> · per-leg times refresh when you tap through</div>
-  <div class="totals"><span>Total <strong>£54</strong></span><span class="base">£73 under baseline</span></div>
-  
-  <div class="note">Tickets already booked &amp; paid — locked in. Baseline £127 (07:36 direct). Note: 05:59 with 1 change is £67 — if she&#x27;s willing to leave earlier and change, total £94 (£33 saved). Trainline auto-selected cheapest (£54.0 tab, £56.19 with fees). Time-window constraints not yet verified.</div>
+  <div class="legs-summary">Cheapest return: <strong>£54</strong> · leg times refresh next run</div>
+  <div class="totals"><span>Tickets <strong>£54</strong> + ~£2.79 fee = <strong>£56.79 all-in</strong></span><span class="base">£59.70 under route median</span></div>
+  <div class="note">Tickets already booked &amp; paid — locked in. Baseline £127 (07:36 direct). Note: 05:59 with 1 change is £67 — if she&#x27;s willing to leave earlier and change, total £94 (£33 saved).</div>
   <div class="note" style="color:#8a8a8a; font-style:italic;">Tickets already paid for — no action needed.</div>
 </div>
 
@@ -430,10 +409,10 @@
   </div>
 </div>
 
-<div class="patterns"><div class="patterns-head">What we know about this route</div><ul class="patterns-list"><li><strong>Total return range:</strong> £70.80 cheapest ever seen · £113.70 median · £120.70 highest. If today's number is near the median, sit tight; near the min, book.</li><li><strong>07:36 outward tier ladder:</strong> £43.80 / £77.10 / £84.10 / £86.70 / £93.70. Fares cycle between these rungs as Advance inventory fills/releases — when you see the lowest rung, book.</li><li><strong>18:30 return tier ladder:</strong> £27.</li><li><strong>Recent bulk events (30d):</strong> 2 detected. Most recent: 2026-04-24 — drop of £7 on the 07:36 outward affecting 14 dates.</li><li class="patterns-meta">Dataset: 97 observations across 20 Tuesdays, since 2026-04-22.</li></ul></div>
+<div class="patterns"><div class="patterns-head">What we know about this route</div><div class="patterns-explainer"><strong>How pricing works on this route</strong><br>The cheapest <strong>07:36 outward</strong> price Trainline offers is always <strong>SplitSave</strong> — 2 tickets that together cover Yatton → Paddington, stay on the <em>same train</em> (no changes), refundable until 23:59 the day before travel. The <strong>18:30 return</strong> is an Advance Single at £27, specified-train, no refunds. Trainline adds a flat <strong>~£2.79 booking fee</strong> at checkout, so every total on this page is shown as "tickets + fee = all-in".</div><ul class="patterns-list"><li><strong>Total return range:</strong> £70.80 cheapest ever seen · £113.70 median · £120.70 highest. If today's number is near the median, sit tight; near the min, book.</li><li><strong>07:36 outward tier ladder:</strong> £43.80 / £77.10 / £84.10 / £86.70 / £93.70. Fares cycle between these rungs as Advance inventory fills/releases — when you see the lowest rung, book.</li><li><strong>18:30 return tier ladder:</strong> £27.</li><li><strong>Recent bulk events (30d):</strong> 2 detected. Most recent: 2026-04-24 — drop of £7 on the 07:36 outward affecting 14 dates.</li><li class="patterns-meta">Dataset: 97 observations across 20 Tuesdays, since 2026-04-22.</li></ul></div>
 
 <footer>
-  <p>Last refreshed <strong>Fri 24 Apr 2026, 17:00 UTC</strong> · refreshed daily at 02:00 UK.</p>
+  <p>Last refreshed <strong>Fri 24 Apr 2026, 17:21 UTC</strong> · refreshed daily at 02:00 UK.</p>
   <p>Source: <a href="https://www.thetrainline.com/train-times/yatton-to-london-paddington" target="_blank" rel="noopener">Trainline · Yatton → Paddington</a>. Fares reflect cheapest Advance tier at time of check.</p>
 </footer>
 

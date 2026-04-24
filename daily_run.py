@@ -185,6 +185,13 @@ def apply_fresh_prices(
         t["total_cheapest"] = new_total
         t["out"] = new_current["out"]
         t["back"] = new_current["back"]
+        # Flush any legacy/static note string — the card now derives
+        # everything Sophie needs from the outward-hero, return-foot,
+        # all-in row, badges, and hero banner. Leaving a stale note on
+        # each Tuesday means pre-SplitSave-era copy (e.g. "£56.20 below
+        # £127 baseline") stays on the page forever. If we ever want
+        # programmatic per-date notes again, set them explicitly here.
+        t["note"] = ""
 
 
 def add_newly_bookable(prices: dict, horizon_probe: dict) -> str | None:

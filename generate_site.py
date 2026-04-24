@@ -29,6 +29,25 @@ YAT = "1551a38ad87e8710d21b25403ae0a3e6"
 PAD = "1f06fc66ccd7ea92ae4b0a550e4ddfd1"
 DOB = "1995-01-01"
 
+# Booking fee Trainline adds at checkout — flat £2.79 observed on both
+# validation dates (Tue 15 Sep total £70.80 → £73.59; Tue 9 Jun total
+# £113.70 → £116.49). Displayed so Sophie sees the real out-the-door cost,
+# not the ticket-only number. If this changes we'll spot it in the basket
+# validation runs and bump it here.
+BOOKING_FEE_GBP = 2.79
+
+# The 07:36 outward is sold as SplitSave on every date we've validated.
+# Two tickets, stay on the SAME train (no changes), refundable until 23:59
+# the day before travel. The "2x Advance Single" alternative is always
+# £1.70–£13.30 more expensive AND has no refunds — so SplitSave is the
+# correct default. Sophie does receive two tickets in her booking email.
+SPLITSAVE_LABEL = "SplitSave · same train, 2 tickets · refundable day-before"
+
+# The 18:30 return is consistently labelled "Advance Single" at £27 across
+# every observation. Specified train only, no refunds, but the £27 price
+# has been absolutely stable so far.
+RETURN_LABEL = "Advance Single · specified train only"
+
 STATUS_LABELS = {
     "URGENT": ("Cheap tier gone", "urgent"),
     "BOOK_TODAY": ("Book today", "today"),
@@ -54,6 +73,20 @@ def _fmt_gbp(x):
     if x is None:
         return "—"
     return f"£{x:.0f}" if x == int(x) else f"£{x:.2f}"
+
+
+def _fmt_gbp2(x):
+    """Always two decimals — used for all-in totals where pennies matter."""
+    if x is None:
+        return "—"
+    return f"£{x:.2f}"
+
+
+def _all_in(ticket_total: float | None) -> float | None:
+    """Ticket price + Trainline booking fee = what Sophie actually pays."""
+    if ticket_total is None:
+        return None
+    return round(ticket_total + BOOKING_FEE_GBP, 2)
 
 
 def _fmt_date_short(iso: str) -> str:
@@ -177,37 +210,70 @@ def _alts_block(cur: dict) -> str:
     )
 
 
-def _totals_row(cur: dict, baseline: float) -> str:
+def _all_in_row(cur: dict, route_median: float | None) -> str:
+    """Total row — ticket price + flat Trainline fee = real out-the-door cost.
+    Compared to the route median (what we typically see on this line) rather
+    than the old £127 baseline, which predates the Advance-fare dataset and
+    doesn't reflect anything Sophie sees on real bookings."""
     total = cur.get("cheapest_any_total")
     if total is None:
         return '<div class="totals"><span>No total yet</span></div>'
-    if total > baseline + 0.5:
-        flag = f'<span class="over">{_fmt_gbp(total - baseline)} over baseline</span>'
-    elif total < baseline - 0.5:
-        flag = f'<span class="base">{_fmt_gbp(baseline - total)} under baseline</span>'
+    all_in = _all_in(total)
+    core = (
+        f'<span>Tickets <strong>{_fmt_gbp(total)}</strong> '
+        f'+ ~{_fmt_gbp2(BOOKING_FEE_GBP)} fee '
+        f'= <strong>{_fmt_gbp2(all_in)} all-in</strong></span>'
+    )
+    # Comparison to median ONLY when we actually have route_median from
+    # fare_history (i.e., not the first-ever run). Gracefully degrade.
+    if isinstance(route_median, (int, float)):
+        if total > route_median + 0.5:
+            flag = f'<span class="over">{_fmt_gbp(total - route_median)} over route median</span>'
+        elif total < route_median - 0.5:
+            flag = f'<span class="base">{_fmt_gbp(route_median - total)} under route median</span>'
+        else:
+            flag = '<span class="base">at route median</span>'
     else:
-        flag = '<span class="base">at baseline</span>'
-    return f'<div class="totals"><span>Total <strong>{_fmt_gbp(total)}</strong></span>{flag}</div>'
+        flag = '<span class="base">median forming</span>'
+    return f'<div class="totals">{core}{flag}</div>'
 
 
-def _leg_html(leg: dict, label: str) -> str:
-    if not leg:
-        return (
-            f'<div class="leg"><div class="leg-label">{label}</div>'
-            f'<div class="leg-time">—</div><div class="leg-fare">No data</div></div>'
-        )
-    t = leg.get("time") or "—"
-    f = leg.get("fare")
-    changes = leg.get("changes")
-    bits = [_fmt_gbp(f)]
-    if changes == 0:
-        bits.append("direct")
-    elif changes:
-        bits.append(f"{changes} change{'s' if changes > 1 else ''}")
+def _outward_hero(cur: dict) -> str:
+    """Big primary block for the 07:36 — the ONLY leg that moves day-to-day
+    on this route, so it earns the visual weight. Labels the price as
+    SplitSave because that's what Trainline delivers at checkout."""
+    out = cur.get("out") or {}
+    fare = out.get("fare")
+    dep = out.get("time") or "07:36"
+    arr = out.get("arrival")
+    arr_bit = f" · arrives <strong>{html.escape(arr)}</strong>" if arr else ""
+    fare_str = _fmt_gbp(fare) if fare is not None else "—"
     return (
-        f'<div class="leg"><div class="leg-label">{label}</div>'
-        f'<div class="leg-time">{html.escape(t)}</div>'
-        f'<div class="leg-fare">{html.escape(" · ".join(bits))}</div></div>'
+        '<div class="outward-hero">'
+        f'<div class="outward-label">OUT · <strong>{html.escape(dep)}</strong>{arr_bit}</div>'
+        f'<div class="outward-fare">{fare_str}</div>'
+        f'<div class="outward-meta">{html.escape(SPLITSAVE_LABEL)}</div>'
+        '</div>'
+    )
+
+
+def _return_footnote(cur: dict) -> str:
+    """Compact one-line footnote for the 18:30. It's an Advance Single at
+    £27 every observation we've made; no point giving it equal card real
+    estate when Sophie's decision is always 'yep, £27, book it'. If it
+    ever does move, the moves banner will flag it and the card-level pill
+    will light up."""
+    back = cur.get("back") or {}
+    fare = back.get("fare")
+    dep = back.get("time") or "18:30"
+    arr = back.get("arrival")
+    arr_bit = f" → {html.escape(arr)}" if arr else ""
+    fare_str = _fmt_gbp(fare) if fare is not None else "—"
+    return (
+        '<div class="return-foot">'
+        f'+ <strong>{html.escape(dep)}</strong>{arr_bit} return '
+        f'<strong>{fare_str}</strong> · {html.escape(RETURN_LABEL)}'
+        '</div>'
     )
 
 
@@ -216,7 +282,15 @@ def _render_bookable_card(
     *,
     movement_ctx: dict | None = None,
     new_lows_by_date: dict | None = None,
+    route_median: float | None = None,
 ) -> str:
+    """Rebuilt 2026-04-24 after basket validation. Outward-primary layout —
+    the 07:36 is the only leg that moves on this route, so it gets the
+    visual weight. 18:30 demoted to a one-line footnote. All-in total
+    surfaces Trainline's £2.79 booking fee so Sophie sees the real
+    out-the-door cost before she taps Book. Price comparison anchored to
+    route median (learned from fare_history) instead of the old £127
+    baseline — that number pre-dated the Advance-fare dataset."""
     cur = t.get("current") or {}
     status = t.get("status", "UNKNOWN")
     status_label, status_class = STATUS_LABELS.get(status, STATUS_LABELS["UNKNOWN"])
@@ -226,39 +300,26 @@ def _render_bookable_card(
     out_time = (out_leg or {}).get("time") or "07:36"
     back_time = (back_leg or {}).get("time") or "18:30"
     note = t.get("note") or ""
-    source_note = cur.get("_note_on_source")
-    # Append source caveat if we're on NR fallback
-    full_note = note
-    if source_note:
-        # Only show if note doesn't already mention the same idea
-        if "National Rail" not in note and "SplitSave" not in note:
-            full_note = (note + " " if note else "") + source_note
     change_badge = _arrow_badge(t.get("change_vs_yesterday"), movement_ctx)
     new_low_badge = _new_low_badge(new_lows_by_date or {}, t["date"])
     is_booked = bool(t.get("booked"))
 
-    # When leg-level data is missing (headline-only scrape), avoid showing
-    # two "No data" blocks. Fall back to a single summary row highlighting
-    # the cheapest total — honest about the limit, quieter visually.
+    # When the scrape didn't capture leg-level data, render one honest line
+    # rather than two empty slots — Sophie shouldn't have to decode empty UI.
     if out_leg is None and back_leg is None:
         total = cur.get("cheapest_any_total")
         if total is not None:
-            legs_block = (
+            body = (
                 '<div class="legs-summary">'
-                f'Cheapest return: <strong>{_fmt_gbp(total)}</strong> · per-leg times refresh when you tap through'
+                f'Cheapest return: <strong>{_fmt_gbp(total)}</strong> · leg times refresh next run'
                 '</div>'
             )
         else:
-            legs_block = (
+            body = (
                 '<div class="legs-summary">Price not captured this run — re-checking tomorrow</div>'
             )
     else:
-        legs_block = (
-            '<div class="legs">'
-            f'{_leg_html(out_leg, "Out")}'
-            f'{_leg_html(back_leg, "Back")}'
-            '</div>'
-        )
+        body = _outward_hero(cur) + _return_footnote(cur)
 
     if is_booked:
         actions_block = (
@@ -269,22 +330,22 @@ def _render_bookable_card(
     else:
         actions_block = (
             '<div class="actions">'
-            f'<a class="btn btn-primary" href="{_trainline_url(t["date"], "out", out_time)}" target="_blank" rel="noopener">Book outbound ({html.escape(out_time)}) →</a>'
-            f'<a class="btn btn-secondary" href="{_trainline_url(t["date"], "back", back_time)}" target="_blank" rel="noopener">Book return ({html.escape(back_time)})</a>'
+            f'<a class="btn btn-primary" href="{_trainline_url(t["date"], "out", out_time)}" target="_blank" rel="noopener">Book 07:36 outbound →</a>'
+            f'<a class="btn btn-secondary" href="{_trainline_url(t["date"], "back", back_time)}" target="_blank" rel="noopener">Book 18:30 return</a>'
             '</div>'
         )
 
     card_class = "card booked" if is_booked else "card"
+    note_block = f'<div class="note">{html.escape(note)}</div>' if note else ""
     return f"""
 <div class="{card_class}">
   <div class="card-head">
     <div><span class="date">{_fmt_date_short(t['date'])}</span><span class="weeks-out">{wk} week{'s' if wk != 1 else ''} out</span>{change_badge}{new_low_badge}</div>
     <div class="status {status_class}">{html.escape(status_label)}</div>
   </div>
-  {legs_block}
-  {_totals_row(cur, t.get('baseline_total') or 127.0)}
-  {_alts_block(cur)}
-  <div class="note">{html.escape(full_note)}</div>
+  {body}
+  {_all_in_row(cur, route_median)}
+  {note_block}
   {actions_block}
 </div>
 """.strip()
@@ -336,7 +397,10 @@ def _render_movements_banner(last_run: dict) -> str:
     for ev in bulk:
         direction = "down" if ev["delta"] < 0 else "up"
         arrow = "↓" if ev["delta"] < 0 else "↑"
-        leg_label = "07:36 outward" if ev["leg"] == "outward" else "18:30 return"
+        # All outward prices we scrape are the SplitSave fare. Label
+        # explicitly so Sophie knows it's the split-ticket price that moved
+        # (not the 2x Advance Single product, which usually holds steadier).
+        leg_label = "07:36 SplitSave outward" if ev["leg"] == "outward" else "18:30 return"
         date_list = ", ".join(_fmt_date_short(d) for d in ev["dates"][:6])
         more = f" +{len(ev['dates']) - 6} more" if len(ev["dates"]) > 6 else ""
         bits.append(
@@ -462,9 +526,29 @@ def _render_patterns_panel(patterns: dict) -> str:
     )
 
     items = range_line + "".join(ladder_items) + events_line + meta_line
+
+    # Explainer sits ABOVE the stats so anyone landing on the page cold
+    # understands what "SplitSave", "all-in" and "route median" actually
+    # mean before they read the numbers. Written once, validated against
+    # Trainline's real basket flow on 2026-04-24 for 15 Sep and 9 Jun.
+    explainer = (
+        '<div class="patterns-explainer">'
+        '<strong>How pricing works on this route</strong><br>'
+        'The cheapest <strong>07:36 outward</strong> price Trainline offers '
+        'is always <strong>SplitSave</strong> — 2 tickets that together cover '
+        'Yatton → Paddington, stay on the <em>same train</em> (no changes), '
+        'refundable until 23:59 the day before travel. The <strong>18:30 '
+        'return</strong> is an Advance Single at £27, specified-train, no '
+        'refunds. Trainline adds a flat <strong>~£2.79 booking fee</strong> '
+        'at checkout, so every total on this page is shown as '
+        '"tickets + fee = all-in".'
+        '</div>'
+    )
+
     return (
         '<div class="patterns">'
         '<div class="patterns-head">What we know about this route</div>'
+        f'{explainer}'
         f'<ul class="patterns-list">{items}</ul>'
         '</div>'
     )
@@ -523,14 +607,16 @@ def _compose_hero(data: dict) -> str:
     # --- 1. New historical lows ------------------------------------------
     if new_lows:
         dates_txt = ", ".join(
-            f"<strong>{_fmt_date_short(nl['date'])}</strong> ({_fmt_gbp(nl['total'])})"
+            f"<strong>{_fmt_date_short(nl['date'])}</strong> "
+            f"({_fmt_gbp2(_all_in(nl['total']))} all-in)"
             for nl in new_lows[:4]
         )
         more = f" +{len(new_lows) - 4} more" if len(new_lows) > 4 else ""
         return _hero_html(
             "buy",
             f"🎯 <strong>New all-time low{'s' if len(new_lows) > 1 else ''}:</strong> "
-            f"{dates_txt}{more}. Book today — these beat every prior observation we've recorded."
+            f"{dates_txt}{more}. Book today — these beat every prior observation we've recorded. "
+            f'<span class="hero-sub">Prices are SplitSave (2 tickets, same train, day-before refund) inc. ~£2.79 Trainline fee.</span>'
         )
 
     # --- 2. Dates at route-min (not strictly a NEW low but still the min) --
@@ -543,30 +629,31 @@ def _compose_hero(data: dict) -> str:
             return _hero_html(
                 "buy",
                 f"💰 <strong>{n} Tuesday{'s' if n != 1 else ''} at the all-time low "
-                f"({_fmt_gbp(route_min)})</strong>: {preview}{more}. "
-                f"Book these today — we've never seen cheaper on this route."
+                f"({_fmt_gbp2(_all_in(route_min))} all-in)</strong>: {preview}{more}. "
+                f"Book these today — we've never seen cheaper on this route. "
+                f'<span class="hero-sub">SplitSave tickets (2 tickets, same train, day-before refund) + ~£2.79 Trainline fee.</span>'
             )
 
     # --- 3. Bulk DROP ----------------------------------------------------
     drops = [e for e in bulk_events if e["delta"] < 0]
     if drops:
         ev = max(drops, key=lambda e: e["count"])
-        leg_label = "07:36 outward" if ev["leg"] == "outward" else "18:30 return"
+        leg_label = "07:36 SplitSave outward" if ev["leg"] == "outward" else "18:30 return"
         date_span = _date_span_phrase(ev["dates"])
         return _hero_html(
             "buy",
             f"📉 <strong>{ev['count']} Tuesday{'s' if ev['count'] != 1 else ''} just dropped "
             f"{_fmt_gbp(abs(ev['delta']))}</strong> on the {leg_label} "
             f"({_fmt_gbp(ev['from'])} → {_fmt_gbp(ev['to'])}) — {date_span}. "
-            f"This is the lower rung of the Advance-fare seesaw for this route; "
-            f"good window to book before it flips back."
+            f"Lower rung of the Advance-fare seesaw; good window to book before it flips back. "
+            f'<span class="hero-sub">All prices above are ticket-only; add ~£2.79 Trainline fee at checkout.</span>'
         )
 
     # --- 4. Bulk RISE ----------------------------------------------------
     rises = [e for e in bulk_events if e["delta"] > 0]
     if rises:
         ev = max(rises, key=lambda e: e["count"])
-        leg_label = "07:36 outward" if ev["leg"] == "outward" else "18:30 return"
+        leg_label = "07:36 SplitSave outward" if ev["leg"] == "outward" else "18:30 return"
         date_span = _date_span_phrase(ev["dates"])
         return _hero_html(
             "hold",
@@ -619,8 +706,9 @@ def _compose_hero(data: dict) -> str:
         return _hero_html(
             "quiet",
             f"Quiet day — no day-over-day moves. {at_or_below_median} of "
-            f"{len(current_totals)} Tuesdays at or below the £{route_median:.0f} "
-            f"median; all-time low on record is £{route_min:.0f}."
+            f"{len(current_totals)} Tuesdays at or below the "
+            f"{_fmt_gbp2(_all_in(route_median))} all-in median; "
+            f"all-time low on record is {_fmt_gbp2(_all_in(route_min))} all-in."
         )
     # Fallback — first run, no patterns yet.
     return _hero_html(
@@ -689,12 +777,14 @@ CSS = """
   .card.booked .date { color: #6b6b6b; }
   .legs-summary { padding: 12px; background: #fdfcf9; border: 1px solid var(--rule); border-radius: 8px; font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 10px; }
   .legs-summary strong { color: var(--ink); font-size: 18px; font-weight: 600; }
-  .legs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-  .leg { border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; background: #fdfcf9; }
-  .leg-label { font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-  .leg-time { font-size: 19px; font-weight: 600; margin-top: 3px; }
-  .leg-fare { font-size: 13px; color: var(--muted); margin-top: 2px; }
-  .totals { display: flex; justify-content: space-between; padding: 10px 12px; background: #f7f5ee; border-radius: 8px; font-size: 14px; margin-bottom: 10px; }
+  .outward-hero { padding: 14px 16px; background: var(--soon-bg); border: 1px solid #cfe0f4; border-radius: 8px; margin-bottom: 6px; }
+  .outward-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  .outward-label strong { color: var(--ink); font-weight: 700; }
+  .outward-fare { font-size: 30px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; margin-top: 4px; line-height: 1; }
+  .outward-meta { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .return-foot { padding: 8px 14px; font-size: 13px; color: var(--muted); background: #fdfcf9; border: 1px solid var(--rule); border-radius: 8px; margin: 6px 0 10px; }
+  .return-foot strong { color: var(--ink); font-weight: 600; }
+  .totals { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f7f5ee; border-radius: 8px; font-size: 13.5px; margin-bottom: 10px; gap: 12px; flex-wrap: wrap; }
   .totals .over { color: var(--urgent); font-weight: 600; }
   .totals .base { color: var(--stable); font-weight: 600; }
   .alts { background: var(--save-bg); border: 1px solid #b7e4c7; border-radius: 8px; padding: 10px 12px; font-size: 13px; color: #064e2f; margin-bottom: 10px; }
@@ -721,6 +811,9 @@ CSS = """
   .patterns-list { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
   .patterns-list > li { margin: 5px 0; }
   .patterns-list .patterns-meta { list-style: none; margin-left: -18px; padding-left: 0; color: var(--muted); font-size: 12px; margin-top: 8px; }
+  .patterns-explainer { font-size: 13px; line-height: 1.55; color: var(--ink); padding: 10px 12px; background: #fdfcf9; border: 1px solid var(--rule); border-radius: 8px; margin-bottom: 12px; }
+  .patterns-explainer strong { color: var(--ink); }
+  .hero-sub { display: block; font-size: 12.5px; font-weight: 400; margin-top: 6px; opacity: 0.85; }
   .note { font-size: 13px; line-height: 1.5; color: #3a3a3a; margin: 8px 0 12px; }
   .actions { display: flex; gap: 8px; flex-wrap: wrap; }
   .btn { display: inline-block; padding: 8px 14px; font-size: 13px; font-weight: 600; border-radius: 6px; text-decoration: none; }
@@ -746,6 +839,7 @@ def render_html(data: dict) -> str:
         nl["date"]: nl for nl in (movements.get("new_lows") or [])
     }
     patterns = data.get("patterns") or {}
+    route_median = patterns.get("route_median")
 
     # Group by status in explicit order
     by_status = {}
@@ -763,6 +857,7 @@ def render_html(data: dict) -> str:
                 t,
                 movement_ctx=per_tuesday_moves.get(t["date"]),
                 new_lows_by_date=new_lows_by_date,
+                route_median=route_median,
             )
             for t in group
         )
