@@ -61,6 +61,25 @@
   .alts ul { margin: 0; padding-left: 18px; }
   .alts li { margin: 2px 0; }
   .save-badge { display: inline-block; background: var(--save); color: white; font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+  .save-badge.up { background: var(--urgent); }
+  .new-low-badge { display: inline-block; background: #fef3c7; color: #92400e; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 4px; margin-left: 4px; border: 1px solid #fcd34d; }
+  .moves { margin: 22px 0 16px; padding: 16px 18px; background: #fdfcf9; border: 1px solid var(--rule); border-left: 4px solid #3a3a3a; border-radius: 10px; }
+  .moves-head { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
+  .moves-list { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.55; color: var(--ink); }
+  .moves-list > li { margin: 6px 0; }
+  .moves-list .move-bulk { list-style: '📉  '; }
+  .moves-list .move-low { list-style: none; margin-left: -18px; padding-left: 0; }
+  .moves-list .move-outlier { list-style: none; margin-left: -18px; padding-left: 0; }
+  .move-count { color: var(--muted); font-weight: 500; }
+  .move-dates { color: var(--muted); font-size: 13px; }
+  .move-context { display: block; color: var(--muted); font-size: 12.5px; margin-top: 2px; font-style: italic; }
+  .moves-quiet { margin: 22px 0 16px; padding: 12px 16px; background: var(--stable-bg); border: 1px solid #c6e5c6; border-left: 4px solid var(--stable); border-radius: 10px; font-size: 13.5px; color: var(--stable); }
+  .moves-quiet-inline { margin-top: 6px; font-size: 12.5px; color: var(--muted); }
+  .patterns { margin: 32px 0 8px; padding: 16px 18px; background: #f7f5ee; border: 1px solid var(--rule); border-radius: 10px; }
+  .patterns-head { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
+  .patterns-list { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
+  .patterns-list > li { margin: 5px 0; }
+  .patterns-list .patterns-meta { list-style: none; margin-left: -18px; padding-left: 0; color: var(--muted); font-size: 12px; margin-top: 8px; }
   .note { font-size: 13px; line-height: 1.5; color: #3a3a3a; margin: 8px 0 12px; }
   .actions { display: flex; gap: 8px; flex-wrap: wrap; }
   .btn { display: inline-block; padding: 8px 14px; font-size: 13px; font-weight: 600; border-radius: 6px; text-decoration: none; }
@@ -84,6 +103,8 @@
   <p class="subtitle">Yatton → London Paddington · every Tuesday · adult, no railcard</p>
   <p class="subtitle" style="margin-top:4px;">Out no later than <strong>07:36</strong> · return no earlier than <strong>18:30</strong></p>
 </header>
+
+<div class="moves"><div class="moves-head">Today's moves</div><ul class="moves-list"><li class="move-bulk"><strong>↓ £7</strong> on the <strong>07:36 outward</strong> — £93.70 → £86.70 <span class="move-count">(13 dates)</span>. <span class="move-dates">Tue 9 Jun, Tue 16 Jun, Tue 23 Jun, Tue 30 Jun, Tue 7 Jul, Tue 14 Jul +7 more.</span> <span class="move-context">Single Advance-tier release — these all moved in lockstep, so it's one pricing event, not 13 independent signals.</span></li><li class="move-outlier">⚠️ <strong>Tue 25 Aug</strong> moved differently from the pack — 07:36 out £84.10 → £77.10. <span class="move-context">Worth a quick look.</span></li></ul><div class="moves-quiet-inline">No change on 6 other Tuesdays.</div></div>
 
 <div class="hero" style="background:#f0faf0; border-left-color:#3f7d3f; color:#3f7d3f;">All tracked Tuesdays at or below baseline — sit tight. I'll check again tomorrow.</div>
 
@@ -157,7 +178,7 @@
 <div class="section-title">Book soon · within 1–2 weeks</div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 25 Aug</span><span class="weeks-out">18 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 25 Aug</span><span class="weeks-out">18 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status soon">Book soon</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£77.10</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -169,7 +190,7 @@
 <div class="section-title">Baseline · sit tight, book in the next fortnight</div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 9 Jun</span><span class="weeks-out">7 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 9 Jun</span><span class="weeks-out">7 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -180,7 +201,7 @@
 </div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 16 Jun</span><span class="weeks-out">8 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 16 Jun</span><span class="weeks-out">8 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -191,7 +212,7 @@
 </div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 23 Jun</span><span class="weeks-out">9 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 23 Jun</span><span class="weeks-out">9 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -202,7 +223,7 @@
 </div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 30 Jun</span><span class="weeks-out">10 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 30 Jun</span><span class="weeks-out">10 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -213,7 +234,7 @@
 </div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 7 Jul</span><span class="weeks-out">11 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 7 Jul</span><span class="weeks-out">11 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -224,7 +245,7 @@
 </div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 14 Jul</span><span class="weeks-out">12 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 14 Jul</span><span class="weeks-out">12 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -235,7 +256,7 @@
 </div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 21 Jul</span><span class="weeks-out">13 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 21 Jul</span><span class="weeks-out">13 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -246,7 +267,7 @@
 </div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 28 Jul</span><span class="weeks-out">14 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 28 Jul</span><span class="weeks-out">14 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -257,7 +278,7 @@
 </div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 4 Aug</span><span class="weeks-out">15 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 4 Aug</span><span class="weeks-out">15 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -268,7 +289,7 @@
 </div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 11 Aug</span><span class="weeks-out">16 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 11 Aug</span><span class="weeks-out">16 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -279,7 +300,7 @@
 </div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 18 Aug</span><span class="weeks-out">17 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 18 Aug</span><span class="weeks-out">17 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -290,7 +311,7 @@
 </div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 1 Sep</span><span class="weeks-out">19 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 1 Sep</span><span class="weeks-out">19 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -301,7 +322,7 @@
 </div>
 <div class="card">
   <div class="card-head">
-    <div><span class="date">Tue 8 Sep</span><span class="weeks-out">20 weeks out</span> <span class="save-badge">↓ £7 vs yesterday</span></div>
+    <div><span class="date">Tue 8 Sep</span><span class="weeks-out">20 weeks out</span> <span class="save-badge">↓ £7 on 07:36 out vs yesterday</span></div>
     <div class="status stable">Watch · at baseline</div>
   </div>
   <div class="legs"><div class="leg"><div class="leg-label">Out</div><div class="leg-time">07:36</div><div class="leg-fare">£86.70</div></div><div class="leg"><div class="leg-label">Back</div><div class="leg-time">18:30</div><div class="leg-fare">£27</div></div></div>
@@ -409,8 +430,10 @@
   </div>
 </div>
 
+<div class="patterns"><div class="patterns-head">What we know about this route</div><ul class="patterns-list"><li><strong>Total return range:</strong> £70.80 cheapest ever seen · £113.70 median · £120.70 highest. If today's number is near the median, sit tight; near the min, book.</li><li><strong>07:36 outward tier ladder:</strong> £43.80 / £77.10 / £84.10 / £86.70 / £93.70. Fares cycle between these rungs as Advance inventory fills/releases — when you see the lowest rung, book.</li><li><strong>18:30 return tier ladder:</strong> £27.</li><li><strong>Recent bulk events (30d):</strong> 2 detected. Most recent: 2026-04-24 — drop of £7 on the 07:36 outward affecting 14 dates.</li><li class="patterns-meta">Dataset: 97 observations across 20 Tuesdays, since 2026-04-22.</li></ul></div>
+
 <footer>
-  <p>Last refreshed <strong>Fri 24 Apr 2026, 13:04 UTC</strong> · refreshed daily at 02:00 UK.</p>
+  <p>Last refreshed <strong>Fri 24 Apr 2026, 16:51 UTC</strong> · refreshed daily at 02:00 UK.</p>
   <p>Source: <a href="https://www.thetrainline.com/train-times/yatton-to-london-paddington" target="_blank" rel="noopener">Trainline · Yatton → Paddington</a> (primary) · <a href="https://ojp.nationalrail.co.uk/" target="_blank" rel="noopener">National Rail</a> (fallback). Fares reflect cheapest Advance tier at time of check.</p>
 </footer>
 

@@ -92,18 +92,59 @@ def _trainline_url(iso_date: str, direction: str, hhmm: str) -> str:
 
 # ---------- card rendering ----------
 
-def _arrow_badge(change: dict) -> str:
-    """Tiny pill showing yesterday's direction of travel if notable."""
-    if not change:
-        return ""
-    delta = change.get("cheapest_any")
+def _arrow_badge(change: dict, movement_context: dict | None = None) -> str:
+    """Pill showing day-over-day move. When we know WHICH leg moved
+    (via movement_context), we say so — much more useful to Sophie than
+    a bare "vs yesterday" that hides whether the outward or return
+    changed. movement_context is this Tuesday's row from
+    last_run.movements.per_tuesday (dict or None).
+
+    Priority order for the delta:
+      1. movement_context.d_total — sourced from fare_history, immune to
+         same-day re-runs overwriting the in-memory `change_vs_yesterday`.
+      2. change.cheapest_any — the legacy field, left as a fallback for
+         historical data read before movements existed."""
+    delta = None
+    if movement_context and isinstance(movement_context.get("d_total"), (int, float)):
+        delta = movement_context["d_total"]
+    elif change and isinstance(change.get("cheapest_any"), (int, float)):
+        delta = change["cheapest_any"]
     if delta is None or abs(delta) < 0.01:
         return ""
-    if delta < 0:
-        return f' <span class="save-badge">↓ {_fmt_gbp(abs(delta))} vs yesterday</span>'
+    # Decide what leg to tag. Prefer movement_context (richer) over the bare
+    # total-only delta.
+    leg_note = ""
+    if movement_context:
+        d_out = movement_context.get("d_out")
+        d_back = movement_context.get("d_back")
+        out_moved = isinstance(d_out, (int, float)) and abs(d_out) >= 0.01
+        back_moved = isinstance(d_back, (int, float)) and abs(d_back) >= 0.01
+        if out_moved and not back_moved:
+            leg_note = " on 07:36 out"
+        elif back_moved and not out_moved:
+            leg_note = " on 18:30 back"
+        elif out_moved and back_moved:
+            leg_note = " on both legs"
+    sign = "↓" if delta < 0 else "↑"
+    direction_class = "save-badge" if delta < 0 else "save-badge up"
+    style = "" if delta < 0 else ' style="background:#b42318"'
     return (
-        f' <span class="save-badge" style="background:#b42318">'
-        f'↑ {_fmt_gbp(delta)} vs yesterday</span>'
+        f' <span class="{direction_class}"{style}>'
+        f'{sign} {_fmt_gbp(abs(delta))}{leg_note} vs yesterday</span>'
+    )
+
+
+def _new_low_badge(new_lows_by_date: dict, travel_date: str) -> str:
+    """Red-orange 'NEW LOW' pill when today's total beats every prior
+    observation of this Tuesday. Driven by last_run.movements.new_lows,
+    not heuristics — so we don't false-positive on first-ever observations."""
+    info = new_lows_by_date.get(travel_date)
+    if not info:
+        return ""
+    return (
+        f' <span class="new-low-badge" title="Beats prior low of '
+        f'{_fmt_gbp(info.get("prior_low"))} by {_fmt_gbp(info.get("beats_by"))} '
+        f'across {info.get("observations")} prior checks">🎯 NEW LOW</span>'
     )
 
 
@@ -170,7 +211,12 @@ def _leg_html(leg: dict, label: str) -> str:
     )
 
 
-def _render_bookable_card(t: dict) -> str:
+def _render_bookable_card(
+    t: dict,
+    *,
+    movement_ctx: dict | None = None,
+    new_lows_by_date: dict | None = None,
+) -> str:
     cur = t.get("current") or {}
     status = t.get("status", "UNKNOWN")
     status_label, status_class = STATUS_LABELS.get(status, STATUS_LABELS["UNKNOWN"])
@@ -187,7 +233,8 @@ def _render_bookable_card(t: dict) -> str:
         # Only show if note doesn't already mention the same idea
         if "National Rail" not in note and "SplitSave" not in note:
             full_note = (note + " " if note else "") + source_note
-    change_badge = _arrow_badge(t.get("change_vs_yesterday"))
+    change_badge = _arrow_badge(t.get("change_vs_yesterday"), movement_ctx)
+    new_low_badge = _new_low_badge(new_lows_by_date or {}, t["date"])
     is_booked = bool(t.get("booked"))
 
     # When leg-level data is missing (headline-only scrape), avoid showing
@@ -231,7 +278,7 @@ def _render_bookable_card(t: dict) -> str:
     return f"""
 <div class="{card_class}">
   <div class="card-head">
-    <div><span class="date">{_fmt_date_short(t['date'])}</span><span class="weeks-out">{wk} week{'s' if wk != 1 else ''} out</span>{change_badge}</div>
+    <div><span class="date">{_fmt_date_short(t['date'])}</span><span class="weeks-out">{wk} week{'s' if wk != 1 else ''} out</span>{change_badge}{new_low_badge}</div>
     <div class="status {status_class}">{html.escape(status_label)}</div>
   </div>
   {legs_block}
@@ -255,6 +302,172 @@ def _render_pending_card(iso_date: str) -> str:
       <a class="pending-btn" href="reminders/{iso_date}.ics" download>Add to Reminders</a>
     </div>
 """.rstrip()
+
+
+# ---------- movements banner + patterns panel ----------
+
+def _render_movements_banner(last_run: dict) -> str:
+    """Top-of-page banner that CONSOLIDATES today's moves into a readable
+    narrative instead of repeating 14 identical pills down the cards. This
+    is the direct fix for "14 dates all -£7 doesn't pass the sniff test" —
+    we tell Sophie "one tier step hit these 14 dates" up front.
+
+    Content priority:
+      1. Bulk events (most load-bearing — explain in plain English)
+      2. New historical lows (actionable — book-now signal)
+      3. Outliers (worth a look, distinct from the consensus move)
+      4. "No changes" quiet day (reassurance, so she knows the pipeline ran)
+    """
+    movements = (last_run or {}).get("movements") or {}
+    if not movements:
+        return ""
+    bulk = movements.get("bulk_events") or []
+    outliers = movements.get("outliers") or []
+    new_lows = movements.get("new_lows") or []
+    unchanged = movements.get("unchanged_count") or 0
+    if not bulk and not outliers and not new_lows:
+        return (
+            '<div class="moves moves-quiet">'
+            f'Quiet night — no fare moves across {unchanged} tracked Tuesdays.'
+            '</div>'
+        )
+
+    bits = []
+    for ev in bulk:
+        direction = "down" if ev["delta"] < 0 else "up"
+        arrow = "↓" if ev["delta"] < 0 else "↑"
+        leg_label = "07:36 outward" if ev["leg"] == "outward" else "18:30 return"
+        date_list = ", ".join(_fmt_date_short(d) for d in ev["dates"][:6])
+        more = f" +{len(ev['dates']) - 6} more" if len(ev["dates"]) > 6 else ""
+        bits.append(
+            f'<li class="move-bulk"><strong>{arrow} {_fmt_gbp(abs(ev["delta"]))}</strong> '
+            f'on the <strong>{leg_label}</strong> — '
+            f'{_fmt_gbp(ev["from"])} → {_fmt_gbp(ev["to"])} '
+            f'<span class="move-count">({ev["count"]} dates)</span>. '
+            f'<span class="move-dates">{date_list}{more}.</span> '
+            f'<span class="move-context">Single Advance-tier '
+            f'{"release" if direction == "down" else "withdrawal"} — '
+            f'these all moved in lockstep, so it\'s one pricing event, not {ev["count"]} independent signals.</span>'
+            f'</li>'
+        )
+    for nl in new_lows:
+        bits.append(
+            f'<li class="move-low"><span class="new-low-badge">🎯 NEW LOW</span> '
+            f'<strong>{_fmt_date_short(nl["date"])}</strong> — '
+            f'{_fmt_gbp(nl["total"])} '
+            f'(beats prior low of {_fmt_gbp(nl["prior_low"])} by '
+            f'{_fmt_gbp(nl["beats_by"])}, {nl["observations"]} prior checks). '
+            f'<span class="move-context">Actionable — consider booking.</span>'
+            f'</li>'
+        )
+    for o in outliers:
+        # Describe the move in concrete £ terms the reader can double-check.
+        pieces = []
+        d_out = o.get("delta_out")
+        d_back = o.get("delta_back")
+        if isinstance(d_out, (int, float)) and abs(d_out) >= 0.01:
+            pieces.append(
+                f"07:36 out {_fmt_gbp(o['from_out'])} → {_fmt_gbp(o['to_out'])}"
+            )
+        if isinstance(d_back, (int, float)) and abs(d_back) >= 0.01:
+            pieces.append(
+                f"18:30 back {_fmt_gbp(o['from_back'])} → {_fmt_gbp(o['to_back'])}"
+            )
+        desc = " · ".join(pieces) if pieces else "check leg fares"
+        bits.append(
+            f'<li class="move-outlier">⚠️ <strong>{_fmt_date_short(o["date"])}</strong> '
+            f'moved differently from the pack — {desc}. '
+            f'<span class="move-context">Worth a quick look.</span></li>'
+        )
+    unchanged_line = ""
+    if unchanged:
+        unchanged_line = (
+            f'<div class="moves-quiet-inline">No change on {unchanged} other Tuesdays.</div>'
+        )
+    return (
+        '<div class="moves">'
+        '<div class="moves-head">Today\'s moves</div>'
+        f'<ul class="moves-list">{"".join(bits)}</ul>'
+        f'{unchanged_line}'
+        '</div>'
+    )
+
+
+def _render_patterns_panel(patterns: dict) -> str:
+    """Bottom-of-page 'what we\\'ve learned about this route' panel. This is
+    where the long-term dataset starts paying off — as fare_history fills
+    out, the ladders sharpen, the route-low anchors, and the bulk-event
+    list gets Sophie to a mental model of when fares move.
+
+    Kept deliberately simple: rules discovered via explicit stats, not ML.
+    Empty-safe for the first few runs when history is thin."""
+    if not patterns:
+        return ""
+    obs_total = patterns.get("observations_total") or 0
+    if obs_total == 0:
+        return (
+            '<div class="patterns">'
+            '<div class="patterns-head">What we know about this route</div>'
+            '<div class="patterns-body">No observations yet — check back after tomorrow\'s run.</div>'
+            '</div>'
+        )
+
+    rmin = patterns.get("route_min")
+    rmed = patterns.get("route_median")
+    rmax = patterns.get("route_max")
+    ladder_out = patterns.get("fare_ladder_out_07_36") or []
+    ladder_back = patterns.get("fare_ladder_back_18_30") or []
+    bulk_30d = patterns.get("bulk_events_last_30d") or []
+    first_obs = patterns.get("first_observation")
+
+    ladder_items = []
+    if ladder_out:
+        rungs = " / ".join(_fmt_gbp(f) for f in ladder_out)
+        ladder_items.append(
+            f'<li><strong>07:36 outward tier ladder:</strong> {rungs}. '
+            f'Fares cycle between these rungs as Advance inventory fills/releases — '
+            f'when you see the lowest rung, book.</li>'
+        )
+    if ladder_back:
+        rungs = " / ".join(_fmt_gbp(f) for f in ladder_back)
+        ladder_items.append(
+            f'<li><strong>18:30 return tier ladder:</strong> {rungs}.</li>'
+        )
+
+    range_line = ""
+    if all(x is not None for x in (rmin, rmed, rmax)):
+        range_line = (
+            f'<li><strong>Total return range:</strong> {_fmt_gbp(rmin)} cheapest ever seen · '
+            f'{_fmt_gbp(rmed)} median · {_fmt_gbp(rmax)} highest. '
+            f'If today\'s number is near the median, sit tight; near the min, book.</li>'
+        )
+
+    events_line = ""
+    if bulk_30d:
+        last = bulk_30d[-1]
+        direction = "drop" if last["delta"] < 0 else "rise"
+        events_line = (
+            f'<li><strong>Recent bulk events (30d):</strong> '
+            f'{len(bulk_30d)} detected. Most recent: '
+            f'{last["observed_on"]} — {direction} of '
+            f'{_fmt_gbp(abs(last["delta"]))} on the '
+            f'{"07:36 outward" if last["leg"] == "outward" else "18:30 return"} '
+            f'affecting {last["affected_count"]} dates.</li>'
+        )
+
+    meta_line = (
+        f'<li class="patterns-meta">Dataset: {obs_total} observations across '
+        f'{len(patterns.get("all_time_low_by_tuesday") or {})} Tuesdays, '
+        f'since {first_obs or "?"}.</li>'
+    )
+
+    items = range_line + "".join(ladder_items) + events_line + meta_line
+    return (
+        '<div class="patterns">'
+        '<div class="patterns-head">What we know about this route</div>'
+        f'<ul class="patterns-list">{items}</ul>'
+        '</div>'
+    )
 
 
 # ---------- hero / headline ----------
@@ -334,6 +547,25 @@ CSS = """
   .alts ul { margin: 0; padding-left: 18px; }
   .alts li { margin: 2px 0; }
   .save-badge { display: inline-block; background: var(--save); color: white; font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+  .save-badge.up { background: var(--urgent); }
+  .new-low-badge { display: inline-block; background: #fef3c7; color: #92400e; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 4px; margin-left: 4px; border: 1px solid #fcd34d; }
+  .moves { margin: 22px 0 16px; padding: 16px 18px; background: #fdfcf9; border: 1px solid var(--rule); border-left: 4px solid #3a3a3a; border-radius: 10px; }
+  .moves-head { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
+  .moves-list { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.55; color: var(--ink); }
+  .moves-list > li { margin: 6px 0; }
+  .moves-list .move-bulk { list-style: '📉  '; }
+  .moves-list .move-low { list-style: none; margin-left: -18px; padding-left: 0; }
+  .moves-list .move-outlier { list-style: none; margin-left: -18px; padding-left: 0; }
+  .move-count { color: var(--muted); font-weight: 500; }
+  .move-dates { color: var(--muted); font-size: 13px; }
+  .move-context { display: block; color: var(--muted); font-size: 12.5px; margin-top: 2px; font-style: italic; }
+  .moves-quiet { margin: 22px 0 16px; padding: 12px 16px; background: var(--stable-bg); border: 1px solid #c6e5c6; border-left: 4px solid var(--stable); border-radius: 10px; font-size: 13.5px; color: var(--stable); }
+  .moves-quiet-inline { margin-top: 6px; font-size: 12.5px; color: var(--muted); }
+  .patterns { margin: 32px 0 8px; padding: 16px 18px; background: #f7f5ee; border: 1px solid var(--rule); border-radius: 10px; }
+  .patterns-head { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
+  .patterns-list { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
+  .patterns-list > li { margin: 5px 0; }
+  .patterns-list .patterns-meta { list-style: none; margin-left: -18px; padding-left: 0; color: var(--muted); font-size: 12px; margin-top: 8px; }
   .note { font-size: 13px; line-height: 1.5; color: #3a3a3a; margin: 8px 0 12px; }
   .actions { display: flex; gap: 8px; flex-wrap: wrap; }
   .btn { display: inline-block; padding: 8px 14px; font-size: 13px; font-weight: 600; border-radius: 6px; text-decoration: none; }
@@ -352,6 +584,14 @@ CSS = """
 
 def render_html(data: dict) -> str:
     tuesdays = data.get("tuesdays") or []
+    last_run = data.get("last_run") or {}
+    movements = last_run.get("movements") or {}
+    per_tuesday_moves = movements.get("per_tuesday") or {}
+    new_lows_by_date = {
+        nl["date"]: nl for nl in (movements.get("new_lows") or [])
+    }
+    patterns = data.get("patterns") or {}
+
     # Group by status in explicit order
     by_status = {}
     for t in tuesdays:
@@ -363,7 +603,14 @@ def render_html(data: dict) -> str:
         if not group:
             continue
         group.sort(key=lambda t: t["date"])
-        cards = "\n".join(_render_bookable_card(t) for t in group)
+        cards = "\n".join(
+            _render_bookable_card(
+                t,
+                movement_ctx=per_tuesday_moves.get(t["date"]),
+                new_lows_by_date=new_lows_by_date,
+            )
+            for t in group
+        )
         sections_html.append(
             f'<div class="section-title">{html.escape(title)}</div>\n{cards}'
         )
@@ -384,6 +631,8 @@ def render_html(data: dict) -> str:
 
     refreshed = datetime.now().astimezone().strftime("%a %-d %b %Y, %H:%M %Z")
     hero = _compose_hero(data)
+    moves_banner = _render_movements_banner(last_run)
+    patterns_panel = _render_patterns_panel(patterns)
 
     # Source note — flag if NR fallback was used
     sources_used = {(t.get("current") or {}).get("source") for t in tuesdays}
@@ -412,11 +661,15 @@ def render_html(data: dict) -> str:
   <p class="subtitle" style="margin-top:4px;">Out no later than <strong>07:36</strong> · return no earlier than <strong>18:30</strong></p>
 </header>
 
+{moves_banner}
+
 {hero}
 
 {chr(10).join(sections_html)}
 
 {pending_section}
+
+{patterns_panel}
 
 <footer>
   <p>Last refreshed <strong>{refreshed}</strong> · refreshed daily at 02:00 UK{source_caveat}.</p>

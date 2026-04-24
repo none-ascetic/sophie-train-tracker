@@ -33,6 +33,8 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
+import fare_history  # long-term fare dataset + movement/pattern analysis
+
 ROOT = Path(__file__).parent
 PRICES = ROOT / "prices.json"
 RAW = ROOT / "raw_snapshot.json"
@@ -41,6 +43,7 @@ PENDING = ROOT / "pending_message.txt"
 ALERT = ROOT / "paddy_alert.txt"
 HORIZON_LOG = ROOT / "horizon_log.jsonl"
 RUN_LOG = ROOT / "run_log.jsonl"
+FARE_HISTORY = ROOT / "fare_history.jsonl"
 
 # "Big mover" threshold — a Tuesday whose total shifted by more than this
 # versus yesterday is worth calling out in the run log (and, eventually, in
@@ -111,12 +114,24 @@ def status_for(total: float) -> str:
     return "URGENT"
 
 
-def apply_fresh_prices(prices: dict, validated: dict[str, dict], checked_at: str) -> None:
+def apply_fresh_prices(
+    prices: dict,
+    validated: dict[str, dict],
+    checked_at: str,
+    history_priors: dict[str, dict] | None = None,
+) -> None:
     """Update prices.json entries in place for every validated Tuesday.
 
     Each entry gets: current snapshot refreshed, history pushed back by one,
-    change_vs_yesterday computed against the prior current, status re-derived."""
+    change_vs_yesterday computed against the prior current, status re-derived.
+
+    `history_priors` (optional) maps travel_date → prior-run `current`-shaped
+    dict sourced from fare_history.jsonl. When supplied, it overrides the
+    in-memory prior — this is the robust path that keeps
+    `change_vs_yesterday` meaningful on same-day re-runs (the append-only log
+    survives re-runs that would otherwise erase the in-memory prior)."""
     by_date = {t["date"]: t for t in prices["tuesdays"]}
+    history_priors = history_priors or {}
     for dstr, val in validated.items():
         t = by_date.get(dstr)
         if not t:
@@ -125,7 +140,8 @@ def apply_fresh_prices(prices: dict, validated: dict[str, dict], checked_at: str
         back_fare = val["back_row"]["price"]
         new_total = round(out_fare + back_fare, 2)
 
-        prior_current = t.get("current") or {}
+        # Prefer fare_history-sourced prior over the in-memory one.
+        prior_current = history_priors.get(dstr) or t.get("current") or {}
         prior_total = prior_current.get("cheapest_any_total")
 
         # Roll yesterday's current into history (cap at 30 entries — plenty for trend).
@@ -448,7 +464,45 @@ def main() -> int:
     # Snapshot prior totals/statuses BEFORE mutation so we can compute big_movers
     # and status_transitions for the run log.
     prior = capture_prior_snapshot(prices)
-    apply_fresh_prices(prices, validated, checked_at)
+    # Also capture the full prior `current` block (both legs, not just total)
+    # so analyse_movements can tell whether an out-leg or back-leg moved.
+    prior_currents = {
+        t["date"]: dict(t.get("current") or {})
+        for t in prices.get("tuesdays") or []
+    }
+    # Build history_priors from fare_history. On the FIRST run of the day
+    # today's obs isn't yet in the log so the log contains only yesterday
+    # (and earlier) — _prior_from_history needs ≥2 entries so it returns {};
+    # apply_fresh_prices then falls back to the in-memory `current`, which
+    # IS yesterday on a first run. On a SAME-DAY RE-RUN the log already has
+    # [yesterday, today_first_run]; _prior_from_history picks yesterday
+    # correctly, rescuing change_vs_yesterday from being zeroed out.
+    _pre_append_history = fare_history.load_history(FARE_HISTORY)
+    history_priors_pre = fare_history._prior_from_history(_pre_append_history)
+    apply_fresh_prices(prices, validated, checked_at, history_priors=history_priors_pre)
+
+    # Append every validated observation to the append-only long-term log
+    # BEFORE analysing movements — so new_low detection sees today's point in
+    # the history (and we excludes today's rows internally when computing
+    # "prior" lows). Dedup on (run_id, travel_date) so re-running the same
+    # scrape doesn't double-insert. Failure to append should not kill the run.
+    try:
+        raw_rows = fare_history.observations_from_snapshot(raw)
+        already = fare_history.existing_run_ids(FARE_HISTORY)
+        new_rows = [
+            r for r in raw_rows
+            if f"{r.get('run_id')}|{r.get('travel_date')}" not in already
+        ]
+        fare_history.append_observations(new_rows, path=FARE_HISTORY)
+        if len(new_rows) < len(raw_rows):
+            print(
+                f"NOTE: skipped {len(raw_rows) - len(new_rows)} already-logged "
+                f"observations (re-run of same run_id).",
+                file=sys.stderr,
+            )
+    except OSError as exc:
+        print(f"WARN: could not append to fare_history.jsonl: {exc}", file=sys.stderr)
+        new_rows = []
 
     # Refresh summary block (compose_imessage reads prices.json but tracker
     # site reads summary for the headline).
@@ -468,12 +522,22 @@ def main() -> int:
         "stable_count": len(buckets["STABLE"]),
         "urgent_count": len(buckets["URGENT"]),
     }
+    # Movement analysis — the signal layer the tracker UI reads. Tells the
+    # site: "this is a bulk event, these are the outliers, these just hit a
+    # new all-time low". Without this, the site can only show 14 identical
+    # pills when one Advance-tier step moves 14 dates in lockstep.
+    history = fare_history.load_history(FARE_HISTORY)
+    movements = fare_history.analyse_movements(prices, prior_currents, history)
+    patterns = fare_history.compute_patterns(history, prices)
+
     prices["last_run"] = {
         "at": checked_at,
         "status": "ok",
         "validated_count": len(validated),
         "newly_unlocked": newly_unlocked,
+        "movements": movements,
     }
+    prices["patterns"] = patterns
 
     PRICES.write_text(json.dumps(prices, indent=2))
 
