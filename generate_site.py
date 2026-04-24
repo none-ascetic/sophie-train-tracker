@@ -472,21 +472,176 @@ def _render_patterns_panel(patterns: dict) -> str:
 
 # ---------- hero / headline ----------
 
+# Hero variants — each one has a distinct colour palette so the state is
+# readable at a glance.
+_HERO_STYLES = {
+    "urgent":  "background:#fef3c7; border-left-color:#b45309; color:#7c2d12;",  # amber — act now
+    "buy":     "background:#ecfdf3; border-left-color:#067647; color:#064e2f;",  # green — good price
+    "watch":   "background:#eff6ff; border-left-color:#175cd3; color:#1c3a6e;",  # blue — neutral
+    "hold":    "background:#fef3f2; border-left-color:#b42318; color:#7a271a;",  # red — wait
+    "quiet":   "background:#f7f5ee; border-left-color:#707070; color:#3a3a3a;",  # grey — no news
+}
+
+
+def _hero_html(style_key: str, body: str) -> str:
+    style = _HERO_STYLES.get(style_key, _HERO_STYLES["quiet"])
+    return f'<div class="hero" style="{style}">{body}</div>'
+
+
 def _compose_hero(data: dict) -> str:
-    summary = data.get("summary") or {}
-    headline = summary.get("headline")
-    if headline:
-        return f'<div class="hero">{html.escape(headline)}</div>'
-    over = summary.get("currently_paying_over_baseline") or []
-    if over:
-        parts = [f"<strong>{_fmt_date_short(o['date'])}</strong> ({_fmt_gbp(o['over'])} over)" for o in over[:3]]
-        txt = "Currently over baseline: " + ", ".join(parts) + ". Book these today to cap the damage."
-        return f'<div class="hero">{txt}</div>'
-    return (
-        '<div class="hero" style="background:#f0faf0; border-left-color:#3f7d3f; color:#3f7d3f;">'
-        'All tracked Tuesdays at or below baseline — sit tight. I\'ll check again tomorrow.'
-        '</div>'
+    """Today-specific prescriptive headline. Reads last_run.movements and
+    patterns so every line refers to concrete dates and numbers from today's
+    actual scrape — never generic filler.
+
+    Priority of signals (most actionable first):
+      1. NEW LOWS → "book these today, beaten prior lows"
+      2. Dates currently at the route's all-time low total → "book these today"
+      3. Bulk DROP event → "window opened, book affected dates today"
+      4. Bulk RISE event → "prices stepped up, wait for them to drop back"
+      5. Outliers without bulk context → "single unusual move — check"
+      6. Stable, priced above route median → "running expensive, wait"
+      7. Stable, at/below route median → quiet-day note, refer to patterns
+    """
+    last_run = data.get("last_run") or {}
+    movements = last_run.get("movements") or {}
+    patterns = data.get("patterns") or {}
+    tuesdays = [t for t in (data.get("tuesdays") or []) if not t.get("booked")]
+
+    new_lows = movements.get("new_lows") or []
+    bulk_events = movements.get("bulk_events") or []
+    outliers = movements.get("outliers") or []
+    route_min = patterns.get("route_min")
+    route_median = patterns.get("route_median")
+
+    # Totals currently showing — used for "at route min" and "above median" flags.
+    current_totals = [
+        ((t.get("current") or {}).get("cheapest_any_total"), t["date"])
+        for t in tuesdays
+        if isinstance((t.get("current") or {}).get("cheapest_any_total"), (int, float))
+    ]
+
+    # --- 1. New historical lows ------------------------------------------
+    if new_lows:
+        dates_txt = ", ".join(
+            f"<strong>{_fmt_date_short(nl['date'])}</strong> ({_fmt_gbp(nl['total'])})"
+            for nl in new_lows[:4]
+        )
+        more = f" +{len(new_lows) - 4} more" if len(new_lows) > 4 else ""
+        return _hero_html(
+            "buy",
+            f"🎯 <strong>New all-time low{'s' if len(new_lows) > 1 else ''}:</strong> "
+            f"{dates_txt}{more}. Book today — these beat every prior observation we've recorded."
+        )
+
+    # --- 2. Dates at route-min (not strictly a NEW low but still the min) --
+    if isinstance(route_min, (int, float)):
+        at_min = [d for tot, d in current_totals if tot is not None and tot <= route_min + 0.01]
+        if at_min:
+            n = len(at_min)
+            preview = ", ".join(_fmt_date_short(d) for d in at_min[:4])
+            more = f" +{n - 4} more" if n > 4 else ""
+            return _hero_html(
+                "buy",
+                f"💰 <strong>{n} Tuesday{'s' if n != 1 else ''} at the all-time low "
+                f"({_fmt_gbp(route_min)})</strong>: {preview}{more}. "
+                f"Book these today — we've never seen cheaper on this route."
+            )
+
+    # --- 3. Bulk DROP ----------------------------------------------------
+    drops = [e for e in bulk_events if e["delta"] < 0]
+    if drops:
+        ev = max(drops, key=lambda e: e["count"])
+        leg_label = "07:36 outward" if ev["leg"] == "outward" else "18:30 return"
+        date_span = _date_span_phrase(ev["dates"])
+        return _hero_html(
+            "buy",
+            f"📉 <strong>{ev['count']} Tuesday{'s' if ev['count'] != 1 else ''} just dropped "
+            f"{_fmt_gbp(abs(ev['delta']))}</strong> on the {leg_label} "
+            f"({_fmt_gbp(ev['from'])} → {_fmt_gbp(ev['to'])}) — {date_span}. "
+            f"This is the lower rung of the Advance-fare seesaw for this route; "
+            f"good window to book before it flips back."
+        )
+
+    # --- 4. Bulk RISE ----------------------------------------------------
+    rises = [e for e in bulk_events if e["delta"] > 0]
+    if rises:
+        ev = max(rises, key=lambda e: e["count"])
+        leg_label = "07:36 outward" if ev["leg"] == "outward" else "18:30 return"
+        date_span = _date_span_phrase(ev["dates"])
+        return _hero_html(
+            "hold",
+            f"⚠️ <strong>{ev['count']} Tuesday{'s' if ev['count'] != 1 else ''} stepped up "
+            f"{_fmt_gbp(abs(ev['delta']))}</strong> on the {leg_label} "
+            f"({_fmt_gbp(ev['from'])} → {_fmt_gbp(ev['to'])}) — {date_span}. "
+            f"Don't buy today; history says these cycle back down within days."
+        )
+
+    # --- 5. Outliers without any bulk ------------------------------------
+    if outliers:
+        o = outliers[0]
+        pieces = []
+        if isinstance(o.get("delta_out"), (int, float)) and abs(o["delta_out"]) >= 0.01:
+            arrow = "↓" if o["delta_out"] < 0 else "↑"
+            pieces.append(
+                f"07:36 out {arrow} {_fmt_gbp(abs(o['delta_out']))} "
+                f"({_fmt_gbp(o['from_out'])} → {_fmt_gbp(o['to_out'])})"
+            )
+        if isinstance(o.get("delta_back"), (int, float)) and abs(o["delta_back"]) >= 0.01:
+            arrow = "↓" if o["delta_back"] < 0 else "↑"
+            pieces.append(
+                f"18:30 back {arrow} {_fmt_gbp(abs(o['delta_back']))}"
+            )
+        desc = " · ".join(pieces) or "leg fares moved"
+        return _hero_html(
+            "watch",
+            f"🔍 <strong>{_fmt_date_short(o['date'])}</strong> moved on its own today — "
+            f"{desc}. Worth a quick look — may be a one-date pricing quirk."
+        )
+
+    # --- 6. Stable, running above median --------------------------------
+    if isinstance(route_median, (int, float)) and current_totals:
+        above = [d for tot, d in current_totals if tot is not None and tot > route_median + 0.5]
+        if above and len(above) >= max(3, len(current_totals) // 2):
+            return _hero_html(
+                "hold",
+                f"Fares running <strong>above the £{route_median:.0f} median</strong> "
+                f"on {len(above)} of {len(current_totals)} tracked Tuesdays. "
+                f"Nothing urgent — waiting a few days costs nothing."
+            )
+
+    # --- 7. Quiet day ----------------------------------------------------
+    # Describe where we actually are rather than say "sit tight".
+    if isinstance(route_median, (int, float)) and isinstance(route_min, (int, float)):
+        at_or_below_median = sum(
+            1 for tot, _ in current_totals
+            if tot is not None and tot <= route_median + 0.5
+        )
+        return _hero_html(
+            "quiet",
+            f"Quiet day — no day-over-day moves. {at_or_below_median} of "
+            f"{len(current_totals)} Tuesdays at or below the £{route_median:.0f} "
+            f"median; all-time low on record is £{route_min:.0f}."
+        )
+    # Fallback — first run, no patterns yet.
+    return _hero_html(
+        "quiet",
+        f"{len(current_totals)} Tuesday{'s' if len(current_totals) != 1 else ''} tracked. "
+        f"Trend data builds as we accumulate more daily checks."
     )
+
+
+def _date_span_phrase(dates: list[str]) -> str:
+    """Return 'Jun–Aug' style range when dates span multiple months, or an
+    explicit list if ≤3 dates. Helps the hero stay scannable on bulk events."""
+    if not dates:
+        return ""
+    if len(dates) <= 3:
+        return ", ".join(_fmt_date_short(d) for d in dates)
+    months = sorted({d[:7] for d in dates})  # YYYY-MM
+    first = datetime.strptime(months[0] + "-01", "%Y-%m-%d").strftime("%b")
+    last = datetime.strptime(months[-1] + "-01", "%Y-%m-%d").strftime("%b")
+    span = first if first == last else f"{first}–{last}"
+    return f"{span} {datetime.strptime(dates[0], '%Y-%m-%d').year}"
 
 
 # ---------- main render ----------
@@ -673,7 +828,7 @@ def render_html(data: dict) -> str:
 
 <footer>
   <p>Last refreshed <strong>{refreshed}</strong> · refreshed daily at 02:00 UK{source_caveat}.</p>
-  <p>Source: <a href="https://www.thetrainline.com/train-times/yatton-to-london-paddington" target="_blank" rel="noopener">Trainline · Yatton → Paddington</a> (primary) · <a href="https://ojp.nationalrail.co.uk/" target="_blank" rel="noopener">National Rail</a> (fallback). Fares reflect cheapest Advance tier at time of check.</p>
+  <p>Source: <a href="https://www.thetrainline.com/train-times/yatton-to-london-paddington" target="_blank" rel="noopener">Trainline · Yatton → Paddington</a>. Fares reflect cheapest Advance tier at time of check.</p>
 </footer>
 
 </div>
