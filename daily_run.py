@@ -485,6 +485,12 @@ def main() -> int:
         "newly_unlocked": newly_unlocked,
     })
 
+    # Regenerate the deployed site (index.html + reminders/*.ics) from the
+    # fresh prices.json. Without this, Vercel keeps serving yesterday's page
+    # and newly-unlocked Tuesdays never leave the "reminders" section.
+    import generate_site  # lives in same dir; safe lazy import
+    generate_site.main()
+
     # Compose Sophie's iMessage last — it reads the now-fresh prices.json.
     import compose_imessage  # lives in same dir; safe lazy import
     compose_imessage.main()

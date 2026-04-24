@@ -66,8 +66,9 @@ scrapes (per Paddy, 22 Apr 2026).
    }
    ```
 5. **Run `daily_run.py`** — it validates `raw_snapshot.json` against
-   `prices.json`, updates prices only if every Tuesday passed, and writes
-   `run_status.json` (`ok` or `failed`).
+   `prices.json`, updates prices only if every Tuesday passed, regenerates
+   `index.html` + `reminders/*.ics` via `generate_site.main()` on success,
+   and writes `run_status.json` (`ok` or `failed`).
 6. **Read `run_status.json`**:
    - `ok` → send the iMessage at 06:00 (separate task reads `pending_message.txt`).
    - `failed` → DO NOT send Sophie's iMessage. Alert Paddy using
@@ -84,7 +85,7 @@ scrapes (per Paddy, 22 Apr 2026).
    `mcp__Control_your_Mac__osascript`:
    ```sh
    cd "/Users/paddydavies/Documents/Claude/Projects/Train Tickets" \
-     && git add prices.json raw_snapshot.json run_status.json horizon_log.jsonl pending_message.txt paddy_alert.txt 2>/dev/null; \
+     && git add prices.json raw_snapshot.json run_status.json horizon_log.jsonl pending_message.txt paddy_alert.txt index.html reminders 2>/dev/null; \
      if ! git diff --cached --quiet; then \
        git commit -m "Daily rail scrape $(date +%Y-%m-%d)" && git push origin main; \
      else \
@@ -128,6 +129,8 @@ scrapes (per Paddy, 22 Apr 2026).
 | `pending_message.txt` | `daily_run.py` → `compose_imessage.py` | Sophie's iMessage body |
 | `paddy_alert.txt` | `daily_run.py` | Paddy-only alert on `failed` |
 | `run_status.json` | `daily_run.py` | Gate for the 06:00 send step |
+| `index.html` | `daily_run.py` → `generate_site.py` | Vercel-served tracker page, regenerated on `ok` |
+| `reminders/*.ics` | `daily_run.py` → `generate_site.py` | ICS for still-unbookable Tuesdays |
 
 ## Failure modes by priority
 
