@@ -685,6 +685,15 @@
           "cheapest_any_total": 120.7
         },
         {
+          "out": {
+            "fare": 93.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 120.7
+        },
+        {
           "checked_at": "2026-04-24T13:04:53Z",
           "travel_date": "2026-06-09",
           "source": "trainline",
@@ -1553,6 +1562,15 @@
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
       },
       "history": [
+        {
+          "out": {
+            "fare": 93.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 120.7
+        },
         {
           "out": {
             "fare": 93.7
@@ -2531,6 +2549,15 @@
           "cheapest_any_total": 120.7
         },
         {
+          "out": {
+            "fare": 93.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 120.7
+        },
+        {
           "checked_at": "2026-04-24T13:04:53Z",
           "travel_date": "2026-06-23",
           "source": "trainline",
@@ -3399,6 +3426,15 @@
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
       },
       "history": [
+        {
+          "out": {
+            "fare": 93.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 120.7
+        },
         {
           "out": {
             "fare": 93.7
@@ -4377,6 +4413,15 @@
           "cheapest_any_total": 120.7
         },
         {
+          "out": {
+            "fare": 93.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 120.7
+        },
+        {
           "checked_at": "2026-04-24T13:04:53Z",
           "travel_date": "2026-07-07",
           "source": "trainline",
@@ -5300,6 +5345,15 @@
           "cheapest_any_total": 120.7
         },
         {
+          "out": {
+            "fare": 93.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 120.7
+        },
+        {
           "checked_at": "2026-04-24T13:04:53Z",
           "travel_date": "2026-07-14",
           "source": "trainline",
@@ -6073,6 +6127,15 @@
       "weeks_out": 13,
       "baseline_total": 127.0,
       "history": [
+        {
+          "out": {
+            "fare": 93.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 120.7
+        },
         {
           "out": {
             "fare": 93.7
@@ -7114,6 +7177,15 @@
           "cheapest_any_total": 120.7
         },
         {
+          "out": {
+            "fare": 93.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 120.7
+        },
+        {
           "checked_at": "2026-04-24T13:04:53Z",
           "travel_date": "2026-07-28",
           "source": "trainline",
@@ -7937,6 +8009,15 @@
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
       },
       "history": [
+        {
+          "out": {
+            "fare": 93.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 120.7
+        },
         {
           "out": {
             "fare": 93.7
@@ -8870,6 +8951,15 @@
           "cheapest_any_total": 120.7
         },
         {
+          "out": {
+            "fare": 93.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 120.7
+        },
+        {
           "checked_at": "2026-04-24T13:04:53Z",
           "travel_date": "2026-08-11",
           "source": "trainline",
@@ -9693,6 +9783,15 @@
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
       },
       "history": [
+        {
+          "out": {
+            "fare": 93.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 120.7
+        },
         {
           "out": {
             "fare": 93.7
@@ -10626,6 +10725,15 @@
           "cheapest_any_total": 111.1
         },
         {
+          "out": {
+            "fare": 84.1
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 111.1
+        },
+        {
           "checked_at": "2026-04-24T13:04:53Z",
           "travel_date": "2026-08-25",
           "source": "trainline",
@@ -11449,6 +11557,15 @@
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
       },
       "history": [
+        {
+          "out": {
+            "fare": 93.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 120.7
+        },
         {
           "out": {
             "fare": 93.7
@@ -12382,6 +12499,15 @@
           "cheapest_any_total": 120.7
         },
         {
+          "out": {
+            "fare": 93.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 120.7
+        },
+        {
           "checked_at": "2026-04-24T13:04:53Z",
           "travel_date": "2026-09-08",
           "source": "trainline",
@@ -13205,6 +13331,15 @@
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
       },
       "history": [
+        {
+          "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
         {
           "out": {
             "fare": 43.8
@@ -14138,6 +14273,15 @@
           "cheapest_any_total": 70.8
         },
         {
+          "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
+        {
           "checked_at": "2026-04-24T13:04:53Z",
           "travel_date": "2026-09-22",
           "source": "trainline",
@@ -14961,6 +15105,15 @@
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
       },
       "history": [
+        {
+          "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
         {
           "out": {
             "fare": 43.8
@@ -15894,6 +16047,15 @@
           "cheapest_any_total": 70.8
         },
         {
+          "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
+        {
           "checked_at": "2026-04-24T13:04:53Z",
           "travel_date": "2026-10-06",
           "source": "trainline",
@@ -16717,6 +16879,15 @@
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
       },
       "history": [
+        {
+          "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
         {
           "out": {
             "fare": 43.8
@@ -17650,6 +17821,15 @@
           "cheapest_any_total": 70.8
         },
         {
+          "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
+        {
           "checked_at": "2026-04-24T13:04:53Z",
           "travel_date": "2026-10-20",
           "source": "trainline",
@@ -18246,7 +18426,7 @@
       },
       "unchanged_count": 6,
       "any_movement": true,
-      "analysed_at": "2026-04-24T18:09:14Z"
+      "analysed_at": "2026-04-24T18:12:17Z"
     }
   },
   "patterns": {
@@ -18316,6 +18496,6 @@
     "observations_total": 97,
     "observations_last_30d": 97,
     "first_observation": "2026-04-22",
-    "last_updated": "2026-04-24T18:09:14Z"
+    "last_updated": "2026-04-24T18:12:17Z"
   }
 }

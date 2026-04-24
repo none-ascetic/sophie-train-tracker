@@ -555,12 +555,33 @@ def _render_movements_banner(last_run: dict) -> str:
         unchanged_line = (
             f'<div class="moves-quiet-inline">No change on {unchanged} other Tuesdays.</div>'
         )
+    # Tiny inline summary surfaces on the collapsed view — so even when
+    # the banner is closed, Sophie sees "1 bulk drop + 1 outlier" at a
+    # glance without having to tap. Built from the same counts used above.
+    summary_bits = []
+    if bulk:
+        drop_n = sum(1 for e in bulk if e["delta"] < 0)
+        rise_n = sum(1 for e in bulk if e["delta"] > 0)
+        if drop_n:
+            summary_bits.append(f"{drop_n} bulk drop")
+        if rise_n:
+            summary_bits.append(f"{rise_n} bulk rise")
+    if outliers:
+        summary_bits.append(f"{len(outliers)} outlier")
+    if new_lows:
+        summary_bits.append(f"{len(new_lows)} new low{'s' if len(new_lows) != 1 else ''}")
+    summary_text = " · ".join(summary_bits) if summary_bits else "no significant moves"
+    # Open by default because there IS movement today. On quiet days
+    # _render_movements_banner returns the .moves-quiet one-liner instead
+    # of this block, so there's nothing to collapse then.
     return (
-        '<div class="moves">'
-        '<div class="moves-head">Today\'s moves</div>'
+        '<details class="moves" open>'
+        '<summary class="moves-head">Today\'s moves '
+        f'<span class="moves-summary-chip">{html.escape(summary_text)}</span>'
+        '</summary>'
         f'<ul class="moves-list">{"".join(bits)}</ul>'
         f'{unchanged_line}'
-        '</div>'
+        '</details>'
     )
 
 
@@ -652,12 +673,16 @@ def _render_patterns_panel(patterns: dict) -> str:
         '</div>'
     )
 
+    # <details> + <summary> so Sophie taps to expand. Closed by default
+    # on repeat visits (assumes she read it once) — no JS / localStorage
+    # needed. The summary stays a 1-liner, everything else is hidden.
     return (
-        '<div class="patterns">'
-        '<div class="patterns-head">What we know about this route</div>'
+        '<details class="patterns">'
+        '<summary class="patterns-head">What we know about this route '
+        '<span class="patterns-hint">tap to expand</span></summary>'
         f'{explainer}'
         f'<ul class="patterns-list">{items}</ul>'
-        '</div>'
+        '</details>'
     )
 
 
@@ -722,8 +747,7 @@ def _compose_hero(data: dict) -> str:
         return _hero_html(
             "buy",
             f"🎯 <strong>New all-time low{'s' if len(new_lows) > 1 else ''}:</strong> "
-            f"{dates_txt}{more}. Book today — these beat every prior observation we've recorded. "
-            f'<span class="hero-sub">Prices are SplitSave (2 tickets, same train, day-before refund) inc. ~£2.79 Trainline fee.</span>'
+            f"{dates_txt}{more}. Book today — these beat every prior observation we've recorded."
         )
 
     # --- 2. Dates at route-min (not strictly a NEW low but still the min) --
@@ -737,8 +761,7 @@ def _compose_hero(data: dict) -> str:
                 "buy",
                 f"💰 <strong>{n} Tuesday{'s' if n != 1 else ''} at the all-time low "
                 f"({_fmt_gbp2(_all_in(route_min))} all-in)</strong>: {preview}{more}. "
-                f"Book these today — we've never seen cheaper on this route. "
-                f'<span class="hero-sub">SplitSave tickets (2 tickets, same train, day-before refund) + ~£2.79 Trainline fee.</span>'
+                f"Book these today — we've never seen cheaper on this route."
             )
 
     # --- 3. Bulk DROP ----------------------------------------------------
@@ -752,8 +775,7 @@ def _compose_hero(data: dict) -> str:
             f"📉 <strong>{ev['count']} Tuesday{'s' if ev['count'] != 1 else ''} just dropped "
             f"{_fmt_gbp(abs(ev['delta']))}</strong> on the {leg_label} "
             f"({_fmt_gbp(ev['from'])} → {_fmt_gbp(ev['to'])}) — {date_span}. "
-            f"Lower rung of the Advance-fare seesaw; good window to book before it flips back. "
-            f'<span class="hero-sub">All prices above are ticket-only; add ~£2.79 Trainline fee at checkout.</span>'
+            f"Lower rung of the Advance-fare seesaw; good window to book before it flips back."
         )
 
     # --- 4. Bulk RISE ----------------------------------------------------
@@ -916,8 +938,15 @@ CSS = """
   .save-badge { display: inline-block; background: var(--save); color: white; font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
   .save-badge.up { background: var(--urgent); }
   .new-low-badge { display: inline-block; background: #fef3c7; color: #92400e; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 4px; margin-left: 4px; border: 1px solid #fcd34d; }
-  .moves { margin: 22px 0 16px; padding: 16px 18px; background: #fdfcf9; border: 1px solid var(--rule); border-left: 4px solid #3a3a3a; border-radius: 10px; }
-  .moves-head { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
+  .moves { margin: 22px 0 16px; padding: 14px 16px; background: #fdfcf9; border: 1px solid var(--rule); border-left: 4px solid #3a3a3a; border-radius: 10px; }
+  .moves > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .moves > summary::-webkit-details-marker { display: none; }
+  .moves > summary::after { content: "▸"; color: var(--muted); font-size: 12px; transition: transform 0.2s; margin-left: auto; }
+  .moves[open] > summary::after { transform: rotate(90deg); }
+  .moves-head { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin: 0; display: inline-flex; align-items: center; gap: 8px; }
+  .moves[open] > .moves-head { margin-bottom: 8px; }
+  .moves-summary-chip { font-size: 11px; letter-spacing: 0.02em; text-transform: none; color: var(--muted); font-weight: 500; background: #f0ede5; border-radius: 999px; padding: 2px 8px; }
+  .moves[open] .moves-list { margin-top: 8px; }
   .moves-list { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.55; color: var(--ink); }
   .moves-list > li { margin: 6px 0; }
   .moves-list .move-bulk { list-style: '📉  '; }
@@ -928,8 +957,14 @@ CSS = """
   .move-context { display: block; color: var(--muted); font-size: 12.5px; margin-top: 2px; font-style: italic; }
   .moves-quiet { margin: 22px 0 16px; padding: 12px 16px; background: var(--stable-bg); border: 1px solid #c6e5c6; border-left: 4px solid var(--stable); border-radius: 10px; font-size: 13.5px; color: var(--stable); }
   .moves-quiet-inline { margin-top: 6px; font-size: 12.5px; color: var(--muted); }
-  .patterns { margin: 32px 0 8px; padding: 16px 18px; background: #f7f5ee; border: 1px solid var(--rule); border-radius: 10px; }
-  .patterns-head { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
+  .patterns { margin: 32px 0 8px; padding: 14px 16px; background: #f7f5ee; border: 1px solid var(--rule); border-radius: 10px; }
+  .patterns > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .patterns > summary::-webkit-details-marker { display: none; }
+  .patterns > summary::after { content: "▸"; color: var(--muted); font-size: 12px; transition: transform 0.2s; margin-left: auto; }
+  .patterns[open] > summary::after { transform: rotate(90deg); }
+  .patterns-hint { font-size: 10.5px; color: var(--muted); font-weight: 500; letter-spacing: 0.02em; text-transform: none; background: #f0ede5; padding: 2px 8px; border-radius: 999px; }
+  .patterns[open] > .patterns-head { margin-bottom: 8px; }
+  .patterns-head { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin: 0; display: inline-flex; align-items: center; gap: 8px; }
   .patterns-list { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
   .patterns-list > li { margin: 5px 0; }
   .patterns-list .patterns-meta { list-style: none; margin-left: -18px; padding-left: 0; color: var(--muted); font-size: 12px; margin-top: 8px; }

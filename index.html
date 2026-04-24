@@ -80,8 +80,15 @@
   .save-badge { display: inline-block; background: var(--save); color: white; font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
   .save-badge.up { background: var(--urgent); }
   .new-low-badge { display: inline-block; background: #fef3c7; color: #92400e; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 4px; margin-left: 4px; border: 1px solid #fcd34d; }
-  .moves { margin: 22px 0 16px; padding: 16px 18px; background: #fdfcf9; border: 1px solid var(--rule); border-left: 4px solid #3a3a3a; border-radius: 10px; }
-  .moves-head { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
+  .moves { margin: 22px 0 16px; padding: 14px 16px; background: #fdfcf9; border: 1px solid var(--rule); border-left: 4px solid #3a3a3a; border-radius: 10px; }
+  .moves > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .moves > summary::-webkit-details-marker { display: none; }
+  .moves > summary::after { content: "▸"; color: var(--muted); font-size: 12px; transition: transform 0.2s; margin-left: auto; }
+  .moves[open] > summary::after { transform: rotate(90deg); }
+  .moves-head { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin: 0; display: inline-flex; align-items: center; gap: 8px; }
+  .moves[open] > .moves-head { margin-bottom: 8px; }
+  .moves-summary-chip { font-size: 11px; letter-spacing: 0.02em; text-transform: none; color: var(--muted); font-weight: 500; background: #f0ede5; border-radius: 999px; padding: 2px 8px; }
+  .moves[open] .moves-list { margin-top: 8px; }
   .moves-list { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.55; color: var(--ink); }
   .moves-list > li { margin: 6px 0; }
   .moves-list .move-bulk { list-style: '📉  '; }
@@ -92,8 +99,14 @@
   .move-context { display: block; color: var(--muted); font-size: 12.5px; margin-top: 2px; font-style: italic; }
   .moves-quiet { margin: 22px 0 16px; padding: 12px 16px; background: var(--stable-bg); border: 1px solid #c6e5c6; border-left: 4px solid var(--stable); border-radius: 10px; font-size: 13.5px; color: var(--stable); }
   .moves-quiet-inline { margin-top: 6px; font-size: 12.5px; color: var(--muted); }
-  .patterns { margin: 32px 0 8px; padding: 16px 18px; background: #f7f5ee; border: 1px solid var(--rule); border-radius: 10px; }
-  .patterns-head { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
+  .patterns { margin: 32px 0 8px; padding: 14px 16px; background: #f7f5ee; border: 1px solid var(--rule); border-radius: 10px; }
+  .patterns > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .patterns > summary::-webkit-details-marker { display: none; }
+  .patterns > summary::after { content: "▸"; color: var(--muted); font-size: 12px; transition: transform 0.2s; margin-left: auto; }
+  .patterns[open] > summary::after { transform: rotate(90deg); }
+  .patterns-hint { font-size: 10.5px; color: var(--muted); font-weight: 500; letter-spacing: 0.02em; text-transform: none; background: #f0ede5; padding: 2px 8px; border-radius: 999px; }
+  .patterns[open] > .patterns-head { margin-bottom: 8px; }
+  .patterns-head { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin: 0; display: inline-flex; align-items: center; gap: 8px; }
   .patterns-list { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
   .patterns-list > li { margin: 5px 0; }
   .patterns-list .patterns-meta { list-style: none; margin-left: -18px; padding-left: 0; color: var(--muted); font-size: 12px; margin-top: 8px; }
@@ -124,9 +137,9 @@
   <p class="subtitle" style="margin-top:4px;">Out no later than <strong>07:36</strong> · return no earlier than <strong>18:30</strong></p>
 </header>
 
-<div class="hero" style="background:#ecfdf3; border-left-color:#067647; color:#064e2f;">💰 <strong>6 Tuesdays at the all-time low (£73.59 all-in)</strong>: Tue 15 Sep, Tue 22 Sep, Tue 29 Sep, Tue 6 Oct +2 more. Book these today — we've never seen cheaper on this route. <span class="hero-sub">SplitSave tickets (2 tickets, same train, day-before refund) + ~£2.79 Trainline fee.</span></div>
+<div class="hero" style="background:#ecfdf3; border-left-color:#067647; color:#064e2f;">💰 <strong>6 Tuesdays at the all-time low (£73.59 all-in)</strong>: Tue 15 Sep, Tue 22 Sep, Tue 29 Sep, Tue 6 Oct +2 more. Book these today — we've never seen cheaper on this route.</div>
 
-<div class="moves"><div class="moves-head">Today's moves</div><ul class="moves-list"><li class="move-bulk"><strong>↓ £7</strong> on the <strong>07:36 SplitSave outward</strong> — £93.70 → £86.70 <span class="move-count">(13 dates)</span>. <span class="move-dates">Tue 9 Jun, Tue 16 Jun, Tue 23 Jun, Tue 30 Jun, Tue 7 Jul, Tue 14 Jul +7 more.</span> <span class="move-context">Single Advance-tier release — these all moved in lockstep, so it's one pricing event, not 13 independent signals.</span></li><li class="move-outlier">⚠️ <strong>Tue 25 Aug</strong> moved differently from the pack — 07:36 out £84.10 → £77.10. <span class="move-context">Worth a quick look.</span></li></ul><div class="moves-quiet-inline">No change on 6 other Tuesdays.</div></div>
+<details class="moves" open><summary class="moves-head">Today's moves <span class="moves-summary-chip">1 bulk drop · 1 outlier</span></summary><ul class="moves-list"><li class="move-bulk"><strong>↓ £7</strong> on the <strong>07:36 SplitSave outward</strong> — £93.70 → £86.70 <span class="move-count">(13 dates)</span>. <span class="move-dates">Tue 9 Jun, Tue 16 Jun, Tue 23 Jun, Tue 30 Jun, Tue 7 Jul, Tue 14 Jul +7 more.</span> <span class="move-context">Single Advance-tier release — these all moved in lockstep, so it's one pricing event, not 13 independent signals.</span></li><li class="move-outlier">⚠️ <strong>Tue 25 Aug</strong> moved differently from the pack — 07:36 out £84.10 → £77.10. <span class="move-context">Worth a quick look.</span></li></ul><div class="moves-quiet-inline">No change on 6 other Tuesdays.</div></details>
 
 <div class="section-title">Book this week · last cheap tier</div>
 <div class="card tint-today">
@@ -350,10 +363,10 @@
   </div>
 </div>
 
-<div class="patterns"><div class="patterns-head">What we know about this route</div><div class="patterns-explainer"><strong>How pricing works on this route</strong><br>The cheapest <strong>07:36 outward</strong> price Trainline offers is always <strong>SplitSave</strong> — 2 tickets that together cover Yatton → Paddington, stay on the <em>same train</em> (no changes), refundable until 23:59 the day before travel. The <strong>18:30 return</strong> is an Advance Single at £27, specified-train, no refunds. Trainline adds a flat <strong>~£2.79 booking fee</strong> at checkout, so every total on this page is shown as "tickets + fee = all-in".</div><ul class="patterns-list"><li><strong>Total return range:</strong> £70.80 cheapest ever seen · £113.70 median · £120.70 highest. If today's number is near the median, sit tight; near the min, book.</li><li><strong>07:36 outward tier ladder:</strong> £43.80 / £77.10 / £84.10 / £86.70 / £93.70. Fares cycle between these rungs as Advance inventory fills/releases — when you see the lowest rung, book.</li><li><strong>18:30 return tier ladder:</strong> £27.</li><li><strong>Recent bulk events (30d):</strong> 2 detected. Most recent: 2026-04-24 — drop of £7 on the 07:36 outward affecting 14 dates.</li><li class="patterns-meta">Dataset: 97 observations across 20 Tuesdays, since 2026-04-22.</li></ul></div>
+<details class="patterns"><summary class="patterns-head">What we know about this route <span class="patterns-hint">tap to expand</span></summary><div class="patterns-explainer"><strong>How pricing works on this route</strong><br>The cheapest <strong>07:36 outward</strong> price Trainline offers is always <strong>SplitSave</strong> — 2 tickets that together cover Yatton → Paddington, stay on the <em>same train</em> (no changes), refundable until 23:59 the day before travel. The <strong>18:30 return</strong> is an Advance Single at £27, specified-train, no refunds. Trainline adds a flat <strong>~£2.79 booking fee</strong> at checkout, so every total on this page is shown as "tickets + fee = all-in".</div><ul class="patterns-list"><li><strong>Total return range:</strong> £70.80 cheapest ever seen · £113.70 median · £120.70 highest. If today's number is near the median, sit tight; near the min, book.</li><li><strong>07:36 outward tier ladder:</strong> £43.80 / £77.10 / £84.10 / £86.70 / £93.70. Fares cycle between these rungs as Advance inventory fills/releases — when you see the lowest rung, book.</li><li><strong>18:30 return tier ladder:</strong> £27.</li><li><strong>Recent bulk events (30d):</strong> 2 detected. Most recent: 2026-04-24 — drop of £7 on the 07:36 outward affecting 14 dates.</li><li class="patterns-meta">Dataset: 97 observations across 20 Tuesdays, since 2026-04-22.</li></ul></details>
 
 <footer>
-  <p>Last refreshed <strong>Fri 24 Apr 2026, 18:09 UTC</strong> · refreshed daily at 02:00 UK.</p>
+  <p>Last refreshed <strong>Fri 24 Apr 2026, 18:12 UTC</strong> · refreshed daily at 02:00 UK.</p>
   <p>Source: <a href="https://www.thetrainline.com/train-times/yatton-to-london-paddington" target="_blank" rel="noopener">Trainline · Yatton → Paddington</a>. Fares reflect cheapest Advance tier at time of check.</p>
 </footer>
 
