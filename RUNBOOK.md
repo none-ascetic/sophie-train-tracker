@@ -116,11 +116,12 @@ Then read `run_status.json`:
 
 The push is load-bearing — without it, the tracker at <https://sophie-train-tracker.vercel.app> serves yesterday's page. Skip commit+push only if the run was `failed` AND no files changed.
 
-Run via `mcp__Control_your_Mac__osascript`:
+Run via `mcp__Control_your_Mac__osascript`. `paddy_alert.txt` only exists on failed runs — adding it unconditionally makes git fail the whole batch on `ok` runs (observed 2026-04-26: silent no-op despite ~12 modified files because `2>/dev/null` swallowed the fatal). Always-present files go in one `git add`; the alert is added only when present:
 
 ```sh
 cd "/Users/paddydavies/Documents/Claude/Projects/Train Tickets" \
-  && git add prices.json raw_snapshot.json run_status.json horizon_log.jsonl fare_history.jsonl pending_message.txt paddy_alert.txt index.html reminders 2>/dev/null; \
+  && git add prices.json raw_snapshot.json run_status.json horizon_log.jsonl fare_history.jsonl run_log.jsonl pending_message.txt index.html reminders \
+  && if [ -f paddy_alert.txt ]; then git add paddy_alert.txt; fi; \
   if ! git diff --cached --quiet; then \
     git commit -m "Daily rail scrape $(date +%Y-%m-%d)" && git push origin main; \
   else \
