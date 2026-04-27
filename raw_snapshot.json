@@ -1,10 +1,10 @@
 {
-  "probed_at": "2026-04-26T01:18:01Z",
+  "probed_at": "2026-04-27T01:31:42Z",
   "horizon_probe": {
     "probe_date": "2026-10-27",
     "bookable": false,
     "coach_redirect": true,
-    "checked_at": "2026-04-26T01:18:01Z"
+    "checked_at": "2026-04-27T01:31:42Z"
   },
   "tuesdays": [
     {
@@ -93,12 +93,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 113.7,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 13.3
     },
     {
       "date": "2026-06-16",
@@ -186,12 +186,12 @@
           "price": 49.3
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 113.7,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 13.3
     },
     {
       "date": "2026-06-23",
@@ -279,12 +279,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 113.7,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-06-30",
@@ -372,12 +372,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 113.7,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-07-07",
@@ -465,12 +465,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 113.7,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-07-14",
@@ -558,12 +558,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 113.7,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-07-21",
@@ -651,12 +651,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 113.7,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-07-28",
@@ -744,12 +744,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 113.7,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-08-04",
@@ -837,12 +837,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 113.7,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-08-11",
@@ -930,12 +930,12 @@
           "price": 38.4
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 113.7,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-08-18",
@@ -1023,12 +1023,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 113.7,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-08-25",
@@ -1116,12 +1116,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 104.1,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-09-01",
@@ -1209,12 +1209,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 113.7,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-09-08",
@@ -1302,12 +1302,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 113.7,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-09-15",
@@ -1395,12 +1395,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 70.8,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-09-22",
@@ -1488,12 +1488,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 70.8,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-09-29",
@@ -1581,12 +1581,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 70.8,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-10-06",
@@ -1674,12 +1674,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 70.8,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-10-13",
@@ -1767,12 +1767,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 70.8,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     },
     {
       "date": "2026-10-20",
@@ -1860,12 +1860,12 @@
           "price": 27
         }
       ],
-      "twox_advance_premium": null,
       "splitsave": {
         "available": true,
         "total": 70.8,
         "savings_vs_direct": 0
-      }
+      },
+      "twox_advance_premium": 0
     }
   ]
 }
