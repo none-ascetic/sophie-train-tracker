@@ -471,6 +471,30 @@ def compute_patterns(history: list[dict], prices: dict) -> dict:
             for td, rows in by_travel.items()
             if any(isinstance(r.get("total"), (int, float)) for r in rows)}
 
+    # Per-date max-min spread, then take the median across dates. This is the
+    # honest "how much does the price for a SINGLE date typically move?" number.
+    # Crucially: NOT the same as route_max - route_min, which mixes apples (a
+    # cheap October date) with oranges (an expensive June date) and overstates
+    # how much any individual date actually swings. Without this Sophie sees
+    # huge "spread" numbers and thinks fares are about to drop, when really
+    # different dates just sit at different price points.
+    per_date_spreads = []
+    for td, rows in by_travel.items():
+        date_totals = [r["total"] for r in rows if isinstance(r.get("total"), (int, float))]
+        if len(date_totals) >= 2:
+            per_date_spreads.append(round(max(date_totals) - min(date_totals), 2))
+    median_per_date_spread = round(median(per_date_spreads), 2) if per_date_spreads else None
+    pct_at_floor = None  # % of observations sitting at the per-date all-time-low
+    if lows and history:
+        floor_hits = 0
+        for r in history:
+            t = r.get("total")
+            if isinstance(t, (int, float)) and r.get("travel_date") in lows:
+                if abs(t - lows[r["travel_date"]]) < 0.5:
+                    floor_hits += 1
+        if history:
+            pct_at_floor = round(100 * floor_hits / len(history), 1)
+
     # Recent activity window (30 days)
     cutoff = (date.today() - timedelta(days=30)).strftime("%Y-%m-%d")
     recent = [r for r in history if (r.get("observed_on") or "") >= cutoff]
@@ -485,6 +509,8 @@ def compute_patterns(history: list[dict], prices: dict) -> dict:
         "route_min": round(min(totals), 2) if totals else None,
         "route_median": round(median(totals), 2) if totals else None,
         "route_max": round(max(totals), 2) if totals else None,
+        "median_per_date_spread": median_per_date_spread,
+        "pct_at_floor": pct_at_floor,
         "fare_ladder_out_07_36": _ladder(out_fares),
         "fare_ladder_back_18_30": _ladder(back_fares),
         "all_time_low_by_tuesday": lows,

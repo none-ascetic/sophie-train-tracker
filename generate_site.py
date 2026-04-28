@@ -52,7 +52,7 @@ STATUS_LABELS = {
     "URGENT": ("Cheap tier gone", "urgent"),
     "BOOK_TODAY": ("Book today", "today"),
     "BOOK_SOON": ("Book soon", "soon"),
-    "STABLE": ("Watch · at median", "stable"),
+    "STABLE": ("Holding · cycling within range", "stable"),
     "UNKNOWN": ("Awaiting data", "stable"),
     "BOOKED": ("Already booked", "booked"),
 }
@@ -61,7 +61,7 @@ SECTION_ORDER = [
     ("URGENT", "Urgent · cheap tier gone"),
     ("BOOK_TODAY", "Book this week · last cheap tier"),
     ("BOOK_SOON", "Book soon · within 1–2 weeks"),
-    ("STABLE", "At median · sit tight, book in the next fortnight"),
+    ("STABLE", "Holding · prices oscillating in observed range, no downward trend"),
     ("UNKNOWN", "Awaiting data"),
     ("BOOKED", "Already booked · paid tickets"),
 ]
@@ -496,7 +496,7 @@ def _render_movements_banner(last_run: dict) -> str:
     if not bulk and not outliers and not new_lows:
         return (
             '<div class="moves moves-quiet">'
-            f'Quiet night — no fare moves across {unchanged} tracked Tuesdays.'
+            f'Quiet night — no fare moves across {unchanged} tracked dates.'
             '</div>'
         )
 
@@ -553,7 +553,7 @@ def _render_movements_banner(last_run: dict) -> str:
     unchanged_line = ""
     if unchanged:
         unchanged_line = (
-            f'<div class="moves-quiet-inline">No change on {unchanged} other Tuesdays.</div>'
+            f'<div class="moves-quiet-inline">No change on {unchanged} other dates.</div>'
         )
     # Tiny inline summary surfaces on the collapsed view — so even when
     # the banner is closed, Sophie sees "1 bulk drop + 1 outlier" at a
@@ -628,11 +628,35 @@ def _render_patterns_panel(patterns: dict) -> str:
 
     range_line = ""
     if all(x is not None for x in (rmin, rmed, rmax)):
-        range_line = (
-            f'<li><strong>Total return range:</strong> {_fmt_gbp(rmin)} cheapest ever seen · '
-            f'{_fmt_gbp(rmed)} median · {_fmt_gbp(rmax)} highest. '
-            f'If today\'s number is near the median, sit tight; near the min, book.</li>'
-        )
+        # Use per-date spread (median of max-min within each individual date),
+        # NOT route-wide max-min. The latter mixes cheap October dates with
+        # expensive June ones and overstates how much any single date actually
+        # moves. Sophie cares about whether HER date will drop — that's a
+        # within-date question.
+        per_date = patterns.get("median_per_date_spread")
+        pct_floor = patterns.get("pct_at_floor")
+        floor_note = ""
+        if pct_floor is not None and pct_floor >= 50:
+            floor_note = f' Most observations ({pct_floor:.0f}%) have been at the per-date floor.'
+        if per_date is not None and per_date <= 8:
+            range_line = (
+                f'<li><strong>Total return range across dates:</strong> {_fmt_gbp(rmin)} cheapest · '
+                f'{_fmt_gbp(rmed)} median · {_fmt_gbp(rmax)} dearest. '
+                f'But each individual date has only swung £{per_date:.2f} on average — fares are cycling, not trending down.{floor_note} '
+                f'Book when you catch the lower tier; expect the higher tier the next day.</li>'
+            )
+        elif per_date is not None:
+            range_line = (
+                f'<li><strong>Total return range across dates:</strong> {_fmt_gbp(rmin)} cheapest · '
+                f'{_fmt_gbp(rmed)} median · {_fmt_gbp(rmax)} dearest. '
+                f'Per-date spread is £{per_date:.2f} — some genuine movement; near the min, book.</li>'
+            )
+        else:
+            range_line = (
+                f'<li><strong>Total return range:</strong> {_fmt_gbp(rmin)} cheapest seen · '
+                f'{_fmt_gbp(rmed)} median · {_fmt_gbp(rmax)} highest. '
+                f'Not enough history yet to know if prices trend or cycle.</li>'
+            )
 
     events_line = ""
     if bulk_30d:
@@ -649,7 +673,7 @@ def _render_patterns_panel(patterns: dict) -> str:
 
     meta_line = (
         f'<li class="patterns-meta">Dataset: {obs_total} observations across '
-        f'{len(patterns.get("all_time_low_by_tuesday") or {})} Tuesdays, '
+        f'{len(patterns.get("all_time_low_by_tuesday") or {})} dates, '
         f'since {first_obs or "?"}.</li>'
     )
 
@@ -821,7 +845,7 @@ def _compose_hero(data: dict) -> str:
             return _hero_html(
                 "hold",
                 f"Fares running <strong>above the £{route_median:.0f} median</strong> "
-                f"on {len(above)} of {len(current_totals)} tracked Tuesdays. "
+                f"on {len(above)} of {len(current_totals)} tracked dates. "
                 f"Nothing urgent — waiting a few days costs nothing."
             )
 
@@ -835,7 +859,7 @@ def _compose_hero(data: dict) -> str:
         return _hero_html(
             "quiet",
             f"Quiet day — no day-over-day moves. {at_or_below_median} of "
-            f"{len(current_totals)} Tuesdays at or below the "
+            f"{len(current_totals)} dates at or below the "
             f"{_fmt_gbp2(_all_in(route_median))} all-in median; "
             f"all-time low on record is {_fmt_gbp2(_all_in(route_min))} all-in."
         )
@@ -1048,7 +1072,7 @@ def render_html(data: dict) -> str:
         pending_section = f"""
 <div class="section-title">Not bookable yet · tap to add to Reminders</div>
 <div class="card">
-  <div class="note" style="margin-top:0">These Tuesdays unlock one at a time as Trainline's ~6-month booking window rolls forward (179 days ahead). Tap <strong>Add to Reminders</strong> and your iPhone's Reminders app will drop in a to-do with a timed alert, a 15-minute warning, and a direct Trainline link in the notes so you can book the second they go live.</div>
+  <div class="note" style="margin-top:0">These dates unlock one at a time as Trainline's ~6-month booking window rolls forward (179 days ahead). Tap <strong>Add to Reminders</strong> and your iPhone's Reminders app will drop in a to-do with a timed alert, a 15-minute warning, and a direct Trainline link in the notes so you can book the second they go live.</div>
   <div class="pending-grid">
 {pending_html}
   </div>
