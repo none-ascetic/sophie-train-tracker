@@ -14911,7 +14911,9 @@
       },
       "back_alternatives": [],
       "total_cheapest": 70.8,
-      "notes": "CHEAP: OUT 07:36 Advance Single \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. \u00a356.20 below \u00a3127 baseline \u2014 book today to lock in."
+      "notes": "CHEAP: OUT 07:36 Advance Single \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. \u00a356.20 below \u00a3127 baseline \u2014 book today to lock in.",
+      "booked": true,
+      "booking_note": "Booked by Sophie \u2014 confirmed via Paddy on 2026-04-28"
     },
     {
       "date": "2026-09-22",
@@ -15852,7 +15854,9 @@
       },
       "back_alternatives": [],
       "total_cheapest": 70.8,
-      "notes": "CHEAP: OUT 07:36 Advance Single \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. \u00a356.20 below \u00a3127 baseline \u2014 book today to lock in."
+      "notes": "CHEAP: OUT 07:36 Advance Single \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. \u00a356.20 below \u00a3127 baseline \u2014 book today to lock in.",
+      "booked": true,
+      "booking_note": "Booked by Sophie \u2014 confirmed via Paddy on 2026-04-28"
     },
     {
       "date": "2026-09-29",
@@ -17734,7 +17738,9 @@
       },
       "back_alternatives": [],
       "total_cheapest": 70.8,
-      "notes": "CHEAP: OUT 07:36 Advance Single \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. \u00a356.20 below \u00a3127 baseline \u2014 book today to lock in."
+      "notes": "CHEAP: OUT 07:36 Advance Single \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. \u00a356.20 below \u00a3127 baseline \u2014 book today to lock in.",
+      "booked": true,
+      "booking_note": "Booked by Sophie \u2014 confirmed via Paddy on 2026-04-28"
     },
     {
       "date": "2026-10-13",
