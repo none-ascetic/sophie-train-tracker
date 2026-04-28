@@ -38,6 +38,14 @@ def _fmt_date(date_str: str) -> str:
     return d.strftime("%-d %b")
 
 
+def _fmt_dow_date(date_str: str) -> str:
+    """Day-of-week + date, e.g. 'Thu 8 Oct'. Sophie's commute switched from Tue to Thu
+    on 1 Oct 2026, so the bullet list needs to show whichever day each entry actually is
+    rather than a hardcoded 'Tue' prefix."""
+    d = datetime.strptime(date_str, "%Y-%m-%d").date()
+    return d.strftime("%a %-d %b")
+
+
 def _best_price_and_source(current: dict) -> tuple:
     """Returns (price, source_label) — picks splitsave if lower than direct."""
     direct = current.get("cheapest_any_total")
@@ -107,7 +115,7 @@ def compose_body(ranked: list, max_lines: int = 3) -> str:
         cur = t.get("current") or {}
         price, source = _best_price_and_source(cur)
         arrow = _change_arrow(t.get("change_vs_yesterday"))
-        lines.append(f"• Tue {_fmt_date(t['date'])}: {_fmt_gbp(price)} ({source}){arrow}")
+        lines.append(f"• {_fmt_dow_date(t['date'])}: {_fmt_gbp(price)} ({source}){arrow}")
     return "\n".join(lines)
 
 

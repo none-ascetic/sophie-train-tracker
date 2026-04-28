@@ -11,7 +11,7 @@
   },
   "booking_horizon_weeks": 24,
   "booking_horizon_note": "Bookable today: up to 18 Oct 2026 (179 days / 25 weeks out). 19 Oct redirects to coach-only page \u2014 just beyond Trainline horizon. Horizon rolls forward +1 day daily. Next Tuesday to unlock: 20 Oct (available 24 Apr 2026).",
-  "constraint_note": "Sophie commutes peak morning \u2014 no later than the 07:36 from Yatton. Fares in this window are \u00a3100+ (peak Advance), not the \u00a327-\u00a367 off-peak tier that's only on the 08:08+.",
+  "constraint_note": "Sophie commutes peak morning \u2014 no later than the 07:36 from Yatton. Fares in this window are \u00a3100+ (peak Advance), not the \u00a327-\u00a367 off-peak tier that's only on the 08:08+. | 2026-04-28: Sophie switching commute day from Tue \u2192 Thu starting Thu 1 Oct. Tue 13/20 Oct dropped. Thu 8/15/22 Oct added. Same time slots (07:36 OUT, 18:30 RETURN).",
   "sources": {
     "primary": "trainline",
     "fallback": "national_rail"
@@ -17739,16 +17739,15 @@
       "back_alternatives": [],
       "total_cheapest": 70.8,
       "notes": "CHEAP: OUT 07:36 Advance Single \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. \u00a356.20 below \u00a3127 baseline \u2014 book today to lock in.",
-      "booked": true,
-      "booking_note": "Booked by Sophie \u2014 confirmed via Paddy on 2026-04-28"
+      "booked": false
     },
     {
-      "date": "2026-10-13",
-      "weeks_out": 24,
+      "date": "2026-10-08",
+      "weeks_out": 23,
       "status": "BOOK_TODAY",
       "current": {
-        "checked_at": "2026-04-28T01:28:51Z",
-        "travel_date": "2026-10-13",
+        "checked_at": "2026-04-28T13:41:01Z",
+        "travel_date": "2026-10-08",
         "source": "trainline",
         "out": {
           "time": "07:36",
@@ -17854,817 +17853,12 @@
             }
           ]
         },
-        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
+        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated. New Thursday entry \u2014 Sophie swapped commute day from Tuesday."
       },
-      "history": [
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "checked_at": "2026-04-24T13:04:53Z",
-          "travel_date": "2026-10-13",
-          "source": "trainline",
-          "out": {
-            "time": "07:36",
-            "arrival": "09:34",
-            "fare": 43.8
-          },
-          "back": {
-            "time": "18:30",
-            "arrival": "20:27",
-            "fare": 27
-          },
-          "cheapest_direct_total": 70.8,
-          "cheapest_any_total": 70.8,
-          "splitsave": {
-            "available": true,
-            "total": 70.8,
-            "savings_vs_direct": 0
-          },
-          "parse_confidence": "ok",
-          "_raw_rows": {
-            "outward": [
-              {
-                "arr": "09:05",
-                "dep": "07:05",
-                "price": 66.3
-              },
-              {
-                "arr": "09:34",
-                "dep": "07:36",
-                "price": 43.8
-              },
-              {
-                "arr": "10:06",
-                "dep": "08:08",
-                "price": 66.3
-              },
-              {
-                "arr": "10:36",
-                "dep": "08:23",
-                "price": 67
-              },
-              {
-                "arr": "10:45",
-                "dep": "08:23",
-                "price": 27
-              },
-              {
-                "arr": "11:20",
-                "dep": "09:02",
-                "price": 64.5
-              },
-              {
-                "arr": "11:34",
-                "dep": "09:41",
-                "price": 48.5
-              },
-              {
-                "arr": "12:09",
-                "dep": "10:01",
-                "price": 36.5
-              }
-            ],
-            "inward": [
-              {
-                "arr": "20:11",
-                "dep": "18:01",
-                "price": 48.5
-              },
-              {
-                "arr": "20:27",
-                "dep": "18:30",
-                "price": 27
-              },
-              {
-                "arr": "21:16",
-                "dep": "19:00",
-                "price": 67
-              },
-              {
-                "arr": "21:30",
-                "dep": "19:30",
-                "price": 48.5
-              },
-              {
-                "arr": "22:19",
-                "dep": "20:00",
-                "price": 33.5
-              },
-              {
-                "arr": "22:36",
-                "dep": "20:30",
-                "price": 27
-              },
-              {
-                "arr": "23:24",
-                "dep": "21:02",
-                "price": 32.5
-              },
-              {
-                "arr": "00:03",
-                "dep": "22:03",
-                "price": 27
-              }
-            ]
-          },
-          "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
-        },
-        {
-          "checked_at": "2026-04-24T13:04:53Z",
-          "travel_date": "2026-10-13",
-          "source": "trainline",
-          "out": {
-            "time": "07:36",
-            "arrival": "09:34",
-            "fare": 43.8
-          },
-          "back": {
-            "time": "18:30",
-            "arrival": "20:27",
-            "fare": 27
-          },
-          "cheapest_direct_total": 70.8,
-          "cheapest_any_total": 70.8,
-          "splitsave": {
-            "available": true,
-            "total": 70.8,
-            "savings_vs_direct": 0
-          },
-          "parse_confidence": "ok",
-          "_raw_rows": {
-            "outward": [
-              {
-                "arr": "09:05",
-                "dep": "07:05",
-                "price": 66.3
-              },
-              {
-                "arr": "09:34",
-                "dep": "07:36",
-                "price": 43.8
-              },
-              {
-                "arr": "10:06",
-                "dep": "08:08",
-                "price": 66.3
-              },
-              {
-                "arr": "10:36",
-                "dep": "08:23",
-                "price": 67
-              },
-              {
-                "arr": "10:45",
-                "dep": "08:23",
-                "price": 27
-              },
-              {
-                "arr": "11:20",
-                "dep": "09:02",
-                "price": 64.5
-              },
-              {
-                "arr": "11:34",
-                "dep": "09:41",
-                "price": 48.5
-              },
-              {
-                "arr": "12:09",
-                "dep": "10:01",
-                "price": 36.5
-              }
-            ],
-            "inward": [
-              {
-                "arr": "20:11",
-                "dep": "18:01",
-                "price": 48.5
-              },
-              {
-                "arr": "20:27",
-                "dep": "18:30",
-                "price": 27
-              },
-              {
-                "arr": "21:16",
-                "dep": "19:00",
-                "price": 67
-              },
-              {
-                "arr": "21:30",
-                "dep": "19:30",
-                "price": 48.5
-              },
-              {
-                "arr": "22:19",
-                "dep": "20:00",
-                "price": 33.5
-              },
-              {
-                "arr": "22:36",
-                "dep": "20:30",
-                "price": 27
-              },
-              {
-                "arr": "23:24",
-                "dep": "21:02",
-                "price": 32.5
-              },
-              {
-                "arr": "00:03",
-                "dep": "22:03",
-                "price": 27
-              }
-            ]
-          },
-          "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
-        },
-        {
-          "checked_at": "2026-04-24T02:10:00Z",
-          "travel_date": "2026-10-13",
-          "source": "trainline",
-          "out": {
-            "time": "07:36",
-            "arrival": "09:34",
-            "fare": 43.8
-          },
-          "back": {
-            "time": "18:30",
-            "arrival": "20:27",
-            "fare": 27.0
-          },
-          "cheapest_direct_total": 70.8,
-          "cheapest_any_total": 70.8,
-          "splitsave": {
-            "available": null,
-            "total": null,
-            "savings_vs_direct": null
-          },
-          "parse_confidence": "ok",
-          "_raw_rows": {
-            "outward": [
-              {
-                "dep": "07:05",
-                "arr": "09:05",
-                "price": 66.3
-              },
-              {
-                "dep": "07:36",
-                "arr": "09:34",
-                "price": 43.8
-              },
-              {
-                "dep": "08:08",
-                "arr": "10:06",
-                "price": 66.3
-              },
-              {
-                "dep": "08:23",
-                "arr": "10:36",
-                "price": 67.0
-              },
-              {
-                "dep": "08:23",
-                "arr": "10:45",
-                "price": 27.0
-              },
-              {
-                "dep": "09:02",
-                "arr": "11:20",
-                "price": 64.5
-              },
-              {
-                "dep": "09:41",
-                "arr": "11:34",
-                "price": 48.5
-              },
-              {
-                "dep": "10:01",
-                "arr": "12:09",
-                "price": 36.5
-              }
-            ],
-            "inward": [
-              {
-                "dep": "18:01",
-                "arr": "20:11",
-                "price": 48.5
-              },
-              {
-                "dep": "18:30",
-                "arr": "20:27",
-                "price": 27.0
-              },
-              {
-                "dep": "19:00",
-                "arr": "21:16",
-                "price": 67.0
-              },
-              {
-                "dep": "19:30",
-                "arr": "21:30",
-                "price": 48.5
-              },
-              {
-                "dep": "20:00",
-                "arr": "22:19",
-                "price": 33.5
-              },
-              {
-                "dep": "20:30",
-                "arr": "22:36",
-                "price": 27.0
-              },
-              {
-                "dep": "21:02",
-                "arr": "23:24",
-                "price": 32.5
-              },
-              {
-                "dep": "22:03",
-                "arr": "00:03",
-                "price": 27.0
-              }
-            ]
-          },
-          "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
-        },
-        {
-          "checked_at": "2026-04-23T01:16:59Z",
-          "travel_date": "2026-10-13",
-          "source": "trainline",
-          "out": {
-            "time": "07:36",
-            "arrival": "09:34",
-            "fare": 43.8
-          },
-          "back": {
-            "time": "18:30",
-            "arrival": "20:27",
-            "fare": 27
-          },
-          "cheapest_direct_total": 70.8,
-          "cheapest_any_total": 70.8,
-          "splitsave": {
-            "available": null,
-            "total": null
-          },
-          "parse_confidence": "ok",
-          "_raw_rows": {
-            "outward": [
-              {
-                "arr": "09:05",
-                "dep": "07:05",
-                "price": 66.3
-              },
-              {
-                "arr": "09:34",
-                "dep": "07:36",
-                "price": 43.8
-              },
-              {
-                "arr": "10:06",
-                "dep": "08:08",
-                "price": 66.3
-              },
-              {
-                "arr": "10:36",
-                "dep": "08:23",
-                "price": 67
-              },
-              {
-                "arr": "10:45",
-                "dep": "08:23",
-                "price": 27
-              },
-              {
-                "arr": "11:20",
-                "dep": "09:02",
-                "price": 68.1
-              },
-              {
-                "arr": "11:34",
-                "dep": "09:41",
-                "price": 48.5
-              },
-              {
-                "arr": "12:09",
-                "dep": "10:01",
-                "price": 36.5
-              }
-            ],
-            "inward": [
-              {
-                "arr": "20:11",
-                "dep": "18:01",
-                "price": 48.5
-              },
-              {
-                "arr": "20:27",
-                "dep": "18:30",
-                "price": 27
-              },
-              {
-                "arr": "21:16",
-                "dep": "19:00",
-                "price": 67
-              },
-              {
-                "arr": "21:30",
-                "dep": "19:30",
-                "price": 48.5
-              },
-              {
-                "arr": "22:19",
-                "dep": "20:00",
-                "price": 33.5
-              },
-              {
-                "arr": "22:36",
-                "dep": "20:30",
-                "price": 27
-              },
-              {
-                "arr": "23:24",
-                "dep": "21:02",
-                "price": 32.5
-              },
-              {
-                "arr": "00:03",
-                "dep": "22:03",
-                "price": 27
-              }
-            ]
-          },
-          "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
-        },
-        {
-          "checked_at": "2026-04-22T18:47:55Z",
-          "travel_date": "2026-10-13",
-          "source": "trainline",
-          "out": {
-            "time": "07:36",
-            "arrival": "09:34",
-            "fare": 43.8
-          },
-          "back": {
-            "time": "18:30",
-            "arrival": "20:27",
-            "fare": 27.0
-          },
-          "cheapest_direct_total": 70.8,
-          "cheapest_any_total": 70.8,
-          "splitsave": {
-            "available": true,
-            "total": 70.8,
-            "savings_vs_direct": 0
-          },
-          "parse_confidence": "ok",
-          "_raw_rows": {
-            "outward": [
-              {
-                "dep": "07:05",
-                "arr": "09:05",
-                "price": 66.3
-              },
-              {
-                "dep": "07:36",
-                "arr": "09:34",
-                "price": 43.8
-              },
-              {
-                "dep": "08:08",
-                "arr": "10:06",
-                "price": 66.3
-              },
-              {
-                "dep": "08:23",
-                "arr": "10:36",
-                "price": 67.0
-              },
-              {
-                "dep": "08:23",
-                "arr": "10:45",
-                "price": 27.0
-              },
-              {
-                "dep": "09:02",
-                "arr": "11:20",
-                "price": 64.5
-              },
-              {
-                "dep": "09:41",
-                "arr": "11:34",
-                "price": 48.5
-              },
-              {
-                "dep": "10:01",
-                "arr": "12:09",
-                "price": 36.5
-              }
-            ],
-            "inward": [
-              {
-                "dep": "18:01",
-                "arr": "20:11",
-                "price": 48.5
-              },
-              {
-                "dep": "18:30",
-                "arr": "20:27",
-                "price": 27.0
-              },
-              {
-                "dep": "19:00",
-                "arr": "21:16",
-                "price": 67.0
-              },
-              {
-                "dep": "19:30",
-                "arr": "21:30",
-                "price": 48.5
-              },
-              {
-                "dep": "20:00",
-                "arr": "22:19",
-                "price": 33.5
-              },
-              {
-                "dep": "20:30",
-                "arr": "22:36",
-                "price": 27.0
-              },
-              {
-                "dep": "21:02",
-                "arr": "23:24",
-                "price": 32.5
-              },
-              {
-                "dep": "22:03",
-                "arr": "00:03",
-                "price": 27.0
-              }
-            ]
-          },
-          "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
-        },
-        {
-          "checked_at": "2026-04-22T17:45:00Z",
-          "travel_date": "2026-10-13",
-          "source": "trainline",
-          "out": {
-            "time": "07:36",
-            "arrival": "09:34",
-            "fare": 43.8
-          },
-          "back": {
-            "time": "18:30",
-            "arrival": "20:27",
-            "fare": 27.0
-          },
-          "cheapest_direct_total": 70.8,
-          "cheapest_any_total": 70.8,
-          "splitsave": {
-            "available": true,
-            "total": 70.8,
-            "savings_vs_direct": 0
-          },
-          "parse_confidence": "ok",
-          "_raw_rows": {
-            "outward": [
-              {
-                "dep": "07:05",
-                "arr": "09:05",
-                "price": 66.3
-              },
-              {
-                "dep": "07:36",
-                "arr": "09:34",
-                "price": 43.8
-              },
-              {
-                "dep": "08:08",
-                "arr": "10:06",
-                "price": 66.3
-              },
-              {
-                "dep": "08:23",
-                "arr": "10:36",
-                "price": 67.0
-              },
-              {
-                "dep": "08:23",
-                "arr": "10:45",
-                "price": 27.0
-              },
-              {
-                "dep": "09:02",
-                "arr": "11:20",
-                "price": 64.5
-              },
-              {
-                "dep": "09:41",
-                "arr": "11:34",
-                "price": 48.5
-              },
-              {
-                "dep": "10:01",
-                "arr": "12:09",
-                "price": 36.5
-              }
-            ],
-            "inward": [
-              {
-                "dep": "18:01",
-                "arr": "20:11",
-                "price": 48.5
-              },
-              {
-                "dep": "18:30",
-                "arr": "20:27",
-                "price": 27.0
-              },
-              {
-                "dep": "19:00",
-                "arr": "21:16",
-                "price": 67.0
-              },
-              {
-                "dep": "19:30",
-                "arr": "21:30",
-                "price": 48.5
-              },
-              {
-                "dep": "20:00",
-                "arr": "22:19",
-                "price": 33.5
-              },
-              {
-                "dep": "20:30",
-                "arr": "22:36",
-                "price": 27.0
-              },
-              {
-                "dep": "21:02",
-                "arr": "23:24",
-                "price": 32.5
-              },
-              {
-                "dep": "22:03",
-                "arr": "00:03",
-                "price": 27.0
-              }
-            ]
-          },
-          "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
-        },
-        {
-          "checked_at": "2026-04-22T17:05:00Z",
-          "travel_date": "2026-10-13",
-          "source": "trainline",
-          "out": {
-            "time": "07:36",
-            "arrival": "09:34",
-            "duration_min": null,
-            "changes": 0,
-            "fare": 43.8
-          },
-          "back": {
-            "time": "18:30",
-            "arrival": "20:27",
-            "duration_min": null,
-            "changes": 0,
-            "fare": 27.0
-          },
-          "cheapest_direct_total": 70.8,
-          "cheapest_any_total": 70.8,
-          "splitsave": {
-            "available": true,
-            "total": 70.8,
-            "savings_vs_direct": null
-          },
-          "parse_confidence": "ok",
-          "_note_on_source": "Scraped via Chrome MCP with SplitSave enabled. OUT <=07:36, RETURN 18:30-20:30 constraint-enforced."
-        }
-      ],
+      "history": [],
       "change_vs_yesterday": {
-        "cheapest_any": 0.0,
-        "splitsave": 0.0
+        "cheapest_any": null,
+        "splitsave": null
       },
       "baseline_total": 127.0,
       "note": "",
@@ -18681,15 +17875,16 @@
       },
       "back_alternatives": [],
       "total_cheapest": 70.8,
-      "notes": "CHEAP: OUT 07:36 Advance Single \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. \u00a356.20 below \u00a3127 baseline \u2014 book today to lock in."
+      "notes": "OUT 07:36 SplitSave \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. New Thursday \u2014 Sophie swapped commute day from 1 Oct.",
+      "booked": false
     },
     {
-      "date": "2026-10-20",
-      "weeks_out": 25,
+      "date": "2026-10-15",
+      "weeks_out": 24,
       "status": "BOOK_TODAY",
       "current": {
-        "checked_at": "2026-04-28T01:28:51Z",
-        "travel_date": "2026-10-20",
+        "checked_at": "2026-04-28T13:41:01Z",
+        "travel_date": "2026-10-15",
         "source": "trainline",
         "out": {
           "time": "07:36",
@@ -18795,492 +17990,187 @@
             }
           ]
         },
-        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
+        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated. New Thursday entry \u2014 Sophie swapped commute day from Tuesday."
       },
-      "history": [
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
-        },
-        {
-          "checked_at": "2026-04-24T13:04:53Z",
-          "travel_date": "2026-10-20",
-          "source": "trainline",
-          "out": {
-            "time": "07:36",
-            "arrival": "09:34",
-            "fare": 43.8
-          },
-          "back": {
-            "time": "18:30",
-            "arrival": "20:27",
-            "fare": 27
-          },
-          "cheapest_direct_total": 70.8,
-          "cheapest_any_total": 70.8,
-          "splitsave": {
-            "available": true,
-            "total": 70.8,
-            "savings_vs_direct": 0
-          },
-          "parse_confidence": "ok",
-          "_raw_rows": {
-            "outward": [
-              {
-                "arr": "09:05",
-                "dep": "07:05",
-                "price": 66.3
-              },
-              {
-                "arr": "09:34",
-                "dep": "07:36",
-                "price": 43.8
-              },
-              {
-                "arr": "10:06",
-                "dep": "08:08",
-                "price": 66.3
-              },
-              {
-                "arr": "10:36",
-                "dep": "08:23",
-                "price": 67
-              },
-              {
-                "arr": "10:45",
-                "dep": "08:23",
-                "price": 27
-              },
-              {
-                "arr": "11:20",
-                "dep": "09:02",
-                "price": 64.5
-              },
-              {
-                "arr": "11:34",
-                "dep": "09:41",
-                "price": 48.5
-              },
-              {
-                "arr": "12:09",
-                "dep": "10:01",
-                "price": 36.5
-              }
-            ],
-            "inward": [
-              {
-                "arr": "20:11",
-                "dep": "18:01",
-                "price": 48.5
-              },
-              {
-                "arr": "20:27",
-                "dep": "18:30",
-                "price": 27
-              },
-              {
-                "arr": "21:16",
-                "dep": "19:00",
-                "price": 67
-              },
-              {
-                "arr": "21:30",
-                "dep": "19:30",
-                "price": 48.5
-              },
-              {
-                "arr": "22:19",
-                "dep": "20:00",
-                "price": 33.5
-              },
-              {
-                "arr": "22:36",
-                "dep": "20:30",
-                "price": 27
-              },
-              {
-                "arr": "23:24",
-                "dep": "21:02",
-                "price": 32.5
-              },
-              {
-                "arr": "00:03",
-                "dep": "22:03",
-                "price": 27
-              }
-            ]
-          },
-          "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
-        },
-        {
-          "checked_at": "2026-04-24T13:04:53Z",
-          "travel_date": "2026-10-20",
-          "source": "trainline",
-          "out": {
-            "time": "07:36",
-            "arrival": "09:34",
-            "fare": 43.8
-          },
-          "back": {
-            "time": "18:30",
-            "arrival": "20:27",
-            "fare": 27
-          },
-          "cheapest_direct_total": 70.8,
-          "cheapest_any_total": 70.8,
-          "splitsave": {
-            "available": true,
-            "total": 70.8,
-            "savings_vs_direct": 0
-          },
-          "parse_confidence": "ok",
-          "_raw_rows": {
-            "outward": [
-              {
-                "arr": "09:05",
-                "dep": "07:05",
-                "price": 66.3
-              },
-              {
-                "arr": "09:34",
-                "dep": "07:36",
-                "price": 43.8
-              },
-              {
-                "arr": "10:06",
-                "dep": "08:08",
-                "price": 66.3
-              },
-              {
-                "arr": "10:36",
-                "dep": "08:23",
-                "price": 67
-              },
-              {
-                "arr": "10:45",
-                "dep": "08:23",
-                "price": 27
-              },
-              {
-                "arr": "11:20",
-                "dep": "09:02",
-                "price": 64.5
-              },
-              {
-                "arr": "11:34",
-                "dep": "09:41",
-                "price": 48.5
-              },
-              {
-                "arr": "12:09",
-                "dep": "10:01",
-                "price": 36.5
-              }
-            ],
-            "inward": [
-              {
-                "arr": "20:11",
-                "dep": "18:01",
-                "price": 48.5
-              },
-              {
-                "arr": "20:27",
-                "dep": "18:30",
-                "price": 27
-              },
-              {
-                "arr": "21:16",
-                "dep": "19:00",
-                "price": 67
-              },
-              {
-                "arr": "21:30",
-                "dep": "19:30",
-                "price": 48.5
-              },
-              {
-                "arr": "22:19",
-                "dep": "20:00",
-                "price": 33.5
-              },
-              {
-                "arr": "22:36",
-                "dep": "20:30",
-                "price": 27
-              },
-              {
-                "arr": "23:24",
-                "dep": "21:02",
-                "price": 32.5
-              },
-              {
-                "arr": "00:03",
-                "dep": "22:03",
-                "price": 27
-              }
-            ]
-          },
-          "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
-        },
-        {
-          "checked_at": "2026-04-24T02:10:00Z",
-          "travel_date": "2026-10-20",
-          "source": "trainline",
-          "out": {
-            "time": "07:36",
-            "arrival": "09:34",
-            "fare": 43.8
-          },
-          "back": {
-            "time": "18:30",
-            "arrival": "20:27",
-            "fare": 27.0
-          },
-          "cheapest_direct_total": 70.8,
-          "cheapest_any_total": 70.8,
-          "splitsave": {
-            "available": null,
-            "total": null,
-            "savings_vs_direct": null
-          },
-          "parse_confidence": "ok",
-          "_raw_rows": {
-            "outward": [
-              {
-                "dep": "07:05",
-                "arr": "09:05",
-                "price": 66.3
-              },
-              {
-                "dep": "07:36",
-                "arr": "09:34",
-                "price": 43.8
-              },
-              {
-                "dep": "08:08",
-                "arr": "10:06",
-                "price": 66.3
-              },
-              {
-                "dep": "08:23",
-                "arr": "10:36",
-                "price": 67.0
-              },
-              {
-                "dep": "08:23",
-                "arr": "10:45",
-                "price": 27.0
-              },
-              {
-                "dep": "09:02",
-                "arr": "11:20",
-                "price": 64.5
-              },
-              {
-                "dep": "09:41",
-                "arr": "11:34",
-                "price": 48.5
-              },
-              {
-                "dep": "10:01",
-                "arr": "12:09",
-                "price": 36.5
-              }
-            ],
-            "inward": [
-              {
-                "dep": "18:01",
-                "arr": "20:11",
-                "price": 48.5
-              },
-              {
-                "dep": "18:30",
-                "arr": "20:27",
-                "price": 27.0
-              },
-              {
-                "dep": "19:00",
-                "arr": "21:16",
-                "price": 67.0
-              },
-              {
-                "dep": "19:30",
-                "arr": "21:30",
-                "price": 48.5
-              },
-              {
-                "dep": "20:00",
-                "arr": "22:19",
-                "price": 33.5
-              },
-              {
-                "dep": "20:30",
-                "arr": "22:36",
-                "price": 27.0
-              },
-              {
-                "dep": "21:02",
-                "arr": "23:24",
-                "price": 32.5
-              },
-              {
-                "dep": "22:03",
-                "arr": "00:03",
-                "price": 27.0
-              }
-            ]
-          },
-          "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
-        }
-      ],
+      "history": [],
       "change_vs_yesterday": {
-        "cheapest_any": 0.0,
-        "splitsave": 0.0
+        "cheapest_any": null,
+        "splitsave": null
       },
       "baseline_total": 127.0,
       "note": "",
-      "total_cheapest": 70.8,
       "out": {
         "time": "07:36",
         "arrival": "09:34",
         "fare": 43.8
       },
+      "out_alternatives": [],
       "back": {
         "time": "18:30",
         "arrival": "20:27",
         "fare": 27
-      }
+      },
+      "back_alternatives": [],
+      "total_cheapest": 70.8,
+      "notes": "OUT 07:36 SplitSave \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. New Thursday \u2014 Sophie swapped commute day from 1 Oct.",
+      "booked": false
+    },
+    {
+      "date": "2026-10-22",
+      "weeks_out": 25,
+      "status": "BOOK_TODAY",
+      "current": {
+        "checked_at": "2026-04-28T13:41:01Z",
+        "travel_date": "2026-10-22",
+        "source": "trainline",
+        "out": {
+          "time": "07:36",
+          "arrival": "09:34",
+          "fare": 43.8
+        },
+        "back": {
+          "time": "18:30",
+          "arrival": "20:27",
+          "fare": 27
+        },
+        "cheapest_direct_total": 70.8,
+        "cheapest_any_total": 70.8,
+        "splitsave": {
+          "available": true,
+          "total": 70.8,
+          "savings_vs_direct": 0
+        },
+        "parse_confidence": "ok",
+        "_raw_rows": {
+          "outward": [
+            {
+              "arr": "09:05",
+              "dep": "07:05",
+              "price": 66.3
+            },
+            {
+              "arr": "09:34",
+              "dep": "07:36",
+              "price": 43.8
+            },
+            {
+              "arr": "10:06",
+              "dep": "08:08",
+              "price": 66.3
+            },
+            {
+              "arr": "10:36",
+              "dep": "08:23",
+              "price": 67
+            },
+            {
+              "arr": "10:45",
+              "dep": "08:23",
+              "price": 27
+            },
+            {
+              "arr": "11:20",
+              "dep": "09:02",
+              "price": 64.5
+            },
+            {
+              "arr": "11:34",
+              "dep": "09:41",
+              "price": 48.5
+            },
+            {
+              "arr": "12:09",
+              "dep": "10:01",
+              "price": 36.5
+            }
+          ],
+          "inward": [
+            {
+              "arr": "20:11",
+              "dep": "18:01",
+              "price": 48.5
+            },
+            {
+              "arr": "20:27",
+              "dep": "18:30",
+              "price": 27
+            },
+            {
+              "arr": "21:16",
+              "dep": "19:00",
+              "price": 67
+            },
+            {
+              "arr": "21:30",
+              "dep": "19:30",
+              "price": 48.5
+            },
+            {
+              "arr": "22:19",
+              "dep": "20:00",
+              "price": 33.5
+            },
+            {
+              "arr": "22:36",
+              "dep": "20:30",
+              "price": 27
+            },
+            {
+              "arr": "23:24",
+              "dep": "21:02",
+              "price": 32.5
+            },
+            {
+              "arr": "00:03",
+              "dep": "22:03",
+              "price": 27
+            }
+          ]
+        },
+        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated. New Thursday entry \u2014 Sophie swapped commute day from Tuesday."
+      },
+      "history": [],
+      "change_vs_yesterday": {
+        "cheapest_any": null,
+        "splitsave": null
+      },
+      "baseline_total": 127.0,
+      "note": "",
+      "out": {
+        "time": "07:36",
+        "arrival": "09:34",
+        "fare": 43.8
+      },
+      "out_alternatives": [],
+      "back": {
+        "time": "18:30",
+        "arrival": "20:27",
+        "fare": 27
+      },
+      "back_alternatives": [],
+      "total_cheapest": 70.8,
+      "notes": "OUT 07:36 SplitSave \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. New Thursday \u2014 Sophie swapped commute day from 1 Oct.",
+      "booked": false
     }
   ],
   "not_bookable_yet": [
-    "2026-10-27",
-    "2026-11-03",
-    "2026-11-10",
-    "2026-11-17"
+    "2026-10-29",
+    "2026-11-05",
+    "2026-11-12",
+    "2026-11-19"
   ],
   "summary": {
     "total_tuesdays_tracked": 30,
     "bookable_now": 20,
     "not_bookable_yet": 4,
     "baseline_total": 127.0,
-    "booked": 6,
+    "booked": 8,
     "book_today_count": 6,
     "book_soon_count": 0,
     "stable_count": 14,
-    "urgent_count": 0
+    "urgent_count": 0,
+    "unbooked": 19,
+    "total": 27
   },
   "booking_horizon_edge": "2026-10-18",
   "booking_horizon_probed_on": "2026-04-22",
