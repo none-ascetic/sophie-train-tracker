@@ -16800,6 +16800,35 @@
       "notes": "CHEAP: OUT 07:36 Advance Single \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. \u00a356.20 below \u00a3127 baseline \u2014 book today to lock in."
     },
     {
+      "date": "2026-10-01",
+      "weeks_out": 22,
+      "status": "BOOKED",
+      "current": null,
+      "history": [],
+      "change_vs_yesterday": null,
+      "baseline_total": 127.0,
+      "note": "First Thursday in Sophie's new commute pattern.",
+      "out": {
+        "time": "07:36",
+        "arrival": null,
+        "duration_min": null,
+        "changes": 0,
+        "fare": null
+      },
+      "out_alternatives": [],
+      "back": {
+        "time": "18:30",
+        "arrival": null,
+        "duration_min": null,
+        "changes": 0,
+        "fare": null
+      },
+      "back_alternatives": [],
+      "total_cheapest": null,
+      "booked": true,
+      "booking_note": "Booked by Sophie before the pipeline tracked Thursdays. Confirmed via Paddy on 2026-04-28."
+    },
+    {
       "date": "2026-10-06",
       "weeks_out": 23,
       "status": "BOOK_TODAY",
@@ -18164,13 +18193,13 @@
     "bookable_now": 20,
     "not_bookable_yet": 4,
     "baseline_total": 127.0,
-    "booked": 8,
+    "booked": 9,
     "book_today_count": 6,
     "book_soon_count": 0,
     "stable_count": 14,
     "urgent_count": 0,
     "unbooked": 19,
-    "total": 27
+    "total": 28
   },
   "booking_horizon_edge": "2026-10-18",
   "booking_horizon_probed_on": "2026-04-22",
