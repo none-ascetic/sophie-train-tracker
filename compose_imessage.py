@@ -80,43 +80,105 @@ def rank_tuesdays(tuesdays: list) -> list:
     return sorted(tuesdays, key=key)
 
 
-def compose_headline(tuesdays: list) -> str:
-    """One-line lead based on the best available action today."""
-    book_today = [t for t in tuesdays if t.get("status") == "BOOK_TODAY"]
-    urgent = [t for t in tuesdays if t.get("status") == "URGENT"]
-    drops = [
-        t for t in tuesdays
-        if (t.get("change_vs_yesterday") or {}).get("cheapest_any") is not None
-        and t["change_vs_yesterday"]["cheapest_any"] < -5  # dropped > £5
-    ]
+CHANGE_THRESHOLD_GBP = 3.00  # ignore movement smaller than this — likely SplitSave noise
 
-    if book_today:
-        t = book_today[0]
-        price, source = _best_price_and_source(t["current"])
-        return f"Book {_fmt_date(t['date'])} today — {_fmt_gbp(price)} return ({source}). Cheapest I've seen."
-    if drops:
-        t = drops[0]
+
+def _is_new_low(t: dict) -> bool:
+    """True if today's cheapest is strictly below every prior observation in history."""
+    cur = t.get("current") or {}
+    today_total = cur.get("cheapest_any_total")
+    if today_total is None:
+        return False
+    history = t.get("history") or []
+    prior_totals = [
+        h.get("cheapest_any_total") for h in history
+        if h.get("cheapest_any_total") is not None
+    ]
+    if not prior_totals:
+        return False  # first observation — can't claim "new" low
+    return today_total < min(prior_totals)
+
+
+def _movements(tuesdays: list) -> dict:
+    """Bucket today's tracked dates by what actually changed since yesterday.
+
+    Lead with movement, not status — Sophie's complaint is the daily 'Book X today'
+    nag for dates that haven't moved in weeks. A flat £70.80 isn't news on day 7,
+    even if it's below the £85 sweet-spot threshold."""
+    drops, rises, new_lows = [], [], []
+    for t in tuesdays:
+        change = (t.get("change_vs_yesterday") or {}).get("cheapest_any")
+        if change is not None:
+            if change <= -CHANGE_THRESHOLD_GBP:
+                drops.append(t)
+            elif change >= CHANGE_THRESHOLD_GBP:
+                rises.append(t)
+        if _is_new_low(t):
+            new_lows.append(t)
+    return {"drops": drops, "rises": rises, "new_lows": new_lows}
+
+
+def compose_headline(tuesdays: list) -> str:
+    """One-line lead based on what changed since yesterday.
+
+    Priority: drops > new historical lows > rises > nothing-to-report. Status
+    flags (BOOK_TODAY etc.) deliberately do not drive the headline anymore —
+    they fired every day for static-cheap dates and trained Sophie to ignore."""
+    m = _movements(tuesdays)
+
+    if m["drops"]:
+        # Biggest absolute drop wins — that's the most actionable price news.
+        t = max(m["drops"], key=lambda x: abs(x["change_vs_yesterday"]["cheapest_any"]))
         change = t["change_vs_yesterday"]["cheapest_any"]
         price, source = _best_price_and_source(t["current"])
-        return f"Price drop: {_fmt_date(t['date'])} down {_fmt_gbp(abs(change))} to {_fmt_gbp(price)} ({source})."
-    if urgent:
-        # Pick the soonest URGENT (earliest travel date) — that's what needs
-        # booking right now before peak fares climb further.
-        t = sorted(urgent, key=lambda x: x["date"])[0]
-        price, _ = _best_price_and_source(t["current"])
-        return f"Heads up: {_fmt_date(t['date'])} cheap tier gone — now {_fmt_gbp(price)}. Book today before it climbs."
-    return "Nothing urgent today — cheapest fares are holding. I'll check again tomorrow."
+        return f"Price drop: {_fmt_dow_date(t['date'])} down {_fmt_gbp(abs(change))} to {_fmt_gbp(price)} ({source})."
+    if m["new_lows"]:
+        t = sorted(m["new_lows"], key=lambda x: x["date"])[0]
+        price, source = _best_price_and_source(t["current"])
+        return f"New low: {_fmt_dow_date(t['date'])} just hit {_fmt_gbp(price)} ({source}). Cheapest seen so far."
+    if m["rises"]:
+        t = max(m["rises"], key=lambda x: x["change_vs_yesterday"]["cheapest_any"])
+        change = t["change_vs_yesterday"]["cheapest_any"]
+        price, source = _best_price_and_source(t["current"])
+        return f"Heads up: {_fmt_dow_date(t['date'])} up {_fmt_gbp(change)} to {_fmt_gbp(price)} ({source})."
+    return "No changes today."
 
 
-def compose_body(ranked: list, max_lines: int = 3) -> str:
-    """A few short context lines after the headline."""
-    lines = []
-    for t in ranked[:max_lines]:
-        cur = t.get("current") or {}
-        price, source = _best_price_and_source(cur)
-        arrow = _change_arrow(t.get("change_vs_yesterday"))
-        lines.append(f"• {_fmt_dow_date(t['date'])}: {_fmt_gbp(price)} ({source}){arrow}")
-    return "\n".join(lines)
+def compose_body(tuesdays: list, ranked: list, max_lines: int = 3) -> str:
+    """Body lines after the headline.
+
+    On a movement day, list the dates that actually moved.
+    On a quiet day, show only the cheapest unbooked date as a one-line reference
+    — no daily list of every tracked Tuesday/Thursday, that's exactly the noise
+    Sophie asked us to remove."""
+    m = _movements(tuesdays)
+    moved = m["drops"] + m["new_lows"] + m["rises"]
+
+    if moved:
+        # Show movers first, dedupe, cap at max_lines.
+        seen, out = set(), []
+        for t in moved:
+            if t["date"] in seen:
+                continue
+            seen.add(t["date"])
+            cur = t.get("current") or {}
+            price, source = _best_price_and_source(cur)
+            arrow = _change_arrow(t.get("change_vs_yesterday"))
+            out.append(f"• {_fmt_dow_date(t['date'])}: {_fmt_gbp(price)} ({source}){arrow}")
+            if len(out) >= max_lines:
+                break
+        return "\n".join(out)
+
+    # Quiet day — one-line reference to the cheapest unbooked date, no list.
+    cheapest = min(
+        (t for t in tuesdays if (t.get("current") or {}).get("cheapest_any_total") is not None),
+        key=lambda x: x["current"]["cheapest_any_total"],
+        default=None,
+    )
+    if cheapest is None:
+        return ""
+    price, source = _best_price_and_source(cheapest["current"])
+    return f"Cheapest unbooked: {_fmt_dow_date(cheapest['date'])} at {_fmt_gbp(price)} ({source})."
 
 
 def _source_caveat(tuesdays: list) -> str:
@@ -140,9 +202,11 @@ def compose_message(data: dict) -> str:
                 f"booked or awaiting data. Full tracker: {TRACKER_URL}")
     ranked = rank_tuesdays(tuesdays)
     headline = compose_headline(tuesdays)
-    body = compose_body(ranked, max_lines=3)
+    body = compose_body(tuesdays, ranked, max_lines=3)
     caveat = _source_caveat(tuesdays)
-    parts = [f"Morning Soph ({today})", headline, body]
+    parts = [f"Morning Soph ({today})", headline]
+    if body:
+        parts.append(body)
     if caveat:
         parts.append(caveat)
     parts.append(f"Full tracker: {TRACKER_URL}")
