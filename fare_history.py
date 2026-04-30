@@ -206,24 +206,59 @@ def _prior_legs(prior_current: dict | None) -> tuple[float | None, float | None]
     return of, bf
 
 
+def _shape_as_current(row: dict) -> dict:
+    """Reshape a fare_history row to match the `current` schema that
+    apply_fresh_prices and analyse_movements both consume."""
+    return {
+        "out": {"fare": row.get("out_07_36")},
+        "back": {"fare": row.get("back_18_30")},
+        "cheapest_any_total": row.get("total"),
+    }
+
+
 def _prior_from_history(history: list[dict]) -> dict[str, dict]:
-    """Second-most-recent observation per travel_date, used as the 'prior'
-    baseline for movement analysis. Using fare_history (append-only, immune
-    to double-runs) is more robust than reading the in-memory `current`
-    block — a re-run of the same day overwrites in-memory state, but the
-    log preserves every distinct observation."""
+    """Second-most-recent observation per travel_date — the prior baseline
+    used by `analyse_movements`, which runs AFTER today's observations have
+    been appended to the log. With today as rows[-1], rows[-2] is yesterday,
+    which is what we want.
+
+    DO NOT use this in `apply_fresh_prices` — that runs BEFORE the append,
+    so rows[-1] is yesterday and rows[-2] is day-before-yesterday. Use
+    `_latest_pre_run_prior(history, current_run_id)` there instead."""
     by_travel = _observations_by_travel(history)
     out: dict[str, dict] = {}
     for td, rows in by_travel.items():
         if len(rows) < 2:
             continue
-        prev = rows[-2]
-        # Shape it to match the `current` schema that analyse_movements reads.
-        out[td] = {
-            "out": {"fare": prev.get("out_07_36")},
-            "back": {"fare": prev.get("back_18_30")},
-            "cheapest_any_total": prev.get("total"),
-        }
+        out[td] = _shape_as_current(rows[-2])
+    return out
+
+
+def _latest_pre_run_prior(history: list[dict], current_run_id: str) -> dict[str, dict]:
+    """Most recent observation per travel_date that does NOT belong to the
+    current run. This is the prior used by `apply_fresh_prices` to compute
+    `change_vs_yesterday`.
+
+    Robust against both invocation patterns:
+      - First run of the day: current run not yet in history → returns rows[-1]
+        (yesterday's run).
+      - Same-day re-run: an earlier-today run already in history → skips it
+        by run_id and returns the next-most-recent (yesterday's run, or the
+        previous same-day run when those exist).
+
+    The previous implementation here delegated to `_prior_from_history`,
+    which returns rows[-2]. On the FIRST run of the day that's
+    day-before-yesterday — producing stale +£X deltas across every Tuesday
+    when nothing actually changed overnight. Discovered 2026-04-29 when
+    the daily message led with "↑ £7" despite zero overnight movement.
+    """
+    by_travel = _observations_by_travel(history)
+    out: dict[str, dict] = {}
+    for td, rows in by_travel.items():
+        for r in reversed(rows):
+            if r.get("run_id") != current_run_id:
+                out[td] = _shape_as_current(r)
+                break
     return out
 
 

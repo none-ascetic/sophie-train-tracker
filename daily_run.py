@@ -477,15 +477,26 @@ def main() -> int:
         t["date"]: dict(t.get("current") or {})
         for t in prices.get("tuesdays") or []
     }
-    # Build history_priors from fare_history. On the FIRST run of the day
-    # today's obs isn't yet in the log so the log contains only yesterday
-    # (and earlier) — _prior_from_history needs ≥2 entries so it returns {};
-    # apply_fresh_prices then falls back to the in-memory `current`, which
-    # IS yesterday on a first run. On a SAME-DAY RE-RUN the log already has
-    # [yesterday, today_first_run]; _prior_from_history picks yesterday
-    # correctly, rescuing change_vs_yesterday from being zeroed out.
+    # Build history_priors from fare_history for change_vs_yesterday deltas.
+    # We want the most recent observation per travel_date that ISN'T from
+    # today's run — that's "yesterday's price" semantically.
+    #
+    # Don't reach for `_prior_from_history` here: it returns rows[-2] which
+    # only resolves to yesterday AFTER today's observations have been
+    # appended. On the FIRST run of the day (this code path runs BEFORE
+    # the append a few lines below), rows[-2] is day-before-yesterday and
+    # every change_vs_yesterday inherits an extra day of drift — i.e. we
+    # report yesterday's overnight move again as if it happened today.
+    # Bug observed 2026-04-29 when the daily message led with a phantom
+    # "↑ £7" across every Tuesday despite zero overnight movement.
+    #
+    # `_latest_pre_run_prior` filters by run_id != current run, so:
+    #   - First run today: current run absent from history → rows[-1] = yesterday ✓
+    #   - Same-day re-run: skips earlier-today run by id → next match wins ✓
     _pre_append_history = fare_history.load_history(FARE_HISTORY)
-    history_priors_pre = fare_history._prior_from_history(_pre_append_history)
+    history_priors_pre = fare_history._latest_pre_run_prior(
+        _pre_append_history, current_run_id=checked_at,
+    )
     apply_fresh_prices(prices, validated, checked_at, history_priors=history_priors_pre)
 
     # Append every validated observation to the append-only long-term log
