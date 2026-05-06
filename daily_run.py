@@ -195,9 +195,15 @@ def apply_fresh_prices(
 
 
 def add_newly_bookable(prices: dict, horizon_probe: dict) -> str | None:
-    """If the horizon probe unlocked a new Tuesday, move it from
+    """If the horizon probe unlocked a new commute date, move it from
     not_bookable_yet → tuesdays with a placeholder entry (today's scrape will
-    fill it). Returns the date string if one was unlocked, else None."""
+    fill it). Returns the date string if one was unlocked, else None.
+
+    Sophie's commute is Tuesday until 2026-09-29 and Thursday from 2026-10-01
+    onward (see project memory). The Tuesday-only weekday filter caused
+    2026-10-29 — a Thursday — to silently fail to promote on 2026-05-06; this
+    accepts both Tue and Thu so the seed list (`not_bookable_yet`) is the
+    real source of truth and a stray non-commute date can't leak through."""
     if not horizon_probe or not horizon_probe.get("bookable"):
         return None
     probe_date = horizon_probe.get("probe_date")
@@ -206,12 +212,12 @@ def add_newly_bookable(prices: dict, horizon_probe: dict) -> str | None:
     nbk = prices.get("not_bookable_yet") or []
     if probe_date not in nbk:
         return None
-    # Only Tuesdays matter for Sophie's commute.
     try:
         d = datetime.strptime(probe_date, "%Y-%m-%d").date()
     except ValueError:
         return None
-    if d.weekday() != 1:  # 1 = Tuesday
+    # 1 = Tuesday, 3 = Thursday — Sophie's two commute days across the year.
+    if d.weekday() not in (1, 3):
         return None
 
     prices["not_bookable_yet"] = [x for x in nbk if x != probe_date]
