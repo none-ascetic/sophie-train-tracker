@@ -31,3 +31,4 @@
 {"probed_on": "2026-05-05", "probe_date": "2026-10-29", "bookable": true, "coach_redirect": false, "out_count": null, "inw_count": null, "checked_at": "2026-05-05T09:37:14Z", "note": ""}
 {"probed_on": "2026-05-06", "probe_date": "2026-10-29", "bookable": true, "coach_redirect": false, "out_count": null, "inw_count": null, "checked_at": "2026-05-06T01:31:08.054809Z", "note": ""}
 {"probed_on": "2026-05-06", "probe_date": "2026-10-29", "bookable": true, "coach_redirect": false, "out_count": null, "inw_count": null, "checked_at": "2026-05-06T01:31:08.054809Z", "note": ""}
+{"probed_on": "2026-05-07", "probe_date": "2026-11-05", "bookable": false, "coach_redirect": true, "out_count": null, "inw_count": null, "checked_at": "2026-05-07T01:30:01.497424Z", "note": ""}
