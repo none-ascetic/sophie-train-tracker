@@ -99,6 +99,14 @@ def _fmt_date_long(iso: str) -> str:
     return d.strftime("%-d %B %Y")
 
 
+def _month_label(ym: str) -> str:
+    """`ym` like '2026-06' → 'June 2026' for the chronological body's
+    month-group section headers (added 2026-05-07 when the layout
+    flipped from status-grouped to chronological)."""
+    d = datetime.strptime(ym + "-01", "%Y-%m-%d").date()
+    return d.strftime("%B %Y")
+
+
 def _weeks_out(travel_iso: str) -> int:
     td = datetime.strptime(travel_iso, "%Y-%m-%d").date() - date.today()
     return max(0, (td.days + 3) // 7)
@@ -1006,6 +1014,15 @@ CSS = """
   .pending-release { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
   .pending-release strong { color: var(--ink); font-weight: 600; }
   .pending-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 6px; padding: 12px 14px; font-size: 13px; font-weight: 600; text-align: center; background: var(--ink); color: #fff; border-radius: 8px; text-decoration: none; }
+  /* Past-trips collapsible — collapsed by default so history doesn't push
+     active dates off the screen. Same visual language as the patterns/moves
+     panels for consistency. Added 2026-05-07 with the chronological layout. */
+  .past-trips { margin: 28px 0 8px; padding: 12px 16px; background: #f7f5ee; border: 1px solid var(--rule); border-radius: 10px; }
+  .past-trips > summary { list-style: none; cursor: pointer; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 700; display: flex; align-items: center; }
+  .past-trips > summary::-webkit-details-marker { display: none; }
+  .past-trips > summary::after { content: "▸"; color: var(--muted); font-size: 12px; transition: transform 0.2s; margin-left: auto; }
+  .past-trips[open] > summary::after { transform: rotate(90deg); }
+  .past-trips[open] .booked-list { margin-top: 10px; }
   footer { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); line-height: 1.6; }
   footer a { color: var(--muted); }
 """
@@ -1031,38 +1048,81 @@ def render_html(data: dict) -> str:
         for d in (ev.get("dates") or []):
             suppress_pill_dates.add(d)
 
-    # Group by status in explicit order
-    by_status = {}
+    # Layout: chronological, soonest-first, grouped by month. (Layout swap
+    # 2026-05-07 after Paddy flagged that the previous status-grouped layout
+    # — Urgent → Book today → Book soon → Holding → Booked — felt random
+    # to first-time readers because dates leapt across the calendar inside
+    # each section.) The hero already names today's actionable dates, so
+    # the body's job is now timeline readability, not action prioritisation.
+    #
+    # Defensive normalisation: any tuesday flagged booked but with a
+    # non-BOOKED status (drift from the upstream pricing logic — Sept 15/22
+    # hit this on 2026-05-07) is forced to BOOKED so it always renders as
+    # the compact booked-line, never as a card with stale "book today"
+    # advice.
     for t in tuesdays:
-        by_status.setdefault(t.get("status", "UNKNOWN"), []).append(t)
+        if t.get("booked"):
+            t["status"] = "BOOKED"
+
+    today_date = date.today()
+
+    def _t_date(t):
+        return datetime.strptime(t["date"], "%Y-%m-%d").date()
+
+    future_t = [t for t in tuesdays if _t_date(t) >= today_date]
+    past_t = [t for t in tuesdays if _t_date(t) < today_date]
+    future_t.sort(key=lambda t: t["date"])
+    past_t.sort(key=lambda t: t["date"], reverse=True)
+
+    # Group future Tuesdays by year-month. Insertion-order dict (Python 3.7+)
+    # preserves chronological ordering since `future_t` is already sorted.
+    by_month: dict = {}
+    for t in future_t:
+        by_month.setdefault(t["date"][:7], []).append(t)
+
+    def _render_card(t):
+        return _render_bookable_card(
+            t,
+            movement_ctx=per_tuesday_moves.get(t["date"]),
+            new_lows_by_date=new_lows_by_date,
+            route_median=route_median,
+            suppress_pill_dates=suppress_pill_dates,
+        )
 
     sections_html = []
-    for status, title in SECTION_ORDER:
-        group = by_status.get(status, [])
-        if not group:
-            continue
-        group.sort(key=lambda t: t["date"])
-        # Booked Tuesdays render as a compact one-line list rather than
-        # full cards — zero action means zero page real estate warranted.
-        if status == "BOOKED":
-            lines = "\n".join(_render_booked_line(t) for t in group)
-            sections_html.append(
-                f'<div class="section-title">{html.escape(title)}</div>\n'
-                f'<div class="booked-list">{lines}</div>'
-            )
-            continue
-        cards = "\n".join(
-            _render_bookable_card(
-                t,
-                movement_ctx=per_tuesday_moves.get(t["date"]),
-                new_lows_by_date=new_lows_by_date,
-                route_median=route_median,
-                suppress_pill_dates=suppress_pill_dates,
-            )
-            for t in group
-        )
-        sections_html.append(
-            f'<div class="section-title">{html.escape(title)}</div>\n{cards}'
+    for ym, group in by_month.items():
+        parts = [f'<div class="section-title">{html.escape(_month_label(ym))}</div>']
+        # Walk the chronologically sorted month and collapse consecutive
+        # booked entries into a single .booked-list wrapper — that's what
+        # gives the compact rows their rounded border + inter-row dividers.
+        # Active dates emit full cards inline.
+        booked_run: list[str] = []
+
+        def _flush_booked():
+            if booked_run:
+                parts.append(
+                    '<div class="booked-list">' + "\n".join(booked_run) + "</div>"
+                )
+                booked_run.clear()
+
+        for t in group:
+            if t.get("booked"):
+                booked_run.append(_render_booked_line(t))
+            else:
+                _flush_booked()
+                parts.append(_render_card(t))
+        _flush_booked()
+        sections_html.append("\n".join(parts))
+
+    # Past trips — collapsed history pane. Most-recent-first inside.
+    past_section = ""
+    if past_t:
+        past_lines = "\n".join(_render_booked_line(t) for t in past_t)
+        past_section = (
+            '<details class="past-trips">'
+            f'<summary>Past trips · {len(past_t)}</summary>'
+            f'<div class="booked-list">{past_lines}</div>'
+            "</details>"
         )
 
     pending = sorted(data.get("not_bookable_yet") or [])
@@ -1118,6 +1178,8 @@ def render_html(data: dict) -> str:
 {chr(10).join(sections_html)}
 
 {pending_section}
+
+{past_section}
 
 {patterns_panel}
 
