@@ -518,7 +518,7 @@
     {
       "date": "2026-06-09",
       "weeks_out": 7,
-      "status": "URGENT",
+      "status": "BOOKED",
       "current": {
         "checked_at": "2026-05-07T01:30:01.497424Z",
         "travel_date": "2026-06-09",
@@ -1559,12 +1559,14 @@
         }
       ],
       "total_cheapest": 152.7,
-      "notes": "OUT 07:36 Advance Single \u00a386.70 + RETURN 18:30 Advance Single \u00a327.00. SplitSave-optimised. Limited availability on both legs. Well below \u00a3127 baseline."
+      "notes": "",
+      "booked": true,
+      "booking_note": "Booked by Sophie \u2014 confirmed via Paddy on 2026-04-30."
     },
     {
       "date": "2026-06-16",
       "weeks_out": 8,
-      "status": "URGENT",
+      "status": "BOOKED",
       "current": {
         "checked_at": "2026-05-07T01:30:01.497424Z",
         "travel_date": "2026-06-16",
@@ -2605,7 +2607,9 @@
         }
       ],
       "total_cheapest": 151.2,
-      "notes": "OUT 07:36 Advance Single \u00a386.70 + RETURN 18:30 Advance Single \u00a327.00. SplitSave-optimised. Limited availability on both legs. Well below \u00a3127 baseline."
+      "notes": "",
+      "booked": true,
+      "booking_note": "Booked by Sophie \u2014 confirmed via Paddy on 2026-04-30."
     },
     {
       "date": "2026-06-23",
@@ -16898,7 +16902,7 @@
     {
       "date": "2026-10-08",
       "weeks_out": 23,
-      "status": "BOOK_TODAY",
+      "status": "BOOKED",
       "current": {
         "checked_at": "2026-05-07T01:30:01.497424Z",
         "travel_date": "2026-10-08",
@@ -17212,8 +17216,9 @@
       },
       "back_alternatives": [],
       "total_cheapest": 70.8,
-      "notes": "OUT 07:36 SplitSave \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. New Thursday \u2014 Sophie swapped commute day from 1 Oct.",
-      "booked": false
+      "notes": "",
+      "booked": true,
+      "booking_note": "Booked by Sophie \u2014 confirmed via Paddy on 2026-04-30."
     },
     {
       "date": "2026-10-15",
@@ -18014,15 +18019,15 @@
     "2026-11-19"
   ],
   "summary": {
-    "total_tuesdays_tracked": 30,
-    "bookable_now": 18,
+    "total_tuesdays_tracked": 27,
+    "bookable_now": 15,
     "not_bookable_yet": 3,
     "baseline_total": 127.0,
-    "booked": 9,
-    "book_today_count": 4,
+    "booked": 12,
+    "book_today_count": 3,
     "book_soon_count": 1,
     "stable_count": 10,
-    "urgent_count": 3
+    "urgent_count": 1
   },
   "booking_horizon_edge": "2026-10-18",
   "booking_horizon_probed_on": "2026-04-22",
