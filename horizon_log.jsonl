@@ -36,3 +36,4 @@
 {"probed_on": "2026-05-08", "probe_date": "2026-11-05", "bookable": false, "coach_redirect": true, "out_count": 0, "inw_count": 0, "checked_at": "2026-05-08T10:53:49Z", "note": "Beyond ~179-day horizon as of 2026-05-08."}
 {"probed_on": "2026-05-09", "probe_date": "2026-11-05", "bookable": false, "coach_redirect": true, "out_count": null, "inw_count": null, "checked_at": "2026-05-09T01:28:24+00:00", "note": ""}
 {"probed_on": "2026-05-10", "probe_date": "2026-11-05", "bookable": true, "coach_redirect": false, "out_count": null, "inw_count": null, "checked_at": "2026-05-10T01:17:17Z", "note": ""}
+{"probed_on": "2026-05-11", "probe_date": "2026-11-12", "bookable": false, "coach_redirect": true, "out_count": null, "inw_count": null, "checked_at": "2026-05-11T01:18:24Z", "note": ""}
