@@ -1,0 +1,82 @@
+[
+  {
+    "date": "2026-06-23",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-06-23T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-06-23T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-06-23T07:00:00"
+  },
+  {
+    "date": "2026-06-30",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-06-30T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-06-30T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-06-30T07:00:00"
+  },
+  {
+    "date": "2026-07-07",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-07-07T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-07-07T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-07-07T07:00:00"
+  },
+  {
+    "date": "2026-07-14",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-07-14T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-07-14T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-07-14T07:00:00"
+  },
+  {
+    "date": "2026-07-21",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-07-21T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-07-21T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-07-21T07:00:00"
+  },
+  {
+    "date": "2026-07-28",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-07-28T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-07-28T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-07-28T07:00:00"
+  },
+  {
+    "date": "2026-08-04",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-08-04T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-08-04T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-08-04T07:00:00"
+  },
+  {
+    "date": "2026-08-11",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-08-11T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-08-11T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-08-11T07:00:00"
+  },
+  {
+    "date": "2026-08-18",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-08-18T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-08-18T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-08-18T07:00:00"
+  },
+  {
+    "date": "2026-08-25",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-08-25T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-08-25T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-08-25T07:00:00"
+  },
+  {
+    "date": "2026-09-01",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-09-01T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-09-01T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-09-01T07:00:00"
+  },
+  {
+    "date": "2026-09-08",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-09-08T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-09-08T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-09-08T07:00:00"
+  },
+  {
+    "date": "2026-10-15",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-10-15T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-10-15T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-10-15T07:00:00"
+  },
+  {
+    "date": "2026-10-22",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-10-22T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-10-22T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-10-22T07:00:00"
+  },
+  {
+    "date": "2026-10-29",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-10-29T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-10-29T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-10-29T07:00:00"
+  },
+  {
+    "date": "2026-11-05",
+    "url": "https://www.thetrainline.com/book/results?journeySearchType=return&origin=urn%3Atrainline%3Ageneric%3Aloc%3AYAT3392gb&destination=urn%3Atrainline%3Ageneric%3Aloc%3APAD3087gb&outwardDate=2026-11-05T07%3A00%3A00&outwardDateType=departAfter&inwardDate=2026-11-05T18%3A00%3A00&inwardDateType=departAfter&selectedTab=train&splitSave=true&lang=en&transportModes%5B%5D=mixed",
+    "expectedDate": "2026-11-05T07:00:00"
+  }
+]

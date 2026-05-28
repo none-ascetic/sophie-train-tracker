@@ -1,0 +1,10 @@
+{
+  "probed_at": "PLACEHOLDER",
+  "horizon_probe": {
+    "probe_date": "2026-11-05",
+    "bookable": true,
+    "coach_redirect": false,
+    "checked_at": "PLACEHOLDER"
+  },
+  "tuesdays": []
+}
