@@ -1,13 +1,13 @@
 {
-  "probed_at": "2026-06-05T01:18:53Z",
+  "probed_at": "2026-06-06T01:17:26+00:00",
   "horizon_probe": {
     "probe_date": "2026-12-03",
     "bookable": false,
     "coach_redirect": true,
     "out_count": 0,
     "inw_count": 0,
-    "checked_at": "2026-06-05T01:18:53Z",
-    "note": "Beyond ~179-day horizon; rail tab redirected to coach. Expected."
+    "checked_at": "2026-06-06T01:17:26+00:00",
+    "note": "selectedTab=coach redirect; still beyond ~179-day booking horizon"
   },
   "tuesdays": [
     {
@@ -63,7 +63,7 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 76.8
+          "price": 82.3
         },
         {
           "dep": "19:00",
@@ -98,7 +98,7 @@
       ],
       "splitsave": {
         "available": true,
-        "total": 169.5,
+        "total": 175.0,
         "savings_vs_direct": 0
       },
       "twox_advance_premium": null
