@@ -1,13 +1,13 @@
 {
-  "probed_at": "2026-06-06T01:17:26+00:00",
+  "probed_at": "2026-06-07T01:20:19+00:00",
   "horizon_probe": {
     "probe_date": "2026-12-03",
-    "bookable": false,
-    "coach_redirect": true,
-    "out_count": 0,
-    "inw_count": 0,
-    "checked_at": "2026-06-06T01:17:26+00:00",
-    "note": "selectedTab=coach redirect; still beyond ~179-day booking horizon"
+    "bookable": true,
+    "coach_redirect": false,
+    "out_count": 8,
+    "inw_count": 8,
+    "checked_at": "2026-06-07T01:20:19+00:00",
+    "note": "Horizon rolled forward; 2026-12-03 now bookable with rail rows (07:36 \u00a343.80, 18:30 \u00a327)."
   },
   "tuesdays": [
     {
@@ -96,11 +96,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 175.0,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -109,12 +104,12 @@
         {
           "dep": "07:05",
           "arr": "09:05",
-          "price": 89.7
+          "price": 91.2
         },
         {
           "dep": "07:36",
           "arr": "09:34",
-          "price": 89.7
+          "price": 91.2
         },
         {
           "dep": "08:08",
@@ -189,11 +184,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 156.7,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -282,11 +272,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 155.2,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -375,11 +360,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 151.2,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -468,11 +448,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 151.2,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -561,11 +536,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 151.2,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -654,11 +624,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -747,11 +712,6 @@
           "price": 49.3
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -840,11 +800,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -933,11 +888,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -1026,11 +976,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -1119,11 +1064,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 113.7,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -1212,11 +1152,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 70.8,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -1305,11 +1240,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 70.8,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -1398,11 +1328,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 70.8,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -1491,11 +1416,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 70.8,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -1584,11 +1504,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 70.8,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -1677,11 +1592,6 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 70.8,
-        "savings_vs_direct": 0
-      },
       "twox_advance_premium": null
     },
     {
@@ -1770,11 +1680,94 @@
           "price": 27
         }
       ],
-      "splitsave": {
-        "available": true,
-        "total": 70.8,
-        "savings_vs_direct": 0
-      },
+      "twox_advance_premium": null
+    },
+    {
+      "date": "2026-12-03",
+      "outward": [
+        {
+          "dep": "07:05",
+          "arr": "09:05",
+          "price": 66.3
+        },
+        {
+          "dep": "07:36",
+          "arr": "09:34",
+          "price": 43.8
+        },
+        {
+          "dep": "08:08",
+          "arr": "10:06",
+          "price": 66.3
+        },
+        {
+          "dep": "08:23",
+          "arr": "10:36",
+          "price": 68.1
+        },
+        {
+          "dep": "08:23",
+          "arr": "10:45",
+          "price": 27
+        },
+        {
+          "dep": "09:02",
+          "arr": "11:20",
+          "price": 64.5
+        },
+        {
+          "dep": "09:41",
+          "arr": "11:34",
+          "price": 48.5
+        },
+        {
+          "dep": "10:01",
+          "arr": "12:09",
+          "price": 36.5
+        }
+      ],
+      "inward": [
+        {
+          "dep": "18:01",
+          "arr": "20:11",
+          "price": 48.5
+        },
+        {
+          "dep": "18:30",
+          "arr": "20:27",
+          "price": 27
+        },
+        {
+          "dep": "19:00",
+          "arr": "21:16",
+          "price": 67
+        },
+        {
+          "dep": "19:30",
+          "arr": "21:30",
+          "price": 48.5
+        },
+        {
+          "dep": "20:00",
+          "arr": "22:19",
+          "price": 33.5
+        },
+        {
+          "dep": "20:30",
+          "arr": "22:36",
+          "price": 27
+        },
+        {
+          "dep": "21:02",
+          "arr": "23:24",
+          "price": 32.5
+        },
+        {
+          "dep": "22:03",
+          "arr": "00:03",
+          "price": 27
+        }
+      ],
       "twox_advance_premium": null
     }
   ]
