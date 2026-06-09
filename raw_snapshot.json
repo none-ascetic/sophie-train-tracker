@@ -1,12 +1,12 @@
 {
-  "probed_at": "2026-06-08T01:21:30+00:00",
+  "probed_at": "2026-06-09T01:18:10Z",
   "horizon_probe": {
     "probe_date": "2026-12-10",
     "bookable": false,
     "coach_redirect": true,
     "out_count": 0,
     "inw_count": 0,
-    "checked_at": "2026-06-08T01:21:30+00:00",
+    "checked_at": "2026-06-09T01:18:10Z",
     "note": "selectedTab=coach redirect; still beyond ~179-day booking horizon"
   },
   "tuesdays": [
@@ -36,7 +36,7 @@
         {
           "dep": "08:23",
           "arr": "10:45",
-          "price": 27
+          "price": 39.4
         },
         {
           "dep": "09:02",
@@ -83,7 +83,7 @@
         {
           "dep": "20:30",
           "arr": "23:00",
-          "price": 27
+          "price": 39.3
         },
         {
           "dep": "21:02",
@@ -714,7 +714,7 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 27
+          "price": 64.5
         },
         {
           "dep": "19:00",
@@ -749,7 +749,7 @@
       ],
       "splitsave": {
         "available": true,
-        "total": 113.7,
+        "total": 151.2,
         "savings_vs_direct": 0
       },
       "twox_advance_premium": null
