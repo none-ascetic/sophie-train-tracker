@@ -1,0 +1,20 @@
+⚠️ Sophie rail run FAILED — 2026-06-12 02:00
+
+What happened
+- The Claude-in-Chrome extension is blocked on a permission prompt in its side panel.
+- javascript_tool injection failed on every call ("Cannot access a chrome-extension:// URL of different extension") and read_page then timed out with: "the page may be loading, unresponsive, or waiting on a permission prompt in the extension side panel."
+- With no working browser injection I could not scrape any fares, so no snapshot was produced.
+
+What I did NOT do (fail-closed, per RUNBOOK)
+- prices.json untouched — yesterday's validated fares are preserved.
+- No raw_snapshot.json written, daily_run.py NOT run (it would have nothing valid to validate).
+- run_status.json set to "failed" so the 06:00 task pages you instead of sending Sophie a stale message.
+
+What DID complete
+- Horizon probe for 2026-12-10 ran fine (navigation works) → still coach-redirect, i.e. beyond the ~179-day booking horizon. No new bookable Tuesday. Expected.
+
+To fix
+- Open Chrome, click the Claude-in-Chrome extension side panel, and clear/approve the pending permission prompt. Close any stray extension tab holding the debugger.
+- Then re-run: tell Claude "run tonight's Sophie rail scrape" (or wait for tomorrow's 02:00).
+
+20 unbooked Tuesdays are waiting to be scraped (23 Jun → 3 Dec 2026).

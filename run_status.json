@@ -1,6 +1,7 @@
 {
-  "status": "ok",
-  "at": "2026-06-09T01:18:31Z",
-  "validated_count": 20,
-  "newly_unlocked": null
+  "status": "failed",
+  "at": "2026-06-12T20:36:35Z",
+  "validated_count": 0,
+  "newly_unlocked": null,
+  "failure_reason": "chrome_extension_permission_prompt_blocked"
 }
