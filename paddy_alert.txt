@@ -1,20 +1,20 @@
-⚠️ Sophie rail run FAILED — 2026-06-12 02:00
+⚠️ Sophie rail run FAILED — 2026-06-13 02:00
 
 What happened
-- The Claude-in-Chrome extension is blocked on a permission prompt in its side panel.
-- javascript_tool injection failed on every call ("Cannot access a chrome-extension:// URL of different extension") and read_page then timed out with: "the page may be loading, unresponsive, or waiting on a permission prompt in the extension side panel."
-- With no working browser injection I could not scrape any fares, so no snapshot was produced.
+- The Claude-in-Chrome extension is still blocked on a permission prompt in its side panel (same as the 2026-06-12 run).
+- javascript_tool injection failed on every attempt ("Cannot access a chrome-extension:// URL of different extension"). Two clean retries, both blocked.
+- With no working browser injection I could not run the extractor, so no fares were scraped and no snapshot was produced.
 
 What I did NOT do (fail-closed, per RUNBOOK)
-- prices.json untouched — yesterday's validated fares are preserved.
-- No raw_snapshot.json written, daily_run.py NOT run (it would have nothing valid to validate).
+- prices.json untouched — the last validated fares (snapshot 2026-06-09) are preserved.
+- No raw_snapshot.json written, daily_run.py NOT run.
 - run_status.json set to "failed" so the 06:00 task pages you instead of sending Sophie a stale message.
 
-What DID complete
-- Horizon probe for 2026-12-10 ran fine (navigation works) → still coach-redirect, i.e. beyond the ~179-day booking horizon. No new bookable Tuesday. Expected.
+Horizon probe
+- Inconclusive this run: navigation to the 2026-12-10 results URL bounced back to the homepage and I could not read the final URL without JS injection. Last known state (2026-06-12): 2026-12-10 still coach-redirect, i.e. beyond the ~179-day horizon. Not treated as a new unlock.
 
 To fix
 - Open Chrome, click the Claude-in-Chrome extension side panel, and clear/approve the pending permission prompt. Close any stray extension tab holding the debugger.
-- Then re-run: tell Claude "run tonight's Sophie rail scrape" (or wait for tomorrow's 02:00).
+- Then re-run: tell Claude "run tonight's Sophie rail scrape".
 
-20 unbooked Tuesdays are waiting to be scraped (23 Jun → 3 Dec 2026).
+20 unbooked Tuesdays are waiting to be scraped (23 Jun → 3 Dec 2026). This is the 2nd consecutive blocked night.
