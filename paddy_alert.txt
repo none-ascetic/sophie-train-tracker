@@ -1,9 +1,9 @@
-⚠️ Sophie rail run FAILED — 2026-06-13 02:00
+⚠️ Sophie rail run FAILED — 2026-06-24 (3rd consecutive blocked night)
 
 What happened
-- The Claude-in-Chrome extension is still blocked on a permission prompt in its side panel (same as the 2026-06-12 run).
-- javascript_tool injection failed on every attempt ("Cannot access a chrome-extension:// URL of different extension"). Two clean retries, both blocked.
-- With no working browser injection I could not run the extractor, so no fares were scraped and no snapshot was produced.
+- Claude-in-Chrome is not connected at all this run. list_connected_browsers returned [] (zero browsers), and tabs_context_mcp reported "Claude in Chrome is not connected" on every attempt. Waited 20s and retried twice — still nothing.
+- This is worse than 12/13 Jun: those nights had a live browser stuck on a permission prompt; tonight there is no reachable browser/extension at all.
+- With no browser I cannot run extractor.js, so no fares were scraped and no snapshot was produced.
 
 What I did NOT do (fail-closed, per RUNBOOK)
 - prices.json untouched — the last validated fares (snapshot 2026-06-09) are preserved.
@@ -11,10 +11,13 @@ What I did NOT do (fail-closed, per RUNBOOK)
 - run_status.json set to "failed" so the 06:00 task pages you instead of sending Sophie a stale message.
 
 Horizon probe
-- Inconclusive this run: navigation to the 2026-12-10 results URL bounced back to the homepage and I could not read the final URL without JS injection. Last known state (2026-06-12): 2026-12-10 still coach-redirect, i.e. beyond the ~179-day horizon. Not treated as a new unlock.
+- Not run — no browser. Last known state: 2026-12-10 still coach-redirect (beyond the ~179-day horizon). Not treated as a new unlock.
+
+Heads-up (not acted on — fail-closed)
+- 2026-06-23 is still flagged unbooked but is now in the PAST. Once scraping resumes it can no longer be priced; it likely needs marking booked or dropping. Left untouched tonight.
 
 To fix
-- Open Chrome, click the Claude-in-Chrome extension side panel, and clear/approve the pending permission prompt. Close any stray extension tab holding the debugger.
+- Open Chrome on this Mac, make sure the Claude-in-Chrome extension is signed in and enabled, and clear any pending permission prompt in its side panel. Confirm the browser shows as connected.
 - Then re-run: tell Claude "run tonight's Sophie rail scrape".
 
-20 unbooked Tuesdays are waiting to be scraped (23 Jun → 3 Dec 2026). This is the 2nd consecutive blocked night.
+20 unbooked Tuesdays are waiting to be scraped (23 Jun → 3 Dec 2026). This is the 3rd consecutive blocked night — Sophie has had no fresh price update since the 2026-06-09 snapshot.

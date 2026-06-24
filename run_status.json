@@ -1,7 +1,7 @@
 {
   "status": "failed",
-  "at": "2026-06-13T01:10:21Z",
+  "at": "2026-06-24T09:57:21Z",
   "validated_count": 0,
   "newly_unlocked": null,
-  "failure_reason": "chrome_extension_permission_prompt_blocked"
+  "failure_reason": "claude_in_chrome_not_connected_no_browser"
 }
