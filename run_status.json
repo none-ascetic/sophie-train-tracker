@@ -1,7 +1,6 @@
 {
-  "status": "failed",
-  "at": "2026-06-25T02:05:00Z",
-  "validated_count": 0,
-  "newly_unlocked": null,
-  "failure_reason": "claude_in_chrome_not_connected_no_browser"
+  "status": "ok",
+  "at": "2026-06-25T13:10:30Z",
+  "validated_count": 20,
+  "newly_unlocked": "2026-12-10"
 }

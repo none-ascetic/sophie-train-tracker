@@ -69,3 +69,4 @@
 {"probed_on": "2026-06-07", "probe_date": "2026-12-03", "bookable": true, "coach_redirect": false, "out_count": 8, "inw_count": 8, "checked_at": "2026-06-07T01:20:19+00:00", "note": "Horizon rolled forward; 2026-12-03 now bookable with rail rows (07:36 \u00a343.80, 18:30 \u00a327)."}
 {"probed_on": "2026-06-08", "probe_date": "2026-12-10", "bookable": false, "coach_redirect": true, "out_count": 0, "inw_count": 0, "checked_at": "2026-06-08T01:21:30+00:00", "note": "selectedTab=coach redirect; still beyond ~179-day booking horizon"}
 {"probed_on": "2026-06-09", "probe_date": "2026-12-10", "bookable": false, "coach_redirect": true, "out_count": 0, "inw_count": 0, "checked_at": "2026-06-09T01:18:10Z", "note": "selectedTab=coach redirect; still beyond ~179-day booking horizon"}
+{"probed_on": "2026-06-25", "probe_date": "2026-12-10", "bookable": true, "coach_redirect": false, "out_count": null, "inw_count": null, "checked_at": "2026-06-25T02:12:00Z", "note": ""}

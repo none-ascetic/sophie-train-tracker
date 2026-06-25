@@ -55,6 +55,13 @@ BIG_MOVER_DELTA_GBP = 5.0
 OUT_DEPARTURE = "07:36"   # Yatton → Paddington (07:36 arr 09:34 typical)
 BACK_DEPARTURE = "18:30"  # Paddington → Yatton (18:30 arr 20:27 typical)
 
+# Per-date outward overrides for timetable variations where the SAME service
+# (09:34 arrival into Paddington) runs at a different departure minute, so the
+# strict 07:36 match would wrongly fail an otherwise-valid date. Authorised by
+# Paddy 2026-06-25: 15 Oct 2026 has no 07:36 — the 09:34-arrival train departs
+# 07:38 that day, accepted as Sophie's equivalent outward.
+OUT_DEPARTURE_OVERRIDES = {"2026-10-15": "07:38"}
+
 
 # ────────────────────────────────────────────────────────────────────────────
 # Validation
@@ -78,11 +85,12 @@ def validate_tuesday(entry: dict) -> tuple[bool, str, dict | None, dict | None]:
     inward = entry.get("inward") or []
     if not outward or not inward:
         return False, "empty outward or inward rows", None, None
-    out_row = _find_row(outward, OUT_DEPARTURE)
+    out_dep = OUT_DEPARTURE_OVERRIDES.get(entry.get("date"), OUT_DEPARTURE)
+    out_row = _find_row(outward, out_dep)
     if out_row is None:
-        return False, f"no {OUT_DEPARTURE} outward row — scraper missed it", None, None
+        return False, f"no {out_dep} outward row — scraper missed it", None, None
     if not isinstance(out_row.get("price"), (int, float)):
-        return False, f"{OUT_DEPARTURE} outward row has non-numeric price", None, None
+        return False, f"{out_dep} outward row has non-numeric price", None, None
     back_row = _find_row(inward, BACK_DEPARTURE)
     if back_row is None:
         return False, f"no {BACK_DEPARTURE} return row — scraper missed it", None, out_row
