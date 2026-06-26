@@ -1,0 +1,10 @@
+PIPELINE FAIL — Fri 26 Jun 2026
+
+Sophie's iMessage HELD. Yesterday's prices preserved in prices.json.
+
+Failed Tuesdays (20):
+  • (all 20 unbooked): Chrome MCP extension unreachable — scraper never ran
+
+Horizon probe: 2026-12-17 — NOT run (Chrome unreachable). Note: not_bookable_yet seed list is now EXHAUSTED (last unlocked 2026-12-10). Decide whether to extend Sophie's commute schedule beyond 10 Dec.
+
+Root cause: Claude-in-Chrome extension not reachable at 02:00 despite Chrome running — likely a pending extension permission/side-panel prompt blocking JS injection on the unattended run. Open Chrome, clear any pending Claude extension prompt, then re-run the pipeline manually.

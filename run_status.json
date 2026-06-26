@@ -1,6 +1,7 @@
 {
-  "status": "ok",
-  "at": "2026-06-25T13:10:30Z",
-  "validated_count": 20,
-  "newly_unlocked": "2026-12-10"
+  "status": "failed",
+  "at": "2026-06-26T02:00:00Z",
+  "reason": "Chrome MCP extension unreachable on unattended run \u2014 scraper could not execute. No fares scraped; prices.json preserved.",
+  "validated_count": 0,
+  "newly_unlocked": null
 }
