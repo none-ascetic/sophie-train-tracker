@@ -1,0 +1,9 @@
+Morning Soph (Sun 28 Jun)
+
+Heads up: Tue 21 Jul up £57.10 to £154.70 (direct).
+
+• Tue 14 Jul: £160.20 (direct) (↑ £26.30 vs yesterday)
+• Tue 21 Jul: £154.70 (direct) (↑ £57.10 vs yesterday)
+• Tue 28 Jul: £152.70 (direct) (↑ £55.60 vs yesterday)
+
+Full tracker: https://sophie-train-tracker.vercel.app
