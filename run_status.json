@@ -1,6 +1,107 @@
 {
-  "status": "ok",
-  "at": "2026-07-01T10:40:15Z",
-  "validated_count": 19,
-  "newly_unlocked": null
+  "status": "failed",
+  "at": "2026-07-02T01:13:23Z",
+  "failures": [
+    {
+      "date": "2026-07-07",
+      "reason": "07:36 outward row has non-numeric price"
+    },
+    {
+      "date": "2026-07-14",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-07-21",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-07-28",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-08-04",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-08-11",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-08-18",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-08-25",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-09-01",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-09-08",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-10-15",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-10-22",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-10-29",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-11-05",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-11-12",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-11-19",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-11-26",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-12-03",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    },
+    {
+      "date": "2026-12-10",
+      "reason": "missing from raw_snapshot \u2014 scraper skipped it"
+    }
+  ],
+  "newly_unlocked": null,
+  "expected": [
+    "2026-07-07",
+    "2026-07-14",
+    "2026-07-21",
+    "2026-07-28",
+    "2026-08-04",
+    "2026-08-11",
+    "2026-08-18",
+    "2026-08-25",
+    "2026-09-01",
+    "2026-09-08",
+    "2026-10-15",
+    "2026-10-22",
+    "2026-10-29",
+    "2026-11-05",
+    "2026-11-12",
+    "2026-11-19",
+    "2026-11-26",
+    "2026-12-03",
+    "2026-12-10"
+  ],
+  "scraped": [
+    "2026-07-07"
+  ]
 }

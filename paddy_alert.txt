@@ -1,0 +1,49 @@
+PIPELINE FAIL — Thu 02 Jul 2026  (02:00 run)
+
+Sophie's iMessage HELD. Yesterday's prices preserved in prices.json. No message sent.
+
+ROOT CAUSE — TRAINLINE SELECTOR / PRICING CHANGE (not transient, not a skip)
+--------------------------------------------------------------------------
+The results page no longer exposes  [data-test="alternative-price"]  — the node
+the extractor reads for the fare. It has been removed in a Trainline redesign.
+
+What still works:
+  • Row + time selectors:  train-results-container-OUTWARD/INWARD,
+    train-results-departure-time, train-results-arrival-time  — all fine.
+    07:36 outward and 18:30 return rows are present on every date.
+
+What changed:
+  • Price now lives in  [data-test="standard-ticket-price"]  (e.g. "£119.70")
+    and  [data-test="first-class-ticket-price-price"]  ("1st £222.80").
+  • There is NO cheapest/SplitSave alternative-price node on the row anymore.
+  • So the extractor returns price:null for EVERY row on EVERY date.
+
+Confirmed on two independent dates:
+  • 2026-07-07 (5 days out, definitely bookable) — all prices null.
+  • 2026-12-17 (horizon probe) — rail rows present, all prices null.
+
+Why the run FAILED CLOSED instead of patching itself:
+  • The visible price is now the STANDARD walk-up fare (£119.70 for 07:36),
+    which is a DIFFERENT fare tier from the SplitSave "cheapest" fare the whole
+    dataset tracks (historically ~£43.80 for 07:36). Recording standard fares
+    would poison the append-only fare_history.jsonl with incomparable numbers.
+  • Where/whether the SplitSave cheapest fare now surfaces is unknown and needs
+    a human basket clickthrough to confirm — exactly what you did on 24 Apr.
+
+ACTION FOR PADDY (during the day)
+---------------------------------
+  1. Open a Yatton→Paddington return results page in Chrome, inspect the 07:36
+     row, and find where the cheapest/SplitSave fare now lives (data-test attr).
+  2. Patch extractor.js in the trainline-lookup skill (price node + the row
+     ancestor loop, which currently breaks on alternative-price) and bump SKILL.md
+     pricing-semantics notes.
+  3. Re-run the pipeline manually. daily_run.py will validate and update
+     prices.json once real numeric fares come back.
+
+Only 2026-07-07 was scraped before the break was diagnosed; the remaining 18
+were NOT re-hammered (the break is global — no point). "missing from raw_snapshot"
+in run_status.json means "not re-scraped", not "Trainline had no data".
+
+Horizon probe: 2026-12-17 — bookable (rail rows present, no coach redirect).
+  Not in not_bookable_yet, so no auto-promotion. Extending Sophie past 10 Dec
+  is still your call.
