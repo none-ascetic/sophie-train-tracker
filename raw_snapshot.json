@@ -1,11 +1,7 @@
 {
-  "probed_at": "2026-07-03T01:21:02Z",
-  "horizon_probe": {
-    "probe_date": "2026-12-17",
-    "bookable": true,
-    "coach_redirect": false,
-    "checked_at": "2026-07-03T01:21:02Z"
-  },
+  "probed_at": "2026-07-04T01:17:06Z",
+  "horizon_probe": null,
+  "horizon_note": "not_bookable_yet is empty \u2014 no horizon date queued; probe skipped. Schedule ends 2026-12-10.",
   "tuesdays": [
     {
       "date": "2026-07-07",
@@ -246,7 +242,7 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 76.8
+          "price": 82.3
         },
         {
           "dep": "19:00",
@@ -281,7 +277,7 @@
       ],
       "splitsave": {
         "available": true,
-        "total": 169.5,
+        "total": 175.0,
         "savings_vs_direct": 0
       },
       "twox_advance_premium": null
@@ -339,7 +335,7 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 70.4
+          "price": 76.8
         },
         {
           "dep": "19:00",
@@ -374,7 +370,7 @@
       ],
       "splitsave": {
         "available": true,
-        "total": 160.1,
+        "total": 166.5,
         "savings_vs_direct": 0
       },
       "twox_advance_premium": null
