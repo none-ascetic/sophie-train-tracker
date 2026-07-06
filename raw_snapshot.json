@@ -1,11 +1,11 @@
 {
-  "probed_at": "2026-07-05T01:24:44Z",
+  "probed_at": "2026-07-06T01:18:28Z",
   "horizon_probe": {
     "probe_date": "2026-12-17",
     "bookable": true,
     "coach_redirect": false,
-    "checked_at": "2026-07-05T01:24:44Z",
-    "note": "Opportunistic probe; not in not_bookable_yet (seed list exhausted) so no auto-promotion. Extending Sophie past 10 Dec is a Paddy decision."
+    "checked_at": "2026-07-06T01:18:28Z",
+    "note": "Opportunistic probe; 2026-12-17 not in not_bookable_yet (seed list exhausted) so no auto-promotion. Extending Sophie past 10 Dec is a Paddy decision."
   },
   "tuesdays": [
     {
@@ -237,7 +237,7 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 82.3
+          "price": 87.8
         },
         {
           "dep": "19:00",
@@ -330,7 +330,7 @@
         {
           "dep": "19:00",
           "arr": "21:16",
-          "price": 64.4
+          "price": 65
         },
         {
           "dep": "19:30",
@@ -765,7 +765,7 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 27
+          "price": 64.5
         },
         {
           "dep": "19:00",
