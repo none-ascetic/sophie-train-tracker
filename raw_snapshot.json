@@ -1,10 +1,12 @@
 {
-  "probed_at": "2026-07-06T01:18:28Z",
+  "probed_at": "2026-07-07T01:20:57Z",
   "horizon_probe": {
     "probe_date": "2026-12-17",
     "bookable": true,
     "coach_redirect": false,
-    "checked_at": "2026-07-06T01:18:28Z",
+    "out_count": 8,
+    "inw_count": 8,
+    "checked_at": "2026-07-07T01:20:57Z",
     "note": "Opportunistic probe; 2026-12-17 not in not_bookable_yet (seed list exhausted) so no auto-promotion. Extending Sophie past 10 Dec is a Paddy decision."
   },
   "tuesdays": [
@@ -14,42 +16,42 @@
         {
           "dep": "07:05",
           "arr": "09:05",
-          "price": 92.7
+          "price": 93.7
         },
         {
           "dep": "07:36",
           "arr": "09:34",
-          "price": 92.7
+          "price": 93.7
         },
         {
           "dep": "08:08",
           "arr": "10:14",
-          "price": 32.6
+          "price": 68.1
         },
         {
           "dep": "08:23",
           "arr": "10:45",
-          "price": 27
+          "price": 68.1
         },
         {
           "dep": "09:41",
           "arr": "11:35",
-          "price": 32.5
+          "price": 49.3
         },
         {
           "dep": "10:01",
           "arr": "12:11",
-          "price": 32.5
+          "price": 49.3
         },
         {
           "dep": "10:23",
           "arr": "12:37",
-          "price": 27
+          "price": 49.3
         },
         {
           "dep": "11:00",
           "arr": "13:07",
-          "price": 32.5
+          "price": 49.3
         }
       ],
       "inward": [
@@ -61,37 +63,37 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 93.3
+          "price": 110.7
         },
         {
           "dep": "19:00",
           "arr": "21:16",
-          "price": 67.5
+          "price": 68.1
         },
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 48.5
+          "price": 49.3
         },
         {
           "dep": "20:00",
           "arr": "22:19",
-          "price": 27
+          "price": 49.3
         },
         {
           "dep": "20:30",
           "arr": "22:36",
-          "price": 32.5
+          "price": 49.3
         },
         {
           "dep": "21:02",
           "arr": "23:24",
-          "price": 32.5
+          "price": 49.3
         },
         {
           "dep": "22:03",
           "arr": "00:28",
-          "price": 27
+          "price": 49.3
         }
       ],
       "twox_advance_premium": null
@@ -169,7 +171,7 @@
         {
           "dep": "20:30",
           "arr": "22:36",
-          "price": 27
+          "price": 32.5
         },
         {
           "dep": "21:02",
@@ -325,7 +327,7 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 70
+          "price": 70.5
         },
         {
           "dep": "19:00",
@@ -391,7 +393,7 @@
         {
           "dep": "09:02",
           "arr": "11:20",
-          "price": 53.5
+          "price": 68.1
         },
         {
           "dep": "09:41",
@@ -479,7 +481,7 @@
         {
           "dep": "09:02",
           "arr": "11:20",
-          "price": 53.5
+          "price": 68.1
         },
         {
           "dep": "09:41",
@@ -531,7 +533,7 @@
         {
           "dep": "21:48",
           "arr": "00:03",
-          "price": 49.3
+          "price": 38.4
         }
       ],
       "twox_advance_premium": null
@@ -567,7 +569,7 @@
         {
           "dep": "09:02",
           "arr": "11:20",
-          "price": 53.5
+          "price": 67
         },
         {
           "dep": "09:41",
@@ -655,7 +657,7 @@
         {
           "dep": "09:02",
           "arr": "11:20",
-          "price": 53.5
+          "price": 67
         },
         {
           "dep": "09:41",
