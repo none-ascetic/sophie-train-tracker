@@ -67,6 +67,14 @@ HISTORY = ROOT / "fare_history.jsonl"
 OUT_DEP = "07:36"
 BACK_DEP = "18:30"
 
+# Per-date outward overrides for timetable variations where the SAME service
+# (09:34 arrival into Paddington) runs at a different departure minute. Must
+# mirror daily_run.OUT_DEPARTURE_OVERRIDES exactly, otherwise those dates get
+# silently dropped from the history log (no 07:36 row found → skipped), which
+# freezes their prior baseline and re-reports a phantom overnight move every
+# run. Authorised by Paddy 2026-06-25: 15 Oct 2026 departs 07:38 that day.
+OUT_DEPARTURE_OVERRIDES = {"2026-10-15": "07:38"}
+
 
 # ────────────────────────────────────────────────────────────────────────────
 # Append-only writer
@@ -115,7 +123,8 @@ def observations_from_snapshot(raw_snapshot: dict) -> list[dict]:
             travel = datetime.strptime(dstr, "%Y-%m-%d").date()
         except ValueError:
             continue
-        out_row = _pick(t.get("outward") or [], OUT_DEP)
+        out_dep = OUT_DEPARTURE_OVERRIDES.get(dstr, OUT_DEP)
+        out_row = _pick(t.get("outward") or [], out_dep)
         back_row = _pick(t.get("inward") or [], BACK_DEP)
         out_fare = out_row.get("price") if out_row else None
         back_fare = back_row.get("price") if back_row else None
