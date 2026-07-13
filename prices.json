@@ -2808,6 +2808,15 @@
         },
         {
           "out": {
+            "fare": 92.7
+          },
+          "back": {
+            "fare": 93.3
+          },
+          "cheapest_any_total": 186.0
+        },
+        {
+          "out": {
             "fare": 93.7
           },
           "back": {
@@ -2850,15 +2859,6 @@
             "fare": 65.0
           },
           "cheapest_any_total": 116.6
-        },
-        {
-          "out": {
-            "fare": 86.7
-          },
-          "back": {
-            "fare": 64.5
-          },
-          "cheapest_any_total": 151.2
         },
         {
           "out": {
@@ -3054,6 +3054,15 @@
       "weeks_out": 13,
       "baseline_total": 127.0,
       "history": [
+        {
+          "out": {
+            "fare": 92.7
+          },
+          "back": {
+            "fare": 93.3
+          },
+          "cheapest_any_total": 186.0
+        },
         {
           "out": {
             "fare": 92.7
@@ -3287,15 +3296,6 @@
             "fare": 64.5
           },
           "cheapest_any_total": 151.2
-        },
-        {
-          "out": {
-            "fare": 86.7
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 113.7
         },
         {
           "out": {
@@ -3581,6 +3581,15 @@
             "fare": 92.7
           },
           "back": {
+            "fare": 76.8
+          },
+          "cheapest_any_total": 169.5
+        },
+        {
+          "out": {
+            "fare": 92.7
+          },
+          "back": {
             "fare": 70.4
           },
           "cheapest_any_total": 163.1
@@ -3827,15 +3836,6 @@
             "fare": 27.0
           },
           "cheapest_any_total": 113.7
-        },
-        {
-          "out": {
-            "fare": 86.7
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 113.7
         }
       ],
       "change_vs_yesterday": {
@@ -3993,6 +3993,15 @@
         },
         {
           "out": {
+            "fare": 89.7
+          },
+          "back": {
+            "fare": 67.0
+          },
+          "cheapest_any_total": 156.7
+        },
+        {
+          "out": {
             "fare": 88.2
           },
           "back": {
@@ -4098,15 +4107,6 @@
             "fare": 62.0
           },
           "cheapest_any_total": 94.6
-        },
-        {
-          "out": {
-            "fare": 86.7
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 113.7
         },
         {
           "out": {
@@ -4393,6 +4393,15 @@
             "fare": 88.2
           },
           "back": {
+            "fare": 67.0
+          },
+          "cheapest_any_total": 155.2
+        },
+        {
+          "out": {
+            "fare": 88.2
+          },
+          "back": {
             "fare": 64.5
           },
           "cheapest_any_total": 152.7
@@ -4513,15 +4522,6 @@
             "fare": 64.5
           },
           "cheapest_any_total": 151.2
-        },
-        {
-          "out": {
-            "fare": 86.7
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 113.7
         },
         {
           "out": {
@@ -4868,6 +4868,15 @@
         },
         {
           "out": {
+            "fare": 86.7
+          },
+          "back": {
+            "fare": 64.5
+          },
+          "cheapest_any_total": 151.2
+        },
+        {
+          "out": {
             "fare": 93.7
           },
           "back": {
@@ -4910,15 +4919,6 @@
             "fare": 57.0
           },
           "cheapest_any_total": 89.6
-        },
-        {
-          "out": {
-            "fare": 86.7
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 113.7
         },
         {
           "out": {
@@ -5274,6 +5274,15 @@
         },
         {
           "out": {
+            "fare": 86.7
+          },
+          "back": {
+            "fare": 64.5
+          },
+          "cheapest_any_total": 151.2
+        },
+        {
+          "out": {
             "fare": 93.7
           },
           "back": {
@@ -5406,15 +5415,6 @@
             "fare": 27.0
           },
           "cheapest_any_total": 113.7
-        },
-        {
-          "out": {
-            "fare": 77.1
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 104.1
         },
         {
           "out": {
@@ -5638,6 +5638,15 @@
             "fare": 86.7
           },
           "back": {
+            "fare": 64.5
+          },
+          "cheapest_any_total": 151.2
+        },
+        {
+          "out": {
+            "fare": 86.7
+          },
+          "back": {
             "fare": 27.0
           },
           "cheapest_any_total": 113.7
@@ -5722,15 +5731,6 @@
             "fare": 27.0
           },
           "cheapest_any_total": 59.6
-        },
-        {
-          "out": {
-            "fare": 86.7
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 113.7
         },
         {
           "out": {
@@ -6086,6 +6086,15 @@
         },
         {
           "out": {
+            "fare": 86.7
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 113.7
+        },
+        {
+          "out": {
             "fare": 93.7
           },
           "back": {
@@ -6128,15 +6137,6 @@
             "fare": 27.0
           },
           "cheapest_any_total": 59.6
-        },
-        {
-          "out": {
-            "fare": 86.7
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 113.7
         },
         {
           "out": {
@@ -8674,12 +8674,12 @@
         },
         {
           "out": {
-            "fare": 43.8
+            "fare": 54.5
           },
           "back": {
-            "fare": 27.0
+            "fare": 54.5
           },
-          "cheapest_any_total": 70.8
+          "cheapest_any_total": 109.0
         },
         {
           "out": {
@@ -9144,6 +9144,15 @@
         },
         {
           "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
+        {
+          "out": {
             "fare": 32.6
           },
           "back": {
@@ -9177,15 +9186,6 @@
             "fare": 27.0
           },
           "cheapest_any_total": 59.6
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
         },
         {
           "out": {
@@ -9551,6 +9551,15 @@
         },
         {
           "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
+        {
+          "out": {
             "fare": 32.6
           },
           "back": {
@@ -9584,15 +9593,6 @@
             "fare": 27.0
           },
           "cheapest_any_total": 59.6
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
         },
         {
           "out": {
@@ -9954,6 +9954,15 @@
         },
         {
           "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
+        {
+          "out": {
             "fare": 32.6
           },
           "back": {
@@ -9987,15 +9996,6 @@
             "fare": 27.0
           },
           "cheapest_any_total": 59.6
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
         },
         {
           "out": {
@@ -10357,6 +10357,15 @@
         },
         {
           "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
+        {
+          "out": {
             "fare": 32.6
           },
           "back": {
@@ -10390,15 +10399,6 @@
             "fare": 27.0
           },
           "cheapest_any_total": 59.6
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
         },
         {
           "out": {
@@ -10760,6 +10760,15 @@
         },
         {
           "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
+        {
+          "out": {
             "fare": 32.6
           },
           "back": {
@@ -10793,15 +10802,6 @@
             "fare": 27.0
           },
           "cheapest_any_total": 59.6
-        },
-        {
-          "out": {
-            "fare": 43.8
-          },
-          "back": {
-            "fare": 27.0
-          },
-          "cheapest_any_total": 70.8
         },
         {
           "out": {
@@ -11071,6 +11071,15 @@
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
       },
       "history": [
+        {
+          "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
         {
           "out": {
             "fare": 43.8
@@ -11494,6 +11503,15 @@
         },
         {
           "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
+        {
+          "out": {
             "fare": 32.6
           },
           "back": {
@@ -11688,6 +11706,15 @@
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
       },
       "history": [
+        {
+          "out": {
+            "fare": 43.8
+          },
+          "back": {
+            "fare": 27.0
+          },
+          "cheapest_any_total": 70.8
+        },
         {
           "out": {
             "fare": 43.8
@@ -12046,7 +12073,7 @@
       },
       "unchanged_count": 16,
       "any_movement": true,
-      "analysed_at": "2026-07-13T10:09:50Z"
+      "analysed_at": "2026-07-13T11:56:53Z"
     }
   },
   "patterns": {
@@ -12246,6 +12273,6 @@
     "observations_total": 1104,
     "observations_last_30d": 258,
     "first_observation": "2026-04-22",
-    "last_updated": "2026-07-13T10:09:50Z"
+    "last_updated": "2026-07-13T11:56:53Z"
   }
 }
