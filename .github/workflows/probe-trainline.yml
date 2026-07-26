@@ -1,0 +1,35 @@
+# Feasibility probe only — manual trigger, read-only, writes nothing.
+# Answers: does Trainline serve real fares to a GitHub Actions (Azure) IP?
+# Delete this workflow once the cloud-migration decision is made.
+name: probe-trainline
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show runner egress region
+        # Bot detection keys off the IP's reputation, so record what we came from.
+        run: |
+          echo "runner_ip_meta:"
+          curl -s --max-time 10 https://ipinfo.io/json || echo "(ipinfo unavailable)"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Playwright
+        run: |
+          pip install --quiet playwright
+          playwright install --with-deps chromium
+
+      - name: Run probe
+        run: python probe/trainline_probe.py
