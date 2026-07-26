@@ -55,6 +55,33 @@ def _best_price_and_source(current: dict) -> tuple:
     return direct, "direct"
 
 
+# How deltas are described. Normally the comparison really is yesterday, but if
+# the pipeline missed a night the movement accrued over several days and calling
+# it "vs yesterday" overstates a single day's jump. Set from prices.json's
+# baseline_checked_at by _set_baseline_label().
+_BASELINE_PHRASE = "vs yesterday"
+
+
+def _set_baseline_label(data: dict) -> None:
+    """Describe the comparison window honestly.
+
+    <36h since the last run → "vs yesterday". Longer → name the date, e.g.
+    "since 22 Jul". Added 26 Jul 2026 after a four-night outage left the deltas
+    labelled as one day's movement.
+    """
+    global _BASELINE_PHRASE
+    baseline = data.get("baseline_checked_at")
+    if not baseline:
+        return
+    try:
+        t = datetime.fromisoformat(str(baseline).replace("Z", "+00:00"))
+    except (ValueError, TypeError):
+        return
+    age_h = (datetime.now(t.tzinfo) - t).total_seconds() / 3600
+    if age_h > 36:
+        _BASELINE_PHRASE = f"since {t.strftime('%-d %b')}"
+
+
 def _change_arrow(change: dict) -> str:
     """↓ £8 / ↑ £5 / '' (no change)"""
     if not change:
@@ -64,8 +91,8 @@ def _change_arrow(change: dict) -> str:
     if delta is None or delta == 0:
         return ""
     if delta < 0:
-        return f" (↓ {_fmt_gbp(abs(delta))} vs yesterday)"
-    return f" (↑ {_fmt_gbp(delta)} vs yesterday)"
+        return f" (↓ {_fmt_gbp(abs(delta))} {_BASELINE_PHRASE})"
+    return f" (↑ {_fmt_gbp(delta)} {_BASELINE_PHRASE})"
 
 
 def rank_tuesdays(tuesdays: list) -> list:
@@ -131,7 +158,9 @@ def compose_headline(tuesdays: list) -> str:
         t = max(m["drops"], key=lambda x: abs(x["change_vs_yesterday"]["cheapest_any"]))
         change = t["change_vs_yesterday"]["cheapest_any"]
         price, source = _best_price_and_source(t["current"])
-        return f"Price drop: {_fmt_dow_date(t['date'])} down {_fmt_gbp(abs(change))} to {_fmt_gbp(price)} ({source})."
+        suffix = "" if _BASELINE_PHRASE == "vs yesterday" else f" {_BASELINE_PHRASE}"
+        return (f"Price drop: {_fmt_dow_date(t['date'])} down {_fmt_gbp(abs(change))} to "
+                f"{_fmt_gbp(price)} ({source}){suffix}.")
     if m["new_lows"]:
         t = sorted(m["new_lows"], key=lambda x: x["date"])[0]
         price, source = _best_price_and_source(t["current"])
@@ -140,7 +169,9 @@ def compose_headline(tuesdays: list) -> str:
         t = max(m["rises"], key=lambda x: x["change_vs_yesterday"]["cheapest_any"])
         change = t["change_vs_yesterday"]["cheapest_any"]
         price, source = _best_price_and_source(t["current"])
-        return f"Heads up: {_fmt_dow_date(t['date'])} up {_fmt_gbp(change)} to {_fmt_gbp(price)} ({source})."
+        suffix = "" if _BASELINE_PHRASE == "vs yesterday" else f" {_BASELINE_PHRASE}"
+        return (f"Heads up: {_fmt_dow_date(t['date'])} up {_fmt_gbp(change)} to "
+                f"{_fmt_gbp(price)} ({source}){suffix}.")
     return "No changes today."
 
 
@@ -191,6 +222,7 @@ def _source_caveat(tuesdays: list) -> str:
 
 
 def compose_message(data: dict) -> str:
+    _set_baseline_label(data)
     today = date.today().strftime("%a %-d %b")
     # Exclude already-booked Tuesdays — Sophie doesn't want nagging on dates she's paid for.
     tuesdays = [

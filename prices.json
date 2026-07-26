@@ -11625,5 +11625,6 @@
     "observations_last_30d": 340,
     "first_observation": "2026-04-22",
     "last_updated": "2026-07-26T09:06:21Z"
-  }
+  },
+  "baseline_checked_at": "2026-07-22T01:18:01Z"
 }

@@ -428,6 +428,12 @@ def main() -> int:
     checked_at = raw.get("probed_at") or CHECKED_AT_FALLBACK
     horizon_probe = raw.get("horizon_probe")
 
+    # Timestamp of the PREVIOUS successful run, captured before we overwrite
+    # last_run. change_vs_yesterday is measured against that run — which is only
+    # literally "yesterday" if the pipeline ran yesterday. compose_imessage uses
+    # this to label deltas honestly when a run was missed.
+    baseline_checked_at = (prices.get("last_run") or {}).get("at")
+
     # Staleness guard. A raw_snapshot.json left over from a previous night would
     # otherwise revalidate cleanly and write a FRESH "ok" — turning 4-day-old
     # fares into today's message. Observed 26 Jul 2026: the 02:00 task fired but
@@ -610,6 +616,8 @@ def main() -> int:
         "newly_unlocked": newly_unlocked,
         "movements": movements,
     }
+    # What change_vs_yesterday is actually measured against.
+    prices["baseline_checked_at"] = baseline_checked_at
     prices["patterns"] = patterns
 
     PRICES.write_text(json.dumps(prices, indent=2))
