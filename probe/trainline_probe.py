@@ -21,6 +21,7 @@ Two dates are probed back-to-back to expose rate limiting on the second.
 """
 from __future__ import annotations
 
+import json
 import re
 import sys
 
@@ -127,6 +128,60 @@ def classify(res) -> str:
     return "EMPTY"
 
 
+def handle_consent(page) -> str:
+    """Dismiss the cookie-consent gate, declining non-essential cookies.
+
+    Round 1 of this probe returned 0 rows with only static FAQ copy in the body:
+    the page shell rendered but the results app never hydrated. Paddy's own
+    Chrome has a consent cookie from months ago; a fresh runner profile does not,
+    and the overlay blocks the results app. Declining (not accepting) keeps this
+    the privacy-preserving choice.
+    """
+    selectors = [
+        '[data-test="cookie-reject-all"]',
+        '#onetrust-reject-all-handler',
+        'button:has-text("Reject all")',
+        'button:has-text("Only necessary")',
+        'button:has-text("Essential only")',
+        'button:has-text("Decline")',
+        '#onetrust-accept-btn-handler',      # fallback: no reject option offered
+        'button:has-text("Accept all")',
+    ]
+    for sel in selectors:
+        try:
+            el = page.locator(sel).first
+            if el.count() > 0 and el.is_visible(timeout=2000):
+                label = (el.inner_text(timeout=2000) or sel)[:40].replace("\n", " ")
+                el.click(timeout=5000)
+                page.wait_for_timeout(1500)
+                return f"clicked:{label}"
+        except Exception:
+            continue
+    return "none_found"
+
+
+def diagnose(page) -> str:
+    """Extra signal when rows are missing — currency and 'no results' copy."""
+    try:
+        info = page.evaluate("""() => {
+          const t = document.body.innerText || '';
+          return {
+            gbp: (t.match(/£/g) || []).length,
+            usd: (t.match(/\\$/g) || []).length,
+            no_results: /no (trains|results|journeys)|couldn't find|sold out/i.test(t),
+            consent_visible: !!document.querySelector(
+              '#onetrust-banner-sdk, [id*="consent"], [class*="consent"]'),
+            containers: [
+              !!document.querySelector('[data-test="train-results-container-OUTWARD"]'),
+              !!document.querySelector('[data-test="train-results-container-INWARD"]'),
+            ],
+          };
+        }""")
+        return json.dumps(info)
+    except Exception as e:
+        return f"diagnose_exc={e!r}"
+
+
 def probe(page, case) -> str:
     date = case["date"]
     url = build_url(date)
@@ -136,6 +191,8 @@ def probe(page, case) -> str:
     except Exception as e:
         print(f"  goto EXC {type(e).__name__}: {e}")
         return "EMPTY"
+
+    print(f"  consent   : {handle_consent(page)}")
 
     # Poll for hydration the same way the live extractor does.
     verdict, res = "EMPTY", None
@@ -162,6 +219,7 @@ def probe(page, case) -> str:
         print(f"  expected  : out={case['expect_out']} back={case['expect_back']}")
         print(f"  MATCHES_KNOWN_GOOD: {match}")
     else:
+        print(f"  diagnose  : {diagnose(page)}")
         snippet = re.sub(r"\s+", " ", res["text"] or "")[:600]
         print(f"  body_snippet: {snippet}")
 
@@ -185,6 +243,16 @@ def main() -> int:
                         "Chrome/140.0.0.0 Safari/537.36"),
         )
         page = ctx.new_page()
+        # Establish a session + consent state on the homepage first. A cold
+        # deep-link into /book/results was the round-1 failure mode.
+        try:
+            page.goto("https://www.thetrainline.com/", wait_until="domcontentloaded",
+                      timeout=60000)
+            print(f"homepage_consent: {handle_consent(page)}")
+            print(f"homepage_title  : {page.title()}")
+        except Exception as e:
+            print(f"homepage EXC {type(e).__name__}: {e}")
+
         for case in CASES:
             verdicts.append(probe(page, case))
         browser.close()
