@@ -45,6 +45,11 @@ HORIZON_LOG = ROOT / "horizon_log.jsonl"
 RUN_LOG = ROOT / "run_log.jsonl"
 FARE_HISTORY = ROOT / "fare_history.jsonl"
 
+# Maximum age of raw_snapshot.json before the run is treated as failed. Sized
+# generously (20h) so timezone/BST edges and a late-but-real run still pass,
+# while a snapshot from a previous night never can.
+MAX_SNAPSHOT_AGE_H = 20.0
+
 # "Big mover" threshold — a Tuesday whose total shifted by more than this
 # versus yesterday is worth calling out in the run log (and, eventually, in
 # Sophie's message body). £5 is the rough sensitivity Paddy uses when scanning
@@ -422,6 +427,42 @@ def main() -> int:
     prices = json.loads(PRICES.read_text())
     checked_at = raw.get("probed_at") or CHECKED_AT_FALLBACK
     horizon_probe = raw.get("horizon_probe")
+
+    # Staleness guard. A raw_snapshot.json left over from a previous night would
+    # otherwise revalidate cleanly and write a FRESH "ok" — turning 4-day-old
+    # fares into today's message. Observed 26 Jul 2026: the 02:00 task fired but
+    # died before writing raw_snapshot (Chrome unavailable), leaving 22 Jul data
+    # in place. Only the absent pending_message.txt stopped a stale send.
+    stale_reason = None
+    if not checked_at:
+        stale_reason = "raw_snapshot.json has no probed_at timestamp"
+    else:
+        try:
+            probed = datetime.fromisoformat(str(checked_at).replace("Z", "+00:00"))
+            age_h = (datetime.now(probed.tzinfo) - probed).total_seconds() / 3600.0
+            if age_h > MAX_SNAPSHOT_AGE_H:
+                stale_reason = (
+                    f"raw_snapshot.json is {age_h:.1f}h old (probed_at {checked_at}) — "
+                    f"max allowed {MAX_SNAPSHOT_AGE_H}h. The overnight scrape did not run."
+                )
+        except (ValueError, TypeError):
+            stale_reason = f"raw_snapshot.json probed_at unparseable: {checked_at!r}"
+
+    if stale_reason:
+        write_status("failed", {"reason": stale_reason})
+        write_paddy_alert([{"date": "(all)", "reason": stale_reason}], horizon_probe)
+        append_run_log(
+            status="failed",
+            duration_sec=_time.monotonic() - t0,
+            tuesdays_total=0,
+            scraped_trainline=0,
+            scrape_failures=1,
+            big_movers=[],
+            status_transitions=[],
+            pending_message_chars=0,
+        )
+        print(f"FAIL: {stale_reason}", file=sys.stderr)
+        return 2
 
     # Always log the horizon probe, even if the rest of the run fails — the
     # daily horizon series matters for "when does the next Tuesday unlock".
