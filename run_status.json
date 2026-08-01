@@ -1,6 +1,5 @@
 {
-  "status": "ok",
-  "at": "2026-07-31T01:17:20Z",
-  "validated_count": 15,
-  "newly_unlocked": null
+  "status": "failed",
+  "at": "2026-08-01T04:07:17Z",
+  "reason": "Chrome extension unreachable after 3 attempts - Chrome running: yes (attempt 1: tabs_context_mcp timed out after 180s; attempt 2: 'Claude in Chrome is not connected'; attempt 3: timed out after 180s). No scrape attempted."
 }
