@@ -1,5 +1,5 @@
 {
   "status": "failed",
-  "at": "2026-08-01T04:07:17Z",
-  "reason": "Chrome extension unreachable after 3 attempts - Chrome running: yes (attempt 1: tabs_context_mcp timed out after 180s; attempt 2: 'Claude in Chrome is not connected'; attempt 3: timed out after 180s). No scrape attempted."
+  "at": "2026-08-02T03:51:33Z",
+  "reason": "Chrome extension unreachable after 3 attempts (tabs_context_mcp timed out x2, 'Claude in Chrome is not connected' x1) - Chrome running: yes"
 }

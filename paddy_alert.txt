@@ -1,14 +1,5 @@
-Sophie rail scrape aborted 2026-08-01T04:07:17Z
+Sophie rail scrape aborted 2026-08-02T03:51:33Z
 
-Reason: Chrome extension unreachable after 3 attempts - Chrome running: yes.
-  attempt 1: mcp__claude-in-chrome__tabs_context_mcp timed out after 180s
-  attempt 2: "Claude in Chrome is not connected"
-  attempt 3: timed out after 180s
+Reason: Chrome extension unreachable after 3 attempts (tabs_context_mcp timed out x2, 'Claude in Chrome is not connected' x1) - Chrome running: yes
 
-Chrome itself WAS running and was activated successfully via osascript - so this is
-the extension / side-panel side, not the "Chrome wasn't launched" failure mode from
-22-26 Jul. Worth checking for a pending Claude side-panel permission prompt, or the
-Jam extension holding the debugger lock.
-
-No fares were scraped. prices.json and the tracker still show the last good run
-(2026-07-31T01:17:20Z, 15 validated).
+No fares were scraped. prices.json and the tracker still show the last good run.
