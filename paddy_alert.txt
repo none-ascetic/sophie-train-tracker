@@ -1,5 +1,0 @@
-Sophie rail scrape aborted 2026-08-02T03:51:33Z
-
-Reason: Chrome extension unreachable after 3 attempts (tabs_context_mcp timed out x2, 'Claude in Chrome is not connected' x1) - Chrome running: yes
-
-No fares were scraped. prices.json and the tracker still show the last good run.
