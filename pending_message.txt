@@ -1,7 +1,9 @@
-Morning Soph (Wed 5 Aug)
+Morning Soph (Thu 6 Aug)
 
-Heads up: Tue 25 Aug up £4.90 to £163.10 (direct).
+Price drop: Thu 15 Oct down £6 to £103 (direct).
 
-• Tue 25 Aug: £163.10 (direct) (↑ £4.90 vs yesterday)
+• Thu 15 Oct: £103 (direct) (↓ £6 vs yesterday)
+• Tue 18 Aug: £186 (direct) (↑ £5.50 vs yesterday)
+• Tue 25 Aug: £169.50 (direct) (↑ £6.40 vs yesterday)
 
 Full tracker: https://sophie-train-tracker.vercel.app

@@ -1,11 +1,11 @@
 {
-  "probed_at": "2026-08-05T01:21:33Z",
+  "probed_at": "2026-08-06T09:39:22Z",
   "horizon_probe": {
     "probe_date": "2027-02-02",
     "bookable": false,
     "coach_redirect": true,
-    "note": "not_bookable_yet queue is empty - probe informational only, nothing to promote. Edge probe: 2027-02-02 (181d out) coach-redirects, so horizon sits just short of it. Queue still needs topping up beyond 2026-12-10.",
-    "checked_at": "2026-08-05T01:21:33Z"
+    "note": "not_bookable_yet queue is empty - probe informational only, nothing to promote. Edge probe 2027-02-02 still coach-redirects. Queue needs topping up beyond 2026-12-10.",
+    "checked_at": "2026-08-06T09:39:22Z"
   },
   "tuesdays": [
     {
@@ -44,7 +44,7 @@
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 48.5
+          "price": 44.5
         },
         {
           "dep": "10:01",
@@ -71,7 +71,7 @@
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 48.5
+          "price": 44.5
         },
         {
           "dep": "20:00",
@@ -81,7 +81,7 @@
         {
           "dep": "20:30",
           "arr": "22:36",
-          "price": 48.5
+          "price": 44.5
         },
         {
           "dep": "21:02",
@@ -94,7 +94,7 @@
           "price": 49.3
         }
       ],
-      "twox_advance_premium": 66.5
+      "twox_advance_premium": null
     },
     {
       "date": "2026-08-18",
@@ -132,7 +132,7 @@
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 48.5
+          "price": 44.5
         },
         {
           "dep": "10:01",
@@ -149,17 +149,17 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 87.8
+          "price": 93.3
         },
         {
           "dep": "19:00",
           "arr": "21:16",
-          "price": 65.0
+          "price": 67.5
         },
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 48.5
+          "price": 44.5
         },
         {
           "dep": "20:00",
@@ -182,7 +182,7 @@
           "price": 27.0
         }
       ],
-      "twox_advance_premium": 72.0
+      "twox_advance_premium": null
     },
     {
       "date": "2026-08-25",
@@ -215,12 +215,12 @@
         {
           "dep": "09:02",
           "arr": "11:20",
-          "price": 67.8
+          "price": 68.1
         },
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 48.5
+          "price": 44.5
         },
         {
           "dep": "10:01",
@@ -237,7 +237,7 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 70.4
+          "price": 76.8
         },
         {
           "dep": "19:00",
@@ -247,7 +247,7 @@
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 48.5
+          "price": 44.5
         },
         {
           "dep": "20:00",
@@ -270,7 +270,7 @@
           "price": 27.0
         }
       ],
-      "twox_advance_premium": 57.9
+      "twox_advance_premium": null
     },
     {
       "date": "2026-09-01",
@@ -278,12 +278,12 @@
         {
           "dep": "07:05",
           "arr": "09:05",
-          "price": 88.2
+          "price": 89.7
         },
         {
           "dep": "07:36",
           "arr": "09:34",
-          "price": 88.2
+          "price": 89.7
         },
         {
           "dep": "08:08",
@@ -308,7 +308,7 @@
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 48.5
+          "price": 44.5
         },
         {
           "dep": "10:01",
@@ -325,7 +325,7 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 64.5
+          "price": 67.0
         },
         {
           "dep": "19:00",
@@ -335,7 +335,7 @@
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 48.5
+          "price": 44.5
         },
         {
           "dep": "20:00",
@@ -358,7 +358,7 @@
           "price": 27.0
         }
       ],
-      "twox_advance_premium": 22.3
+      "twox_advance_premium": null
     },
     {
       "date": "2026-09-08",
@@ -366,12 +366,12 @@
         {
           "dep": "07:05",
           "arr": "09:05",
-          "price": 86.7
+          "price": 88.2
         },
         {
           "dep": "07:36",
           "arr": "09:34",
-          "price": 86.7
+          "price": 88.2
         },
         {
           "dep": "08:08",
@@ -396,7 +396,7 @@
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 48.5
+          "price": 44.5
         },
         {
           "dep": "10:01",
@@ -418,12 +418,12 @@
         {
           "dep": "19:00",
           "arr": "21:16",
-          "price": 57.5
+          "price": 60.0
         },
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 45.5
+          "price": 44.5
         },
         {
           "dep": "20:00",
@@ -446,7 +446,7 @@
           "price": 27.0
         }
       ],
-      "twox_advance_premium": 13.3
+      "twox_advance_premium": null
     },
     {
       "date": "2026-10-15",
@@ -454,17 +454,17 @@
         {
           "dep": "07:05",
           "arr": "09:05",
-          "price": 54.5
+          "price": 51.5
         },
         {
           "dep": "07:38",
           "arr": "09:34",
-          "price": 54.5
+          "price": 51.5
         },
         {
           "dep": "08:08",
           "arr": "10:06",
-          "price": 54.5
+          "price": 51.5
         },
         {
           "dep": "08:23",
@@ -484,7 +484,7 @@
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 39.5
+          "price": 37.0
         },
         {
           "dep": "09:57",
@@ -501,7 +501,7 @@
         {
           "dep": "18:30",
           "arr": "20:33",
-          "price": 54.5
+          "price": 51.5
         },
         {
           "dep": "19:00",
@@ -511,7 +511,7 @@
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 39.5
+          "price": 37.0
         },
         {
           "dep": "20:00",
@@ -521,12 +521,12 @@
         {
           "dep": "20:30",
           "arr": "22:36",
-          "price": 39.5
+          "price": 37.0
         },
         {
           "dep": "21:02",
           "arr": "23:24",
-          "price": 42.5
+          "price": 43.0
         },
         {
           "dep": "22:03",
@@ -534,7 +534,7 @@
           "price": 39.5
         }
       ],
-      "twox_advance_premium": 0.0
+      "twox_advance_premium": null
     },
     {
       "date": "2026-10-22",
@@ -552,7 +552,7 @@
         {
           "dep": "08:08",
           "arr": "10:06",
-          "price": 66.3
+          "price": 61.5
         },
         {
           "dep": "08:23",
@@ -572,19 +572,19 @@
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "10:01",
           "arr": "12:09",
-          "price": 36.5
+          "price": 37.0
         }
       ],
       "inward": [
         {
           "dep": "18:01",
           "arr": "20:11",
-          "price": 48.5
+          "price": 49.0
         },
         {
           "dep": "18:30",
@@ -599,7 +599,7 @@
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "20:00",
@@ -622,7 +622,7 @@
           "price": 27.0
         }
       ],
-      "twox_advance_premium": 18.6
+      "twox_advance_premium": null
     },
     {
       "date": "2026-10-29",
@@ -640,7 +640,7 @@
         {
           "dep": "08:08",
           "arr": "10:06",
-          "price": 66.3
+          "price": 61.5
         },
         {
           "dep": "08:23",
@@ -660,19 +660,19 @@
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "10:01",
           "arr": "12:09",
-          "price": 49.3
+          "price": 37.0
         }
       ],
       "inward": [
         {
           "dep": "18:01",
           "arr": "20:11",
-          "price": 48.5
+          "price": 49.0
         },
         {
           "dep": "18:30",
@@ -687,7 +687,7 @@
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "20:00",
@@ -710,7 +710,7 @@
           "price": 27.0
         }
       ],
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     },
     {
       "date": "2026-11-05",
@@ -728,7 +728,7 @@
         {
           "dep": "08:08",
           "arr": "10:06",
-          "price": 66.3
+          "price": 61.5
         },
         {
           "dep": "08:23",
@@ -748,19 +748,19 @@
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "10:01",
           "arr": "12:09",
-          "price": 49.3
+          "price": 37.0
         }
       ],
       "inward": [
         {
           "dep": "18:01",
           "arr": "20:11",
-          "price": 48.5
+          "price": 49.0
         },
         {
           "dep": "18:30",
@@ -775,7 +775,7 @@
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "20:00",
@@ -798,7 +798,7 @@
           "price": 27.0
         }
       ],
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     },
     {
       "date": "2026-11-12",
@@ -816,7 +816,7 @@
         {
           "dep": "08:08",
           "arr": "10:06",
-          "price": 66.3
+          "price": 61.5
         },
         {
           "dep": "08:23",
@@ -836,19 +836,19 @@
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "10:01",
           "arr": "12:09",
-          "price": 49.3
+          "price": 37.0
         }
       ],
       "inward": [
         {
           "dep": "18:01",
           "arr": "20:11",
-          "price": 48.5
+          "price": 49.0
         },
         {
           "dep": "18:30",
@@ -863,7 +863,7 @@
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "20:00",
@@ -886,7 +886,7 @@
           "price": 27.0
         }
       ],
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     },
     {
       "date": "2026-11-19",
@@ -904,7 +904,7 @@
         {
           "dep": "08:08",
           "arr": "10:06",
-          "price": 66.3
+          "price": 61.5
         },
         {
           "dep": "08:23",
@@ -924,19 +924,19 @@
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "10:01",
           "arr": "12:09",
-          "price": 49.3
+          "price": 37.0
         }
       ],
       "inward": [
         {
           "dep": "18:01",
           "arr": "20:11",
-          "price": 48.5
+          "price": 49.0
         },
         {
           "dep": "18:30",
@@ -951,7 +951,7 @@
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "20:00",
@@ -974,7 +974,7 @@
           "price": 27.0
         }
       ],
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     },
     {
       "date": "2026-11-26",
@@ -992,7 +992,7 @@
         {
           "dep": "08:08",
           "arr": "10:06",
-          "price": 66.3
+          "price": 61.5
         },
         {
           "dep": "08:23",
@@ -1012,19 +1012,19 @@
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "10:01",
           "arr": "12:09",
-          "price": 49.3
+          "price": 37.0
         }
       ],
       "inward": [
         {
           "dep": "18:01",
           "arr": "20:11",
-          "price": 48.5
+          "price": 49.0
         },
         {
           "dep": "18:30",
@@ -1039,7 +1039,7 @@
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "20:00",
@@ -1062,7 +1062,7 @@
           "price": 27.0
         }
       ],
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     },
     {
       "date": "2026-12-03",
@@ -1080,7 +1080,7 @@
         {
           "dep": "08:08",
           "arr": "10:06",
-          "price": 66.3
+          "price": 61.5
         },
         {
           "dep": "08:23",
@@ -1100,19 +1100,19 @@
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "10:01",
           "arr": "12:09",
-          "price": 49.3
+          "price": 37.0
         }
       ],
       "inward": [
         {
           "dep": "18:01",
           "arr": "20:11",
-          "price": 48.5
+          "price": 49.0
         },
         {
           "dep": "18:30",
@@ -1127,7 +1127,7 @@
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "20:00",
@@ -1150,7 +1150,7 @@
           "price": 27.0
         }
       ],
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     },
     {
       "date": "2026-12-10",
@@ -1168,7 +1168,7 @@
         {
           "dep": "08:08",
           "arr": "10:06",
-          "price": 66.3
+          "price": 61.5
         },
         {
           "dep": "08:23",
@@ -1188,19 +1188,19 @@
         {
           "dep": "09:41",
           "arr": "11:34",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "10:01",
           "arr": "12:09",
-          "price": 49.3
+          "price": 37.0
         }
       ],
       "inward": [
         {
           "dep": "18:01",
           "arr": "20:11",
-          "price": 48.5
+          "price": 49.0
         },
         {
           "dep": "18:30",
@@ -1215,7 +1215,7 @@
         {
           "dep": "19:30",
           "arr": "21:30",
-          "price": 48.5
+          "price": 39.5
         },
         {
           "dep": "20:00",
@@ -1238,7 +1238,7 @@
           "price": 27.0
         }
       ],
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     }
   ]
 }
