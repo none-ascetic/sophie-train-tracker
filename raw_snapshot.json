@@ -1,5 +1,5 @@
 {
-  "probed_at": "2026-08-08T02:07:35Z",
+  "probed_at": "2026-08-10T06:18:26Z",
   "horizon_probe": null,
   "tuesdays": [
     {
@@ -93,7 +93,7 @@
         "total": 186.0,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 66.5
+      "twox_advance_premium": null
     },
     {
       "date": "2026-08-18",
@@ -186,7 +186,7 @@
         "total": 186.0,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 66.5
+      "twox_advance_premium": null
     },
     {
       "date": "2026-08-25",
@@ -241,7 +241,7 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 76.8
+          "price": 87.8
         },
         {
           "dep": "19:00",
@@ -276,10 +276,10 @@
       ],
       "splitsave": {
         "available": true,
-        "total": 169.5,
+        "total": 180.5,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 51.5
+      "twox_advance_premium": null
     },
     {
       "date": "2026-09-01",
@@ -287,12 +287,12 @@
         {
           "dep": "07:05",
           "arr": "09:05",
-          "price": 89.7
+          "price": 91.2
         },
         {
           "dep": "07:36",
           "arr": "09:34",
-          "price": 89.7
+          "price": 91.2
         },
         {
           "dep": "08:08",
@@ -312,7 +312,7 @@
         {
           "dep": "09:02",
           "arr": "11:20",
-          "price": 67.8
+          "price": 68.1
         },
         {
           "dep": "09:41",
@@ -339,7 +339,7 @@
         {
           "dep": "19:00",
           "arr": "21:16",
-          "price": 62.5
+          "price": 65.0
         },
         {
           "dep": "19:30",
@@ -369,10 +369,10 @@
       ],
       "splitsave": {
         "available": true,
-        "total": 156.7,
+        "total": 158.2,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 31.3
+      "twox_advance_premium": null
     },
     {
       "date": "2026-09-08",
@@ -427,7 +427,7 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 64.5
+          "price": 67.0
         },
         {
           "dep": "19:00",
@@ -462,10 +462,10 @@
       ],
       "splitsave": {
         "available": true,
-        "total": 152.7,
+        "total": 155.2,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 22.3
+      "twox_advance_premium": null
     },
     {
       "date": "2026-10-15",
@@ -558,7 +558,7 @@
         "total": 103.0,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 6.0
+      "twox_advance_premium": null
     },
     {
       "date": "2026-10-22",
@@ -651,7 +651,7 @@
         "total": 80.3,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 15.6
+      "twox_advance_premium": null
     },
     {
       "date": "2026-10-29",
@@ -744,7 +744,7 @@
         "total": 70.8,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     },
     {
       "date": "2026-11-05",
@@ -837,7 +837,7 @@
         "total": 70.8,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     },
     {
       "date": "2026-11-12",
@@ -930,7 +930,7 @@
         "total": 70.8,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     },
     {
       "date": "2026-11-19",
@@ -1023,7 +1023,7 @@
         "total": 70.8,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     },
     {
       "date": "2026-11-26",
@@ -1116,7 +1116,7 @@
         "total": 70.8,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     },
     {
       "date": "2026-12-03",
@@ -1209,7 +1209,7 @@
         "total": 70.8,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     },
     {
       "date": "2026-12-10",
@@ -1302,7 +1302,7 @@
         "total": 70.8,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": 1.7
+      "twox_advance_premium": null
     }
   ]
 }
