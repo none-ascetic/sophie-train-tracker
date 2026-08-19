@@ -24,7 +24,9 @@ Load `$WORK/prices.json` and classify each entry:
 
 - `tuesdays` with `booked: true` → **skip** (already paid for).
 - `tuesdays` with `booked: false` → **scrape today**.
-- `not_bookable_yet` → the first entry is today's horizon probe.
+- `not_bookable_yet` → the first entry is today's horizon probe. **If the list is empty, skip step 2** and record `horizon_probe.no_queue = true`. That's the steady state once the queue drains, not a failure.
+
+**Prune passed dates first.** `expected_dates()` has no past-date filter, so a date that has come and gone stays in `tuesdays` forever and hard-fails validation every night (Trainline won't return rows for it). Drop any entry with `date < today` from `prices.json` before scraping. Done manually each time so far (07-07, 07-14, 08-18) — worth a code fix in `expected_dates`.
 
 ### 2. Horizon probe (1 lookup)
 
@@ -64,7 +66,7 @@ Per date (≈5–7s, ≈100s total across 20 dates):
 2. If either radio is not `.checked`, click it. Trainline auto-selects the cheapest row by default, NOT the 07:36.
 3. Click `[data-test="cjs-button-continue"]`.
 4. Wait up to 15s for URL to contain `/book/ticket-options`. Timeout → record null.
-5. Parse `document.body.innerText`. Find the `Ticket type` section. Scan for `+£X.XX` lines with the preceding line as the ticket-type name. Expect `SplitSave` `+£0.00`, `2x Single Tickets` `+£X.XX`, `Anytime Return` `+£X.XX`.
+5. Parse `document.body.innerText`. The section heading is **`Select Flexibility`**, not `Ticket type` (corrected 2026-08-19 — the old label never matched, so a naive gate on it times out every time). Do **not** gate on the word `SplitSave` alone either: it renders before the prices do, and you'll parse an empty set. Gate on `/\+£[\d.]+/` AND `/2x Single Tickets/`. Then scan for `+£X.XX` lines with the preceding line as the ticket-type name. Expect `SplitSave` `+£0.00`, `2x Single Tickets` `+£X.XX`, `Anytime Return` `+£X.XX`. The `Standard` headline (line after `Standard`) is a useful cross-check — it equals scraped outward + inward.
 6. Record the `2x Single Tickets` delta as `twox_advance_premium` on this date.
 
 ### 5. Write `$WORK/raw_snapshot.json`
