@@ -1,106 +1,14 @@
 {
-  "probed_at": "2026-08-18T01:13:13Z",
+  "probed_at": "2026-08-19T01:16:56Z",
   "horizon_probe": {
     "probe_date": null,
-    "bookable": null,
-    "coach_redirect": null,
-    "note": "not_bookable_yet queue is empty - no probe target",
-    "checked_at": "2026-08-18T01:13:13Z"
+    "bookable": false,
+    "coach_redirect": false,
+    "no_queue": true,
+    "note": "not_bookable_yet is empty \u2014 queue drained, nothing to probe. Steady state until Paddy tops up beyond 2026-12-10.",
+    "checked_at": "2026-08-19T01:16:56Z"
   },
   "tuesdays": [
-    {
-      "date": "2026-08-18",
-      "outward": [
-        {
-          "dep": "07:05",
-          "arr": "09:05",
-          "price": 93.7
-        },
-        {
-          "dep": "07:36",
-          "arr": "09:34",
-          "price": 93.7
-        },
-        {
-          "dep": "08:08",
-          "arr": "10:06",
-          "price": 68.1
-        },
-        {
-          "dep": "08:23",
-          "arr": "10:36",
-          "price": 68.1
-        },
-        {
-          "dep": "08:23",
-          "arr": "10:45",
-          "price": 68.1
-        },
-        {
-          "dep": "09:02",
-          "arr": "11:20",
-          "price": 68.1
-        },
-        {
-          "dep": "09:41",
-          "arr": "11:34",
-          "price": 47.2
-        },
-        {
-          "dep": "10:01",
-          "arr": "12:09",
-          "price": 49.3
-        }
-      ],
-      "inward": [
-        {
-          "dep": "18:01",
-          "arr": "20:11",
-          "price": 78.9
-        },
-        {
-          "dep": "18:30",
-          "arr": "20:27",
-          "price": 110.7
-        },
-        {
-          "dep": "19:00",
-          "arr": "21:16",
-          "price": 68.1
-        },
-        {
-          "dep": "19:30",
-          "arr": "21:30",
-          "price": 45.7
-        },
-        {
-          "dep": "20:00",
-          "arr": "22:19",
-          "price": 49.3
-        },
-        {
-          "dep": "20:30",
-          "arr": "22:36",
-          "price": 45.7
-        },
-        {
-          "dep": "21:02",
-          "arr": "23:24",
-          "price": 49.3
-        },
-        {
-          "dep": "22:03",
-          "arr": "00:41",
-          "price": 49.3
-        }
-      ],
-      "splitsave": {
-        "available": true,
-        "total": 204.4,
-        "savings_vs_direct": 0
-      },
-      "twox_advance_premium": null
-    },
     {
       "date": "2026-08-25",
       "outward": [
@@ -174,17 +82,17 @@
         {
           "dep": "20:30",
           "arr": "22:36",
-          "price": 28.5
+          "price": 44.5
         },
         {
           "dep": "21:02",
           "arr": "23:24",
-          "price": 39.3
+          "price": 49.3
         },
         {
           "dep": "22:03",
           "arr": "00:03",
-          "price": 37.4
+          "price": 48.5
         }
       ],
       "splitsave": {
@@ -192,7 +100,7 @@
         "total": 186.0,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": null
+      "twox_advance_premium": 66.5
     },
     {
       "date": "2026-09-01",
@@ -220,7 +128,7 @@
         {
           "dep": "08:23",
           "arr": "10:45",
-          "price": 27.0
+          "price": 62.0
         },
         {
           "dep": "09:02",
@@ -285,7 +193,7 @@
         "total": 180.5,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": null
+      "twox_advance_premium": 61.5
     },
     {
       "date": "2026-09-08",
@@ -293,12 +201,12 @@
         {
           "dep": "07:05",
           "arr": "09:05",
-          "price": 91.2
+          "price": 92.7
         },
         {
           "dep": "07:36",
           "arr": "09:34",
-          "price": 91.2
+          "price": 92.7
         },
         {
           "dep": "08:08",
@@ -340,7 +248,7 @@
         {
           "dep": "18:30",
           "arr": "20:27",
-          "price": 67.0
+          "price": 76.8
         },
         {
           "dep": "19:00",
@@ -375,10 +283,10 @@
       ],
       "splitsave": {
         "available": true,
-        "total": 158.2,
+        "total": 169.5,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": null
+      "twox_advance_premium": 41.0
     },
     {
       "date": "2026-10-15",
@@ -471,7 +379,7 @@
         "total": 109.0,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": null
+      "twox_advance_premium": 7.5
     },
     {
       "date": "2026-10-22",
@@ -564,7 +472,7 @@
         "total": 80.3,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": null
+      "twox_advance_premium": 15.6
     },
     {
       "date": "2026-10-29",
@@ -657,7 +565,7 @@
         "total": 80.3,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": null
+      "twox_advance_premium": 15.6
     },
     {
       "date": "2026-11-05",
@@ -750,7 +658,7 @@
         "total": 70.8,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": null
+      "twox_advance_premium": 1.7
     },
     {
       "date": "2026-11-12",
@@ -843,7 +751,7 @@
         "total": 70.8,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": null
+      "twox_advance_premium": 1.7
     },
     {
       "date": "2026-11-19",
@@ -936,7 +844,7 @@
         "total": 70.8,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": null
+      "twox_advance_premium": 1.7
     },
     {
       "date": "2026-11-26",
@@ -1029,7 +937,7 @@
         "total": 70.8,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": null
+      "twox_advance_premium": 1.7
     },
     {
       "date": "2026-12-03",
@@ -1122,7 +1030,7 @@
         "total": 70.8,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": null
+      "twox_advance_premium": 1.7
     },
     {
       "date": "2026-12-10",
@@ -1215,7 +1123,7 @@
         "total": 70.8,
         "savings_vs_direct": 0
       },
-      "twox_advance_premium": null
+      "twox_advance_premium": 1.7
     }
   ]
 }
