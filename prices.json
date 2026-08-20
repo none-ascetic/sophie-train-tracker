@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "run_date": "2026-04-22",
-  "route": "YAT\u2194PAD",
+  "route": "YAT↔PAD",
   "constraints": {
     "out_latest": "07:36",
     "return_earliest": "18:30",
@@ -10,8 +10,8 @@
     "passenger": "adult"
   },
   "booking_horizon_weeks": 24,
-  "booking_horizon_note": "Bookable today: up to 18 Oct 2026 (179 days / 25 weeks out). 19 Oct redirects to coach-only page \u2014 just beyond Trainline horizon. Horizon rolls forward +1 day daily. Next Tuesday to unlock: 20 Oct (available 24 Apr 2026).",
-  "constraint_note": "Sophie commutes peak morning \u2014 no later than the 07:36 from Yatton. Fares in this window are \u00a3100+ (peak Advance), not the \u00a327-\u00a367 off-peak tier that's only on the 08:08+. | 2026-04-28: Sophie switching commute day from Tue \u2192 Thu starting Thu 1 Oct. Tue 13/20 Oct dropped. Thu 8/15/22 Oct added. Same time slots (07:36 OUT, 18:30 RETURN).",
+  "booking_horizon_note": "Bookable today: up to 18 Oct 2026 (179 days / 25 weeks out). 19 Oct redirects to coach-only page — just beyond Trainline horizon. Horizon rolls forward +1 day daily. Next Tuesday to unlock: 20 Oct (available 24 Apr 2026).",
+  "constraint_note": "Sophie commutes peak morning — no later than the 07:36 from Yatton. Fares in this window are £100+ (peak Advance), not the £27-£67 off-peak tier that's only on the 08:08+. | 2026-04-28: Sophie switching commute day from Tue → Thu starting Thu 1 Oct. Tue 13/20 Oct dropped. Thu 8/15/22 Oct added. Same time slots (07:36 OUT, 18:30 RETURN).",
   "sources": {
     "primary": "trainline",
     "fallback": "national_rail"
@@ -422,7 +422,9 @@
       },
       "back_alternatives": [],
       "total_cheapest": 186.0,
-      "notes": "OUT 07:36 Advance Single \u00a377.10 + RETURN 18:30 Advance Single \u00a327.00. \u00a322.90 below baseline \u2014 fair price, book within a week."
+      "notes": "OUT 07:36 Advance Single £77.10 + RETURN 18:30 Advance Single £27.00. £22.90 below baseline — fair price, book within a week.",
+      "booked": true,
+      "booking_note": "Booked by Sophie — confirmed via Paddy on 2026-08-20 (booked through 5 Nov)"
     },
     {
       "date": "2026-09-01",
@@ -829,7 +831,9 @@
       },
       "back_alternatives": [],
       "total_cheapest": 186.0,
-      "notes": "OUT 07:36 Advance Single \u00a386.70 + RETURN 18:30 Advance Single \u00a327.00. \u00a313.30 below \u00a3127 baseline \u2014 stable summer pricing."
+      "notes": "OUT 07:36 Advance Single £86.70 + RETURN 18:30 Advance Single £27.00. £13.30 below £127 baseline — stable summer pricing.",
+      "booked": true,
+      "booking_note": "Booked by Sophie — confirmed via Paddy on 2026-08-20 (booked through 5 Nov)"
     },
     {
       "date": "2026-09-08",
@@ -1236,7 +1240,9 @@
       },
       "back_alternatives": [],
       "total_cheapest": 169.5,
-      "notes": "OUT 07:36 Advance Single \u00a386.70 + RETURN 18:30 Advance Single \u00a327.00. \u00a313.30 below \u00a3127 baseline \u2014 stable summer pricing."
+      "notes": "OUT 07:36 Advance Single £86.70 + RETURN 18:30 Advance Single £27.00. £13.30 below £127 baseline — stable summer pricing.",
+      "booked": true,
+      "booking_note": "Booked by Sophie — confirmed via Paddy on 2026-08-20 (booked through 5 Nov)"
     },
     {
       "date": "2026-09-15",
@@ -2177,9 +2183,9 @@
       },
       "back_alternatives": [],
       "total_cheapest": 70.8,
-      "notes": "CHEAP: OUT 07:36 Advance Single \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. \u00a356.20 below \u00a3127 baseline \u2014 book today to lock in.",
+      "notes": "CHEAP: OUT 07:36 Advance Single £43.80 + RETURN 18:30 Advance Single £27.00. £56.20 below £127 baseline — book today to lock in.",
       "booked": true,
-      "booking_note": "Booked by Sophie \u2014 confirmed via Paddy on 2026-04-28"
+      "booking_note": "Booked by Sophie — confirmed via Paddy on 2026-04-28"
     },
     {
       "date": "2026-09-22",
@@ -3120,9 +3126,9 @@
       },
       "back_alternatives": [],
       "total_cheapest": 70.8,
-      "notes": "CHEAP: OUT 07:36 Advance Single \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. \u00a356.20 below \u00a3127 baseline \u2014 book today to lock in.",
+      "notes": "CHEAP: OUT 07:36 Advance Single £43.80 + RETURN 18:30 Advance Single £27.00. £56.20 below £127 baseline — book today to lock in.",
       "booked": true,
-      "booking_note": "Booked by Sophie \u2014 confirmed via Paddy on 2026-04-28"
+      "booking_note": "Booked by Sophie — confirmed via Paddy on 2026-04-28"
     },
     {
       "date": "2026-10-01",
@@ -3448,7 +3454,7 @@
               }
             ]
           },
-          "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated. New Thursday entry \u2014 Sophie swapped commute day from Tuesday."
+          "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated. New Thursday entry — Sophie swapped commute day from Tuesday."
         }
       ],
       "change_vs_yesterday": {
@@ -3472,7 +3478,7 @@
       "total_cheapest": 70.8,
       "notes": "",
       "booked": true,
-      "booking_note": "Booked by Sophie \u2014 confirmed via Paddy on 2026-04-30."
+      "booking_note": "Booked by Sophie — confirmed via Paddy on 2026-04-30."
     },
     {
       "date": "2026-10-15",
@@ -3879,8 +3885,9 @@
       },
       "back_alternatives": [],
       "total_cheapest": 109.0,
-      "notes": "OUT 07:36 SplitSave \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. New Thursday \u2014 Sophie swapped commute day from 1 Oct.",
-      "booked": false
+      "notes": "OUT 07:36 SplitSave £43.80 + RETURN 18:30 Advance Single £27.00. New Thursday — Sophie swapped commute day from 1 Oct.",
+      "booked": true,
+      "booking_note": "Booked by Sophie — confirmed via Paddy on 2026-08-20 (booked through 5 Nov)"
     },
     {
       "date": "2026-10-22",
@@ -3903,9 +3910,9 @@
         "cheapest_direct_total": 80.3,
         "cheapest_any_total": 80.3,
         "splitsave": {
-          "available": true,
-          "total": 61.8,
-          "savings_vs_direct": 18.5
+          "available": null,
+          "total": null,
+          "savings_vs_direct": null
         },
         "parse_confidence": "ok",
         "_raw_rows": {
@@ -3994,7 +4001,8 @@
             }
           ]
         },
-        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
+        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.",
+        "_splitsave_note": "2026-08-20: discarded £61.8 — basket priced the auto-selected cheapest rows, not the 07:36/18:30 pair (validated legs total £80.3)."
       },
       "history": [
         {
@@ -4287,8 +4295,9 @@
       },
       "back_alternatives": [],
       "total_cheapest": 80.3,
-      "notes": "OUT 07:36 SplitSave \u00a343.80 + RETURN 18:30 Advance Single \u00a327.00. New Thursday \u2014 Sophie swapped commute day from 1 Oct.",
-      "booked": false
+      "notes": "OUT 07:36 SplitSave £43.80 + RETURN 18:30 Advance Single £27.00. New Thursday — Sophie swapped commute day from 1 Oct.",
+      "booked": true,
+      "booking_note": "Booked by Sophie — confirmed via Paddy on 2026-08-20 (booked through 5 Nov)"
     },
     {
       "date": "2026-10-29",
@@ -4311,9 +4320,9 @@
         "cheapest_direct_total": 80.3,
         "cheapest_any_total": 80.3,
         "splitsave": {
-          "available": true,
-          "total": 61.8,
-          "savings_vs_direct": 18.5
+          "available": null,
+          "total": null,
+          "savings_vs_direct": null
         },
         "parse_confidence": "ok",
         "_raw_rows": {
@@ -4402,7 +4411,8 @@
             }
           ]
         },
-        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
+        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.",
+        "_splitsave_note": "2026-08-20: discarded £61.8 — basket priced the auto-selected cheapest rows, not the 07:36/18:30 pair (validated legs total £80.3)."
       },
       "history": [
         {
@@ -4692,7 +4702,9 @@
         "time": "18:30",
         "arrival": "20:27",
         "fare": 34.8
-      }
+      },
+      "booked": true,
+      "booking_note": "Booked by Sophie — confirmed via Paddy on 2026-08-20 (booked through 5 Nov)"
     },
     {
       "date": "2026-11-05",
@@ -4715,9 +4727,9 @@
         "cheapest_direct_total": 70.8,
         "cheapest_any_total": 70.8,
         "splitsave": {
-          "available": true,
-          "total": 54.0,
-          "savings_vs_direct": 16.8
+          "available": null,
+          "total": null,
+          "savings_vs_direct": null
         },
         "parse_confidence": "ok",
         "_raw_rows": {
@@ -4806,7 +4818,8 @@
             }
           ]
         },
-        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
+        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.",
+        "_splitsave_note": "2026-08-20: discarded £54.0 — basket priced the auto-selected cheapest rows, not the 07:36/18:30 pair (validated legs total £70.8)."
       },
       "history": [
         {
@@ -5096,7 +5109,9 @@
         "time": "18:30",
         "arrival": "20:27",
         "fare": 27.0
-      }
+      },
+      "booked": true,
+      "booking_note": "Booked by Sophie — confirmed via Paddy on 2026-08-20 (booked through 5 Nov)"
     },
     {
       "date": "2026-11-12",
@@ -5119,9 +5134,9 @@
         "cheapest_direct_total": 70.8,
         "cheapest_any_total": 70.8,
         "splitsave": {
-          "available": true,
-          "total": 54.0,
-          "savings_vs_direct": 16.8
+          "available": null,
+          "total": null,
+          "savings_vs_direct": null
         },
         "parse_confidence": "ok",
         "_raw_rows": {
@@ -5210,7 +5225,8 @@
             }
           ]
         },
-        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
+        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.",
+        "_splitsave_note": "2026-08-20: discarded £54.0 — basket priced the auto-selected cheapest rows, not the 07:36/18:30 pair (validated legs total £70.8)."
       },
       "history": [
         {
@@ -5523,9 +5539,9 @@
         "cheapest_direct_total": 70.8,
         "cheapest_any_total": 70.8,
         "splitsave": {
-          "available": true,
-          "total": 54.0,
-          "savings_vs_direct": 16.8
+          "available": null,
+          "total": null,
+          "savings_vs_direct": null
         },
         "parse_confidence": "ok",
         "_raw_rows": {
@@ -5614,7 +5630,8 @@
             }
           ]
         },
-        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
+        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.",
+        "_splitsave_note": "2026-08-20: discarded £54.0 — basket priced the auto-selected cheapest rows, not the 07:36/18:30 pair (validated legs total £70.8)."
       },
       "history": [
         {
@@ -5927,9 +5944,9 @@
         "cheapest_direct_total": 70.8,
         "cheapest_any_total": 70.8,
         "splitsave": {
-          "available": true,
-          "total": 54.0,
-          "savings_vs_direct": 16.8
+          "available": null,
+          "total": null,
+          "savings_vs_direct": null
         },
         "parse_confidence": "ok",
         "_raw_rows": {
@@ -6018,7 +6035,8 @@
             }
           ]
         },
-        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
+        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.",
+        "_splitsave_note": "2026-08-20: discarded £54.0 — basket priced the auto-selected cheapest rows, not the 07:36/18:30 pair (validated legs total £70.8)."
       },
       "history": [
         {
@@ -6331,9 +6349,9 @@
         "cheapest_direct_total": 70.8,
         "cheapest_any_total": 70.8,
         "splitsave": {
-          "available": true,
-          "total": 54.0,
-          "savings_vs_direct": 16.8
+          "available": null,
+          "total": null,
+          "savings_vs_direct": null
         },
         "parse_confidence": "ok",
         "_raw_rows": {
@@ -6422,7 +6440,8 @@
             }
           ]
         },
-        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
+        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.",
+        "_splitsave_note": "2026-08-20: discarded £54.0 — basket priced the auto-selected cheapest rows, not the 07:36/18:30 pair (validated legs total £70.8)."
       },
       "history": [
         {
@@ -6735,9 +6754,9 @@
         "cheapest_direct_total": 70.8,
         "cheapest_any_total": 70.8,
         "splitsave": {
-          "available": true,
-          "total": 54.0,
-          "savings_vs_direct": 16.8
+          "available": null,
+          "total": null,
+          "savings_vs_direct": null
         },
         "parse_confidence": "ok",
         "_raw_rows": {
@@ -6826,7 +6845,8 @@
             }
           ]
         },
-        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated."
+        "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.",
+        "_splitsave_note": "2026-08-20: discarded £54.0 — basket priced the auto-selected cheapest rows, not the 07:36/18:30 pair (validated legs total £70.8)."
       },
       "history": [
         {
