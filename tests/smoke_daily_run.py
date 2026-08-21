@@ -15,6 +15,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from datetime import datetime, timezone
 from pathlib import Path
 
 SRC = Path(__file__).resolve().parent.parent  # Train Tickets/
@@ -23,15 +24,18 @@ SRC = Path(__file__).resolve().parent.parent  # Train Tickets/
 def build_valid_snapshot(prices: dict) -> dict:
     """One synthetic scrape row per unbooked Tuesday, using each entry's
     existing current prices so the validated run matches reality."""
+    # Must be "now" — daily_run rejects a raw_snapshot older than 20h, so a
+    # hardcoded date silently rots the fixture into a permanent failure.
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     snap = {
-        "probed_at": "2026-04-22T02:05:00Z",
+        "probed_at": now,
         "horizon_probe": {
             "probe_date": "2026-10-20",
             "bookable": False,
             "coach_redirect": True,
             "out_count": 0,
             "inw_count": 0,
-            "checked_at": "2026-04-22T02:03:00Z",
+            "checked_at": now,
             "note": "smoke test probe",
         },
         "tuesdays": [],
@@ -59,7 +63,15 @@ def build_valid_snapshot(prices: dict) -> dict:
 def run_in_tempdir(snapshot: dict) -> tuple[int, dict]:
     with tempfile.TemporaryDirectory() as td:
         td = Path(td)
-        for name in ("prices.json", "compose_imessage.py", "daily_run.py"):
+        # daily_run imports fare_history and generate_site at module level, so
+        # the temp dir needs them too or the run dies before it starts.
+        for name in (
+            "prices.json",
+            "compose_imessage.py",
+            "daily_run.py",
+            "fare_history.py",
+            "generate_site.py",
+        ):
             shutil.copy(SRC / name, td / name)
         (td / "horizon_log.jsonl").write_text("")
         (td / "raw_snapshot.json").write_text(json.dumps(snapshot))
@@ -78,6 +90,7 @@ def run_in_tempdir(snapshot: dict) -> tuple[int, dict]:
             "pending": (td / "pending_message.txt").read_text() if (td / "pending_message.txt").exists() else None,
             "horizon_log": (td / "horizon_log.jsonl").read_text(),
             "run_log": run_log_path.read_text() if run_log_path.exists() else None,
+            "prices": json.loads((td / "prices.json").read_text()),
         }
         return res.returncode, artifacts
 
@@ -103,6 +116,34 @@ def main() -> int:
     print("  run_status:", art_ok["status"])
     print("  pending preview:", art_ok["pending"].split('\n')[0])
     print("  run_log last entry:", {k: happy_log[k] for k in ("status", "scraped_trainline", "scrape_failures", "big_movers", "status_transitions")})
+
+    # ── poisoned basket ─────────────────────────────────────────────────
+    # Regression for 2026-08-20: the step-4 click-through priced Trainline's
+    # auto-selected cheapest rows instead of Sophie's 07:36/18:30, and the
+    # resulting £54 total reached her message as "cheapest unbooked". The run
+    # must still succeed (step 4 is non-blocking) but the phantom total and
+    # the premium derived from it must both be discarded.
+    snap_poison = build_valid_snapshot(prices)
+    target = snap_poison["tuesdays"][0]
+    real_total = target["splitsave"]["total"]
+    target["splitsave"] = {"available": True, "total": round(real_total - 16.8, 2)}
+    target["twox_advance_premium"] = 0.0
+    rc_p, art_p = run_in_tempdir(snap_poison)
+    assert rc_p == 0, f"poisoned basket should not fail the run, rc={rc_p}"
+    assert art_p["status"]["status"] == "ok", "step 4 is non-blocking — run stays ok"
+    poisoned_entry = next(
+        t for t in art_p["prices"]["tuesdays"] if t["date"] == target["date"]
+    )
+    ss = poisoned_entry["current"]["splitsave"]
+    assert ss["total"] is None, f"phantom basket total leaked into prices.json: {ss}"
+    assert poisoned_entry["current"].get("_splitsave_note"), "discard should be recorded"
+    # The validated legs are untouched — they come from the results page.
+    assert poisoned_entry["current"]["cheapest_any_total"] == real_total, (
+        "validated leg total must survive a bad basket"
+    )
+    assert str(real_total) in art_p["pending"] or "£" in art_p["pending"]
+    print("POISONED BASKET: OK")
+    print("  discarded:", poisoned_entry["current"]["_splitsave_note"])
 
     # ── missing row ─────────────────────────────────────────────────────
     snap_bad = build_valid_snapshot(prices)

@@ -5134,9 +5134,9 @@
         "cheapest_direct_total": 70.8,
         "cheapest_any_total": 70.8,
         "splitsave": {
-          "available": null,
-          "total": null,
-          "savings_vs_direct": null
+          "available": true,
+          "total": 70.8,
+          "savings_vs_direct": 0
         },
         "parse_confidence": "ok",
         "_raw_rows": {
@@ -5226,7 +5226,7 @@
           ]
         },
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.",
-        "_splitsave_note": "2026-08-20: discarded £54.0 — basket priced the auto-selected cheapest rows, not the 07:36/18:30 pair (validated legs total £70.8)."
+        "_note_on_premium": "Recaptured 2026-08-21 with hardened premium_capture.js — basket reconciles."
       },
       "history": [
         {
@@ -5539,9 +5539,9 @@
         "cheapest_direct_total": 70.8,
         "cheapest_any_total": 70.8,
         "splitsave": {
-          "available": null,
-          "total": null,
-          "savings_vs_direct": null
+          "available": true,
+          "total": 70.8,
+          "savings_vs_direct": 0
         },
         "parse_confidence": "ok",
         "_raw_rows": {
@@ -5631,7 +5631,7 @@
           ]
         },
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.",
-        "_splitsave_note": "2026-08-20: discarded £54.0 — basket priced the auto-selected cheapest rows, not the 07:36/18:30 pair (validated legs total £70.8)."
+        "_note_on_premium": "Recaptured 2026-08-21 with hardened premium_capture.js — basket reconciles."
       },
       "history": [
         {
@@ -5944,9 +5944,9 @@
         "cheapest_direct_total": 70.8,
         "cheapest_any_total": 70.8,
         "splitsave": {
-          "available": null,
-          "total": null,
-          "savings_vs_direct": null
+          "available": true,
+          "total": 70.8,
+          "savings_vs_direct": 0
         },
         "parse_confidence": "ok",
         "_raw_rows": {
@@ -6036,7 +6036,7 @@
           ]
         },
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.",
-        "_splitsave_note": "2026-08-20: discarded £54.0 — basket priced the auto-selected cheapest rows, not the 07:36/18:30 pair (validated legs total £70.8)."
+        "_note_on_premium": "Recaptured 2026-08-21 with hardened premium_capture.js — basket reconciles."
       },
       "history": [
         {
@@ -6349,9 +6349,9 @@
         "cheapest_direct_total": 70.8,
         "cheapest_any_total": 70.8,
         "splitsave": {
-          "available": null,
-          "total": null,
-          "savings_vs_direct": null
+          "available": true,
+          "total": 70.8,
+          "savings_vs_direct": 0
         },
         "parse_confidence": "ok",
         "_raw_rows": {
@@ -6441,7 +6441,7 @@
           ]
         },
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.",
-        "_splitsave_note": "2026-08-20: discarded £54.0 — basket priced the auto-selected cheapest rows, not the 07:36/18:30 pair (validated legs total £70.8)."
+        "_note_on_premium": "Recaptured 2026-08-21 with hardened premium_capture.js — basket reconciles."
       },
       "history": [
         {
@@ -6754,9 +6754,9 @@
         "cheapest_direct_total": 70.8,
         "cheapest_any_total": 70.8,
         "splitsave": {
-          "available": null,
-          "total": null,
-          "savings_vs_direct": null
+          "available": true,
+          "total": 70.8,
+          "savings_vs_direct": 0
         },
         "parse_confidence": "ok",
         "_raw_rows": {
@@ -6846,7 +6846,7 @@
           ]
         },
         "_note_on_source": "Scraped via Chrome MCP. 07:36 OUT + 18:30 RETURN validated.",
-        "_splitsave_note": "2026-08-20: discarded £54.0 — basket priced the auto-selected cheapest rows, not the 07:36/18:30 pair (validated legs total £70.8)."
+        "_note_on_premium": "Recaptured 2026-08-21 with hardened premium_capture.js — basket reconciles."
       },
       "history": [
         {

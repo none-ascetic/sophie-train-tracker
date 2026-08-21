@@ -104,6 +104,52 @@ def validate_tuesday(entry: dict) -> tuple[bool, str, dict | None, dict | None]:
     return True, "", out_row, back_row
 
 
+NULL_BASKET = {"available": None, "total": None, "savings_vs_direct": None}
+
+
+def reconcile_basket(
+    entry: dict, out_row: dict, back_row: dict
+) -> tuple[dict, float | None, str | None]:
+    """Drop basket-derived figures that don't match the validated legs.
+
+    RUNBOOK step 4 clicks through to /book/ticket-options to read the basket
+    total and the 2x-Advance premium. Trainline pre-selects the CHEAPEST rows,
+    so when the target radios don't actually take, Continue prices a different
+    journey and the basket describes trains Sophie can't use — silently, with
+    a plausible-looking number.
+
+    Observed 2026-08-20: £54 reached her draft message as "cheapest unbooked"
+    when it was 08:23 out (£27) + 20:30 back (£27). Her real total was £70.80.
+
+    A trustworthy basket total equals out + back. Anything else is discarded,
+    and the premium goes with it — both come from the same basket, so if the
+    total is for the wrong trains the delta is too. A null is recoverable;
+    a wrong number that looks right is not.
+
+    Returns (splitsave, twox_advance_premium, note-or-None).
+    """
+    premium = entry.get("twox_advance_premium")
+    splitsave = entry.get("splitsave") or dict(NULL_BASKET)
+    total = splitsave.get("total")
+
+    expected = round(out_row["price"] + back_row["price"], 2)
+
+    if total is None:
+        if premium is None:
+            return splitsave, None, None
+        return splitsave, None, (
+            "basket total absent — 2x premium unverifiable, discarded"
+        )
+
+    if round(float(total), 2) != expected:
+        return dict(NULL_BASKET), None, (
+            f"basket total £{total:.2f} != validated legs £{expected:.2f} — "
+            f"priced the wrong trains, discarded"
+        )
+
+    return splitsave, premium, None
+
+
 def expected_dates(prices: dict) -> list[str]:
     """Every unbooked Tuesday we expect to see in the raw snapshot."""
     return [t["date"] for t in prices.get("tuesdays", []) if not t.get("booked")]
@@ -180,6 +226,7 @@ def apply_fresh_prices(
             "cheapest_any_total": new_total,
             "splitsave": val.get("splitsave") or {"available": None, "total": None},
             "parse_confidence": "ok",
+            **({"_splitsave_note": val["basket_note"]} if val.get("basket_note") else {}),
             "_raw_rows": {  # audit trail — Paddy can diff if something looks off
                 "outward": val["outward_all"],
                 "inward": val["inward_all"],
@@ -493,12 +540,20 @@ def main() -> int:
         if not ok:
             failures.append({"date": dstr, "reason": reason})
             continue
+        # Step 4 is non-blocking, so a bad basket must never fail the run —
+        # but it must never publish either. Sanitise, don't abort.
+        splitsave, premium, basket_note = reconcile_basket(entry, out_row, back_row)
+        if basket_note:
+            print(f"WARN {dstr}: {basket_note}")
+
         validated[dstr] = {
             "out_row": out_row,
             "back_row": back_row,
             "outward_all": entry.get("outward"),
             "inward_all": entry.get("inward"),
-            "splitsave": entry.get("splitsave"),
+            "splitsave": splitsave,
+            "twox_advance_premium": premium,
+            "basket_note": basket_note,
         }
 
     if failures:

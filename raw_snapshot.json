@@ -749,12 +749,12 @@
         }
       ],
       "splitsave": {
-        "available": null,
-        "total": null,
-        "savings_vs_direct": null
+        "available": true,
+        "total": 70.8,
+        "savings_vs_direct": 0
       },
-      "twox_advance_premium": null,
-      "_capture_note": "2026-08-20: basket priced auto-selected cheapest rows, not the target pair — discarded."
+      "twox_advance_premium": 1.7,
+      "_recaptured": "Recaptured 2026-08-21 with hardened premium_capture.js — basket reconciles."
     },
     {
       "date": "2026-11-19",
@@ -843,12 +843,12 @@
         }
       ],
       "splitsave": {
-        "available": null,
-        "total": null,
-        "savings_vs_direct": null
+        "available": true,
+        "total": 70.8,
+        "savings_vs_direct": 0
       },
-      "twox_advance_premium": null,
-      "_capture_note": "2026-08-20: basket priced auto-selected cheapest rows, not the target pair — discarded."
+      "twox_advance_premium": 1.7,
+      "_recaptured": "Recaptured 2026-08-21 with hardened premium_capture.js — basket reconciles."
     },
     {
       "date": "2026-11-26",
@@ -937,12 +937,12 @@
         }
       ],
       "splitsave": {
-        "available": null,
-        "total": null,
-        "savings_vs_direct": null
+        "available": true,
+        "total": 70.8,
+        "savings_vs_direct": 0
       },
-      "twox_advance_premium": null,
-      "_capture_note": "2026-08-20: basket priced auto-selected cheapest rows, not the target pair — discarded."
+      "twox_advance_premium": 1.7,
+      "_recaptured": "Recaptured 2026-08-21 with hardened premium_capture.js — basket reconciles."
     },
     {
       "date": "2026-12-03",
@@ -1031,12 +1031,12 @@
         }
       ],
       "splitsave": {
-        "available": null,
-        "total": null,
-        "savings_vs_direct": null
+        "available": true,
+        "total": 70.8,
+        "savings_vs_direct": 0
       },
-      "twox_advance_premium": null,
-      "_capture_note": "2026-08-20: basket priced auto-selected cheapest rows, not the target pair — discarded."
+      "twox_advance_premium": 1.7,
+      "_recaptured": "Recaptured 2026-08-21 with hardened premium_capture.js — basket reconciles."
     },
     {
       "date": "2026-12-10",
@@ -1125,12 +1125,12 @@
         }
       ],
       "splitsave": {
-        "available": null,
-        "total": null,
-        "savings_vs_direct": null
+        "available": true,
+        "total": 70.8,
+        "savings_vs_direct": 0
       },
-      "twox_advance_premium": null,
-      "_capture_note": "2026-08-20: basket priced auto-selected cheapest rows, not the target pair — discarded."
+      "twox_advance_premium": 1.7,
+      "_recaptured": "Recaptured 2026-08-21 with hardened premium_capture.js — basket reconciles."
     }
   ]
 }

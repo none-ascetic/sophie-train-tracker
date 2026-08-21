@@ -133,11 +133,23 @@ def observations_from_snapshot(raw_snapshot: dict) -> list[dict]:
             # legitimate data points for trend analysis anyway.
             continue
         # twox_advance_premium may or may not be present depending on whether
-        # the scheduled task captured the ticket-options page. Pass through
-        # as-is; readers accept null.
+        # the scheduled task captured the ticket-options page. Readers accept
+        # null, so when in doubt we write null.
+        #
+        # This module reads raw_snapshot directly rather than going through
+        # daily_run.reconcile_basket, so it repeats that check: the premium is
+        # only trustworthy if the basket it came from priced Sophie's actual
+        # trains. Trainline pre-selects the cheapest rows, and on 2026-08-20 a
+        # failed radio click produced a £54 basket (08:23 + 20:30) against her
+        # real £70.80 — the premium from that basket is meaningless.
         premium = t.get("twox_advance_premium")
         if not isinstance(premium, (int, float)):
             premium = None
+        else:
+            basket_total = ((t.get("splitsave") or {}).get("total"))
+            expected = round(float(out_fare) + float(back_fare), 2)
+            if basket_total is None or round(float(basket_total), 2) != expected:
+                premium = None
         rows.append({
             "schema": 2,
             "observed_at": observed_at,

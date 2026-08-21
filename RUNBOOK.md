@@ -60,14 +60,21 @@ If validation fails, wait 30s, reload the tab, re-extract. Retry up to 3 times p
 
 Why: the scraped 07:36 outward price is a SplitSave fare. This step captures how much extra the 2x-Advance-Single alternative costs, so we can tell whether the £7 SplitSave seesaw tracks the Advance tier or is SplitSave-specific. Validated selectors on 2026-04-24 for 15 Sep (£1.70) and 9 Jun (£13.30).
 
-Per date (≈5–7s, ≈100s total across 20 dates):
+**Do not hand-write this step.** Use `premium_capture.js` — it is the hardened version and it exists precisely because the hand-written variant failed silently (see below). Read the file, execute it once to cache the function in `sessionStorage.__premium` (survives same-tab navigation), then per date:
 
-1. On the results page from step 3, find the standard-class radio buttons for 07:36 outward and 18:30 return: select `[data-test="train-results-container-OUTWARD"]`, walk its `train-results-departure-time` elements, regex-match `07:36`, walk up to the row's `standard-class-price-radio-btn`. Same for `-INWARD` + `18:30`.
-2. If either radio is not `.checked`, click it. Trainline auto-selects the cheapest row by default, NOT the 07:36.
-3. Click `[data-test="cjs-button-continue"]`.
-4. Wait up to 15s for URL to contain `/book/ticket-options`. Timeout → record null.
-5. Parse `document.body.innerText`. The section heading is **`Select Flexibility`**, not `Ticket type` (corrected 2026-08-19 — the old label never matched, so a naive gate on it times out every time). Do **not** gate on the word `SplitSave` alone either: it renders before the prices do, and you'll parse an empty set. Gate on `/\+£[\d.]+/` AND `/2x Single Tickets/`. Then scan for `+£X.XX` lines with the preceding line as the ticket-type name. Expect `SplitSave` `+£0.00`, `2x Single Tickets` `+£X.XX`, `Anytime Return` `+£X.XX`. The `Standard` headline (line after `Standard`) is a useful cross-check — it equals scraped outward + inward.
-6. Record the `2x Single Tickets` delta as `twox_advance_premium` on this date.
+```js
+await eval(sessionStorage.__premium)('07:36', '18:30', <out_fare>, <back_fare>)
+```
+
+The last two args are the **already-validated leg prices from step 3**. They are what makes the capture safe — the basket is only trusted if it agrees with them.
+
+Returns `{twox, standard, opts}` on success, or `{err, ...}`. Any `err` → record `null` and move on. Never throws.
+
+Record the `twox` value as `twox_advance_premium`, and `standard` as `splitsave.total`.
+
+**The 2026-08-20 failure this prevents.** The old prose used `if (!el.checked) el.click()`, but `standard-class-price-radio-btn` is not always the underlying `<input>`, so `.checked` read `undefined`, the click never took, and Continue priced Trainline's default *cheapest* rows. That produced a £54 basket (08:23 out £27 + 20:30 back £27) which reached Sophie's message as "cheapest unbooked" — her real total was £70.80. Two guards now stop it: selection is re-read after clicking, and the basket total must equal out + back.
+
+`daily_run.reconcile_basket()` repeats the reconciliation server-side as a backstop, so even a hand-rolled or future-broken capture cannot publish a phantom total — it will be nulled and noted in `_splitsave_note`. Covered by `tests/test_reconcile_basket.py` and the POISONED BASKET scenario in `tests/smoke_daily_run.py`.
 
 ### 5. Write `$WORK/raw_snapshot.json`
 
@@ -192,5 +199,6 @@ UI labelling lives in `generate_site.py` constants `BOOKING_FEE_GBP`, `SPLITSAVE
 1. **Trainline unreachable / bot challenge** — retries exhaust, hard fail.
 2. **Layout changed / selectors moved** — validation fails on every Tuesday, hard fail. Selectors are in the skill's `extractor.js` + `SKILL.md`; check the DOM in browser devtools before patching.
 3. **Cheap tier gone on one date** — NOT a failure. The 07:36 / 18:30 rows still exist, just at a higher price. Recorded; the status bucket updates.
+3b. **Basket priced the wrong trains** — NOT a failure, and now self-healing. `reconcile_basket` nulls any `splitsave.total` that doesn't equal out + back, plus the premium derived from it, and prints a `WARN <date>` line. Watch for a run where *every* date warns: that means the radio selection is broken again, not that Trainline changed its pricing.
 4. **Horizon shifted backwards unexpectedly** — not a failure, but log it. `horizon_log.jsonl` shows the regression.
 5. **2x-Advance premium capture fails** — NOT a failure. Record null, move on.
